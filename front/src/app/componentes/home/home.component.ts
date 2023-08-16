@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  pensamento = {
+    id: '1',
+    conteudo: 'Aprendendo Angular',
+    autoria: 'Dev',
+    modelo: 'modelo1'
+  }
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  criarPensamentos() {
+    alert("Novo pensamento criado")
+  }
+
+  cancelar() {
+    alert("Cancelado com sucesso")
+  }
 }
