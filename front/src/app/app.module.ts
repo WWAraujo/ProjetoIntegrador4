@@ -8,6 +8,7 @@ import { ComponentesComponent } from './componentes/componentes.component';
 import { CabecalhoComponent } from './componentes/cabecalho/cabecalho.component';
 import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { ListarPensamentoComponent } from './componentes/listar-pensamento/listar-pensamento.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { HomeComponent } from './componentes/home/home.component';
     ComponentesComponent,
     CabecalhoComponent,
     RodapeComponent,
-    HomeComponent
+    HomeComponent,
+    ListarPensamentoComponent
   ],
   imports: [
     BrowserModule,
