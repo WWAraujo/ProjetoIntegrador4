@@ -9,6 +9,7 @@ import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ListarPensamentoComponent } from './componentes/listar-pensamento/listar-pensamento.component';
 import { PensamentoComponent } from './componentes/pensamento/pensamento.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PensamentoComponent } from './componentes/pensamento/pensamento.compone
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
