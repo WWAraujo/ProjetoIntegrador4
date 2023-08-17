@@ -12,7 +12,7 @@ export class PensamentoComponent implements OnInit {
     id: 0,
     conteudo: 'I love Angular',
     autoria: 'Wallace',
-    modelo: 'modelo3'
+    modelo: 'modelo3' 
   }
   constructor() { }
 
