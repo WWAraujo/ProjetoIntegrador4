@@ -10,6 +10,8 @@ import { HomeComponent } from './componentes/home/home.component';
 import { ListarPensamentoComponent } from './componentes/listar-pensamento/listar-pensamento.component';
 import { PensamentoComponent } from './componentes/pensamento/pensamento.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ExcluirPensamnetoComponent } from './componentes/excluir-pensamneto/excluir-pensamneto.component';
+import { EditarPensamentoComponent } from './componentes/editar-pensamento/editar-pensamento.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     RodapeComponent,
     HomeComponent,
     ListarPensamentoComponent,
-    PensamentoComponent
+    PensamentoComponent,
+    ExcluirPensamnetoComponent,
+    EditarPensamentoComponent
   ],
   imports: [
     BrowserModule,
