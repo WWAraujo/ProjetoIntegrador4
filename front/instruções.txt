@@ -1,5 +1,0 @@
-npm install -g @angular/cli@14.0.0
-
-ng serve --open
-
-ng generate component home
