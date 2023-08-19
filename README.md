@@ -14,6 +14,8 @@ Depois abrir o VSC como o projeto na pasta FRONT, abrir um novo terminal dentro 
 Para rodar o front no terminar Gitbash ng serve
 
 Preparando o banco de dados. 
-iniciar na porta 3306 uma tabela nexustech
+iniciar na porta 3306
 username= root 
 senha=
+
+create database nexustech;
