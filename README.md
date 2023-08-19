@@ -12,3 +12,10 @@ Para instalar o Angular, digita no cmd o código: npm install -g @angular/cli@14
 Depois abrir o VSC como o projeto na pasta FRONT, abrir um novo terminal dentro do VSC e selecionar GitBash, feito isso rodar o código npm install para baixar as dependencias 
 
 Para rodar o front no terminar Gitbash ng serve
+
+Preparando o banco de dados. 
+iniciar na porta 3306
+username= root 
+senha=
+
+create database nexustech;
