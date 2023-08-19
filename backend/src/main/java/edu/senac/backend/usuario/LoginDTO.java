@@ -1,4 +1,4 @@
-package edu.senac.backend.service.dto;
+package edu.senac.backend.usuario;
 
 public class LoginDTO {
 

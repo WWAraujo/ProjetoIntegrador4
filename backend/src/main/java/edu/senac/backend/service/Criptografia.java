@@ -1,4 +1,4 @@
-package edu.senac.backend.service.dto;
+package edu.senac.backend.service;
 
 import java.util.Base64;
 
