@@ -13,7 +13,13 @@ public class LoginController {
 
     @PostMapping
     @Transactional
-    public void validarUsuario(@RequestBody DadosParaLogin login) {
+    public void salvarUsuario(@RequestBody DadosParaLogin login) {
+        repository.save(new Login(login));
+    }
+
+    @GetMapping
+    @Transactional
+    public void buscarUsuario(@RequestBody DadosParaLogin login) {
         repository.save(new Login(login));
     }
 }
