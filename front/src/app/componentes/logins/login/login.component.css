@@ -11,11 +11,11 @@
   width: 200px;
 }
 
-.criar-pensamentos {
+.login {
   padding: 2rem 0;
 }
 
-.criar-pensamentos form {
+.login form {
   background: #C4EDFF;
 
   border: none;
@@ -27,13 +27,13 @@
   padding: 2rem;
 }
 
-.criar-pensamentos form label {
+.login form label {
   color: #154580;
   font-weight: bold;
   margin: 0 0 1rem;
 }
 
-.criar-pensamentos form .input {
+.login form .input {
   border: none;
   height: 40px;
   padding: 1rem 2rem;
@@ -42,7 +42,7 @@
 }
 
 
-.criar-pensamentos form .textarea {
+.login form .textarea {
   border: none;
   padding: 1rem 2rem;
   border-radius: 20px;

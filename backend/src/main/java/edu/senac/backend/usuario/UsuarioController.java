@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
     @PostMapping
-    public void cadasstrar(@RequestBody DadosCadastroUsuario usuario) {
+    public void cadastrar(@RequestBody DadosCadastroUsuario usuario) {
         System.out.println(usuario);
     }
 }
