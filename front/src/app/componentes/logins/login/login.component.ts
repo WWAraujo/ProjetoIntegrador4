@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.formeBuilder.group({
-      email: ['', Validators.required],
-      senhaad: ['', Validators.required]
+      email: ['', [Validators.required],[Validators.email]],
+      senhaad: ['', [Validators.required]]
     })
   }
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     console.log(this.formulario.value);
     if(this.formulario.valid){
       this.service.solicitarLogin(this.formulario.value).subscribe(() => {
-        this.router.navigate(['/home'])
+        this.router.navigate(['/solicitarLogin'])
       })
     }
   }
