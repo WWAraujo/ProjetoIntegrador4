@@ -13,11 +13,10 @@ const routes: Routes = [
     path: 'solicitarLogin',
     component: LoginComponent
   },
-  {
-    path:'backoffice',
-    component: BackofficeComponent,
-
-  }
+  // {
+  //   path:'backoffice',
+  //   component: BackofficeComponent,
+  // }
 ];
 
 @NgModule({

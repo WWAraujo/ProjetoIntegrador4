@@ -2,24 +2,22 @@
   <header class="header">
       <h2>Fazer Login:</h2>
   </header>
-  <form>
+  <form [formGroup]="formulario">
     <label for="email">E-mail</label>
     <input
       type="text"
       class="input"
       id="email"
-      name="email"
+      formControlName="email"
       placeholder="Digite o e-mail"
-      [(ngModel)]="login.usuario"
     >
     <label for="senha">Senha</label>
     <input
       type="password"
       class="input"
       id="senha"
-      name="senha"
+      formControlName="senha"
       placeholder="Digite a senha"
-      [(ngModel)]="login.senha"
     >
     <div class="acoes">
       <button
