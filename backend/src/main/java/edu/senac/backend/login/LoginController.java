@@ -17,9 +17,9 @@ public class LoginController {
         repository.save(new Login(login));
     }
 
-    @GetMapping
+    @DeleteMapping
     @Transactional
-    public void buscarUsuario(@RequestBody DadosParaLogin login) {
-        repository.save(new Login(login));
+    public void deletarUsuario(@RequestBody DadosParaLogin login) {
+        repository.delete(new Login(login));
     }
 }
