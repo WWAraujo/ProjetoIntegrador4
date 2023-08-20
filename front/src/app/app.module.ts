@@ -7,7 +7,7 @@ import { CabecalhoComponent } from './componentes/cabecalho/cabecalho.component'
 import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { LoginComponent } from './componentes/logins/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BackofficeComponent } from './componentes/logins/backoffice/backoffice.component';
+import { BackofficeComponent } from './componentes/backoffice/backoffice.component';
 
 
 @NgModule({

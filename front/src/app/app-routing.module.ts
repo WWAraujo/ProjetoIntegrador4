@@ -1,4 +1,4 @@
-import { BackofficeComponent } from './componentes/logins/backoffice/backoffice.component';
+import { BackofficeComponent } from './componentes/backoffice/backoffice.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './componentes/logins/login/login.component';
