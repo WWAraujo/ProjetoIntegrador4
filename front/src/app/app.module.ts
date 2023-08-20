@@ -7,6 +7,7 @@ import { CabecalhoComponent } from './componentes/cabecalho/cabecalho.component'
 import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { LoginComponent } from './componentes/logins/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BackofficeComponent } from './componentes/logins/backoffice/backoffice.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     CabecalhoComponent,
     RodapeComponent,
-    LoginComponent
+    LoginComponent,
+    BackofficeComponent
   ],
   imports: [
     BrowserModule,
