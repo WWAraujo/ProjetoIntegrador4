@@ -3,6 +3,7 @@
       <h2>Fazer Login:</h2>
   </header>
   <form [formGroup]="formulario">
+
     <label for="email">E-mail</label>
     <input
       type="text"
@@ -11,6 +12,12 @@
       formControlName="email"
       placeholder="Digite o e-mail"
     >
+    <div class="mensagem__erro"
+    *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">
+      E-mail é obrigatorio!
+    </div>
+
+
     <label for="senha">Senha</label>
     <input
       type="password"
@@ -19,10 +26,24 @@
       formControlName="senha"
       placeholder="Digite a senha"
     >
+    <div class="mensagem__erro"
+    *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
+      Senha é obrigatoria!
+    </div>
+    <div class="mensagem__erro"
+    *ngIf="formulario.get('senha')?.errors?.['minLength'] && formulario.get('senha')?.touched">
+    Senha tem mínimo de 3 caracteres!
+    </div>
+
     <div class="acoes">
-      <button (click)="solicitarLogin()" class="botao" type="submit"
-      >Entrar
+      <button
+        [disabled]="!formulario.valid"
+        (click)="solicitarLogin()"
+        [ngClass]="habilitarBotao()"
+        >Entrar
       </button>
     </div>
+
+
   </form>
 </section>

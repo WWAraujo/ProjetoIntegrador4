@@ -20,18 +20,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.formeBuilder.group({
-      email: ['', [Validators.required],[Validators.email]],
-      senhaad: ['', [Validators.required]]
+      email: ['', [Validators.required]],
+      senha: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(6)
+      ])]
     })
   }
 
   solicitarLogin() {
-    console.log(this.formulario.value);
+    console.log(this.formulario.get('email')?.errors);
     if(this.formulario.valid){
-      this.service.solicitarLogin(this.formulario.value).subscribe(() => {
-        this.router.navigate(['/solicitarLogin'])
+      this.service.login(this.formulario.value).subscribe(() => {
+        this.router.navigate(['/backoffice'])
       })
     }
   }
 
+  habilitarBotao(): string {
+    if(this.formulario.valid){
+      return 'botao'
+    } else {
+      return 'botao__desabilitado'
+    }
+  }
 }
