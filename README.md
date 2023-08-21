@@ -7,11 +7,13 @@ Nesse projeto Vamos usar
 - Angular
 - Loombk
 - Spring boot data jpa
+#
 
+## Esse projeto contem 2 pastas uma de Backend e outra de Front
+#
 
-Esse projeto contem 2 pastas uma de Backend e outra de Front 
-- Para rodar o Backend: 
-Preparando o banco de dados: 
+## Preparando o banco de dados SQL:
+
 Iniciar na porta 3306
 Username= root 
 Senha=
@@ -19,9 +21,16 @@ Senha=
 - Criar uma tabela com o nome abaixo
 create database nexustech;
 
-Quando fizer o clone do projeto:
+#
+## Preparando o backend java
+Depois de fazer o clone do projeto:
 - Abrir a subpasta Backend com o Intellij
 As dependecias do Intellij serão baixadas automaticamente. Apena precisa do JDK 17 ou superior
+
+
+
+#
+## Preparando o front 
 
 - Para rodar o front: 
 Precisa do Node js 18.17.1 LTS instalado, Dowload <https://nodejs.org/en>
