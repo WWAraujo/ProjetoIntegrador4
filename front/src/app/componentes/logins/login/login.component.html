@@ -4,16 +4,16 @@
   </header>
   <form [formGroup]="formulario">
 
-    <label for="email">E-mail</label>
+    <label for="usuario">E-mail</label>
     <input
       type="text"
       class="input"
-      id="email"
-      formControlName="email"
+      id="usuario"
+      formControlName="usuario"
       placeholder="Digite o e-mail"
     >
     <div class="mensagem__erro"
-    *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">
+    *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched">
       E-mail é obrigatorio!
     </div>
 
