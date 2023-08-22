@@ -5,8 +5,9 @@ Nesse projeto Vamos usar
 - SQL
 - Node js 18.17.1(LTS)
 - Angular
+- Typescrip
 - Loombk
-- Spring boot data jpa
+- Spring boot jpa
 #
 
 ## Esse projeto contem 2 pastas uma de Backend e outra de Front
