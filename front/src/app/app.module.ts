@@ -29,7 +29,7 @@ import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/lis
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

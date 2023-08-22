@@ -1,1 +1,16 @@
-<p>listar-usuario works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Preço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of dados" class="table">
+      <td> {{ item.id }} </td>
+      <td> {{ item.nome }} </td>
+      <td> {{ item.preco }} </td>
+    </tr>
+  </tbody>
+</table>

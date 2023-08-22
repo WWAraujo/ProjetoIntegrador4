@@ -2,6 +2,7 @@ import { BackofficeComponent } from './componentes/backoffice/backoffice.compone
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './componentes/logins/login/login.component';
+import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/listar-usuario.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path:'backoffice',
     component: BackofficeComponent,
+  },
+  {
+    path: 'listarUsuario',
+    component: ListarUsuarioComponent,
   }
 ];
 
