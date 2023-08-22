@@ -8,6 +8,8 @@ import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { LoginComponent } from './componentes/logins/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BackofficeComponent } from './componentes/backoffice/backoffice.component';
+import { CadastroUsuarioComponent } from './componentes/usuario/cadastro-usuario/cadastro-usuario.component';
+import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/alterar-usuario.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { BackofficeComponent } from './componentes/backoffice/backoffice.compone
     CabecalhoComponent,
     RodapeComponent,
     LoginComponent,
-    BackofficeComponent
+    BackofficeComponent,
+    CadastroUsuarioComponent,
+    AlterarUsuarioComponent,
   ],
   imports: [
     BrowserModule,
