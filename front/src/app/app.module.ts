@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BackofficeComponent } from './componentes/backoffice/backoffice.component';
 import { CadastroUsuarioComponent } from './componentes/usuario/cadastro-usuario/cadastro-usuario.component';
 import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/alterar-usuario.component';
+import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/listar-usuario.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/a
     BackofficeComponent,
     CadastroUsuarioComponent,
     AlterarUsuarioComponent,
+    ListarUsuarioComponent,
   ],
   imports: [
     BrowserModule,
