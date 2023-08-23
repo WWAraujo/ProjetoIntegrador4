@@ -15,11 +15,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private service: LoginService,
     private router: Router,
-    private formeBuilder: FormBuilder
+    private formBuilder: FormBuilder
     ) { }
 
   ngOnInit(): void {
-    this.formulario = this.formeBuilder.group({
+    this.formulario = this.formBuilder.group({
       usuario: ['', [Validators.required]],
       senha: ['', Validators.compose([
         Validators.required,
