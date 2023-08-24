@@ -1,8 +1,8 @@
 package edu.senac.backend.usuario;
 
-public enum TipoUsuarioDTO {
+public enum TipoUsuario {
 
     ADMINISTRADOR,
-    USUARIO,
-    ESTOQUISTA;
+    ESTOQUISTA,
+    CLIENTE;
 }
