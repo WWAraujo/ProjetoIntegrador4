@@ -22,6 +22,6 @@ public class Login {
 
     public Login(DadosParaLogin login) {
         this.usuario = login.usuario();
-        this.senha = new Criptografia().Encrypted(login.senha());
+        this.senha = new Criptografia().encriptar(login.senha());
     }
 }
