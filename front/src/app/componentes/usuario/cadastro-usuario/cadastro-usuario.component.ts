@@ -11,7 +11,7 @@ export class CadastroUsuarioComponent implements OnInit {
     nome: '',
     cpf: '',
     email: '',
-    grupo: 'ADM',
+    grupo: 'ADMINISTRADOR',
     senha: ''
   };
 
