@@ -12,10 +12,6 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  // testeLogin(login: Login): Observable<Login> {
-  //   return this.http.get<Login>(this.API)
-  // }
-
   login(login: Login): Observable<Login> {
     return this.http.post<Login>(this.API, login)
   }
