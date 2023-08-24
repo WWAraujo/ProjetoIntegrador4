@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "logins")
+@Table(name = "login")
 @Entity(name = "Login")
 @Getter
 @NoArgsConstructor
@@ -17,11 +17,11 @@ public class Login {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String usuario;
-    private String senha;
+    private String email_usuario;
+    private String senha_usuario;
 
     public Login(DadosParaLogin login) {
-        this.usuario = login.usuario();
-        this.senha = new Criptografia().encriptar(login.senha());
+        this.email_usuario = login.usuario();
+        this.senha_usuario = new Criptografia().encriptar(login.senha());
     }
 }
