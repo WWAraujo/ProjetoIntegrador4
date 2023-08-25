@@ -1,7 +1,16 @@
 .container{
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+h2{
+  font: 3em 'Inter',sans-serif;
+  margin: 20px 0px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 8px double #fff;
 }
 
 .opcoes{
@@ -9,12 +18,38 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font:'Inter',sans-serif;
   position: relative;
+  width: 400px;
+  height: 350px;
+  border-radius: 1%;
+  margin-bottom: 50px;
+}
+
+.opcoes button{
+  display: block;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
   width: 300px;
-  height: 200px;
-  background-color: #fff;
-  border-radius: 3%;
+  height: 45px;
+  margin: 10px;
+  padding: 5px;
+  font: 2em 'Inter',sans-serif;
+  font-weight: 600;
+  color: #909090;
+  background-color: transparent;
+  text-decoration: none;
+  border-radius: 1%;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.opcoes button:hover {
+    transition: 0.5s;
+    width: 310px;
+    box-shadow: 0px 0px 10px 1px #fff, 0 0 0 4px #fff;
+    color: #fff;
 }
 
 

@@ -17,7 +17,7 @@ h1 {
 }
 
 h2 {
-  color: #154580;
+  color: #fff;
   font-weight: bold;
   font-size: 2rem;
   text-align: center;
@@ -37,13 +37,13 @@ h2 {
 }
 
 .botao {
-  background: #154580;
+  background: #1e90ff;
   color: #ffffff;
   max-width: 270px;
-  width: 250px;
+  width: 270px;
   padding: 1rem;
   margin: 0 auto;
-  border: 2px solid #154580;
+  border: 2px solid #1e90ff;
   border-radius: 10px;
   transition: 0.5s ease;
 }
@@ -55,14 +55,15 @@ h2 {
   width: 250px;
   padding: 1rem;
   margin: 0 auto;
-  border: 2px solid #C4C4C4;
+  border: 3px solid #C4C4C4;
   border-radius: 10px;
   transition: 0.5s ease;
 }
 
 .botao:hover {
-  border: 2px solid #84EEC1;
-  color: #84EEC1;
+  border: 2px solid #1e90ff;
+  color: #fff;
+  cursor: pointer;
 }
 
 @media (min-width: 576px) {
