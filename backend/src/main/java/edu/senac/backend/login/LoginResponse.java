@@ -1,8 +1,6 @@
 package edu.senac.backend.login;
 
-import edu.senac.backend.service.TipoUsuario;
-
-public interface LoginProjection {
+public interface LoginResponse {
 
     String getId();
     String getTipoUsuario();

@@ -1,7 +1,6 @@
 package edu.senac.backend.login;
 
 import edu.senac.backend.service.Criptografia;
-import edu.senac.backend.service.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Login {
+public class LoginModel {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +23,7 @@ public class Login {
 
     private int tipoUsuario;
 
-    public Login(DadosParaLogin login) {
+    public LoginModel(LoginRecord login) {
         this.emailUsuario = login.usuario();
         this.senhaUsuario = new Criptografia().encriptar(login.senha());
     }
