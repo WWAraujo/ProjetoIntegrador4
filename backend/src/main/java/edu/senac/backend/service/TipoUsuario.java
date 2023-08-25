@@ -1,4 +1,4 @@
-package edu.senac.backend.usuario;
+package edu.senac.backend.service;
 
 public enum TipoUsuario {
 

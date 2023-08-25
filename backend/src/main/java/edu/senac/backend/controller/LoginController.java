@@ -1,8 +1,9 @@
 package edu.senac.backend.controller;
 
-import edu.senac.backend.login.DadosParaLogin;
-import edu.senac.backend.login.LoginRepository;
+import edu.senac.backend.login.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,16 +17,15 @@ public class LoginController {
 
 
     @CrossOrigin(origins = "http://localhost:4200/")
-    @GetMapping()
+    @PostMapping()
     @Transactional
-    public void salvarUsuario(@RequestBody DadosParaLogin login) {
+    public ResponseEntity<LoginProjection> salvarUsuario(@RequestBody DadosParaLogin login) {
 
-        System.out.println(login);
-//        repository.save(new Login(login));
-//        var resposta = repository.fyndIdAndTypeByEmailAndSenha(login.usuario(), login.senha());
+        Login lg = new Login(login);
 
-        Long id = Long.parseLong("1");
-        var teste = repository.getReferenceById(id);
-        System.out.println(teste);
+        LoginProjection loginProjection = repository.findIdAndTypeByEmailAndSenha(lg.getEmailUsuario(), lg.getSenhaUsuario());
+
+        return ResponseEntity.ok(loginProjection);
+
     }
 }

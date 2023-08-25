@@ -2,7 +2,7 @@
 //
 //import edu.senac.backend.service.Criptografia;
 //import edu.senac.backend.usuario.DadosParaUsuario;
-//import edu.senac.backend.usuario.TipoUsuario;
+//import edu.senac.backend.service.TipoUsuario;
 //import jakarta.persistence.GeneratedValue;
 //import jakarta.persistence.GenerationType;
 //import jakarta.persistence.Id;
