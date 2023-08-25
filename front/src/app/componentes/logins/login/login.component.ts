@@ -1,3 +1,4 @@
+import { Logado } from './../logado';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
@@ -11,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   formulario!: FormGroup;
+  logado!: Logado
 
   constructor(
     private service: LoginService,
@@ -23,18 +25,23 @@ export class LoginComponent implements OnInit {
       usuario: ['', [Validators.required]],
       senha: ['', Validators.compose([
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(3)
       ])]
     })
   }
 
   solicitarLogin() {
-    console.log(this.formulario.get('email')?.errors);
     if(this.formulario.valid){
-      this.service.login(this.formulario.value).subscribe(() => {
-        this.router.navigate(['/backoffice'])
+      this.service.login(this.formulario.value).subscribe((logado) => {
+        console.log(logado)
+        this.validarUsuario()
       })
     }
+  }
+
+
+  validarUsuario(ngIf="logado.id !isNaN(numero) ") {
+      this.router.navigate(['/backoffice'])
   }
 
   habilitarBotao(): string {

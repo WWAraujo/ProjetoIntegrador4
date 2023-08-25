@@ -16,6 +16,10 @@
     *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched">
       E-mail é obrigatorio!
     </div>
+    <div class="mensagem__erro"
+    *ngIf="formulario.get('usuario')?.errors?.['email'] && formulario.get('usuario')?.touched">
+      Digite um e-mail valido meu jovem...!
+    </div>
 
 
     <label for="senha">Senha</label>
