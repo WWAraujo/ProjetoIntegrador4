@@ -22,7 +22,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
-      usuario: ['', [Validators.required]],
+      usuario: ['', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])],
       senha: ['', Validators.compose([
         Validators.required,
         Validators.minLength(3)
@@ -40,8 +43,12 @@ export class LoginComponent implements OnInit {
   }
 
 
-  validarUsuario(ngIf="logado.id !isNaN(numero) ") {
+  validarUsuario(){
+    if (this.logado) {
       this.router.navigate(['/backoffice'])
+    } else {
+      alert("Não foi possivel fazer o login")
+    }
   }
 
   habilitarBotao(): string {
