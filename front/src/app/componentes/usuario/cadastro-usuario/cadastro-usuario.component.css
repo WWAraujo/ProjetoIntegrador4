@@ -1,5 +1,14 @@
 
 form {
+  background: #C4EDFF;
+
+  border: none;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 2rem;
     width: 300px;
     margin: 0 auto;
   }
@@ -9,6 +18,9 @@ form {
   }
   
   label {
+    color: #154580;
+    font-weight: bold;
+    margin: 0 0 1rem;
     display: block;
     font-weight: bold;
   }
@@ -23,7 +35,7 @@ form {
     border-radius: 4px;
   }
   
-  /* Estilize o botão de cadastro */
+
   button {
     background-color: #007bff;
     color: #fff;

@@ -23,8 +23,7 @@ export class CadastroUsuarioComponent implements OnInit {
   confirmarSenha: string = '';
 
   cadastrarUsuario() {
-    // Aqui você pode implementar a lógica para cadastrar o usuário
-    // Verifique se o e-mail não está duplicado antes de realizar o cadastro
+
     if (this.user.email === 'email@existente.com') {
       alert('Este e-mail já está cadastrado. Escolha outro.');
     } else {

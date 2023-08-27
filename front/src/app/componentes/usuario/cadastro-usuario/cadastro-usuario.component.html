@@ -1,3 +1,7 @@
+<section class="container login ff-inter">
+  <header class="header">
+      <h2>Cadastrar</h2>
+  </header>
 <form (ngSubmit)="cadastrarUsuario()" #cadastroForm="ngForm">
     <div class="form-group">
       <label for="nome">Nome</label>
@@ -28,6 +32,10 @@
     </div>
     <div class="form-group">
       <button type="submit" [disabled]="!cadastroForm.valid || user.senha !== confirmarSenha">Cadastrar</button>
+    </div>
+   <div class="form-group">
+      <button type="submit" [disabled]="!cadastroForm.valid || user.senha !== confirmarSenha">Cadastrar</button>
+      <button type="button" (click)="alterarUsuario()">Alterar</button>
     </div>
   </form>
   
