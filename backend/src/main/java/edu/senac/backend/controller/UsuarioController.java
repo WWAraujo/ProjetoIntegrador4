@@ -1,12 +1,9 @@
 package edu.senac.backend.controller;
 
-import edu.senac.backend.service.AtivoInativo;
 import edu.senac.backend.usuario.*;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,6 +13,7 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository repository;
+
 
     @CrossOrigin(origins = "http://localhost:4200/")
     @PostMapping
@@ -31,8 +29,8 @@ public class UsuarioController {
 
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping
-    public List<UsuarioModel> listarUsuario() {
-        return repository.findAll();
+    public List<ConverterListaUsuarios> listarUsuario() {
+        return new ConverterListaUsuarios().teste(repository.findAll());
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")
