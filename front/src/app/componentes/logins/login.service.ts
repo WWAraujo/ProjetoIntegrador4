@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Login } from './login';
 import { Observable } from 'rxjs';
+import { Logado } from './logado';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  // testeLogin(login: Login): Observable<Login> {
-  //   return this.http.get<Login>(this.API)
-  // }
-
-  login(login: Login): Observable<Login> {
-    return this.http.post<Login>(this.API, login)
+  login(login: Login): Observable<Logado> {
+    return this.http.post<Logado>(this.API, login)
   }
 
 }

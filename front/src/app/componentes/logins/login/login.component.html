@@ -3,7 +3,6 @@
       <h2>Fazer Login:</h2>
   </header>
   <form [formGroup]="formulario">
-
     <label for="usuario">E-mail</label>
     <input
       type="text"
@@ -15,6 +14,10 @@
     <div class="mensagem__erro"
     *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched">
       E-mail é obrigatorio!
+    </div>
+    <div class="mensagem__erro"
+    *ngIf="formulario.get('usuario')?.errors?.['email'] && formulario.get('usuario')?.touched">
+      Digite um e-mail valido meu jovem...!
     </div>
 
 
@@ -31,7 +34,7 @@
       Senha é obrigatoria!
     </div>
     <div class="mensagem__erro"
-    *ngIf="formulario.get('senha')?.errors?.['minLength'] && formulario.get('senha')?.touched">
+    *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched">
     Senha tem mínimo de 3 caracteres!
     </div>
 
@@ -43,7 +46,5 @@
         >Entrar
       </button>
     </div>
-
-
   </form>
 </section>

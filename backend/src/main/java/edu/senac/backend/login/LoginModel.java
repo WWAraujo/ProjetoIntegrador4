@@ -7,21 +7,24 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "logins")
+@Table(name = "login")
 @Entity(name = "Login")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Login {
+public class LoginModel {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String usuario;
-    private String senha;
 
-    public Login(DadosParaLogin login) {
-        this.usuario = login.usuario();
-        this.senha = new Criptografia().Encrypted(login.senha());
+    private String emailUsuario;
+    private String senhaUsuario;
+
+    private int tipoUsuario;
+
+    public LoginModel(LoginRecord login) {
+        this.emailUsuario = login.usuario();
+        this.senhaUsuario = new Criptografia().encriptar(login.senha());
     }
 }
