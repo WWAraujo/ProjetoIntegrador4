@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService} from '../../../Servicos/user.services';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +13,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   formulario!: FormGroup;
-  logado!: Logado
+  logado!: Logado;
 
   constructor(
     private service: LoginService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
     ) { }
 
   ngOnInit(): void {
@@ -36,20 +38,20 @@ export class LoginComponent implements OnInit {
   solicitarLogin() {
     if(this.formulario.valid){
       this.service.login(this.formulario.value).subscribe((logado) => {
-        console.log(logado)
+        this.logado = logado;
+        this.userService.setUserType(logado.tipoUsuario);
         this.validarUsuario()
       })
     }
   }
-
-
-  validarUsuario(){
-    if (this.logado) {
+  validarUsuario() {
+    if (this.logado.tipoUsuario === '1') {
       this.router.navigate(['/backoffice'])
-    } else {
-      alert("Não foi possivel fazer o login")
+    } else if (this.logado.tipoUsuario === '2') {
+      this.router.navigate(['/backoffice'])
     }
   }
+
 
   habilitarBotao(): string {
     if(this.formulario.valid){

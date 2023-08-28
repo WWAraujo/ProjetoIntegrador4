@@ -11,7 +11,7 @@ import { BackofficeComponent } from './componentes/backoffice/backoffice.compone
 import { CadastroUsuarioComponent } from './componentes/usuario/cadastro-usuario/cadastro-usuario.component';
 import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/alterar-usuario.component';
 import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/listar-usuario.component';
-
+import { UserService } from './Servicos/user.services';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/lis
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
