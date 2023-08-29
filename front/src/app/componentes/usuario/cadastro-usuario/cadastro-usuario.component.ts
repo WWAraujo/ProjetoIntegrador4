@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -15,9 +17,22 @@ export class CadastroUsuarioComponent implements OnInit {
     senha: ''
   };
 
+  formulario!: FormGroup;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.formulario = this.formBuilder.group({
+      cpf: ['', Validators.compose([
+        Validators.required,
+        Validators.max(11),
+        Validators.min(11)
+      ])],
+      senha: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3)
+      ])]
+    })
   }
 
   confirmarSenha: string = '';
