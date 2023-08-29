@@ -48,6 +48,15 @@
   cursor: pointer;
 }
 
+.btnUserEdit{
+  background-color: #fff;
+  border: 1px solid transparent;
+}
+
+.btnUserEdit:hover{
+  cursor: pointer;
+}
+
 
 table {
   background-color: #fff;

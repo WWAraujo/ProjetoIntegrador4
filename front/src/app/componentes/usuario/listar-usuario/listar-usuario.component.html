@@ -10,12 +10,14 @@
       <th>Email</th>
       <th>Tipo</th>
       <th>Status</th>
+      <th>Ação</th>
     </tr>
     <tr *ngFor="let item of arr" class="table">
       <td> {{ item.nomeUsuario }}   </td>
       <td> {{ item.emailUsuario }} </td>
       <td> {{ item.tipoUsuario }} </td>
       <td> {{ item.ativoInativo }} </td>
+      <td><button class="btnUserEdit"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
     </tr>
 </table>
 </section>
