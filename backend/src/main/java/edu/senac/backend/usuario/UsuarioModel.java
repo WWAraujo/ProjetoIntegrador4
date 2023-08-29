@@ -31,8 +31,8 @@ public class UsuarioModel {
         this.nomeUsuario = usuario.nome();
         this.cpfUsuario = usuario.cpf();
         this.emailUsuario = usuario.email();
-        this.senhaUsuario = new Criptografia().encriptar(usuario.senha());
         tipoDeUsuarioParaSalvarNoBanco(usuario.tipoUsuario());
+        this.senhaUsuario = new Criptografia().encriptar(usuario.senha());
         this.ativoInativo = AtivoInativo.ATIVO.toString();
     }
 
