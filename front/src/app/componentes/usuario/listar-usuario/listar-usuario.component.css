@@ -1,3 +1,78 @@
-table {
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background-color: #fff;
+}
+
+.userSearch{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 50px;
   width: 100%;
 }
+
+.userSearch label{
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.userSearch input {
+  width: 600px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0.5px solid;
+  box-shadow:0px 0px 2px 2px gray;
+  margin-right: 20px;
+}
+
+.btnPesquisar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #fff;
+}
+
+.btnPesquisar img {
+  width: 30px;
+  height: 30px;
+}
+
+.btnPesquisar:hover{
+  cursor: pointer;
+}
+
+
+table {
+  background-color: #fff;
+  width: 80%;
+  height: 80%;
+  border-radius: 5px;
+}
+
+table th {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+}
+
+table td {
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.table {
+  border: 3px solid green;
+}
+
+.table td {
+  margin: 10px;
+}
+

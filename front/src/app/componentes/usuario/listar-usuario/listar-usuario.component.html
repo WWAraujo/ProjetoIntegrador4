@@ -1,18 +1,21 @@
-<table>
-  <thead>
+<section class="container">
+  <div class="userSearch">
+    <label>Pesquisar</label>
+    <input type="text" class="campoPesquisar">
+    <button class="btnPesquisar"><img src="../../../../assets/image/lupa.png" alt="lupaPesquisar"></button>
+  </div>
+  <table>
     <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Preço</th>
+      <th>Nome </th>
+      <th>Email</th>
+      <th>Tipo</th>
+      <th>Status</th>
     </tr>
-  </thead>
-  <tbody>
     <tr *ngFor="let item of arr" class="table">
-      <td> {{ item.id }} </td>
-      <td> {{ item.nomeUsuario }} </td>
+      <td> {{ item.nomeUsuario }}   </td>
       <td> {{ item.emailUsuario }} </td>
-      <td> {{ item.ativoInativo }} </td>
       <td> {{ item.tipoUsuario }} </td>
+      <td> {{ item.ativoInativo }} </td>
     </tr>
-  </tbody>
 </table>
+</section>

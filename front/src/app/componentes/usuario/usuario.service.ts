@@ -12,7 +12,7 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  listarUsuario(): Observable<ListarUsuario[]> {
+  listarUsuario(ListarUsuario:ListarUsuario): Observable<ListarUsuario[]> {
     return this.http.get<ListarUsuario[]>(this.API)
   }
 }

@@ -1,9 +1,18 @@
 /* Aqui fica todo css global do projeto */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
 
-* {
+html, body, app-root{
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
+}
+
+main{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .ff-inter { font-family: 'Inter', sans-serif; }
@@ -34,6 +43,10 @@ h2 {
   padding-bottom: 1rem;
   margin-right: auto;
   margin-left: auto;
+}
+
+app-cabecalho, app-rodape{
+  height: 50px;
 }
 
 .botao {

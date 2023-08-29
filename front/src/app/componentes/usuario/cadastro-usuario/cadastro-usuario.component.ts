@@ -18,6 +18,7 @@ export class CadastroUsuarioComponent implements OnInit {
   };
 
   formulario!: FormGroup;
+  formBuilder!: FormBuilder;
 
   constructor() { }
 
