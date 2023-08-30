@@ -17,12 +17,12 @@
       <th>Hab/des</th>
     </tr>
     <tr *ngFor="let item of arr" class="table">
-      <td> {{ item.nomeUsuario }}   </td>
+      <td> {{ item.nomeUsuario  }} </td>
       <td> {{ item.emailUsuario }} </td>
-      <td> {{ item.tipoUsuario }} </td>
+      <td> {{ item.tipoUsuario  }} </td>
       <td> {{ item.ativoInativo }} </td>
       <td><button class="btnUserEdit"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
-      <td><button class="btnUserEdit" (click)="deletarusuario( item.id )">"##"</button></td>
+      <td><button class="btnUserEdit" (click)="deletarusuario( item.id )">Ativar Desativar</button></td>
     </tr>
 </table>
 

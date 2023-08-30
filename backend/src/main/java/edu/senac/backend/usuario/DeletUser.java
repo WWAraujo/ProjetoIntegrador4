@@ -14,10 +14,7 @@ public class DeletUser{
 
     public DeletUser(Long id, UsuarioRepository repository) {
 
-        System.out.println(id);
-
         Optional<UsuarioModel> delete = repository.findById(id);
-        System.out.println(delete);
 
         delete.ifPresent(usuarioModel -> repository.save(
                 new UsuarioModel(
