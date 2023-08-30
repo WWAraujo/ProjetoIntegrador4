@@ -4,6 +4,7 @@
   </header>
 <form [formGroup]="formulario">
 
+
       <label for="nome">Nome</label>
       <input
         type="text"
@@ -13,6 +14,7 @@
         placeholder="Digite o nome"
       >
 
+      
       <label for="cpf">CPF</label>
       <input
         type="text"
@@ -21,6 +23,7 @@
         formControlName="cpf"
         placeholder="Digite o CPF"
       >
+
 
       <label for="emailCadastro">E-mail</label>
       <input
@@ -31,12 +34,13 @@
         placeholder="Digite o e-mail"
       >
 
+
       <label for="tipoUsuario">Tipo de Usuário:</label>
       <select formControlName="tipoUsuario" id="tipoUsuario">
         <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
       </select>
 
-      
+
       <label for="senha">Senha</label>
       <input
         type="password"
@@ -47,6 +51,7 @@
         placeholder="Digite a senha"
       >
 
+
       <label for="confirmarSenha">Confirmar Senha</label>
       <input
         type="password"
@@ -55,6 +60,7 @@
         name="confirmarSenha"
         placeholder="Digite novamente a senha"
       >
+
 
       <div>
         <button

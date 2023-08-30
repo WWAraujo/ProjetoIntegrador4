@@ -24,8 +24,6 @@ export class UsuarioService {
   }
 
   cadastrar(cadastro: CadastroUsuario): Observable<CadastroUsuario>{
-    console.log("Chegou no service com objeto",cadastro)
-    console.log(this.API)
     return this.http.post<CadastroUsuario>(this.API, cadastro)
   }
 }

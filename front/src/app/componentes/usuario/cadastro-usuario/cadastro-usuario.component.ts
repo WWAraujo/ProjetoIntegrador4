@@ -12,15 +12,13 @@ import { TipoUsuario } from './user-role.enum';
 })
 
 export class CadastroUsuarioComponent implements OnInit {
+  
   formulario!: FormGroup;
-  cpfInvalido: boolean = false;
   tiposUsuario  = Object.values(TipoUsuario);
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private service: UsuarioService,
-    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +46,6 @@ export class CadastroUsuarioComponent implements OnInit {
   cadastrarUsuario() {
     this.service.cadastrar(this.formulario.value).subscribe(); { }
 
-    console.log("componente ts passando formulario", this.formulario.value)
     // if (this.user.email === 'email@existente.com') {
     //   alert('Este e-mail já está cadastrado. Escolha outro.');
     // } else {
