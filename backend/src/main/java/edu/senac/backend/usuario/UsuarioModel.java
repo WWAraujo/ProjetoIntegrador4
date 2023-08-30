@@ -48,14 +48,13 @@ public class UsuarioModel {
     }
 
     public UsuarioModel(UsuarioRecordDELETE usuario){
-        this.id = Long.parseLong(usuario.id());
+        this.id = usuario.id();
         this.nomeUsuario = usuario.nome();
         this.cpfUsuario = usuario.cpf();
         this.emailUsuario = usuario.email();
-        this.senhaUsuario = new Criptografia().encriptar(usuario.senha());
+        this.senhaUsuario = usuario.senha();
         tipoDeUsuarioParaSalvarNoBanco(usuario.tipoUsuario());
         this.ativoInativo = AtivoInativo.INATIVO.toString();
-
     }
 
     private void tipoDeUsuarioParaSalvarNoBanco(TipoUsuario tipoUsuario){

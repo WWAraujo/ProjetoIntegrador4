@@ -1,5 +1,6 @@
 package edu.senac.backend.controller;
 
+import edu.senac.backend.service.TipoUsuario;
 import edu.senac.backend.usuario.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +43,40 @@ public class UsuarioController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")
-    @DeleteMapping
-    public void deleteUsuario(@RequestBody UsuarioRecordDELETE delete) {
-        repository.save(new UsuarioModel(delete));
+    @DeleteMapping("/{id}")
+    public void deleteUsuario(@PathVariable Long id ) {
+
+        System.out.println(id);
+
+        Optional<UsuarioModel> delete = repository.findById(id);
+        System.out.println(delete);
+
+        if (delete.isPresent()) {
+            repository.save(
+                    new UsuarioModel(
+                            new UsuarioRecordDELETE(
+                                delete.get().getId(),
+                                delete.get().getNomeUsuario(),
+                                delete.get().getCpfUsuario(),
+                                delete.get().getEmailUsuario(),
+                                tipoUsuario(delete.get().getTipoUsuario()),
+                                delete.get().getSenhaUsuario())));
+
+
+        }
+    }
+
+    private TipoUsuario tipoUsuario (int tipoNumero) {
+
+        TipoUsuario tipoUsuario = null;
+        if (tipoNumero == 1){
+            tipoUsuario = TipoUsuario.ADMINISTRADOR;
+        } else if (tipoNumero == 2){
+            tipoUsuario = TipoUsuario.ESTOQUISTA;
+        } else {
+            throw new RuntimeException("Erro no tipo de usuario");
+        }
+        return tipoUsuario;
     }
 
 }

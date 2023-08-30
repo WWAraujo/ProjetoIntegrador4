@@ -4,7 +4,7 @@ import edu.senac.backend.service.AtivoInativo;
 import edu.senac.backend.service.TipoUsuario;
 
 public record UsuarioRecordDELETE(
-        String id,
+        Long id,
         String nome,
         String cpf,
         String email,
