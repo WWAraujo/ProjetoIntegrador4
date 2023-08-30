@@ -38,7 +38,7 @@ public class UsuarioModel {
 
     public UsuarioModel(UsuarioRecordUPDATE usuario) {
 
-        this.id = Long.parseLong(usuario.id());
+        this.id = usuario.id();
         this.nomeUsuario = usuario.nome();
         this.cpfUsuario = usuario.cpf();
         this.emailUsuario = usuario.email();
@@ -48,13 +48,14 @@ public class UsuarioModel {
     }
 
     public UsuarioModel(UsuarioRecordDELETE usuario){
+
         this.id = usuario.id();
         this.nomeUsuario = usuario.nome();
         this.cpfUsuario = usuario.cpf();
         this.emailUsuario = usuario.email();
-        this.senhaUsuario = usuario.senha();
         tipoDeUsuarioParaSalvarNoBanco(usuario.tipoUsuario());
-        this.ativoInativo = AtivoInativo.INATIVO.toString();
+        this.senhaUsuario = usuario.senha();
+        this.ativoInativo = usuario.ativoInativo().toString();
     }
 
     private void tipoDeUsuarioParaSalvarNoBanco(TipoUsuario tipoUsuario){

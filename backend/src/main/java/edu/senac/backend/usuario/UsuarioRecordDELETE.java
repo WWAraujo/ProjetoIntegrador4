@@ -9,5 +9,6 @@ public record UsuarioRecordDELETE(
         String cpf,
         String email,
         TipoUsuario tipoUsuario,
-        String senha) {
+        String senha,
+        AtivoInativo ativoInativo) {
 }

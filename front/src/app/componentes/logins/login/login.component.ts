@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/backoffice'])
     } else if (this.logado.tipoUsuario === '2') {
       this.router.navigate(['/backoffice'])
-    }
+    } 
   }
 
   habilitarBotao(): string {
