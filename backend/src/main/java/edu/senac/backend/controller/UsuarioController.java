@@ -17,9 +17,10 @@ public class UsuarioController {
     private UsuarioRepository repository;
 
 
-    //@CrossOrigin(origins = "http://localhost:4200/")
+    @CrossOrigin(origins = "http://localhost:4200/")
     @PostMapping
     public void criarUsuario(@RequestBody UsuarioRecordCREATE usuario) {
+        System.out.println(usuario);
         UsuarioModel teste = new UsuarioModel(usuario);
         System.out.println(teste);
         repository.save(teste);

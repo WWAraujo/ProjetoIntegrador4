@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListarUsuario } from './listar-usuario/listar-usuarios';
+import { CadastroUsuario } from './cadastro-usuario/cadastro-usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,11 @@ export class UsuarioService {
   excluir(id: number): Observable<ListarUsuario> {
     const url = `${this.API}/${id}`
     return this.http.delete<ListarUsuario>(url)
+  }
+
+  cadastrar(cadastro: CadastroUsuario): Observable<CadastroUsuario>{
+    console.log("Chegou no service com objeto",cadastro)
+    console.log(this.API)
+    return this.http.post<CadastroUsuario>(this.API, cadastro)
   }
 }

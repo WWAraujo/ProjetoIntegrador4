@@ -2,55 +2,66 @@
   <header class="header">
       <h2>Cadastrar</h2>
   </header>
-<form (ngSubmit)="cadastrarUsuario()" #cadastroForm="ngForm">
-    <div class="form-group">
+<form [formGroup]="formulario">
+
       <label for="nome">Nome</label>
-      <input type="text" id="nome" name="nome" [(ngModel)]="user.nome" required>
-    </div>
+      <input
+        type="text"
+        class="input"
+        id="nome"
+        formControlName="nome"
+        placeholder="Digite o nome"
+      >
 
-
-
-
-    <div class="form-group">
       <label for="cpf">CPF</label>
-      <input type="text" id="cpf" name="cpf" [(ngModel)]="user.cpf" required pattern="[0-9]{11}" [ngClass]="{'invalid-cpf': cpfInvalido}" >
-      <span class="error-message" *ngIf="cpfInvalido">CPF inválido</span>
-    </div>
+      <input
+        type="text"
+        class="input"
+        id="cpf"
+        formControlName="cpf"
+        placeholder="Digite o CPF"
+      >
 
+      <label for="emailCadastro">E-mail</label>
+      <input
+        type="text"
+        class="input"
+        id="email"
+        formControlName="email"
+        placeholder="Digite o e-mail"
+      >
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="form-group">
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
-    </div>
-    <div class="form-group">
-      <label for="grupo">Grupo</label>
-      <select id="grupo" name="grupo" [(ngModel)]="user.grupo" required>
-        <option value="ADMINISTRADOR">ADM</option>
-        <option value="ESTOQUISTA">ESTOQUISTA</option>
+      <label for="tipoUsuario">Tipo de Usuário:</label>
+      <select formControlName="tipoUsuario" id="tipoUsuario">
+        <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
       </select>
-    </div>
-    <div class="form-group">
+
+      
       <label for="senha">Senha</label>
-      <input type="password" id="senha" name="senha" [(ngModel)]="user.senha" required>
-    </div>
-    <div class="form-group">
+      <input
+        type="password"
+        class="input"
+        id="senha"
+        name="senha"
+        formControlName="senha"
+        placeholder="Digite a senha"
+      >
+
       <label for="confirmarSenha">Confirmar Senha</label>
-      <input type="password" id="confirmarSenha" name="confirmarSenha" [(ngModel)]="confirmarSenha" required>
-    </div>
-    <div class="form-group">
-      <button type="submit" >Cadastrar</button>
-    </div>
+      <input
+        type="password"
+        class="input"
+        id="confirmarSenha"
+        name="confirmarSenha"
+        placeholder="Digite novamente a senha"
+      >
+
+      <div>
+        <button
+          (click)="cadastrarUsuario()"
+          >Cadastrar
+        </button>
+      </div>
+
   </form>
 

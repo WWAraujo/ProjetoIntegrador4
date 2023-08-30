@@ -3,6 +3,7 @@
       <h2>Fazer Login:</h2>
   </header>
   <form [formGroup]="formulario">
+
     <label for="usuario">E-mail</label>
     <input
       type="text"
@@ -12,7 +13,7 @@
       placeholder="Digite o e-mail"
     >
     <div class="mensagem__erro"
-    *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched">
+      *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched">
       E-mail é obrigatorio!
     </div>
     <div class="mensagem__erro"
@@ -42,6 +43,7 @@
       <button
         [disabled]="!formulario.valid"
         (click)="solicitarLogin()"
+        ((keypress))="solicitarLogin()"
         [ngClass]="habilitarBotao()"
         >Entrar
       </button>
