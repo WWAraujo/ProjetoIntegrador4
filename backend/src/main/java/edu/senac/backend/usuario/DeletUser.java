@@ -2,10 +2,6 @@ package edu.senac.backend.usuario;
 
 import edu.senac.backend.service.AtivoInativo;
 import edu.senac.backend.service.TipoUsuario;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
