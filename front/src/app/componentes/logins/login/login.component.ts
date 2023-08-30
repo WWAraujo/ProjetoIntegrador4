@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       })
     }
   }
+
   validarUsuario() {
     if (this.logado.tipoUsuario === '1') {
       this.router.navigate(['/backoffice'])
@@ -51,7 +52,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/backoffice'])
     }
   }
-
 
   habilitarBotao(): string {
     if(this.formulario.valid){

@@ -1,3 +1,4 @@
+import { DeletarUsuario } from './usuario';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -14,5 +15,10 @@ export class UsuarioService {
 
   listarUsuario(ListarUsuario:ListarUsuario): Observable<ListarUsuario[]> {
     return this.http.get<ListarUsuario[]>(this.API)
+  }
+
+  excluir(id: number): Observable<ListarUsuario> {
+    const url = `${this.API}/${id}`
+    return this.http.delete<ListarUsuario>(url)
   }
 }

@@ -12,6 +12,7 @@ import { CadastroUsuarioComponent } from './componentes/usuario/cadastro-usuario
 import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/alterar-usuario.component';
 import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/listar-usuario.component';
 import { UserService } from './Servicos/user.services';
+import { DeletarUsuarioComponent } from './componentes/usuario/deletar-usuario/deletar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UserService } from './Servicos/user.services';
     CadastroUsuarioComponent,
     AlterarUsuarioComponent,
     ListarUsuarioComponent,
+    DeletarUsuarioComponent,
   ],
   imports: [
     BrowserModule,

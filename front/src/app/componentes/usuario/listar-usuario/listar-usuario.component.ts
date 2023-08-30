@@ -1,6 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../usuario.service';
 import { ListarUsuario } from './listar-usuarios';
+import { Router } from '@angular/router';
+import { DeletarUsuario } from '../usuario';
 
 @Component({
   selector: 'app-listar-usuario',
@@ -10,11 +13,12 @@ import { ListarUsuario } from './listar-usuarios';
 export class ListarUsuarioComponent implements OnInit {
 
   listausuario!: ListarUsuario;
+  deletarUsuario!: DeletarUsuario
 
-  // dados = []
   arr: Array<ListarUsuario> = [];
 
   constructor(
+    private router: Router,
     private service: UsuarioService
   ) { }
 
@@ -27,6 +31,20 @@ export class ListarUsuarioComponent implements OnInit {
       this.arr = listausuario;
       console.log(this.arr)
     })
+  }
+
+  deletarusuario(itemId: number){
+    this.service.excluir(itemId).subscribe(() => {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload'
+      this.router.navigate([this.router.url])
+    })
+  }
+
+  recarregarComponente() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload'
+    this.router.navigate([this.router.url])
   }
 
 }
