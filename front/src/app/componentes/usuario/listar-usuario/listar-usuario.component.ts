@@ -47,4 +47,8 @@ export class ListarUsuarioComponent implements OnInit {
     this.router.navigate([this.router.url])
   }
 
+  cadastrarNovo(){
+    this.router.navigate(['cadastrarUsuario'])
+  }
+
 }
