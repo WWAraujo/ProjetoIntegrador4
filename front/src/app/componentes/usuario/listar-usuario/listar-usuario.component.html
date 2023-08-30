@@ -1,4 +1,7 @@
 <section class="container">
+  <div class="title">
+    <label>USUARIOS</label>
+  </div>
   <div class="userSearch">
     <label>Pesquisar</label>
     <input type="text" class="campoPesquisar">
@@ -22,4 +25,6 @@
       <td><button class="btnUserEdit" (click)="deletarusuario( item.id )">"##"</button></td>
     </tr>
 </table>
+
+<button class="newUser" id="btnNewUser" name="btnnewUser" (click)="cadastrarNovo()">CADASTRAR</button>
 </section>
