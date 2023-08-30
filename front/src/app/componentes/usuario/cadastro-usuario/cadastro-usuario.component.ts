@@ -26,8 +26,9 @@ export class CadastroUsuarioComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       cpf: ['', Validators.compose([
         Validators.required,
-        Validators.max(11),
-        Validators.min(11)
+        Validators.maxLength(11),
+        Validators.minLength(11),
+        this.validarCpf
       ])],
       senha: ['', Validators.compose([
         Validators.required,
@@ -46,6 +47,56 @@ export class CadastroUsuarioComponent implements OnInit {
       console.log('Usuário cadastrado com sucesso:', this.user);
     }
   }
+
+  validarCpf(control: { value: string }): { [key: string]: any } | null {
+    const cpf = control.value.replace(/\D/g, ''); // Remove non-digit characters
+
+    if (cpf.length !== 11) {
+      return { 'invalidCpf': true }; // Return an error if CPF length is not 11
+    }
+
+    // Check for repeated digits
+    if (/^(\d)\1+$/.test(cpf)) {
+      return { 'invalidCpf': true };
+    }
+
+    // Validate CPF algorithm
+    let sum = 0;
+    let remainder: number;
+
+    for (let i = 1; i <= 9; i++) {
+      sum = sum + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    }
+
+    remainder = (sum * 10) % 11;
+
+    if ((remainder === 10) || (remainder === 11)) {
+      remainder = 0;
+    }
+
+    if (remainder !== parseInt(cpf.substring(9, 10))) {
+      return { 'invalidCpf': true };
+    }
+
+    sum = 0;
+    for (let i = 1; i <= 10; i++) {
+      sum = sum + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
+
+    remainder = (sum * 10) % 11;
+
+    if ((remainder === 10) || (remainder === 11)) {
+      remainder = 0;
+    }
+
+    if (remainder !== parseInt(cpf.substring(10, 11))) {
+      return { 'invalidCpf': true };
+    }
+
+    return null; // CPF is valid
+  }
+
+  cpfInvalido: boolean = false;
 }
 
 export interface User {

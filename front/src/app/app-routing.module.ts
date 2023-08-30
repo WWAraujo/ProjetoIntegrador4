@@ -24,7 +24,7 @@ const routes: Routes = [
     component: ListarUsuarioComponent,
   },
   {
-    path: 'CadastrarUsuario',
+    path: 'cadastrarUsuario',
     component: CadastroUsuarioComponent,
   }
 ];

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../usuario.service';
 import { ListarUsuario } from './listar-usuarios';
@@ -15,7 +16,8 @@ export class ListarUsuarioComponent implements OnInit {
   arr: Array<ListarUsuario> = [];
 
   constructor(
-    private service: UsuarioService
+    private service: UsuarioService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +29,10 @@ export class ListarUsuarioComponent implements OnInit {
       this.arr = listausuario;
       console.log(this.arr)
     })
+  }
+
+  cadastrarNovo(){
+    this.router.navigate(['cadastrarUsuario'])
   }
 
 }

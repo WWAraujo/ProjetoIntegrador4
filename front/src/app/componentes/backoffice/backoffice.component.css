@@ -3,6 +3,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 h2{
@@ -22,7 +26,6 @@ h2{
   width: 400px;
   height: 350px;
   border-radius: 1%;
-  margin-bottom: 50px;
 }
 
 .opcoes button{
