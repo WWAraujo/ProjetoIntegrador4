@@ -21,7 +21,7 @@
       <td> {{ item.emailUsuario }} </td>
       <td> {{ item.tipoUsuario  }} </td>
       <td> {{ item.ativoInativo }} </td>
-      <td><button class="btnUserEdit"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
+      <td><button class="btnUserEdit" (click)="alterarUsuario( item.id )"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
       <td><button class="btnUserEdit" (click)="deletarusuario( item.id )">Ativar Desativar</button></td>
     </tr>
 </table>

@@ -1,4 +1,4 @@
-
+import { AlterarUsuario } from '../alterar-uruario';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../usuario.service';
 import { ListarUsuario } from './listar-usuarios';
@@ -13,7 +13,8 @@ import { DeletarUsuario } from '../usuario';
 export class ListarUsuarioComponent implements OnInit {
 
   listausuario!: ListarUsuario;
-  deletarUsuario!: DeletarUsuario
+  deletarUsuario!: DeletarUsuario;
+  alterarUser!: AlterarUsuario;
 
   arr: Array<ListarUsuario> = [];
 
@@ -51,4 +52,21 @@ export class ListarUsuarioComponent implements OnInit {
     this.router.navigate(['/cadastrarUsuario'])
   }
 
+  alterarUsuario(itemId: number){
+
+    console.log('id usuario',itemId)
+    console.log('construtor do usuario vazio',this.alterarUser)
+
+    this.service.procurarPorId(itemId).subscribe((usuario) => {
+      this.alterarUser = usuario
+    })
+
+    console.log('usuario para alterar',this.alterarUser)
+
+    this.service.setAlterarUsuario(this.alterarUser)
+
+    if (this.alterarUser) {
+      this.router.navigate(['/alterarUsuario'])
+    }
+  }
 }

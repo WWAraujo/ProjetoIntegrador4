@@ -1,5 +1,6 @@
 package edu.senac.backend.usuario;
 
+import edu.senac.backend.service.AlterarTipoUsuario;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class ConverterListaUsuarios {
             usuarioResponseAtual.setNomeUsuario(converter.getNomeUsuario());
             usuarioResponseAtual.setEmailUsuario(converter.getEmailUsuario());
             usuarioResponseAtual.setAtivoInativo(converter.getAtivoInativo());
-            usuarioResponseAtual.setTipoUsuario(alterartipousuario(converter.getTipoUsuario()));
-
+            usuarioResponseAtual.setTipoUsuario( new AlterarTipoUsuario()
+                    .deIntparaString(converter.getTipoUsuario()) );
 
             responses.add(usuarioResponseAtual);
         }
@@ -36,16 +37,6 @@ public class ConverterListaUsuarios {
         return responses;
     }
 
-    private String alterartipousuario(int tipoUsuario){
 
-        String resposta = null;
-        if (tipoUsuario == 1){
-            resposta = "ADMINISTRADOR";
-        } else if (tipoUsuario == 2){
-            resposta = "ESTOQUISTA";
-        } else {
-            throw new RuntimeException("Erro no tipo de usuario");
-        }
-        return resposta;
-    }
+
 }

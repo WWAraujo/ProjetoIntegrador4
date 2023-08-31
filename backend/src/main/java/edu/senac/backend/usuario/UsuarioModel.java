@@ -1,15 +1,18 @@
 package edu.senac.backend.usuario;
 
+import edu.senac.backend.service.AlterarTipoUsuario;
 import edu.senac.backend.service.AtivoInativo;
 import edu.senac.backend.service.Criptografia;
 import edu.senac.backend.service.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Optional;
+
 @ToString
 @Table(name = "login")
 @Entity(name = "Usuario")
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -31,7 +34,7 @@ public class UsuarioModel {
         this.nomeUsuario = usuario.nome();
         this.cpfUsuario = usuario.cpf();
         this.emailUsuario = usuario.email();
-        tipoDeUsuarioParaSalvarNoBanco(usuario.tipoUsuario());
+        this.tipoUsuario = new AlterarTipoUsuario().deEnumParaInt(usuario.tipoUsuario());
         this.senhaUsuario = new Criptografia().encriptar(usuario.senha());
         this.ativoInativo = AtivoInativo.ATIVO.toString();
     }
@@ -39,11 +42,11 @@ public class UsuarioModel {
     public UsuarioModel(UsuarioRecordUPDATE usuario) {
 
         this.id = usuario.id();
-        this.nomeUsuario = usuario.nome();
-        this.cpfUsuario = usuario.cpf();
-        this.emailUsuario = usuario.email();
-        this.senhaUsuario = new Criptografia().encriptar(usuario.senha());
-        tipoDeUsuarioParaSalvarNoBanco(usuario.tipoUsuario());
+        this.nomeUsuario = usuario.nomeUsuario();
+        this.cpfUsuario = usuario.cpfUsuario();
+        this.emailUsuario = usuario.emailUsuario();
+        this.senhaUsuario = new Criptografia().encriptar(usuario.senhaUsuario());
+        this.tipoUsuario = new AlterarTipoUsuario().deEnumParaInt(usuario.tipoUsuario());
         this.ativoInativo = usuario.ativoInativo().toString();
     }
 
@@ -53,19 +56,21 @@ public class UsuarioModel {
         this.nomeUsuario = usuario.nome();
         this.cpfUsuario = usuario.cpf();
         this.emailUsuario = usuario.email();
-        tipoDeUsuarioParaSalvarNoBanco(usuario.tipoUsuario());
+        this.tipoUsuario = new AlterarTipoUsuario().deEnumParaInt(usuario.tipoUsuario());
         this.senhaUsuario = usuario.senha();
         this.ativoInativo = usuario.ativoInativo().toString();
     }
 
-    private void tipoDeUsuarioParaSalvarNoBanco(TipoUsuario tipoUsuario){
+    public UsuarioModel(Optional<UsuarioModel> usuarioModel) {
 
-        if (tipoUsuario.equals(TipoUsuario.ADMINISTRADOR)){
-            this.tipoUsuario = 1;
-        } else if (tipoUsuario.equals(TipoUsuario.ESTOQUISTA)){
-            this.tipoUsuario = 2;
-        } else {
-            throw new RuntimeException("Erro no tipo de usuario");
+        if (usuarioModel.isPresent()) {
+            this.id = usuarioModel.get().getId();
+            this.nomeUsuario = usuarioModel.get().getNomeUsuario();
+            this.cpfUsuario = usuarioModel.get().getCpfUsuario();
+            this.emailUsuario = usuarioModel.get().getEmailUsuario();
+            this.senhaUsuario = new Criptografia().descriptar(usuarioModel.get().getSenhaUsuario());
+            this.tipoUsuario = usuarioModel.get().getTipoUsuario();
+            this.ativoInativo = usuarioModel.get().getAtivoInativo();
         }
     }
 

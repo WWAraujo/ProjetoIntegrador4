@@ -5,10 +5,10 @@ import edu.senac.backend.service.TipoUsuario;
 
 public record UsuarioRecordUPDATE(
         Long id,
-        String nome,
-        String cpf,
-        String email,
+        String nomeUsuario,
+        String cpfUsuario,
+        String emailUsuario,
         TipoUsuario tipoUsuario,
-        String senha,
+        String senhaUsuario,
         AtivoInativo ativoInativo) {
 }

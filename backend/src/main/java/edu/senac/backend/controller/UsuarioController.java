@@ -4,6 +4,7 @@ import edu.senac.backend.service.AtivoInativo;
 import edu.senac.backend.service.TipoUsuario;
 import edu.senac.backend.usuario.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,27 +21,28 @@ public class UsuarioController {
     @CrossOrigin(origins = "http://localhost:4200/")
     @PostMapping
     public UsuarioModel criarUsuario(@RequestBody UsuarioRecordCREATE usuario) {
-        System.out.println(usuario);
         return repository.save(new UsuarioModel(usuario));
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")
     @PutMapping
     public void buscarUsuario(@RequestBody UsuarioRecordUPDATE usuario) {
-
+        System.out.println(usuario);
         repository.save(new UsuarioModel(usuario));
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping
     public List<ConverterListaUsuarios> listarUsuarios() {
-
         return new ConverterListaUsuarios().teste(repository.findAll());
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/buscarid/{id}")
     public Optional<UsuarioModel> buscarUsuario(@PathVariable Long id) {
+
+        Optional<UsuarioModel> response = repository.findById(id);
+        System.out.println(response);
 
         return repository.findById(id);
     }

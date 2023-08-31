@@ -1,1 +1,63 @@
-<p>alterar-usuario works!</p>
+<section class="container login ff-inter">
+  <header class="header">
+      <h2>Cadastrar</h2>
+  </header>
+<form [formGroup]="formulario">
+
+
+
+  <label for="nomeUsuario">Nome</label>
+  <input
+    type="text"
+    class="input"
+    id="nomeUsuario"
+    formControlName="nomeUsuario"
+  >
+
+  <label for="cpfUsuario">CPF</label>
+  <input
+    type="text"
+    class="input"
+    id="cpfUsuario"
+    formControlName="cpfUsuario"
+  >
+
+  <label for="tipoUsuario">Tipo de Usuário:</label>
+  <select formControlName="tipoUsuario" id="tipoUsuario">
+    <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
+  </select>
+
+
+  <label for="senha">Senha</label>
+  <input
+    type="password"
+    class="input"
+    id="senha"
+    name="senha"
+    formControlName="senhaUsuario"
+    placeholder="Digite a senha"
+  >
+
+
+  <label for="confirmarSenha">Confirmar Senha</label>
+  <input
+    type="password"
+    class="input"
+    id="confirmarSenha"
+    name="confirmarSenha"
+    placeholder="Digite novamente a senha"
+  >
+
+
+  <div>
+    <button
+      (click)="atualizarUsuario()"
+      >Cadastrar
+    </button>
+    <button
+      (click)="cancelar()"
+      >Cancelar
+    </button>
+  </div>
+
+</form>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../usuario.service';
-import { TipoUsuario } from './user-role.enum';
+import { TipoUsuario } from '../user-role.enum';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 

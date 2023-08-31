@@ -1,16 +1,18 @@
-import { DeletarUsuario } from './usuario';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListarUsuario } from './listar-usuario/listar-usuarios';
 import { CadastroUsuario } from './cadastro-usuario/cadastro-usuario';
+import { AlterarUsuario } from './alterar-uruario';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UsuarioService {
 
   private readonly API = 'http://localhost:8080/usuario'
+  private alterarUsuario!: AlterarUsuario;
 
   constructor(private http: HttpClient) { }
 
@@ -27,11 +29,29 @@ export class UsuarioService {
     return this.http.post<CadastroUsuario>(this.API, cadastro)
   }
 
-  procurarEmail(email: string) : Observable<boolean> {
+  procurarEmail(email: string): Observable<boolean> {
     const caminho = 'buscaremail';
-    const urlBuscarEmail = `${this.API}/${caminho}/${email}`
-
+    const urlBuscarEmail = `${this.API}/${caminho}/${email}`;
     return this.http.get<boolean>(urlBuscarEmail)
   }
 
+  procurarPorId(itemId: number): Observable<AlterarUsuario>{
+    const caminho = 'buscarid';
+    const urlBuscarId = `${this.API}/${caminho}/${itemId}`;
+    return this.http.get<AlterarUsuario>(urlBuscarId)
+  }
+
+  setAlterarUsuario(usuario: AlterarUsuario) {
+    this.alterarUsuario = usuario;
+  }
+
+  getAlterarUsuario() {
+    return this.alterarUsuario;
+  }
+
+  alterar(atualizarUsuario: AlterarUsuario): Observable<Object> {
+    console.log('aterar objeto url', atualizarUsuario)
+
+    return this.http.put(this.API, atualizarUsuario)
+  }
 }
