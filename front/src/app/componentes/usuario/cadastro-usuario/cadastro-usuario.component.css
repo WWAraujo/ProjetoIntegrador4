@@ -12,11 +12,11 @@ form {
     width: 300px;
     margin: 0 auto;
   }
-  
+
   .form-group {
     margin-bottom: 15px;
   }
-  
+
   label {
     color: #154580;
     font-weight: bold;
@@ -24,7 +24,7 @@ form {
     display: block;
     font-weight: bold;
   }
-  
+
   input[type="text"],
   input[type="email"],
   input[type="password"],
@@ -34,7 +34,7 @@ form {
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  
+
 
   button {
     background-color: #007bff;
@@ -44,9 +44,14 @@ form {
     border-radius: 4px;
     cursor: pointer;
   }
-  
+
   button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
-  
+
+  div{
+    color: red;
+    font-size: 12px;
+    margin-left: 5px;
+  }

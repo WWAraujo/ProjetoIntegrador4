@@ -14,6 +14,15 @@
     formControlName="nomeUsuario"
   >
 
+  <label for="nomeUsuario">Email</label>
+  <input
+    type="text"
+    class="input"
+    id="emailUsuario"
+    formControlName="emailUsuario"
+    [readonly]="campoBloqueado"
+  >
+
   <label for="cpfUsuario">CPF</label>
   <input
     type="text"

@@ -13,7 +13,9 @@
         formControlName="nome"
         placeholder="Digite o nome"
       >
-
+      <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
+        Nome Obrigatório
+      </div>
 
       <label for="cpf">CPF</label>
       <input
@@ -23,6 +25,9 @@
         formControlName="cpf"
         placeholder="Digite o CPF"
       >
+      <div *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched">
+        O CPF é Obrigatório
+      </div>
 
 
       <label for="emailCadastro">E-mail</label>
@@ -35,11 +40,17 @@
         (input)="onInputChanged()"
         (blur)="procurarEmail()"
       >
+      <div *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">
+        Email Obrigatório
+      </div>
 
       <label for="tipoUsuario">Tipo de Usuário:</label>
       <select formControlName="tipoUsuario" id="tipoUsuario">
         <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
       </select>
+      <div *ngIf="formulario.get('tiposUsuario')?.errors?.['required'] && formulario.get('tiposUsuario')?.touched">
+        Nome Obrigatório
+      </div>
 
 
       <label for="senha">Senha</label>
@@ -51,6 +62,9 @@
         formControlName="senha"
         placeholder="Digite a senha"
       >
+      <div *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
+        Informe uma senha
+      </div>
 
 
       <label for="confirmarSenha">Confirmar Senha</label>
@@ -61,7 +75,9 @@
         name="confirmarSenha"
         placeholder="Digite novamente a senha"
       >
-
+      <div *ngIf="formulario.get('confirmarSenha')?.errors?.['required'] && formulario.get('confirmarSenha')?.touched">
+        As senhas devem ser iguais.
+      </div>
 
       <div>
         <button

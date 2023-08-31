@@ -15,6 +15,7 @@ export class AlterarUsuarioComponent implements OnInit {
   formulario!: FormGroup;
   private usuario!: AlterarUsuario;
   tiposUsuario  = Object.values(TipoUsuario);
+  campoBloqueado = true;
 
   constructor(
     private fb: FormBuilder,
