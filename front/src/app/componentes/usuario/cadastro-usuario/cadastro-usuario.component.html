@@ -14,7 +14,7 @@
         placeholder="Digite o nome"
       >
 
-      
+
       <label for="cpf">CPF</label>
       <input
         type="text"
@@ -32,8 +32,9 @@
         id="email"
         formControlName="email"
         placeholder="Digite o e-mail"
+        (input)="onInputChanged()"
+        (blur)="procurarEmail()"
       >
-
 
       <label for="tipoUsuario">Tipo de Usuário:</label>
       <select formControlName="tipoUsuario" id="tipoUsuario">

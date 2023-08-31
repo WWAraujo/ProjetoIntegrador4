@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UsuarioService } from '../usuario.service';
 import { TipoUsuario } from './user-role.enum';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,13 +13,16 @@ import { TipoUsuario } from './user-role.enum';
 })
 
 export class CadastroUsuarioComponent implements OnInit {
-  
+
   formulario!: FormGroup;
   tiposUsuario  = Object.values(TipoUsuario);
+  emailEncontrado: boolean = false;
+  clienteCadastrado: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private service: UsuarioService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -29,28 +33,59 @@ export class CadastroUsuarioComponent implements OnInit {
       tipoUsuario: [''],
       senha: ''
 
-      // nome: ["", Validators.min(3)],
-      // cpf: ['', Validators.compose([
-      //   Validators.required,
-      //   Validators.maxLength(11),
-      //   Validators.minLength(11),
-      //   this.validarCpf
-      // ])],
-      // senha: ['', Validators.compose([
-      //   Validators.required,
-      //   Validators.minLength(3)
-      // ])]
+    //   nome: ['', Validators.compose([
+    //     Validators.required,
+    //     Validators.min(3)
+    //   ])],
+
+    //   cpf: ['', Validators.compose([
+    //     Validators.required,
+    //   ])],
+
+    //   email: ['', Validators.compose([
+    //     Validators.required,
+    //   ])],
+
+    //   TipoUsuario: ['', Validators.compose([
+    //     Validators.required,
+    //   ])],
+
+    //   senha: ['', Validators.compose([
+    //     Validators.required,
+    //     Validators.minLength(3)
+    //   ])]
     })
+
+  }
+
+  inputChanged = new Subject<void>();
+  onInputChanged() {
+    this.inputChanged.next();
+  }
+
+  procurarEmail() {
+    const email = this.formulario.get('email')?.value
+    this.service.procurarEmail(email).subscribe((emailEncontrado) => {
+      this.emailEncontrado = emailEncontrado
+      console.log('resultado da consulta',emailEncontrado)
+    })
+
   }
 
   cadastrarUsuario() {
-    this.service.cadastrar(this.formulario.value).subscribe(); { }
+    if (this.emailEncontrado.valueOf()){
+      this.service.cadastrar(this.formulario.value).subscribe((clienteCadastrado) => {
+        if (!clienteCadastrado){
+          this.router.navigate(['/listarUsuario'])
+          console.log('Usuário cadastrado com sucesso:', this.formulario.value)
+        } else{
+          alert('Algo deu errado no cadastro')
+        }
+      })
+    } else{
+      alert('Email já cadastrado')
 
-    // if (this.user.email === 'email@existente.com') {
-    //   alert('Este e-mail já está cadastrado. Escolha outro.');
-    // } else {
-    //   console.log('Usuário cadastrado com sucesso:', this.user);
-    // }
+    }
   }
 
   // habilitarBotao(): string {

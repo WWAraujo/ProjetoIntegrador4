@@ -19,9 +19,9 @@ public class UsuarioController {
 
     @CrossOrigin(origins = "http://localhost:4200/")
     @PostMapping
-    public void criarUsuario(@RequestBody UsuarioRecordCREATE usuario) {
-
-        repository.save(new UsuarioModel(usuario));
+    public UsuarioModel criarUsuario(@RequestBody UsuarioRecordCREATE usuario) {
+        System.out.println(usuario);
+        return repository.save(new UsuarioModel(usuario));
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")
@@ -39,8 +39,8 @@ public class UsuarioController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")
-    @GetMapping("/{id}")
-    public Optional<UsuarioModel> listarUsuario(@PathVariable Long id) {
+    @GetMapping("/buscarid/{id}")
+    public Optional<UsuarioModel> buscarUsuario(@PathVariable Long id) {
 
         return repository.findById(id);
     }
@@ -50,6 +50,13 @@ public class UsuarioController {
     public void deleteUsuario(@PathVariable Long id ) {
 
         new DeletUser(id , repository);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200/")
+    @GetMapping("/buscaremail/{email}")
+    public Boolean listarUsuario(@PathVariable String email) {
+        boolean respose = repository.findByEmailUsuario(email).isPresent();
+        return respose;
     }
 
 

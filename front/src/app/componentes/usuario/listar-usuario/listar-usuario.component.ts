@@ -23,11 +23,11 @@ export class ListarUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listarUsuario();
+    this.listarUsuarios();
   }
 
-  listarUsuario() {
-    this.service.listarUsuario(this.listausuario).subscribe((listausuario) => {
+  listarUsuarios() {
+    this.service.listarUsuarios(this.listausuario).subscribe((listausuario) => {
       this.arr = listausuario;
       console.log(this.arr)
     })

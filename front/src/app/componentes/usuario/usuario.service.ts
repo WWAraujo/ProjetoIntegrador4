@@ -14,7 +14,7 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  listarUsuario(ListarUsuario:ListarUsuario): Observable<ListarUsuario[]> {
+  listarUsuarios(ListarUsuario:ListarUsuario): Observable<ListarUsuario[]> {
     return this.http.get<ListarUsuario[]>(this.API)
   }
 
@@ -26,4 +26,12 @@ export class UsuarioService {
   cadastrar(cadastro: CadastroUsuario): Observable<CadastroUsuario>{
     return this.http.post<CadastroUsuario>(this.API, cadastro)
   }
+
+  procurarEmail(email: string) : Observable<boolean> {
+    const caminho = 'buscaremail';
+    const urlBuscarEmail = `${this.API}/${caminho}/${email}`
+
+    return this.http.get<boolean>(urlBuscarEmail)
+  }
+
 }
