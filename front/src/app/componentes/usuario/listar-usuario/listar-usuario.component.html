@@ -7,6 +7,7 @@
     <input type="text" class="campoPesquisar">
     <button class="btnPesquisar"><img src="../../../../assets/image/lupa.png" alt="lupaPesquisar"></button>
   </div>
+  <div class="container_table">
   <table>
     <tr>
       <th>Nome </th>
@@ -22,9 +23,9 @@
       <td> {{ item.tipoUsuario  }} </td>
       <td> {{ item.ativoInativo }} </td>
       <td><button class="btnUserEdit" (click)="alterarUsuario( item.id )"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
-      <td><button class="btnUserEdit" (click)="deletarusuario( item.id )">Ativar Desativar</button></td>
+      <td><button class="btnUserEdit" (click)="deletarusuario( item.id )"><p>Ativar Desativar</p></button></td>
     </tr>
 </table>
-
+</div>
 <button class="newUser" id="btnNewUser" name="btnnewUser" (click)="cadastrarNovo()">CADASTRAR</button>
 </section>
