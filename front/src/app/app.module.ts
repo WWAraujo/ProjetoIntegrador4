@@ -13,6 +13,9 @@ import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/a
 import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/listar-usuario.component';
 import { UserService } from './Servicos/user.services';
 import { DeletarUsuarioComponent } from './componentes/usuario/deletar-usuario/deletar-usuario.component';
+import { VisualizarProdutosCadastradosComponent } from './componentes/produtos/visualizar-produtos-cadastrados/visualizar-produtos-cadastrados.component';
+import { ListarProdutosComponent } from './componentes/produtos/listar-produtos/listar-produtos.component';
+import { CadastrarProdutosComponent } from './componentes/produtos/cadastrar-produtos/cadastrar-produtos.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { DeletarUsuarioComponent } from './componentes/usuario/deletar-usuario/d
     AlterarUsuarioComponent,
     ListarUsuarioComponent,
     DeletarUsuarioComponent,
+    VisualizarProdutosCadastradosComponent,
+    ListarProdutosComponent,
+    CadastrarProdutosComponent,
   ],
   imports: [
     BrowserModule,
