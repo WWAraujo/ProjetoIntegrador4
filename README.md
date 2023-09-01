@@ -47,3 +47,8 @@ Depois abrir o VSC, abra a pasta FRONT:
 
 E por ultimo, para rodar o front 
 - No terminal Gitbash colocar o comando: ng serve
+
+
+#
+## Trello do projeto 
+https://trello.com/b/yrAn0NH8/ecommerce-pi-4nc
