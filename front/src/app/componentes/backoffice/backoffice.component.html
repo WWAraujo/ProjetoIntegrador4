@@ -4,6 +4,6 @@
   <div class="opcoes">
     <button [disabled]="isEstoquista || isCliente"  (click)="irParaUsuarios()">Usuarios</button>
     <button [disabled]="isCliente" href="" alt="listarProdutos">Produtos</button>
-    <button [disabled]="isAdmin || isEstoquista"  href="" alt="listarPedidos">Meus Pedidos</button>
+    <button [disabled]="isAdmin || isEstoquista"   (click)="irParaListaProdutos()">Produtos</button>
   </div>
 </section>

@@ -16,6 +16,7 @@ import { DeletarUsuarioComponent } from './componentes/usuario/deletar-usuario/d
 import { VisualizarProdutosCadastradosComponent } from './componentes/produtos/visualizar-produtos-cadastrados/visualizar-produtos-cadastrados.component';
 import { ListarProdutosComponent } from './componentes/produtos/listar-produtos/listar-produtos.component';
 import { CadastrarProdutosComponent } from './componentes/produtos/cadastrar-produtos/cadastrar-produtos.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CadastrarProdutosComponent } from './componentes/produtos/cadastrar-pro
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

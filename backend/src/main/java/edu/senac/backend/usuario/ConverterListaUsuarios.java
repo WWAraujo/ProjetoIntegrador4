@@ -16,7 +16,7 @@ public class ConverterListaUsuarios {
     private String tipoUsuario;
 
 
-    public List<ConverterListaUsuarios> teste(List<UsuarioModel> usuarioModelList) {
+    public List<ConverterListaUsuarios> converterUsuario(List<UsuarioModel> usuarioModelList) {
 
         List<ConverterListaUsuarios> responses = new ArrayList<>();
 

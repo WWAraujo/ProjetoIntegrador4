@@ -34,7 +34,7 @@ public class UsuarioController {
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping
     public List<ConverterListaUsuarios> listarUsuarios() {
-        return new ConverterListaUsuarios().teste(repository.findAll());
+        return new ConverterListaUsuarios().converterUsuario(repository.findAll());
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")

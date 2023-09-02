@@ -35,5 +35,9 @@ export class BackofficeComponent implements OnInit {
     this.router.navigate(['listarUsuario'])
   }
 
+  irParaListaProdutos() {
+    this.router.navigate(['listarProduto'])
+  }
+
 }
 

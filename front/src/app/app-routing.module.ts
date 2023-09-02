@@ -1,10 +1,11 @@
 import { BackofficeComponent } from './componentes/backoffice/backoffice.component';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './componentes/logins/login/login.component';
 import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/listar-usuario.component';
 import { CadastroUsuarioComponent } from './componentes/usuario/cadastro-usuario/cadastro-usuario.component';
 import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/alterar-usuario.component';
+import { ListarProdutosComponent } from './componentes/produtos/listar-produtos/listar-produtos.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'alterarUsuario',
     component: AlterarUsuarioComponent,
+  },
+  {
+    path: 'listarProduto',
+    component: ListarProdutosComponent
   }
 ];
 
