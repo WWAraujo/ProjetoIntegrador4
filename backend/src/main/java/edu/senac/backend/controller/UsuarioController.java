@@ -1,10 +1,7 @@
 package edu.senac.backend.controller;
 
-import edu.senac.backend.service.AtivoInativo;
-import edu.senac.backend.service.TipoUsuario;
 import edu.senac.backend.usuario.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PaginaProdutos } from './listar-produtos/listar-produtos';
+import { PaginaProdutos, Produto } from './listar-produtos/listar-produtos';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +14,9 @@ export class ProdutosService {
 
   getProdutos(page: number): Observable<PaginaProdutos> {
     return this.http.get<PaginaProdutos>(`${this.API}/listar?page=${page}`)
+  }
+
+  getProdutosByString(pesquisa: string): Observable<Produto[]> {
+    return this.http.get<Produto[]>(`${this.API}/buscarproduto/${pesquisa}`)
   }
 }

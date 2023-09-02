@@ -2,7 +2,7 @@ import { FormBuilder } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Logado } from '../logins/logado';
-import { UserService } from 'src/app/Servicos/user.services';
+import { UserService } from 'src/app/componentes/usuario/user.services';
 @Component({
   selector: 'app-backoffice',
   templateUrl: './backoffice.component.html',

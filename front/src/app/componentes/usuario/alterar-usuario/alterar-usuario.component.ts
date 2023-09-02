@@ -25,9 +25,7 @@ export class AlterarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log('construtor do usuario', this.usuario)
     this.usuario = this.service.getAlterarUsuario()
-    console.log('construtor depois de tentar receber valor', this.usuario)
 
 
     this.formulario = this.fb.group({
@@ -50,16 +48,12 @@ export class AlterarUsuarioComponent implements OnInit {
   }
 
   construtor() {
-    console.log('construtor do usuario', this.usuario)
     this.usuario = this.service.getAlterarUsuario()
-    console.log('construtor depois de tentar receber valor', this.usuario)
   }
 
   atualizarUsuario(){
-    console.log(this.formulario)
     this.service.alterar(this.formulario.value).subscribe(
       response => {
-        console.log('Usuário atualizado com sucesso:', response);
         this.router.navigate(['/listarUsuario'])
       },
       error => {

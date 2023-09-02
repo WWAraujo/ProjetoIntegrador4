@@ -11,8 +11,7 @@ import { BackofficeComponent } from './componentes/backoffice/backoffice.compone
 import { CadastroUsuarioComponent } from './componentes/usuario/cadastro-usuario/cadastro-usuario.component';
 import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/alterar-usuario.component';
 import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/listar-usuario.component';
-import { UserService } from './Servicos/user.services';
-import { DeletarUsuarioComponent } from './componentes/usuario/deletar-usuario/deletar-usuario.component';
+import { UserService } from './componentes/usuario/user.services';
 import { VisualizarProdutosCadastradosComponent } from './componentes/produtos/visualizar-produtos-cadastrados/visualizar-produtos-cadastrados.component';
 import { ListarProdutosComponent } from './componentes/produtos/listar-produtos/listar-produtos.component';
 import { CadastrarProdutosComponent } from './componentes/produtos/cadastrar-produtos/cadastrar-produtos.component';
@@ -28,7 +27,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CadastroUsuarioComponent,
     AlterarUsuarioComponent,
     ListarUsuarioComponent,
-    DeletarUsuarioComponent,
     VisualizarProdutosCadastradosComponent,
     ListarProdutosComponent,
     CadastrarProdutosComponent,

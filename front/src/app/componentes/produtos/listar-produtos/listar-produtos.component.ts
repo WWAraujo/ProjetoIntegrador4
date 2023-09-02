@@ -11,11 +11,13 @@ import { Router } from '@angular/router';
 export class ListarProdutosComponent implements OnInit {
 
   produtos: Produto[] = [];
+  resultadosPesquisa: Produto[] = [];
   itemsPerPage: number = 10; // Número de itens por página
   page: number = 0; // Página atual
   totalPages!: number;
   nextPage: boolean = false;
   beforPage: boolean = false;
+  termoPesquisa!: string;
 
   constructor(
     private service: ProdutosService,
@@ -27,17 +29,20 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   listarProdutos() {
-    this.service.getProdutos(this.page).subscribe((response) => {
-      console.log(this.page)
-      this.produtos = response.content;
-      this.totalPages = response.totalPages
+    if (this.resultadosPesquisa.length > 0) {
+      // Se houver resultados de pesquisa, use-os
+      this.produtos = this.resultadosPesquisa;
+    } else {
+      // Caso contrário, busque a lista principal de produtos
+      this.service.getProdutos(this.page).subscribe((response) => {
+        this.produtos = response.content;
+        this.totalPages = response.totalPages
 
-      if(response.totalPages > 1) {
-        this.nextPage = true
-      }
-      console.log(response)
-
-    })
+        if(response.totalPages > 1) {
+          this.nextPage = true
+        }
+      });
+    }
   }
 
   paginaAlterada(pagina: number) {
@@ -68,6 +73,17 @@ export class ListarProdutosComponent implements OnInit {
       }
     } else{
       this.beforPage = false;
+    }
+  }
+
+  pesquisar() {
+    if (!this.termoPesquisa){
+      this.listarProdutos();
+    } else {
+      this.service.getProdutosByString(this.termoPesquisa).subscribe((response) => {
+        this.produtos = response;
+        this.router.navigate([this.router.url]);
+      });
     }
   }
 

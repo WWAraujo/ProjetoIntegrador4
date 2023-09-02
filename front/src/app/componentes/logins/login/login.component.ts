@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService} from '../../../Servicos/user.services';
+import { UserService} from '../../usuario/user.services';
 
 @Component({
   selector: 'app-login',
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/backoffice'])
     } else if (this.logado.tipoUsuario === '2') {
       this.router.navigate(['/backoffice'])
-    } 
+    }
   }
 
   habilitarBotao(): string {

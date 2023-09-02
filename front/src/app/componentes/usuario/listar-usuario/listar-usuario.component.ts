@@ -28,7 +28,6 @@ export class ListarUsuarioComponent implements OnInit {
   listarUsuarios() {
     this.service.listarUsuarios(this.listausuario).subscribe((listausuario) => {
       this.arr = listausuario;
-      console.log(this.arr)
     })
   }
 
@@ -40,31 +39,26 @@ export class ListarUsuarioComponent implements OnInit {
     })
   }
 
-  recarregarComponente() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload'
-    this.router.navigate([this.router.url])
-  }
-
   cadastrarNovo(){
     this.router.navigate(['/cadastrarUsuario'])
   }
 
   alterarUsuario(itemId: number){
 
-    console.log('id usuario',itemId)
-    console.log('construtor do usuario vazio',this.alterarUser)
-
     this.service.procurarPorId(itemId).subscribe((usuario) => {
       this.alterarUser = usuario
     })
-
-    console.log('usuario para alterar',this.alterarUser)
 
     this.service.setAlterarUsuario(this.alterarUser)
 
     if (this.alterarUser) {
       this.router.navigate(['/alterarUsuario'])
     }
+  }
+
+  recarregarComponente() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload'
+    this.router.navigate([this.router.url])
   }
 }

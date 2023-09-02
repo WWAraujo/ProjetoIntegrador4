@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,5 +32,9 @@ public class ProdutoController {
         return repository.findById(id);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:4200/")
+    @GetMapping("/buscarproduto/{pesquisa}")
+    public List<ProdutoModel> buscarProduto(@PathVariable String pesquisa) {
+        return repository.pesquisarPorNome(pesquisa);
+    }
 }

@@ -44,7 +44,6 @@ export class CadastroUsuarioComponent implements OnInit {
     const email = this.formulario.get('email')?.value
     this.service.procurarEmail(email).subscribe((emailEncontrado) => {
       this.emailEncontrado = emailEncontrado
-      console.log('resultado da consulta',emailEncontrado)
     })
 
   }
@@ -54,7 +53,6 @@ export class CadastroUsuarioComponent implements OnInit {
       this.service.cadastrar(this.formulario.value).subscribe((clienteCadastrado) => {
         if (clienteCadastrado){
           this.router.navigate(['/listarUsuario'])
-          console.log('Usuário cadastrado com sucesso:', this.formulario.value)
         } else{
           alert('Algo deu errado no cadastro')
         }

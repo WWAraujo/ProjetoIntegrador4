@@ -50,8 +50,6 @@ export class UsuarioService {
   }
 
   alterar(atualizarUsuario: AlterarUsuario): Observable<Object> {
-    console.log('aterar objeto url', atualizarUsuario)
-
     return this.http.put(this.API, atualizarUsuario)
   }
 }
