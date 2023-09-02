@@ -45,6 +45,10 @@ Para iniciar o Front
 Depois abrir o VSC, abra a pasta FRONT:
 - Com o projeto iniciado, abrir um novo terminal dentro do VSC e selecionar GitBash, feito isso rodar o código npm install para baixar as dependencias do projeto 
 
+Precisamos instalas o modulo de paginação no front também 
+no terminal do VSC rodar o comando: npm install ngx-pagination --save
+Depois de instalar reiniciar o VSC para melhor funcionamento
+
 E por ultimo, para rodar o front 
 - No terminal Gitbash colocar o comando: ng serve
 
