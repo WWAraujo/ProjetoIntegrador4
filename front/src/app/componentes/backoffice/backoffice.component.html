@@ -2,8 +2,8 @@
   <header class="header d-class"></header>
   <h2>BackOffice</h2>
   <div class="opcoes">
-    <button [disabled]="isEstoquista || isCliente"  (click)="irParaUsuarios()">Usuarios</button>
-    <button [disabled]="isCliente" href="" alt="listarProdutos">Produtos</button>
-    <button [disabled]="isAdmin || isEstoquista"   (click)="irParaListaProdutos()">Produtos</button>
+    <button [disabled]="isCliente"                  alt="listarProdutos"  (click)="irParaListaProdutos()" >Listar Produtos</button>
+    <button [disabled]="isEstoquista || isCliente"  alt="listarUsuario"   (click)="irParaUsuarios()"      >Listar Usuários</button>
+    <button [disabled]="isAdmin || isEstoquista"    alt="listarPedidos"                                   >Listar Pedidos</button>
   </div>
 </section>

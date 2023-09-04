@@ -1,13 +1,12 @@
 package edu.senac.backend.controller;
 
-import edu.senac.backend.produto.ProdutoModel;
-import edu.senac.backend.produto.ProdutoRepository;
+import edu.senac.backend.produto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +18,12 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoRepository repository;
+
+    @Autowired
+    private AvaliacaoProdutoRepository avaliacaoProdutoRepository;
+
+    @Autowired
+    private FotosProdutoRepository fotosProdutoRepository;
 
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/listar")
@@ -36,5 +41,28 @@ public class ProdutoController {
     @GetMapping("/buscarproduto/{pesquisa}")
     public List<ProdutoModel> buscarProduto(@PathVariable String pesquisa) {
         return repository.pesquisarPorNome(pesquisa);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200/")
+    @PostMapping
+    public ResponseEntity<Long> salvarProduto(@RequestBody ProdutoRecordConstructor produto) {
+
+
+        ProdutoModel produtoModel = new ProdutoModel(produto);
+        ProdutoModel produtoSalvo = repository.save(produtoModel);
+
+
+        AvaliacaoProdutoModel avaliacaoProdutoModel  =
+                new AvaliacaoProdutoModel(produtoSalvo, produto.avaliacaoProdutoRecord());
+        avaliacaoProdutoRepository.save(avaliacaoProdutoModel);
+
+
+        FotosProdutoModel fotosProdutoModel =
+                new FotosProdutoModel(produtoSalvo, produto.fotosProdutoRecord());
+        fotosProdutoRepository.save(fotosProdutoModel);
+
+
+        Long idProdutoSalvo = Long.parseLong(String.valueOf(produtoSalvo.getId()));
+        return ResponseEntity.ok(idProdutoSalvo);
     }
 }

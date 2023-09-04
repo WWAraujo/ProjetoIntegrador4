@@ -23,4 +23,15 @@ public class ProdutoModel {
     private String ativoInativo;
 
 
+    public ProdutoModel(ProdutoRecordConstructor produto) {
+
+        if (produto.produto().id() != null ){
+            this.id = produto.produto().id();
+        }
+        this.nomeProduto = produto.produto().nomeProduto();
+        this.descricaoDetalhadaProduto = produto.produto().descricaoDetalhadaProduto();
+        this.precoProduto = produto.produto().precoProduto();
+        this.qtdEstoque =  produto.produto().qtdEstoque();
+        this.ativoInativo = produto.produto().ativoInativo();
+    }
 }
