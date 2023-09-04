@@ -56,10 +56,11 @@ public class ProdutoController {
                 new AvaliacaoProdutoModel(produtoSalvo, produto.avaliacaoProdutoRecord());
         avaliacaoProdutoRepository.save(avaliacaoProdutoModel);
 
-
-        FotosProdutoModel fotosProdutoModel =
-                new FotosProdutoModel(produtoSalvo, produto.fotosProdutoRecord());
-        fotosProdutoRepository.save(fotosProdutoModel);
+        for (FotosProdutoRecord fotoRecord : produto.fotosProdutoRecord()) {
+            FotosProdutoModel fotosProdutoModel =
+                    new FotosProdutoModel(produtoSalvo, fotoRecord);
+            fotosProdutoRepository.save(fotosProdutoModel);
+        }
 
 
         Long idProdutoSalvo = Long.parseLong(String.valueOf(produtoSalvo.getId()));
