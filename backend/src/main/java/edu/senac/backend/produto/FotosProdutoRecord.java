@@ -5,6 +5,6 @@ public record FotosProdutoRecord(
         Integer idProduto,
         String nomeImg,
         String caminhoImg,
-        String flagImg
+        boolean flagImg
 ) {
 }

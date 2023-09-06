@@ -6,6 +6,7 @@ import { ListarUsuarioComponent } from './componentes/usuario/listar-usuario/lis
 import { CadastroUsuarioComponent } from './componentes/usuario/cadastro-usuario/cadastro-usuario.component';
 import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/alterar-usuario.component';
 import { ListarProdutosComponent } from './componentes/produtos/listar-produtos/listar-produtos.component';
+import { CadastrarProdutosComponent } from './componentes/produtos/cadastrar-produtos/cadastrar-produtos.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'listarProduto',
     component: ListarProdutosComponent
+  },
+  {
+    path: 'cadastrarProduto',
+    component: CadastrarProdutosComponent
   }
 ];
 

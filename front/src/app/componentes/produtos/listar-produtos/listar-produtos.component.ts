@@ -88,6 +88,7 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   cadastrarNovo() {
+    this.router.navigate(['/cadastrarProduto'])
   }
 
   alterarProduto(id: number) {

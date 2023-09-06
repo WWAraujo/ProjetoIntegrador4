@@ -44,8 +44,8 @@ public class ProdutoController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200/")
-    @PostMapping
-    public ResponseEntity<Long> salvarProduto(@RequestBody ProdutoRecordConstructor produto) {
+    @PostMapping("/cadastrar-produto")
+    public ResponseEntity<Long> cadastrarProduto(@RequestBody ProdutoRecordConstructor produto) {
 
 
         ProdutoModel produtoModel = new ProdutoModel(produto);

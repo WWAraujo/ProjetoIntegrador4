@@ -1,0 +1,28 @@
+<div class="container">
+
+  <form (submit)="enviarImagem()" enctype="multipart/form-data">
+    <input type="file" (change)="selecionarImagem($event)" />
+  </form>
+
+  <div *ngFor="let foto of fotosProduto; let i = index">
+    <img [src]="getFullPath(foto.nome)" [alt]="foto.nome" [width]="150" [height]="150" />
+    <label>
+      <input
+        type="radio"
+        [value]="foto.nome"
+        [(ngModel)]="imagemPrincipalId"
+        (change)="selecionarImagemPrincipal(foto.nome)"
+      />
+      Definir como imagem principal
+    </label>
+  </div>
+
+  <div>
+    <button class="btn btn-primary btn-block" (click)="concluirUpload()">Concluir Upload e Fechar</button>
+  </div>
+  <div>
+    <button class="btn btn-primary btn-block" (click)="cancelarUpload()">Cancelar</button>
+  </div>
+
+</div>
+
