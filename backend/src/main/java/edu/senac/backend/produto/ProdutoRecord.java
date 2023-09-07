@@ -3,7 +3,7 @@ package edu.senac.backend.produto;
 
 public record ProdutoRecord(
 
-        Integer id,
+        Long id,
         String nomeProduto,
         String descricaoDetalhadaProduto,
         Double precoProduto,

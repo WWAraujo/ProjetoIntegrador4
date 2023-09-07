@@ -2,8 +2,9 @@ package edu.senac.backend.arquivos;
 
 public record ArquivosRecord(
 
-        String id,
-        String nome,
-        String local
+        String idProduto,
+        String nomeImg,
+        String caminhoImg,
+        String flagImg
 ) {
 }

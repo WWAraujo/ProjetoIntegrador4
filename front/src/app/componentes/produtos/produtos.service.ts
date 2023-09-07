@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaginaProdutos, Produto } from './listar-produtos/listar-produtos';
 import { environment } from 'src/environments/environment';
-import { CarregarFotos } from './cadastrar-produtos/carregar-fotos/carregar-fotos';
+import { CarregarFotos } from './cadastrar-produtos/cadastrar-produtos';
 
 const API = environment.apiURL;
 const NOT_MODIFIED = '304';
@@ -36,13 +36,14 @@ export class ProdutosService {
     });
   }
 
-  cadastrarProduto(produtoData: any): Observable<any> {
-    return this.http.post(`${API}/produto/cadastrar-produto`, produtoData);
-  }
-
   enviarImagem(file: File): Observable<CarregarFotos> {
     const formData = new FormData();
     formData.append('file', file);
     return this.http.post<CarregarFotos>(`${API}/api/upload`, formData);
+  }
+
+  cadastrarProduto(produtoData: any): Observable<any> {
+    console.log('dados encaminhado para back', produtoData)
+    return this.http.post(`${API}/produto/cadastrar-produto`, produtoData);
   }
 }

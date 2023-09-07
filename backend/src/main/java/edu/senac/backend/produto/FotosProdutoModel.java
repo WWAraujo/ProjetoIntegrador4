@@ -14,9 +14,9 @@ public class FotosProdutoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    private int idProduto;
+    private Long idProduto;
     private String nomeImg;
     private String caminhoImg;
     private String flagImg;

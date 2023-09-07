@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutosService } from '../produtos.service';
 import { ModalService } from './modal.service';
-import { CarregarFotos } from './carregar-fotos/carregar-fotos';
+import { AvaliacaoProduto, Produto, CarregarFotos } from './cadastrar-produtos';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-produtos',
@@ -10,25 +11,37 @@ import { CarregarFotos } from './carregar-fotos/carregar-fotos';
   styleUrls: ['./cadastrar-produtos.component.css']
 })
 export class CadastrarProdutosComponent implements OnInit {
-  @Input() objetos: any[] | undefined;
 
   modalAberto = false;
   formularioProduto!: FormGroup;
+
+  produto: Produto = {
+    nomeProduto: '',
+    descricaoDetalhadaProduto: '',
+    precoProduto: 0,
+    qtdEstoque: 0,
+    ativoInativo: '',
+  };
+
+  avaliacaoProdutoRecord: AvaliacaoProduto = {
+    idProduto: 0,
+    avaliacao: 0,
+  };
+
   fotosProduto: CarregarFotos[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private produtosService: ProdutosService,
-    public modalservice: ModalService
+    public modalservice: ModalService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.formularioProduto = this.formBuilder.group({
-      nomeProduto: ['', Validators.required],
-      descricaoProduto: ['', Validators.required],
-      precoProduto: ['', Validators.required],
-      qtdEstoque: ['', Validators.required],
-      ativoInativo: ['', Validators.required]
+      produto: this.produto,
+      avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
+      fotosProdutoRecord: this.fotosProduto,
     });
 
     this.modalservice.fecharModalEvent.subscribe(() => {
@@ -39,12 +52,16 @@ export class CadastrarProdutosComponent implements OnInit {
   }
 
   submitForm() {
-    if (this.formularioProduto.invalid) {
-      return;
-    }
 
-    const produtoData = this.formularioProduto.value;
-    this.produtosService.cadastrarProduto(produtoData).subscribe(
+    const dadosParaEnviar = {
+      produto: this.produto,
+      avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
+      fotosProdutoRecord: this.fotosProduto,
+    };
+
+    console.log('construindo objeto para enviar', dadosParaEnviar)
+
+    this.produtosService.cadastrarProduto(dadosParaEnviar).subscribe(
       (response) => {
         console.log('Produto cadastrado com sucesso:', response);
         // Limpe o formulário ou faça ações adicionais, se necessário.
@@ -64,15 +81,17 @@ export class CadastrarProdutosComponent implements OnInit {
     this.modalAberto = false;
   }
 
-  slideConfig = {
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    dots: true,
-    infinite: true,
-    centerMode: false,
-  };
-
   getFullPath(imageName: string): string {
     return `http://localhost:8080/api/upload/${imageName}`;
+  }
+
+  receberListaFotos(fotos: CarregarFotos[]){
+    console.log('lista recebida no cadastrar',fotos);
+    this.fotosProduto = fotos;
+    console.log('lista com produto salvo',this.fotosProduto);
+  }
+
+  irParaListaProdutos() {
+    this.router.navigate(['listarProduto'])
   }
 }

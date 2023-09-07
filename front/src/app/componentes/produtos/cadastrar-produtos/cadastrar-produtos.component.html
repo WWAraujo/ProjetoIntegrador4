@@ -1,45 +1,66 @@
 <div class="container">
-  <form [formGroup]="formularioProduto" (ngSubmit)="submitForm()">
-    <div class="form-group">
-      <label for="nomeProduto">Nome do Produto</label>
-      <input type="text" id="nomeProduto" formControlName="nomeProduto" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="descricaoProduto">Descrição do Produto</label>
-      <textarea id="descricaoProduto" formControlName="descricaoProduto" class="form-control" required></textarea>
-    </div>
-    <div class="form-group">
-      <label for="precoProduto">Preço do Produto</label>
-      <input type="number" id="precoProduto" formControlName="precoProduto" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="qtdEstoque">Quantidade em Estoque</label>
-      <input type="number" id="qtdEstoque" formControlName="qtdEstoque" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="ativoInativo">Status</label>
-      <select id="ativoInativo" formControlName="ativoInativo" class="form-control" required>
-        <option value="ATIVO">Ativo</option>
-        <option value="INATIVO">Inativo</option>
-      </select>
-    </div>
+  <h1>Formulário de Produto</h1>
 
-    <div *ngFor="let foto of fotosProduto; let i = index">
-      <img [src]="getFullPath(foto.nome)" [alt]="foto.nome" [width]="150" [height]="150" />
-    </div>
+  <div class="form-group col-md-4">
+    <label for="nomeProduto">Nome do Produto:</label>
+    <input type="text" id="nomeProduto" [(ngModel)]="produto.nomeProduto" class="form-control" required>
+  </div>
 
-    <!-- Botão para abrir o modal -->
-    <button class="btn btn-primary" (click)="abrirModal()">Carregar Fotos</button>
+  <div class="form-group col-md-4">
+    <label for="descricaoProduto">Descrição do Produto:</label>
+    <textarea type="text" id="descricaoProduto" [(ngModel)]="produto.descricaoDetalhadaProduto" class="form-control" required></textarea>
+  </div>
 
-    <!-- Modal -->
-    <div class="modal" *ngIf="modalAberto">
-      <div class="modal-overlay"></div>
-      <div class="modal-content">
-        <app-carregar-fotos></app-carregar-fotos>
-      </div>
-      <button class="modal-fechar" (click)="fecharModal()">&times;</button>
-    </div>
+  <div class="col-md-4">
+    <label for="precoProduto">Preço do Produto:</label>
+    <input type="number" id="precoProduto" [(ngModel)]="produto.precoProduto" class="form-control" required>
+  </div>
 
-    <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
-  </form>
+  <div class="col-md-4">
+    <label for="quantidadeEstoque">Quantidade estoque</label>
+    <input type="text" id="quantidadeEstoque" [(ngModel)]="produto.qtdEstoque" class="form-control" required>
+  </div>
+
+  <div class="form-group col-md-4">
+    <label for="ativoInativo">Status</label>
+    <select id="ativoInativo" [(ngModel)]="produto.ativoInativo" class="form-control" required>
+      <option value="ATIVO">Ativo</option>
+      <option value="INATIVO">Inativo</option>
+    </select>
+  </div>
+
+
+  <div class="form-group col-md-4">
+    <label for="ativoInativo">Avaliação</label>
+    <select id="ativoInativo" [(ngModel)]="avaliacaoProdutoRecord.avaliacao" class="form-control" required>
+      <option value="5.0">5.0</option>
+      <option value="4.5">4.5</option>
+      <option value="4.0">4.0</option>
+      <option value="3.5">3.5</option>
+      <option value="3.0">3.0</option>
+      <option value="2.5">2.5</option>
+      <option value="2.0">2.0</option>
+      <option value="1.5">1.5</option>
+      <option value="1.0">1.0</option>
+      <option value="0.5">0.5</option>
+      <option value="0.0">0.0</option>
+    </select>
+  </div>
+
+  <button class="newUser" (click)="abrirModal()">Carregar Fotos</button>
+
+  <div class="modal" *ngIf="modalAberto">
+    <div class="modal-overlay"></div>
+    <div class="modal-content"> <app-carregar-fotos></app-carregar-fotos> </div>
+    <button class="modal-fechar" (click)="fecharModal()">&times;</button>
+  </div>
+
+  <button class="newUser" (click)="submitForm()" >Cadastrar Produto</button>
+
+  <button class="newUser" (click)="irParaListaProdutos()" >Cancelar</button>
+
+  <div *ngFor="let foto of fotosProduto; let i = index">
+    <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="150" [height]="150" />
+  </div>
+  
 </div>

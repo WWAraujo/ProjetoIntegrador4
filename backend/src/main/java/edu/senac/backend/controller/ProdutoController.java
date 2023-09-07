@@ -47,8 +47,10 @@ public class ProdutoController {
     @PostMapping("/cadastrar-produto")
     public ResponseEntity<Long> cadastrarProduto(@RequestBody ProdutoRecordConstructor produto) {
 
+        System.out.println(produto);
 
         ProdutoModel produtoModel = new ProdutoModel(produto);
+
         ProdutoModel produtoSalvo = repository.save(produtoModel);
 
 

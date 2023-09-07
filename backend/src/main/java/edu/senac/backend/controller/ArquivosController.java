@@ -43,11 +43,11 @@ public class ArquivosController {
             ArquivosRecord novoNomeArquivo = gerarNomeArquivoUnico(uploadDirectory, nomeArquivoOriginal);
 
 
-            String caminhoCompleto = uploadDirectory + File.separator + novoNomeArquivo.nome();
+            String caminhoCompleto = uploadDirectory + File.separator + novoNomeArquivo.nomeImg();
             File arquivoSalvo = new File(caminhoCompleto);
 
 
-            Path filePath = Paths.get(uploadDirectory, novoNomeArquivo.nome());
+            Path filePath = Paths.get(uploadDirectory, novoNomeArquivo.nomeImg());
             file.transferTo(filePath);
 
 
@@ -105,7 +105,7 @@ public class ArquivosController {
             arquivo = new File(caminhoDiretorio + File.separator + novoNomeArquivo);
         }
 
-        ArquivosRecord response = new ArquivosRecord(timestamp.toString(), novoNomeArquivo , caminhoDiretorio);
+        ArquivosRecord response = new ArquivosRecord(timestamp.toString(), novoNomeArquivo , caminhoDiretorio, null);
 
         return response;
     }

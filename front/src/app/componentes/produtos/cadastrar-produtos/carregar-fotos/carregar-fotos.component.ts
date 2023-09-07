@@ -2,7 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutosService } from '../../produtos.service';
 import { ModalService } from '../modal.service';
-import { CarregarFotos } from './carregar-fotos';
+import { CadastrarProdutosComponent } from '../cadastrar-produtos.component';
+import { CarregarFotos } from '../cadastrar-produtos';
 
 @Component({
   selector: 'app-carregar-fotos',
@@ -11,7 +12,6 @@ import { CarregarFotos } from './carregar-fotos';
 })
 
 export class CarregarFotosComponent implements OnInit {
-  @Output() objetoAdicionado = new EventEmitter<any>();
 
   file: File | null = null;
   preview!: string;
@@ -21,14 +21,15 @@ export class CarregarFotosComponent implements OnInit {
   constructor(
     private produtoService: ProdutosService,
     public modalservice: ModalService,
+    private cadastrarProduto: CadastrarProdutosComponent,
   ) { }
 
   ngOnInit(): void {
   }
 
   concluirUpload() {
-    this.modalservice.listaDeObjetos.push(this.fotosProduto);
-    this.objetoAdicionado.emit(this.fotosProduto);
+    this.cadastrarProduto.receberListaFotos(this.fotosProduto);
+    console.log('enviando lista de fotos do carregar', this.fotosProduto)
     this.modalservice.fecharModal();
   }
 
@@ -37,6 +38,7 @@ export class CarregarFotosComponent implements OnInit {
   }
 
   getFullPath(imageName: string): string {
+    console.log('procurou pelo nome de ',imageName)
     return `http://localhost:8080/api/upload/${imageName}`;
   }
 
@@ -49,11 +51,12 @@ export class CarregarFotosComponent implements OnInit {
 
   selecionarImagemPrincipal(id: string) {
     this.fotosProduto.forEach((foto) => {
-      if (foto.nome === id) {
-        foto.principal = true;
+      if (foto.nomeImg === id) {
+        foto.flagImg = 'p';
       } else {
-        foto.principal = false;
+        foto.flagImg = '';
       }
+      foto.idProduto = 0;
     });
   }
 
@@ -62,8 +65,10 @@ export class CarregarFotosComponent implements OnInit {
     if (this.file) {
       this.produtoService.enviarImagem(this.file).subscribe(
         (response) => {
+          console.log('response ',response)
           this.fotosProduto.push(response);
-          this.selecionarImagemPrincipal(response.nome)
+          console.log('depois de adicionar na lista ', this.fotosProduto)
+          this.selecionarImagemPrincipal(response.nomeImg)
         },
         (error) => {
           console.error('Erro ao enviar a imagem:', error);
@@ -73,4 +78,6 @@ export class CarregarFotosComponent implements OnInit {
       console.log('Nenhuma imagem selecionada.');
     }
   }
+
+  
 }

@@ -5,13 +5,13 @@
   </form>
 
   <div *ngFor="let foto of fotosProduto; let i = index">
-    <img [src]="getFullPath(foto.nome)" [alt]="foto.nome" [width]="150" [height]="150" />
+    <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="150" [height]="150" />
     <label>
       <input
         type="radio"
-        [value]="foto.nome"
+        [value]="foto.nomeImg"
         [(ngModel)]="imagemPrincipalId"
-        (change)="selecionarImagemPrincipal(foto.nome)"
+        (change)="selecionarImagemPrincipal(foto.nomeImg)"
       />
       Definir como imagem principal
     </label>

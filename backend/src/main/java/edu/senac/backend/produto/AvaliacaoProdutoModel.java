@@ -15,9 +15,9 @@ public class AvaliacaoProdutoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    private int idProduto;
+    private Long idProduto;
     private Double avaliacao;
 
     public AvaliacaoProdutoModel(ProdutoModel produtoModel, AvaliacaoProdutoRecord avl) {
