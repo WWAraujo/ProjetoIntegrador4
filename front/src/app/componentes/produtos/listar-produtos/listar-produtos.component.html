@@ -22,6 +22,7 @@
         <th>Status</th>
         <th>Alterar</th>
         <th>Hab/des</th>
+        <th>Visualizar</th>
       </tr>
       <tr *ngFor="let item of produtos" class="table">
         <td> {{ item.nomeProduto  }} </td>
@@ -30,7 +31,8 @@
         <td> {{ item.qtdEstoque }} </td>
         <td> {{ item.ativoInativo }} </td>
         <td><button class="btnUserEdit" (click)="alterarProduto( item.id )"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
-        <td><button class="btnUserEdit" (click)="deletarProduto( item.id )"><p>Ativar Desativar</p></button></td>
+        <td><button class="btnUserEdit" (click)="deletarProduto( item.id, item.ativoInativo )"><p>Ativar Desativar</p></button></td>
+        <td><button class="btnUserEdit" ><p>Visualizar</p></button></td>
       </tr>
     </table>
 

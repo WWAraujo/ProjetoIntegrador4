@@ -29,7 +29,6 @@ export class CarregarFotosComponent implements OnInit {
 
   concluirUpload() {
     this.cadastrarProduto.receberListaFotos(this.fotosProduto);
-    console.log('enviando lista de fotos do carregar', this.fotosProduto)
     this.modalservice.fecharModal();
   }
 
@@ -38,7 +37,6 @@ export class CarregarFotosComponent implements OnInit {
   }
 
   getFullPath(imageName: string): string {
-    console.log('procurou pelo nome de ',imageName)
     return `http://localhost:8080/api/upload/${imageName}`;
   }
 
@@ -65,9 +63,7 @@ export class CarregarFotosComponent implements OnInit {
     if (this.file) {
       this.produtoService.enviarImagem(this.file).subscribe(
         (response) => {
-          console.log('response ',response)
           this.fotosProduto.push(response);
-          console.log('depois de adicionar na lista ', this.fotosProduto)
           this.selecionarImagemPrincipal(response.nomeImg)
         },
         (error) => {
@@ -75,9 +71,9 @@ export class CarregarFotosComponent implements OnInit {
         }
       );
     } else {
-      console.log('Nenhuma imagem selecionada.');
+      alert('Nenhuma imagem selecionada.');
     }
   }
 
-  
+
 }

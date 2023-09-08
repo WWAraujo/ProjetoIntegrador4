@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -15,7 +16,6 @@ public class LoginController {
     private LoginRepository repository;
 
 
-    @CrossOrigin(origins = "http://localhost:4200/")
     @PostMapping()
     @Transactional
     public ResponseEntity<LoginResponse> salvarUsuario(@RequestBody LoginRecord login) {

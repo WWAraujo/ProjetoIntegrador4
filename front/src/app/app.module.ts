@@ -19,8 +19,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MensagemComponent } from './componentes/mensagem/mensagem.component';
 import { ProdutoComponent } from './componentes/produtos/produto/produto.component';
 import { CarregarFotosComponent } from './componentes/produtos/cadastrar-produtos/carregar-fotos/carregar-fotos.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -46,8 +44,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    BrowserAnimationsModule,
-    SlickCarouselModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

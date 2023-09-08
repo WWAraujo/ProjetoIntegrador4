@@ -43,7 +43,11 @@ export class ProdutosService {
   }
 
   cadastrarProduto(produtoData: any): Observable<any> {
-    console.log('dados encaminhado para back', produtoData)
     return this.http.post(`${API}/produto/cadastrar-produto`, produtoData);
+  }
+
+  excluir(id: number, status: string): Observable<any> {
+    const url = `${API}/produto/${id}/${status}`
+    return this.http.delete<any>(url)
   }
 }

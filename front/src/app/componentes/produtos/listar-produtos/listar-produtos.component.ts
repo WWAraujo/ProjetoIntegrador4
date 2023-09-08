@@ -94,6 +94,11 @@ export class ListarProdutosComponent implements OnInit {
   alterarProduto(id: number) {
   }
 
-  deletarProduto(id: number) {
+  deletarProduto(id: number, status: string) {
+    this.service.excluir(id, status).subscribe(() => {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload'
+      this.router.navigate([this.router.url])
+    })
   }
 }

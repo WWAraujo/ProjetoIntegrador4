@@ -16,6 +16,7 @@ export class CadastrarProdutosComponent implements OnInit {
   formularioProduto!: FormGroup;
 
   produto: Produto = {
+    id: 0,
     nomeProduto: '',
     descricaoDetalhadaProduto: '',
     precoProduto: 0,
@@ -48,7 +49,6 @@ export class CadastrarProdutosComponent implements OnInit {
       this.fecharModal();
     });
 
-    console.log(this.fotosProduto)
   }
 
   submitForm() {
@@ -59,16 +59,14 @@ export class CadastrarProdutosComponent implements OnInit {
       fotosProdutoRecord: this.fotosProduto,
     };
 
-    console.log('construindo objeto para enviar', dadosParaEnviar)
-
     this.produtosService.cadastrarProduto(dadosParaEnviar).subscribe(
       (response) => {
-        console.log('Produto cadastrado com sucesso:', response);
-        // Limpe o formulário ou faça ações adicionais, se necessário.
+        alert('Produto cadastrado com sucesso.')
+        this.router.navigate(['listarProduto'])
       },
       (error) => {
         console.error('Erro ao cadastrar produto:', error);
-        // Trate o erro ou exiba uma mensagem de erro para o usuário.
+        alert('Erro ao cadastrar produto:');
       }
     );
   }
@@ -86,9 +84,7 @@ export class CadastrarProdutosComponent implements OnInit {
   }
 
   receberListaFotos(fotos: CarregarFotos[]){
-    console.log('lista recebida no cadastrar',fotos);
     this.fotosProduto = fotos;
-    console.log('lista com produto salvo',this.fotosProduto);
   }
 
   irParaListaProdutos() {
