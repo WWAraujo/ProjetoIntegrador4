@@ -4,6 +4,7 @@ import { UsuarioService } from '../usuario.service';
 import { TipoUsuario } from '../user-role.enum';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { Validacoes } from './validacoes';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class CadastroUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
       nome: ['',[Validators.required]],
-      cpf: ['',[Validators.required]],
+      cpf: ['',[Validators.required,Validacoes.ValidaCPF]],
       email: ['',[Validators.required, Validators.email]],
       tipoUsuario: ['',[Validators.required]],
       senha: ['',[Validators.required,]],

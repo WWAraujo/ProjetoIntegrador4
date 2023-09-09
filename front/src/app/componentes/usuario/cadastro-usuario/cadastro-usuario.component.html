@@ -13,11 +13,13 @@
     </div>
 
     <label for="cpf">CPF</label>
-    <input type="text" class="input" id="cpf" formControlName="cpf" placeholder="Digite o CPF">
+    <input type="text" class="input" id="cpf" formControlName="cpf" placeholder="Digite o CPF" maxlength="11">
     <div *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched">
       O CPF é Obrigatório
     </div>
-
+    <div *ngIf="formulario.get('cpf')?.hasError('cpfInvalido')">
+      Informe um cpf valido!
+    </div>
 
     <label for="emailCadastro">E-mail</label>
     <input type="text" class="input" id="email" formControlName="email" placeholder="Digite o e-mail"
