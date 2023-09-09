@@ -50,7 +50,6 @@
   border-radius: 5px;
   border: 1px solid #1e90ff;
   font: 18px 'Inter',sans-serif;
-  color: #1e90ff;
 }
 
 .title {
@@ -76,14 +75,7 @@ div{
 }
 
 .alterUser {
-  margin: 0;
-  padding: 15px 10px;
-  background-color: #1e90ff;
-  color: #fff;
   margin-top: 10px;
-  border-radius: 10px;
-  border: 2px solid transparent;
-  width: 250px;
 }
 
 .alterUser:hover {
@@ -95,10 +87,10 @@ div{
   padding: 15px 10px;
   background-color: #1e90ff;
   color: #fff;
-  margin-top: 10px;
+  margin: 10px 0px;
   border-radius: 10px;
   border: 2px solid transparent;
-  width: 250px;
+  width: 270px;
 }
 
 .cancel:hover {

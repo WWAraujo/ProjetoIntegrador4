@@ -64,6 +64,10 @@
   font-weight: bold;
 }
 
+.newUser {
+  margin: 10px 0px;
+}
+
 div{
   width: 60%;
   color: red;
