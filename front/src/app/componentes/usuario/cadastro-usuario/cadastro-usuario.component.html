@@ -17,7 +17,7 @@
     <div *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched">
       O CPF é Obrigatório
     </div>
-    <div *ngIf="formulario.get('cpf')?.hasError('cpfInvalido')">
+    <div *ngIf="formulario.get('cpf')?.touched && formulario.get('cpf')?.hasError('cpfInvalido')">
       Informe um cpf valido!
     </div>
 

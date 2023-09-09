@@ -69,16 +69,4 @@ div{
   color: red;
 }
 
-.newUser {
-  padding: 25px 50px;
-  background-color: #1e90ff;
-  color: #fff;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  border: 2px solid transparent
-}
 
-.newUser:hover {
-  cursor: pointer;
-}
