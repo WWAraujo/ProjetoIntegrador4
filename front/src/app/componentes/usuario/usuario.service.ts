@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListarUsuario } from './listar-usuario/listar-usuarios';
 import { CadastroUsuario } from './cadastro-usuario/cadastro-usuario';
-import { AlterarUsuario } from './alterar-uruario';
+import { AlterarUsuario } from './alterar-usuario';
 
 @Injectable({
   providedIn: 'root'

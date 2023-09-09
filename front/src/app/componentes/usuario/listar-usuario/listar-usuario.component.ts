@@ -1,5 +1,5 @@
-import { AlterarUsuario } from '../alterar-uruario';
-import { Component, OnInit } from '@angular/core';
+import { AlterarUsuario } from '../alterar-usuario';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from '../usuario.service';
 import { ListarUsuario } from './listar-usuarios';
 import { Router } from '@angular/router';
@@ -7,8 +7,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-listar-usuario',
   templateUrl: './listar-usuario.component.html',
-  styleUrls: ['./listar-usuario.component.css']
+  styleUrls: ['./listar-usuario.component.css'],
+
 })
+
 export class ListarUsuarioComponent implements OnInit {
 
   listausuario!: ListarUsuario;
@@ -23,6 +25,16 @@ export class ListarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarUsuarios();
+  }
+
+  filter(event: Event){
+  const filtvalue = (event.target as HTMLInputElement).value.toLowerCase();
+  this.service.listarUsuarios(this.listausuario).subscribe((listausuario) => {
+    this.arr = listausuario.filter((usuario)=> {
+      return usuario.nomeUsuario.toLowerCase().includes(filtvalue);
+    })
+
+  })
   }
 
   listarUsuarios() {

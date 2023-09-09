@@ -19,6 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MensagemComponent } from './componentes/mensagem/mensagem.component';
 import { ProdutoComponent } from './componentes/produtos/produto/produto.component';
 import { CarregarFotosComponent } from './componentes/produtos/cadastrar-produtos/carregar-fotos/carregar-fotos.component';
+import { UserPipe } from './componentes/usuario/listar-usuario/usuarios.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CarregarFotosComponent } from './componentes/produtos/cadastrar-produto
     MensagemComponent,
     ProdutoComponent,
     CarregarFotosComponent,
-  ],
+    UserPipe,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../usuario.service';
-import { AlterarUsuario } from '../alterar-uruario';
+import { AlterarUsuario } from '../alterar-usuario';
 import { TipoUsuario } from '../user-role.enum';
 import { Router } from '@angular/router';
 

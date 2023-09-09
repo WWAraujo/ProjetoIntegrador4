@@ -4,7 +4,10 @@
   </div>
   <div class="userSearch">
     <label>Pesquisar</label>
-    <input type="text" class="campoPesquisar">
+    <input
+    type="search"
+    class="campoPesquisar"
+    (input)="filter($event)">
     <button class="btnPesquisar"><img src="../../../../assets/image/lupa.png" alt="lupaPesquisar"></button>
   </div>
   <div class="container_table">
