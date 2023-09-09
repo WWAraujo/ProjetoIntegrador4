@@ -1,40 +1,57 @@
-<section class="container login ff-inter">
-  <div class="container-cadastro">
-    <h1>Cadastrar</h1>
+<section class="container">
 
-    <form [formGroup]="formulario">
-      <label for="nomeUsuario">Nome</label>
-      <input type="text" class="input" id="nomeUsuario" formControlName="nomeUsuario">
-
-      <label for="nomeUsuario">Email</label>
-      <input type="text" class="input" id="emailUsuario" formControlName="emailUsuario" [readonly]="campoBloqueado">
-
-      <label for="cpfUsuario">CPF</label>
-      <input type="text" class="input" id="cpfUsuario" formControlName="cpfUsuario">
-
-      <label for="tipoUsuario">Tipo de Usuário</label>
-      <select formControlName="tipoUsuario" id="tipoUsuario">
-        <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
-      </select>
-
-
-      <label for="senha">Senha</label>
-      <input type="password" class="input" id="senha" name="senha" formControlName="senhaUsuario"
-        placeholder="Digite a senha">
-
-
-      <label for="confirmarSenha">Confirmar Senha</label>
-      <input type="password" class="input" id="confirmarSenha" name="confirmarSenha"
-        placeholder="Digite novamente a senha">
-
-
-      <div class="buttons">
-        <button (click)="atualizarUsuario()">Cadastrar
-        </button>
-        <button (click)="cancelar()">Cancelar
-        </button>
-      </div>
-    </form>
+  <div class="title">
+    <label>ALTERAR</label>
   </div>
 
+  <form class="form-cadastro" [formGroup]="formulario">
+
+    <label for="nomeUsuario">Nome</label>
+    <input type="text" class="input" id="nomeUsuario" formControlName="nomeUsuario">
+
+    <label for="emailUsuario">Email</label>
+    <input type="text" class="input" id="emailUsuario" formControlName="emailUsuario" [readonly]="campoBloqueado">
+
+    <label for="cpfUsuario">CPF</label>
+    <input type="text" class="input" id="cpfUsuario" formControlName="cpfUsuario">
+
+    <label for="tipoUsuario">Tipo de Usuário</label>
+    <select formControlName="tipoUsuario" id="tipoUsuario">
+      <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
+    </select>
+
+    <label for="senha">Senha</label>
+    <input type="password" class="input" id="senha" name="senha" formControlName="senhaUsuario" (input)="validarSenha()">
+    <div class="mensagem__erro"
+      *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
+      Senha é obrigatoria!
+    </div>
+    <div class="mensagem__erro"
+      *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched">
+      Senha tem mínimo de 3 caracteres!
+    </div>
+
+    <label for="confirmarSenha">Confirmar Senha</label>
+    <input type="password" class="input" id="confirmarSenha" name="confirmarSenha" formControlName="confirmarSenha" (input)="validarSenha()">
+    <div class="mensagem__erro"
+      *ngIf="formulario.get('confirmacaoSenha')?.errors?.['required'] && formulario.get('confirmacaoSenha')?.touched">
+      Senha é obrigatoria!
+    </div>
+    <div class="mensagem__erro"
+      *ngIf="formulario.get('confirmacaoSenha')?.errors?.['minlength'] && formulario.get('confirmacaoSenha')?.touched">
+      Senha tem mínimo de 3 caracteres!
+    </div>
+    <div class="mensagem__erro" *ngIf="!senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched">
+      As senhas não coincidem!
+    </div>
+
+    <div class="buttons">
+      <button  (click)="atualizarUsuario()" [disabled]="!formulario.valid"
+        [ngClass]="habilitarBotao()">
+        ALTERAR
+      </button>
+      <button class="cancel" (click)="cancelar()">VOLTAR
+      </button>
+    </div>
+  </form>
 </section>

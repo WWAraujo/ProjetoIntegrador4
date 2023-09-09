@@ -16,9 +16,10 @@ export class AlterarUsuarioComponent implements OnInit {
   private usuario!: AlterarUsuario;
   tiposUsuario  = Object.values(TipoUsuario);
   campoBloqueado = true;
+  senhaCorrespondente: boolean = true;
 
   constructor(
-    private fb: FormBuilder,
+    private formbuilder: FormBuilder,
     private service: UsuarioService,
     private router: Router,
   ) {}
@@ -28,13 +29,14 @@ export class AlterarUsuarioComponent implements OnInit {
     this.usuario = this.service.getAlterarUsuario()
 
 
-    this.formulario = this.fb.group({
+    this.formulario = this.formbuilder.group({
       id: [{ value: '',  }, Validators.required],
       nomeUsuario: ['', Validators.required],
       cpfUsuario: ['', Validators.required],
       emailUsuario: [{ value: '',  }, [Validators.required, Validators.email]],
-      senhaUsuario: ['', Validators.required],
-      tipoUsuario: ['', Validators.required],
+      senhaUsuario: ['', Validators.required,Validators.minLength(3)],
+      confirmarSenha: ['', Validators.required,Validators.minLength(3)],
+      tipoUsuario: ['', Validators.required,],
       ativoInativo: [{ value: '', }, Validators.required],
     });
 
@@ -63,8 +65,22 @@ export class AlterarUsuarioComponent implements OnInit {
     );
   }
 
+  validarSenha(){
+    const senha = this.formulario.get('senha')?.value;
+    const confirmacaoSenha = this.formulario.get('confirmacaoSenha')?.value; ;
+    this.senhaCorrespondente = senha === confirmacaoSenha;
+  }
+
   cancelar() {
     this.router.navigate(['/listarUsuario'])
 
+  }
+
+  habilitarBotao(): string {
+    if(this.formulario.valid){
+      return 'botao'
+    } else {
+      return 'botao__desabilitado'
+    }
   }
 }

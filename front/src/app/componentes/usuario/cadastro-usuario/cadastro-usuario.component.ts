@@ -32,7 +32,7 @@ export class CadastroUsuarioComponent implements OnInit {
       cpf: ['',[Validators.required]],
       email: ['',[Validators.required, Validators.email]],
       tipoUsuario: ['',[Validators.required]],
-      senha: ['',[Validators.required,Validators.minLength(3)]],
+      senha: ['',[Validators.required,]],
       confirmacaoSenha: ['',[Validators.required,Validators.minLength(3)]],
     });
   }
