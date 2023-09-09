@@ -4,6 +4,7 @@ import { UsuarioService } from '../usuario.service';
 import { AlterarUsuario } from '../alterar-usuario';
 import { TipoUsuario } from '../user-role.enum';
 import { Router } from '@angular/router';
+import { Validacoes } from '../cadastro-usuario/validacoes';
 
 @Component({
   selector: 'app-alterar-usuario',
@@ -32,11 +33,11 @@ export class AlterarUsuarioComponent implements OnInit {
     this.formulario = this.formbuilder.group({
       id: [{ value: '',  }, Validators.required],
       nomeUsuario: ['', Validators.required],
-      cpfUsuario: ['', Validators.required],
+      cpfUsuario: ['', [Validators.required,Validacoes.ValidaCPF]],
       emailUsuario: [{ value: '',  }, [Validators.required, Validators.email]],
-      senhaUsuario: ['', Validators.required,Validators.minLength(3)],
-      confirmarSenha: ['', Validators.required,Validators.minLength(3)],
-      tipoUsuario: ['', Validators.required,],
+      senha: ['', [Validators.required,Validators.minLength(3)]],
+      confirmacaoSenha: ['', [Validators.required]],
+      tipoUsuario: ['', [Validators.required]],
       ativoInativo: [{ value: '', }, Validators.required],
     });
 
@@ -55,6 +56,7 @@ export class AlterarUsuarioComponent implements OnInit {
   }
 
   atualizarUsuario(){
+
     this.service.alterar(this.formulario.value).subscribe(
       response => {
         this.router.navigate(['/listarUsuario'])
@@ -77,7 +79,7 @@ export class AlterarUsuarioComponent implements OnInit {
   }
 
   habilitarBotao(): string {
-    if(this.formulario.valid){
+    if(this.formulario.valid && this.senhaCorrespondente){
       return 'botao'
     } else {
       return 'botao__desabilitado'

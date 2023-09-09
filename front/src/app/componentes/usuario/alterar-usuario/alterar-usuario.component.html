@@ -13,7 +13,13 @@
     <input type="text" class="input" id="emailUsuario" formControlName="emailUsuario" [readonly]="campoBloqueado">
 
     <label for="cpfUsuario">CPF</label>
-    <input type="text" class="input" id="cpfUsuario" formControlName="cpfUsuario">
+    <input type="text" class="input" id="cpfUsuario" formControlName="cpfUsuario" >
+    <div *ngIf="formulario.get('cpfUsuario')?.errors?.['required'] && formulario.get('cpfUsuario')?.touched">
+      O CPF é Obrigatório
+    </div>
+    <div *ngIf="formulario.get('cpfUsuario')?.hasError('cpfInvalido')">
+      Informe um cpf valido!
+    </div>
 
     <label for="tipoUsuario">Tipo de Usuário</label>
     <select formControlName="tipoUsuario" id="tipoUsuario">
@@ -21,7 +27,7 @@
     </select>
 
     <label for="senha">Senha</label>
-    <input type="password" class="input" id="senha" name="senha" formControlName="senhaUsuario" (input)="validarSenha()">
+    <input type="password" class="input" id="senha" name="senha" formControlName="senha" (input)="validarSenha()">
     <div class="mensagem__erro"
       *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
       Senha é obrigatoria!
@@ -32,10 +38,10 @@
     </div>
 
     <label for="confirmarSenha">Confirmar Senha</label>
-    <input type="password" class="input" id="confirmarSenha" name="confirmarSenha" formControlName="confirmarSenha" (input)="validarSenha()">
+    <input type="password" class="input" id="confirmacaoSenha" name="confirmacaoSenha" formControlName="confirmacaoSenha" (input)="validarSenha()">
     <div class="mensagem__erro"
       *ngIf="formulario.get('confirmacaoSenha')?.errors?.['required'] && formulario.get('confirmacaoSenha')?.touched">
-      Senha é obrigatoria!
+      Confirmação de Senha é obrigatoria!
     </div>
     <div class="mensagem__erro"
       *ngIf="formulario.get('confirmacaoSenha')?.errors?.['minlength'] && formulario.get('confirmacaoSenha')?.touched">
