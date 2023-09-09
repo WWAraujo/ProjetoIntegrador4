@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, MinLengthValidator, ValidatorFn, Validators } from '@angular/forms';
 import { UsuarioService } from '../usuario.service';
 import { TipoUsuario } from '../user-role.enum';
 import { Subject } from 'rxjs';
@@ -18,6 +18,7 @@ export class CadastroUsuarioComponent implements OnInit {
   tiposUsuario  = Object.values(TipoUsuario);
   emailEncontrado: boolean = false;
   clienteCadastrado: boolean = false;
+  senhaCorrespondente: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +32,8 @@ export class CadastroUsuarioComponent implements OnInit {
       cpf: ['',[Validators.required]],
       email: ['',[Validators.required, Validators.email]],
       tipoUsuario: ['',[Validators.required]],
-      senha: ['',[Validators.required,Validators.minLength(3)]]
+      senha: ['',[Validators.required,Validators.minLength(3)]],
+      confirmacaoSenha: ['',[Validators.required,Validators.minLength(3)]],
     });
   }
 
@@ -45,7 +47,6 @@ export class CadastroUsuarioComponent implements OnInit {
     this.service.procurarEmail(email).subscribe((emailEncontrado) => {
       this.emailEncontrado = emailEncontrado
     })
-
   }
 
   cadastrarUsuario() {
@@ -58,9 +59,32 @@ export class CadastroUsuarioComponent implements OnInit {
         }
       })
     } else{
-      alert('Email já cadastrado')
+      alert('Email ja Cadastrado!')
+    }
 
+    if (this.formulario.valid && this.senhaCorrespondente){
+
+    }else{
+      alert('Verifique os campos obrigatórios e a confimação de senha')
     }
   }
 
+  validarSenha(){
+    const senha = this.formulario.get('senha')?.value;
+    const confirmacaoSenha = this.formulario.get('confirmacaoSenha')?.value; ;
+    this.senhaCorrespondente = senha === confirmacaoSenha;
+  }
+
+  habilitarBotao(): string {
+    if(this.formulario.valid){
+      return 'botao'
+    } else {
+      return 'botao__desabilitado'
+    }
+  }
 }
+
+
+
+
+

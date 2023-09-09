@@ -1,72 +1,40 @@
 <section class="container login ff-inter">
-  <header class="header">
-      <h2>Cadastrar</h2>
-  </header>
-<form [formGroup]="formulario">
+  <div class="container-cadastro">
+    <h1>Cadastrar</h1>
+
+    <form [formGroup]="formulario">
+      <label for="nomeUsuario">Nome</label>
+      <input type="text" class="input" id="nomeUsuario" formControlName="nomeUsuario">
+
+      <label for="nomeUsuario">Email</label>
+      <input type="text" class="input" id="emailUsuario" formControlName="emailUsuario" [readonly]="campoBloqueado">
+
+      <label for="cpfUsuario">CPF</label>
+      <input type="text" class="input" id="cpfUsuario" formControlName="cpfUsuario">
+
+      <label for="tipoUsuario">Tipo de Usuário</label>
+      <select formControlName="tipoUsuario" id="tipoUsuario">
+        <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
+      </select>
 
 
-
-  <label for="nomeUsuario">Nome</label>
-  <input
-    type="text"
-    class="input"
-    id="nomeUsuario"
-    formControlName="nomeUsuario"
-  >
-
-  <label for="nomeUsuario">Email</label>
-  <input
-    type="text"
-    class="input"
-    id="emailUsuario"
-    formControlName="emailUsuario"
-    [readonly]="campoBloqueado"
-  >
-
-  <label for="cpfUsuario">CPF</label>
-  <input
-    type="text"
-    class="input"
-    id="cpfUsuario"
-    formControlName="cpfUsuario"
-  >
-
-  <label for="tipoUsuario">Tipo de Usuário:</label>
-  <select formControlName="tipoUsuario" id="tipoUsuario">
-    <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
-  </select>
+      <label for="senha">Senha</label>
+      <input type="password" class="input" id="senha" name="senha" formControlName="senhaUsuario"
+        placeholder="Digite a senha">
 
 
-  <label for="senha">Senha</label>
-  <input
-    type="password"
-    class="input"
-    id="senha"
-    name="senha"
-    formControlName="senhaUsuario"
-    placeholder="Digite a senha"
-  >
+      <label for="confirmarSenha">Confirmar Senha</label>
+      <input type="password" class="input" id="confirmarSenha" name="confirmarSenha"
+        placeholder="Digite novamente a senha">
 
 
-  <label for="confirmarSenha">Confirmar Senha</label>
-  <input
-    type="password"
-    class="input"
-    id="confirmarSenha"
-    name="confirmarSenha"
-    placeholder="Digite novamente a senha"
-  >
-
-
-  <div>
-    <button
-      (click)="atualizarUsuario()"
-      >Cadastrar
-    </button>
-    <button
-      (click)="cancelar()"
-      >Cancelar
-    </button>
+      <div class="buttons">
+        <button (click)="atualizarUsuario()">Cadastrar
+        </button>
+        <button (click)="cancelar()">Cancelar
+        </button>
+      </div>
+    </form>
   </div>
 
-</form>
+</section>

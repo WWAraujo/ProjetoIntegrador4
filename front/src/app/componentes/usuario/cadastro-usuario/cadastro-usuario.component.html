@@ -1,90 +1,72 @@
-<section class="container login ff-inter">
-  <header class="header">
-      <h2>Cadastrar</h2>
-  </header>
-<form [formGroup]="formulario">
+<section class="container">
+
+  <div class="title">
+    <label>CADASTRAR</label>
+  </div>
+
+  <form class="form-cadastro" [formGroup]="formulario">
+
+    <label for="nome">Nome</label>
+    <input type="text" class="input" id="nome" formControlName="nome" placeholder="Digite o nome">
+    <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
+      Nome Obrigatório
+    </div>
+
+    <label for="cpf">CPF</label>
+    <input type="text" class="input" id="cpf" formControlName="cpf" placeholder="Digite o CPF">
+    <div *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched">
+      O CPF é Obrigatório
+    </div>
 
 
-      <label for="nome">Nome</label>
-      <input
-        type="text"
-        class="input"
-        id="nome"
-        formControlName="nome"
-        placeholder="Digite o nome"
+    <label for="emailCadastro">E-mail</label>
+    <input type="text" class="input" id="email" formControlName="email" placeholder="Digite o e-mail"
+      (input)="onInputChanged()" (blur)="procurarEmail()">
+    <div *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">
+      Email Obrigatório
+    </div>
+
+    <label for="tipoUsuario">Tipo de Usuário</label>
+    <select formControlName="tipoUsuario" id="tipoUsuario">
+      <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
+    </select>
+    <div *ngIf="formulario.get('tiposUsuario')?.errors?.['required'] && formulario.get('tiposUsuario')?.touched">
+      Nome Obrigatório
+    </div>
+
+    <label for="senha">Senha</label>
+    <input type="password" class="input" id="senha" formControlName="senha" placeholder="Digite a senha"
+      (input)="validarSenha()">
+    <div class="mensagem__erro"
+      *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
+      Senha é obrigatoria!
+    </div>
+    <div class="mensagem__erro"
+      *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched">
+      Senha tem mínimo de 3 caracteres!
+    </div>
+
+    <label for="confirmacaoSenha">Confirmar Senha</label>
+    <input type="password" class="input" id="confirmacaoSenha" formControlName="confirmacaoSenha"
+      placeholder="Digite novamente a senha" (input)="validarSenha()">
+    <div class="mensagem__erro"
+      *ngIf="formulario.get('confirmacaoSenha')?.errors?.['required'] && formulario.get('confirmacaoSenha')?.touched">
+      Senha é obrigatoria!
+    </div>
+    <div class="mensagem__erro"
+      *ngIf="formulario.get('confirmacaoSenha')?.errors?.['minlength'] && formulario.get('confirmacaoSenha')?.touched">
+      Senha tem mínimo de 3 caracteres!
+    </div>
+    <div class="mensagem__erro" *ngIf="!senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched">
+      As senhas não coincidem!
+    </div>
+      <button class="newUser"
+      (click)="cadastrarUsuario()"
+      [disabled]="!formulario.valid"
+      [ngClass]="habilitarBotao()"
       >
-      <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
-        Nome Obrigatório
-      </div>
+      CADASTRAR
+    </button>
 
-      <label for="cpf">CPF</label>
-      <input
-        type="text"
-        class="input"
-        id="cpf"
-        formControlName="cpf"
-        placeholder="Digite o CPF"
-      >
-      <div *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched">
-        O CPF é Obrigatório
-      </div>
-
-
-      <label for="emailCadastro">E-mail</label>
-      <input
-        type="text"
-        class="input"
-        id="email"
-        formControlName="email"
-        placeholder="Digite o e-mail"
-        (input)="onInputChanged()"
-        (blur)="procurarEmail()"
-      >
-      <div *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">
-        Email Obrigatório
-      </div>
-
-      <label for="tipoUsuario">Tipo de Usuário:</label>
-      <select formControlName="tipoUsuario" id="tipoUsuario">
-        <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
-      </select>
-      <div *ngIf="formulario.get('tiposUsuario')?.errors?.['required'] && formulario.get('tiposUsuario')?.touched">
-        Nome Obrigatório
-      </div>
-
-
-      <label for="senha">Senha</label>
-      <input
-        type="password"
-        class="input"
-        id="senha"
-        name="senha"
-        formControlName="senha"
-        placeholder="Digite a senha"
-      >
-      <div *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
-        Informe uma senha
-      </div>
-
-
-      <label for="confirmarSenha">Confirmar Senha</label>
-      <input
-        type="password"
-        class="input"
-        id="confirmarSenha"
-        name="confirmarSenha"
-        placeholder="Digite novamente a senha"
-      >
-      <div *ngIf="formulario.get('confirmarSenha')?.errors?.['required'] && formulario.get('confirmarSenha')?.touched">
-        As senhas devem ser iguais.
-      </div>
-
-      <div>
-        <button
-          (click)="cadastrarUsuario()"
-          >Cadastrar
-        </button>
-      </div>
-
-</form>
-
+  </form>
+</section>

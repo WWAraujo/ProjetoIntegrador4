@@ -43,6 +43,7 @@ export class AlterarUsuarioComponent implements OnInit {
       nomeUsuario:  this.usuario?.nomeUsuario,
       cpfUsuario:   this.usuario?.cpfUsuario,
       emailUsuario: this.usuario?.emailUsuario,
+      tiposUsuario: this.usuario?.tipoUsuario,
       ativoInativo: this.usuario?.ativoInativo
     });
   }

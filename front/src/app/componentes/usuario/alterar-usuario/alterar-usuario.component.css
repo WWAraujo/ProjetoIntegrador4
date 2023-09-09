@@ -1,15 +1,23 @@
+.container-cadastro{
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.container-cadastro h1{
+  color:#000;
+}
 
 form {
   background: #C4EDFF;
-
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
 
   display: flex;
   flex-direction: column;
 
   padding: 2rem;
-    width: 300px;
+    width: 60%;
     margin: 0 auto;
   }
 
@@ -35,6 +43,12 @@ form {
     border-radius: 4px;
   }
 
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 
   button {
     background-color: #007bff;

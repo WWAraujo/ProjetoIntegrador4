@@ -3,12 +3,11 @@
     <label>USUARIOS</label>
   </div>
   <div class="userSearch">
-    <label>Pesquisar</label>
     <input
     type="search"
     class="campoPesquisar"
+    placeholder="Pesquisar..."
     (input)="filter($event)">
-    <button class="btnPesquisar"><img src="../../../../assets/image/lupa.png" alt="lupaPesquisar"></button>
   </div>
   <div class="container_table">
   <table>
@@ -16,19 +15,19 @@
       <th>Nome </th>
       <th>Email</th>
       <th>Tipo</th>
-      <th>Status</th>
-      <th>Alterar</th>
       <th>Hab/des</th>
+      <th>Alterar</th>
+      <th>Status</th>
     </tr>
     <tr *ngFor="let item of arr" class="table">
       <td> {{ item.nomeUsuario  }} </td>
       <td> {{ item.emailUsuario }} </td>
       <td> {{ item.tipoUsuario  }} </td>
-      <td> {{ item.ativoInativo }} </td>
+      <td><button class="btnUserEdit" (click)="deletarUsuario( item.id )"><p>Ativar/ Desativar</p></button></td>
       <td><button class="btnUserEdit" (click)="alterarUsuario( item.id )"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
-      <td><button class="btnUserEdit" (click)="deletarUsuario( item.id )"><p>Ativar Desativar</p></button></td>
+      <td> {{ item.ativoInativo }} </td>
     </tr>
 </table>
 </div>
-<button class="newUser" id="btnNewUser" name="btnnewUser" (click)="cadastrarNovo()">CADASTRAR</button>
+<button class="newUser" id="btnNewUser" name="btnnewUser" (click)="cadastrarNovo()">NOVO USUÁRIO</button>
 </section>

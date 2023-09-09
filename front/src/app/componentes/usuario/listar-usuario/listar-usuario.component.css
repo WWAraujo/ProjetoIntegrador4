@@ -2,22 +2,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin: auto;
   padding: 0;
   background-color: #fff;
   height: 100%;
 }
 
-.title{
+.title {
   margin-top: 20px;
 }
+
 .title label {
   font: 3em 'Inter', sans-serif;
   color: #000;
   font-weight: bold;
 }
 
-.userSearch{
+.userSearch {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,48 +29,49 @@
   width: 100%;
 }
 
-.userSearch label{
-  font: 1.8em 'Inter', sans-serif;
-  margin-right: 20px;
-  font-weight: 600;
-}
-
 .userSearch input {
   position: relative;
-  width: 60%;
+  width: 70%;
+  height: 40px;
   padding: 10px;
   border-radius: 5px;
-  border: 0.5px solid;
-  box-shadow:0px 0px 2px 2px gray;
+  border: 1px solid #1e90ff;
+  font: 18px 'Inter',sans-serif;
+  color: #1e90ff;
 }
 
-.btnPesquisar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
+.userSearch input:focus{
+  box-shadow: 0px 0px 2px 1px #1e90ff;
+  border: 2px solid #1e90ff;
+  outline: none;
+}
+
+.btnUserEdit {
+  border: 2px solid transparent;
   background-color: #fff;
-  margin: 0px 100px 0px 20px ;
+  text-align: center;
+  width: 70px;
+  height: 35px;
+  margin: 0;
+  padding: 0;
 }
 
-.btnPesquisar img {
+.btnUserEdit img {
   width: 30px;
-  height: 30px;
+  padding: 0;
+  margin: 0;
 }
 
-.btnPesquisar:hover{
+.btnUserEdit p {
+
+  width: 25px;
+  padding: 0;
+  margin: 0;
+}
+
+.btnUserEdit:hover {
   cursor: pointer;
 }
-
-.btnUserEdit{
-  background-color: #fff;
-  border: 1px solid transparent;
-}
-
-.btnUserEdit:hover{
-  cursor: pointer;
-}
-
 
 table {
   background-color: #fff;
@@ -76,40 +79,46 @@ table {
   overflow: auto;
   width: 100%;
   margin: 0;
+  border-radius: 10px;
 }
 
 table th {
+  position: sticky;
+  top: 0;
+  background-color: #f2f2f2;
+  text-align: center;
   padding: 10px 0px;
   font: 1.1em 'Inter', sans-serif;
   font-weight: 600;
-}
+  text-transform: uppercase;
+  }
 
 table td {
-  font: 1em 'Inter', sans-serif;
+  font: 0.9em 'Inter', sans-serif;
   text-align: center;
   border: 1px solid #000;
   max-width: 200px;
-  min-width: 50px;
-  text-transform: lowercase;
+  min-width: 10px;
+  vertical-align: middle;
 }
 
-table td p{
+table td p {
   font: 1em 'Inter', sans-serif;
 }
 
- .container_table{
+.container_table {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65%;
+  width: 75%;
   height: 450px;
   overflow: auto;
   overflow-x: auto;
-  border: 2px solid ;
+  border: 2px solid;
 }
 
 
-.newUser{
+.newUser {
   padding: 25px 50px;
   background-color: #1e90ff;
   color: #fff;
@@ -119,6 +128,6 @@ table td p{
   border: 2px solid transparent
 }
 
-.newUser:hover{
+.newUser:hover {
   cursor: pointer;
 }

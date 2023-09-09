@@ -58,15 +58,13 @@ export class ListarUsuarioComponent implements OnInit {
   alterarUsuario(itemId: number){
 
     this.service.procurarPorId(itemId).subscribe((usuario) => {
-      this.alterarUser = usuario
-    })
-
-    this.service.setAlterarUsuario(this.alterarUser)
-
-    if (this.alterarUser) {
-      this.router.navigate(['/alterarUsuario'])
+      this.alterarUser = usuario;
+      this.service.setAlterarUsuario(this.alterarUser);
+      if (this.alterarUser) {
+        this.router.navigate(['/alterarUsuario'])
+    }});
     }
-  }
+
 
   recarregarComponente() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
