@@ -31,7 +31,7 @@ export class ListarUsuarioComponent implements OnInit {
   const filtvalue = (event.target as HTMLInputElement).value.toLowerCase();
   this.service.listarUsuarios(this.listausuario).subscribe((listausuario) => {
     this.arr = listausuario.filter((usuario)=> {
-      return usuario.nomeUsuario.toLowerCase().includes(filtvalue);
+      return usuario.nomeUsuario.toLowerCase().includes(filtvalue) || usuario.emailUsuario.toLowerCase().includes(filtvalue);
     })
 
   })

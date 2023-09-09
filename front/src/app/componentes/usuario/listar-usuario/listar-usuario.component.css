@@ -37,7 +37,7 @@
   border-radius: 5px;
   border: 1px solid #1e90ff;
   font: 18px 'Inter',sans-serif;
-  color: #1e90ff;
+  color: #000;
 }
 
 .userSearch input:focus{
