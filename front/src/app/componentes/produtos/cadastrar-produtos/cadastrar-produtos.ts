@@ -7,8 +7,8 @@ export interface Produto {
   ativoInativo: string;
 }
 
-export interface AvaliacaoProduto{
-  idProduto: number ;
+export interface AvaliacaoProduto {
+  idProduto: number;
   avaliacao: number;
 }
 
@@ -18,4 +18,3 @@ export interface CarregarFotos {
   caminhoImg: string;
   flagImg: string;
 }
-

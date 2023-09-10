@@ -23,7 +23,10 @@ public class AvaliacaoProdutoModel {
     public AvaliacaoProdutoModel(ProdutoModel produtoModel, AvaliacaoProdutoRecord avl) {
         this.idProduto = produtoModel.getId();
         this.avaliacao = avl.avaliacao();
+    }
 
-
+    public AvaliacaoProdutoModel(ProdutoModel produtoModel, AvaliacaoProdutoModel avl) {
+        this.idProduto = produtoModel.getId();
+        this.avaliacao = avl.getAvaliacao();
     }
 }

@@ -2,15 +2,17 @@
   <div class="title">
     <label>Produtos</label>
   </div>
-  <form class="userSearch" (keypress)="pesquisar()" >
+  <form class="userSearch" (keypress)="pesquisar()">
     <label>Pesquisar</label>
     <input
       type="text"
       [(ngModel)]="termoPesquisa"
       name="termoPesquisa"
       placeholder="Digite sua pesquisa"
-    >
-    <button type="submit" class="btnPesquisar"><img src="../../../../assets/image/lupa.png" alt="lupaPesquisar"></button>
+    />
+    <button type="submit" class="btnPesquisar">
+      <img src="../../../../assets/image/lupa.png" alt="lupaPesquisar" />
+    </button>
   </form>
   <div class="container_table">
     <table>
@@ -25,19 +27,45 @@
         <th>Visualizar</th>
       </tr>
       <tr *ngFor="let item of produtos" class="table">
-        <td> {{ item.nomeProduto  }} </td>
-        <td> {{ item.descricaoDetalhadaProduto }} </td>
-        <td> {{ item.precoProduto }} </td>
-        <td> {{ item.qtdEstoque }} </td>
-        <td> {{ item.ativoInativo }} </td>
-        <td><button class="btnUserEdit" (click)="alterarProduto( item.id )"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
-        <td><button class="btnUserEdit" (click)="deletarProduto( item.id, item.ativoInativo )"><p>Ativar Desativar</p></button></td>
-        <td><button class="btnUserEdit" ><p>Visualizar</p></button></td>
+        <td>{{ item.nomeProduto }}</td>
+        <td>{{ item.descricaoDetalhadaProduto }}</td>
+        <td>{{ item.precoProduto }}</td>
+        <td>{{ item.qtdEstoque }}</td>
+        <td>{{ item.ativoInativo }}</td>
+        <td>
+          <button class="btnUserEdit" (click)="alterarProduto(item.id)">
+            <img
+              src="../../../../assets/image/editar.png"
+              alt="editarUsuario"
+            />
+          </button>
+        </td>
+        <td>
+          <button
+            class="btnUserEdit"
+            (click)="deletarProduto(item.id, item.ativoInativo)"
+          >
+            <p>Ativar Desativar</p>
+          </button>
+        </td>
+        <td>
+          <button class="btnUserEdit"><p>Visualizar</p></button>
+        </td>
       </tr>
     </table>
-
   </div>
-    <button class="newUser" id="btnNewUser" name="btnnewUser" (click)="cadastrarNovo()">CADASTRAR</button>
-    <button class="btnPesquisar" *ngIf="nextPage" (click)="proximaPagina()"><img src="../../../../assets/image/next.page.png" alt="proxima pagina"></button>
-    <button class="btnPesquisar" *ngIf="beforPage" (click)="paginaAnterior()"><img src="../../../../assets/image/before.page.png" alt="proxima pagina"></button>
+  <button
+    class="newUser"
+    id="btnNewUser"
+    name="btnnewUser"
+    (click)="cadastrarNovo()"
+  >
+    CADASTRAR
+  </button>
+  <button class="btnPesquisar" *ngIf="nextPage" (click)="proximaPagina()">
+    <img src="../../../../assets/image/next.page.png" alt="proxima pagina" />
+  </button>
+  <button class="btnPesquisar" *ngIf="beforPage" (click)="paginaAnterior()">
+    <img src="../../../../assets/image/before.page.png" alt="proxima pagina" />
+  </button>
 </section>

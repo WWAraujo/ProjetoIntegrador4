@@ -1,4 +1,4 @@
 export interface Logado {
-  id: string
-  tipoUsuario: string
+  id: string;
+  tipoUsuario: string;
 }

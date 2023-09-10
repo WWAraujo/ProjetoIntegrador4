@@ -1,10 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModalService {
-
   listaDeObjetos: any[] = [];
 
   fecharModalEvent: EventEmitter<void> = new EventEmitter<void>();
@@ -12,6 +11,6 @@ export class ModalService {
   fecharModal() {
     this.fecharModalEvent.emit();
   }
-  
-  constructor() { }
+
+  constructor() {}
 }

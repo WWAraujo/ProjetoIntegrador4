@@ -4,30 +4,49 @@
   </div>
   <div class="userSearch">
     <input
-    type="search"
-    class="campoPesquisar"
-    placeholder="Pesquisar..."
-    (input)="filter($event)">
+      type="search"
+      class="campoPesquisar"
+      placeholder="Pesquisar..."
+      (input)="filter($event)"
+    />
   </div>
   <div class="container_table">
-  <table>
-    <tr>
-      <th>Nome </th>
-      <th>Email</th>
-      <th>Tipo</th>
-      <th>Hab/des</th>
-      <th>Alterar</th>
-      <th>Status</th>
-    </tr>
-    <tr *ngFor="let item of arr" class="table">
-      <td> {{ item.nomeUsuario  }} </td>
-      <td> {{ item.emailUsuario }} </td>
-      <td> {{ item.tipoUsuario  }} </td>
-      <td><button class="btnUserEdit" (click)="deletarUsuario( item.id )"><p>Ativar/ Desativar</p></button></td>
-      <td><button class="btnUserEdit" (click)="alterarUsuario( item.id )"><img src="../../../../assets/image/editar.png" alt="editarUsuario"></button></td>
-      <td> {{ item.ativoInativo }} </td>
-    </tr>
-</table>
-</div>
-<button class="newUser" id="btnNewUser" name="btnnewUser" (click)="cadastrarNovo()">CRIAR USUÁRIO</button>
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Tipo</th>
+        <th>Hab/des</th>
+        <th>Alterar</th>
+        <th>Status</th>
+      </tr>
+      <tr *ngFor="let item of arr" class="table">
+        <td>{{ item.nomeUsuario }}</td>
+        <td>{{ item.emailUsuario }}</td>
+        <td>{{ item.tipoUsuario }}</td>
+        <td>
+          <button class="btnUserEdit" (click)="deletarUsuario(item.id)">
+            <p>Ativar/ Desativar</p>
+          </button>
+        </td>
+        <td>
+          <button class="btnUserEdit" (click)="alterarUsuario(item.id)">
+            <img
+              src="../../../../assets/image/editar.png"
+              alt="editarUsuario"
+            />
+          </button>
+        </td>
+        <td>{{ item.ativoInativo }}</td>
+      </tr>
+    </table>
+  </div>
+  <button
+    class="newUser"
+    id="btnNewUser"
+    name="btnnewUser"
+    (click)="cadastrarNovo()"
+  >
+    CRIAR USUÁRIO
+  </button>
 </section>

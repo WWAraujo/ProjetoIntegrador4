@@ -5,33 +5,53 @@
   <h2>Fazer Login:</h2>
   <form class="form-login" [formGroup]="formulario">
     <label for="usuario">E-mail</label>
-    <input type="text" class="input" id="usuario" formControlName="usuario" placeholder="Digite o e-mail">
-    <div class="mensagem__erro"
-      *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched">
+    <input
+      type="text"
+      class="input"
+      id="usuario"
+      formControlName="usuario"
+      placeholder="Digite o e-mail"
+    />
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched"
+    >
       E-mail é obrigatorio!
     </div>
-    <div class="mensagem__erro"
-      *ngIf="formulario.get('usuario')?.errors?.['email'] && formulario.get('usuario')?.touched">
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('usuario')?.errors?.['email'] && formulario.get('usuario')?.touched"
+    >
       Digite um e-mail valido.
     </div>
     <label for="senha">Senha</label>
-    <input type="password" class="input" id="senha" formControlName="senha" placeholder="Digite a senha">
-    <div class="mensagem__erro"
-      *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
+    <input
+      type="password"
+      class="input"
+      id="senha"
+      formControlName="senha"
+      placeholder="Digite a senha"
+    />
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched"
+    >
       Senha é obrigatoria!
     </div>
-    <div class="mensagem__erro"
-      *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched">
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched"
+    >
       Senha tem mínimo de 3 caracteres!
     </div>
     <div class="login">
       <button
-      [disabled]="!formulario.valid"
-      (click)="solicitarLogin()"
-      ((keypress))="solicitarLogin()"
-      [ngClass]="habilitarBotao()"
+        [disabled]="!formulario.valid"
+        (click)="solicitarLogin()"
+        ((keypress))="solicitarLogin()"
+        [ngClass]="habilitarBotao()"
       >
-      Entrar
+        Entrar
       </button>
     </div>
   </form>

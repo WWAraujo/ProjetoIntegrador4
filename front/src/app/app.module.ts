@@ -38,7 +38,7 @@ import { UserPipe } from './componentes/usuario/listar-usuario/usuarios.pipe';
     ProdutoComponent,
     CarregarFotosComponent,
     UserPipe,
-    ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,6 +48,6 @@ import { UserPipe } from './componentes/usuario/listar-usuario/usuarios.pipe';
     NgxPaginationModule,
   ],
   providers: [UserService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -16,12 +16,12 @@
 .title label {
   text-align: center;
   width: 100%;
-  font: 3em 'Inter', sans-serif;
+  font: 3em "Inter", sans-serif;
   color: #000;
   font-weight: bold;
 }
 
-.form-cadastro{
+.form-cadastro {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,27 +29,27 @@
   width: 100%;
   height: 100%;
 }
-.form-cadastro label{
+.form-cadastro label {
   width: 60%;
-  font: 1.2em 'Inter',sans-serif;
+  font: 1.2em "Inter", sans-serif;
   margin: 10px 0px;
   color: #1e90ff;
 }
-.form-cadastro input{
+.form-cadastro input {
   width: 60%;
   height: 40px;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #1e90ff;
-  font: 18px 'Inter',sans-serif;
+  font: 18px "Inter", sans-serif;
 }
 
-.form-cadastro select{
+.form-cadastro select {
   width: 60%;
   height: 40px;
   border-radius: 5px;
   border: 1px solid #1e90ff;
-  font: 18px 'Inter',sans-serif;
+  font: 18px "Inter", sans-serif;
 }
 
 .title {
@@ -57,17 +57,17 @@
 }
 
 .title label {
-  font: 3em 'Inter', sans-serif;
+  font: 3em "Inter", sans-serif;
   color: #000;
   font-weight: bold;
 }
 
-div{
+div {
   width: 60%;
   color: red;
 }
 
-.buttons{
+.buttons {
   display: flex;
   flex-direction: column;
   align-items: center;

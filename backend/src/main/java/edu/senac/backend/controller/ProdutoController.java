@@ -10,6 +10,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,5 +78,42 @@ public class ProdutoController {
         return ResponseEntity.ok(idProdutoSalvo);
     }
 
+    @GetMapping("/mostrar-produto-completo/{id}")
+    public ResponseEntity<ProdutoRecordConstructor> mostrarProdutoCompleto(@PathVariable Long id) {
+
+        Optional<ProdutoModel> produtoModel = repository.findById(Integer.parseInt(id.toString()));
+        ProdutoRecord produtoRecord = new ProdutoRecord(
+                produtoModel.get().getId(),
+                produtoModel.get().getNomeProduto(),
+                produtoModel.get().getDescricaoDetalhadaProduto(),
+                produtoModel.get().getPrecoProduto(),
+                produtoModel.get().getQtdEstoque(),
+                produtoModel.get().getAtivoInativo()
+        );
+
+
+        AvaliacaoProdutoRecord avaliacaoProdutoRecord =
+                new AvaliacaoProdutoRecord(
+                        id.toString(),
+                        avaliacaoProdutoRepository.calcularMediaAvaliacao(id));
+
+
+        Optional<FotosProdutoModel[]> fotosProdutoModel = fotosProdutoRepository.buscarFotosPorIdProduto(id);
+        List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
+        for (FotosProdutoModel fotos : fotosProdutoModel.get()){
+            FotosProdutoRecord foto = new FotosProdutoRecord(
+                    Integer.parseInt(fotos.getIdProduto().toString()),
+                    fotos.getNomeImg(),
+                    fotos.getCaminhoImg(),
+                    fotos.getFlagImg()
+            );
+            fotosresponse.add(foto);
+        }
+
+
+        ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, avaliacaoProdutoRecord, fotosresponse);
+
+        return ResponseEntity.ok(response);
+    }
 
 }

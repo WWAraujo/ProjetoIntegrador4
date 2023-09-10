@@ -6,20 +6,16 @@ import { UserService } from 'src/app/componentes/usuario/user.services';
 @Component({
   selector: 'app-backoffice',
   templateUrl: './backoffice.component.html',
-  styleUrls: ['./backoffice.component.css']
+  styleUrls: ['./backoffice.component.css'],
 })
 export class BackofficeComponent implements OnInit {
-
-  logado!: Logado
+  logado!: Logado;
 
   isAdmin: boolean = false;
   isEstoquista: boolean = false;
   isCliente: boolean = false;
 
-  constructor(
-    private router: Router,
-    private userService: UserService
-  ) { }
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     const userType = this.userService.getUserType();
@@ -32,12 +28,10 @@ export class BackofficeComponent implements OnInit {
     }
   }
   irParaUsuarios() {
-    this.router.navigate(['listarUsuario'])
+    this.router.navigate(['listarUsuario']);
   }
 
   irParaListaProdutos() {
-    this.router.navigate(['listarProduto'])
+    this.router.navigate(['listarProduto']);
   }
-
 }
-

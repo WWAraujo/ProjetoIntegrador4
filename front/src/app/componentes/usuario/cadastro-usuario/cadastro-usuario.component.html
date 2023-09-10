@@ -1,74 +1,132 @@
 <section class="container">
-
   <div class="title">
     <label>CADASTRAR</label>
   </div>
 
   <form class="form-cadastro" [formGroup]="formulario">
-
     <label for="nome">Nome</label>
-    <input type="text" class="input" id="nome" formControlName="nome" placeholder="Digite o nome">
-    <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
+    <input
+      type="text"
+      class="input"
+      id="nome"
+      formControlName="nome"
+      placeholder="Digite o nome"
+    />
+    <div
+      *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched"
+    >
       Nome Obrigatório
     </div>
 
     <label for="cpf">CPF</label>
-    <input type="text" class="input" id="cpf" formControlName="cpf" placeholder="Digite o CPF" maxlength="11">
-    <div *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched">
+    <input
+      type="text"
+      class="input"
+      id="cpf"
+      formControlName="cpf"
+      placeholder="Digite o CPF"
+      maxlength="11"
+    />
+    <div
+      *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched"
+    >
       O CPF é Obrigatório
     </div>
-    <div *ngIf="formulario.get('cpf')?.touched && formulario.get('cpf')?.hasError('cpfInvalido')">
+    <div
+      *ngIf="
+        formulario.get('cpf')?.touched &&
+        formulario.get('cpf')?.hasError('cpfInvalido')
+      "
+    >
       Informe um cpf valido!
     </div>
 
     <label for="emailCadastro">E-mail</label>
-    <input type="text" class="input" id="email" formControlName="email" placeholder="Digite o e-mail"
-      (input)="onInputChanged()" (blur)="procurarEmail()">
-    <div *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">
+    <input
+      type="text"
+      class="input"
+      id="email"
+      formControlName="email"
+      placeholder="Digite o e-mail"
+      (input)="onInputChanged()"
+      (blur)="procurarEmail()"
+    />
+    <div
+      *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched"
+    >
       Email Obrigatório
     </div>
 
     <label for="tipoUsuario">Tipo de Usuário</label>
     <select formControlName="tipoUsuario" id="tipoUsuario">
-      <option *ngFor="let tipo of tiposUsuario" [value]="tipo">{{ tipo }}</option>
+      <option *ngFor="let tipo of tiposUsuario" [value]="tipo">
+        {{ tipo }}
+      </option>
     </select>
-    <div *ngIf="formulario.get('tiposUsuario')?.errors?.['required'] && formulario.get('tiposUsuario')?.touched">
+    <div
+      *ngIf="formulario.get('tiposUsuario')?.errors?.['required'] && formulario.get('tiposUsuario')?.touched"
+    >
       Nome Obrigatório
     </div>
 
     <label for="senha">Senha</label>
-    <input type="password" class="input" id="senha" formControlName="senha" placeholder="Digite a senha"
-      (input)="validarSenha()">
-    <div class="mensagem__erro"
-      *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
+    <input
+      type="password"
+      class="input"
+      id="senha"
+      formControlName="senha"
+      placeholder="Digite a senha"
+      (input)="validarSenha()"
+    />
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched"
+    >
       Senha é obrigatoria!
     </div>
-    <div class="mensagem__erro"
-      *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched">
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched"
+    >
       Senha tem mínimo de 3 caracteres!
     </div>
 
     <label for="confirmacaoSenha">Confirmar Senha</label>
-    <input type="password" class="input" id="confirmacaoSenha" formControlName="confirmacaoSenha"
-      placeholder="Digite novamente a senha" (input)="validarSenha()">
-    <div class="mensagem__erro"
-      *ngIf="formulario.get('confirmacaoSenha')?.errors?.['required'] && formulario.get('confirmacaoSenha')?.touched">
+    <input
+      type="password"
+      class="input"
+      id="confirmacaoSenha"
+      formControlName="confirmacaoSenha"
+      placeholder="Digite novamente a senha"
+      (input)="validarSenha()"
+    />
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('confirmacaoSenha')?.errors?.['required'] && formulario.get('confirmacaoSenha')?.touched"
+    >
       Senha é obrigatoria!
     </div>
-    <div class="mensagem__erro"
-      *ngIf="formulario.get('confirmacaoSenha')?.errors?.['minlength'] && formulario.get('confirmacaoSenha')?.touched">
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('confirmacaoSenha')?.errors?.['minlength'] && formulario.get('confirmacaoSenha')?.touched"
+    >
       Senha tem mínimo de 3 caracteres!
     </div>
-    <div class="mensagem__erro" *ngIf="!senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched">
+    <div
+      class="mensagem__erro"
+      *ngIf="
+        !senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched
+      "
+    >
       As senhas não coincidem!
     </div>
-      <button class="newUser"
+    <button
+      class="newUser"
       (click)="cadastrarUsuario()"
       [disabled]="!formulario.valid"
       [ngClass]="habilitarBotao()"
-      >
+    >
       CADASTRAR
     </button>
-
   </form>
 </section>

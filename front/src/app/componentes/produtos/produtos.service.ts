@@ -9,22 +9,20 @@ const API = environment.apiURL;
 const NOT_MODIFIED = '304';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProdutosService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getProdutos(page: number): Observable<PaginaProdutos> {
-    return this.http.get<PaginaProdutos>(`${API}/produto/listar?page=${page}`)
+    return this.http.get<PaginaProdutos>(`${API}/produto/listar?page=${page}`);
   }
 
   getProdutosByString(pesquisa: string): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${API}/produto/buscarproduto/${pesquisa}`)
+    return this.http.get<Produto[]>(`${API}/produto/buscarproduto/${pesquisa}`);
   }
 
   upload(descricao: string, permiteComentario: boolean, arquivo: File) {
-
     const formData = new FormData();
     formData.append('description', descricao);
     formData.append('allowComments', permiteComentario ? 'true' : 'false');
@@ -47,7 +45,7 @@ export class ProdutosService {
   }
 
   excluir(id: number, status: string): Observable<any> {
-    const url = `${API}/produto/${id}/${status}`
-    return this.http.delete<any>(url)
+    const url = `${API}/produto/${id}/${status}`;
+    return this.http.delete<any>(url);
   }
 }

@@ -8,9 +8,8 @@ describe('BackofficeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BackofficeComponent ]
-    })
-    .compileComponents();
+      declarations: [BackofficeComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BackofficeComponent);
     component = fixture.componentInstance;

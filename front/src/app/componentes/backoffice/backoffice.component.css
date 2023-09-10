@@ -1,4 +1,4 @@
-.container{
+.container {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -9,15 +9,15 @@
   padding: 0;
 }
 
-h2{
-  font: 3em 'Inter',sans-serif;
+h2 {
+  font: 3em "Inter", sans-serif;
   margin: 20px 0px;
   padding: 20px;
   border-radius: 10px;
   border: 8px double #fff;
 }
 
-.opcoes{
+.opcoes {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +28,7 @@ h2{
   border-radius: 1%;
 }
 
-.opcoes button{
+.opcoes button {
   display: block;
   flex-direction: row;
   text-align: center;
@@ -37,7 +37,7 @@ h2{
   height: 50px;
   margin: 10px;
   padding: 5px;
-  font: 2em 'Inter',sans-serif;
+  font: 2em "Inter", sans-serif;
   font-weight: 600;
   color: #fff;
   background-color: transparent;
@@ -45,21 +45,19 @@ h2{
   border-radius: 1%;
   border: 1px solid #fff;
   text-transform: uppercase;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .opcoes button:hover {
-    transition: 0.5s;
-    width: 330px;
-    box-shadow: 0px 0px 10px 1px #fff, 0 0 0 4px #fff;
-    color: #fff;
+  transition: 0.5s;
+  width: 330px;
+  box-shadow: 0px 0px 10px 1px #fff, 0 0 0 4px #fff;
+  color: #fff;
 }
 
-.opcoes button:disabled{
+.opcoes button:disabled {
   color: #909090;
   box-shadow: none;
   transition: none;
   width: 320px;
 }
-
-

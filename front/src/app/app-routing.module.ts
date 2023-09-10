@@ -12,14 +12,14 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'solicitarLogin',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'solicitarLogin',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
-    path:'backoffice',
+    path: 'backoffice',
     component: BackofficeComponent,
   },
   {
@@ -36,16 +36,16 @@ const routes: Routes = [
   },
   {
     path: 'listarProduto',
-    component: ListarProdutosComponent
+    component: ListarProdutosComponent,
   },
   {
     path: 'cadastrarProduto',
-    component: CadastrarProdutosComponent
-  }
+    component: CadastrarProdutosComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,5 +1,11 @@
 import { AlterarUsuario } from '../alterar-usuario';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { UsuarioService } from '../usuario.service';
 import { ListarUsuario } from './listar-usuarios';
 import { Router } from '@angular/router';
@@ -8,67 +14,62 @@ import { Router } from '@angular/router';
   selector: 'app-listar-usuario',
   templateUrl: './listar-usuario.component.html',
   styleUrls: ['./listar-usuario.component.css'],
-
 })
-
 export class ListarUsuarioComponent implements OnInit {
-
   listausuario!: ListarUsuario;
   alterarUser!: AlterarUsuario;
 
   arr: Array<ListarUsuario> = [];
 
-  constructor(
-    private router: Router,
-    private service: UsuarioService
-  ) { }
+  constructor(private router: Router, private service: UsuarioService) {}
 
   ngOnInit(): void {
     this.listarUsuarios();
   }
 
-  filter(event: Event){
-  const filtvalue = (event.target as HTMLInputElement).value.toLowerCase();
-  this.service.listarUsuarios(this.listausuario).subscribe((listausuario) => {
-    this.arr = listausuario.filter((usuario)=> {
-      return usuario.nomeUsuario.toLowerCase().includes(filtvalue) || usuario.emailUsuario.toLowerCase().includes(filtvalue);
-    })
-
-  })
+  filter(event: Event) {
+    const filtvalue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.service.listarUsuarios(this.listausuario).subscribe((listausuario) => {
+      this.arr = listausuario.filter((usuario) => {
+        return (
+          usuario.nomeUsuario.toLowerCase().includes(filtvalue) ||
+          usuario.emailUsuario.toLowerCase().includes(filtvalue)
+        );
+      });
+    });
   }
 
   listarUsuarios() {
     this.service.listarUsuarios(this.listausuario).subscribe((listausuario) => {
       this.arr = listausuario;
-    })
+    });
   }
 
-  deletarUsuario(itemId: number){
+  deletarUsuario(itemId: number) {
     this.service.excluir(itemId).subscribe(() => {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload'
-      this.router.navigate([this.router.url])
-    })
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate([this.router.url]);
+    });
   }
 
-  cadastrarNovo(){
-    this.router.navigate(['/cadastrarUsuario'])
+  cadastrarNovo() {
+    this.router.navigate(['/cadastrarUsuario']);
   }
 
-  alterarUsuario(itemId: number){
-
+  alterarUsuario(itemId: number) {
     this.service.procurarPorId(itemId).subscribe((usuario) => {
       this.alterarUser = usuario;
       this.service.setAlterarUsuario(this.alterarUser);
       if (this.alterarUser) {
-        this.router.navigate(['/alterarUsuario'])
-    }});
-    }
-
+        this.router.navigate(['/alterarUsuario']);
+      }
+    });
+  }
 
   recarregarComponente() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload'
-    this.router.navigate([this.router.url])
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([this.router.url]);
   }
 }

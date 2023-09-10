@@ -3,15 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService} from '../../usuario/user.services';
+import { UserService } from '../../usuario/user.services';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   formulario!: FormGroup;
   logado!: Logado;
 
@@ -20,44 +19,44 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private userService: UserService
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
-      usuario: ['', Validators.compose([
-        Validators.required,
-        Validators.email
-      ])],
-      senha: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3)
-      ])]
-    })
+      usuario: [
+        '',
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      senha: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(3)]),
+      ],
+    });
   }
 
   solicitarLogin() {
-    if(this.formulario.valid){
+    if (this.formulario.valid) {
       this.service.login(this.formulario.value).subscribe((logado) => {
         this.logado = logado;
         this.userService.setUserType(logado.tipoUsuario);
-        this.validarUsuario()
-      })
+        this.validarUsuario();
+      });
     }
   }
 
   validarUsuario() {
     if (this.logado.tipoUsuario === '1') {
-      this.router.navigate(['/backoffice'])
+      this.router.navigate(['/backoffice']);
     } else if (this.logado.tipoUsuario === '2') {
-      this.router.navigate(['/backoffice'])
+      this.router.navigate(['/backoffice']);
     }
   }
 
   habilitarBotao(): string {
-    if(this.formulario.valid){
-      return 'botao'
+    if (this.formulario.valid) {
+      return 'botao';
     } else {
-      return 'botao__desabilitado'
+      return 'botao__desabilitado';
     }
   }
 }

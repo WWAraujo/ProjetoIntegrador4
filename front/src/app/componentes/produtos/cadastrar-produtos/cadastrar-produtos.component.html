@@ -3,36 +3,69 @@
 
   <div class="form-group col-md-4">
     <label for="nomeProduto">Nome do Produto:</label>
-    <input type="text" id="nomeProduto" [(ngModel)]="produto.nomeProduto" class="form-control" required>
+    <input
+      type="text"
+      id="nomeProduto"
+      [(ngModel)]="produto.nomeProduto"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="form-group col-md-4">
     <label for="descricaoProduto">Descrição do Produto:</label>
-    <textarea type="text" id="descricaoProduto" [(ngModel)]="produto.descricaoDetalhadaProduto" class="form-control" required></textarea>
+    <textarea
+      type="text"
+      id="descricaoProduto"
+      [(ngModel)]="produto.descricaoDetalhadaProduto"
+      class="form-control"
+      required
+    ></textarea>
   </div>
 
   <div class="col-md-4">
     <label for="precoProduto">Preço do Produto:</label>
-    <input type="number" id="precoProduto" [(ngModel)]="produto.precoProduto" class="form-control" required>
+    <input
+      type="number"
+      id="precoProduto"
+      [(ngModel)]="produto.precoProduto"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="col-md-4">
     <label for="quantidadeEstoque">Quantidade estoque</label>
-    <input type="text" id="quantidadeEstoque" [(ngModel)]="produto.qtdEstoque" class="form-control" required>
+    <input
+      type="text"
+      id="quantidadeEstoque"
+      [(ngModel)]="produto.qtdEstoque"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="form-group col-md-4">
     <label for="ativoInativo">Status</label>
-    <select id="ativoInativo" [(ngModel)]="produto.ativoInativo" class="form-control" required>
+    <select
+      id="ativoInativo"
+      [(ngModel)]="produto.ativoInativo"
+      class="form-control"
+      required
+    >
       <option value="ATIVO">Ativo</option>
       <option value="INATIVO">Inativo</option>
     </select>
   </div>
 
-
   <div class="form-group col-md-4">
     <label for="ativoInativo">Avaliação</label>
-    <select id="ativoInativo" [(ngModel)]="avaliacaoProdutoRecord.avaliacao" class="form-control" required>
+    <select
+      id="ativoInativo"
+      [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
+      class="form-control"
+      required
+    >
       <option value="5.0">5.0</option>
       <option value="4.5">4.5</option>
       <option value="4.0">4.0</option>
@@ -51,16 +84,20 @@
 
   <div class="modal" *ngIf="modalAberto">
     <div class="modal-overlay"></div>
-    <div class="modal-content"> <app-carregar-fotos></app-carregar-fotos> </div>
+    <div class="modal-content"><app-carregar-fotos></app-carregar-fotos></div>
     <button class="modal-fechar" (click)="fecharModal()">&times;</button>
   </div>
 
-  <button class="newUser" (click)="submitForm()" >Cadastrar Produto</button>
+  <button class="newUser" (click)="submitForm()">Cadastrar Produto</button>
 
-  <button class="newUser" (click)="irParaListaProdutos()" >Cancelar</button>
+  <button class="newUser" (click)="irParaListaProdutos()">Cancelar</button>
 
   <div *ngFor="let foto of fotosProduto; let i = index">
-    <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="150" [height]="150" />
+    <img
+      [src]="getFullPath(foto.nomeImg)"
+      [alt]="foto.nomeImg"
+      [width]="150"
+      [height]="150"
+    />
   </div>
-  
 </div>

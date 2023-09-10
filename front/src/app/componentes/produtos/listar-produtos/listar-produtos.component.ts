@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./listar-produtos.component.css'],
 })
 export class ListarProdutosComponent implements OnInit {
-
   produtos: Produto[] = [];
   resultadosPesquisa: Produto[] = [];
   itemsPerPage: number = 10; // Número de itens por página
@@ -19,10 +18,7 @@ export class ListarProdutosComponent implements OnInit {
   beforPage: boolean = false;
   termoPesquisa!: string;
 
-  constructor(
-    private service: ProdutosService,
-    private router: Router,
-  ) { }
+  constructor(private service: ProdutosService, private router: Router) {}
 
   ngOnInit(): void {
     this.listarProdutos();
@@ -36,10 +32,10 @@ export class ListarProdutosComponent implements OnInit {
       // Caso contrário, busque a lista principal de produtos
       this.service.getProdutos(this.page).subscribe((response) => {
         this.produtos = response.content;
-        this.totalPages = response.totalPages
+        this.totalPages = response.totalPages;
 
-        if(response.totalPages > 1) {
-          this.nextPage = true
+        if (response.totalPages > 1) {
+          this.nextPage = true;
         }
       });
     }
@@ -49,56 +45,56 @@ export class ListarProdutosComponent implements OnInit {
     this.page = pagina;
   }
 
-  proximaPagina(){
-    if(this.totalPages > this.page+1){
+  proximaPagina() {
+    if (this.totalPages > this.page + 1) {
       this.page = this.page + 1;
       this.beforPage = true;
       this.listarProdutos();
-      if (this.page+1 === this.totalPages){
+      if (this.page + 1 === this.totalPages) {
         this.nextPage = false;
       }
-    } else{
+    } else {
       this.nextPage = false;
     }
-
   }
 
-  paginaAnterior(){
-    if (this.page > 0 ){
+  paginaAnterior() {
+    if (this.page > 0) {
       this.page = this.page - 1;
       this.nextPage = true;
       this.listarProdutos();
-      if (this.page === 0 ){
+      if (this.page === 0) {
         this.beforPage = false;
       }
-    } else{
+    } else {
       this.beforPage = false;
     }
   }
 
   pesquisar() {
-    if (!this.termoPesquisa){
+    if (!this.termoPesquisa) {
       this.listarProdutos();
     } else {
-      this.service.getProdutosByString(this.termoPesquisa).subscribe((response) => {
-        this.produtos = response;
-        this.router.navigate([this.router.url]);
-      });
+      this.service
+        .getProdutosByString(this.termoPesquisa)
+        .subscribe((response) => {
+          this.produtos = response;
+          this.router.navigate([this.router.url]);
+        });
     }
   }
 
   cadastrarNovo() {
-    this.router.navigate(['/cadastrarProduto'])
+    this.router.navigate(['/cadastrarProduto']);
   }
 
-  alterarProduto(id: number) {
-  }
+  alterarProduto(id: number) {}
 
   deletarProduto(id: number, status: string) {
     this.service.excluir(id, status).subscribe(() => {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload'
-      this.router.navigate([this.router.url])
-    })
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate([this.router.url]);
+    });
   }
 }

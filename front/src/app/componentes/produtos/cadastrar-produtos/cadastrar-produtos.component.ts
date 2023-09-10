@@ -8,10 +8,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-cadastrar-produtos',
   templateUrl: './cadastrar-produtos.component.html',
-  styleUrls: ['./cadastrar-produtos.component.css']
+  styleUrls: ['./cadastrar-produtos.component.css'],
 })
 export class CadastrarProdutosComponent implements OnInit {
-
   modalAberto = false;
   formularioProduto!: FormGroup;
 
@@ -48,11 +47,9 @@ export class CadastrarProdutosComponent implements OnInit {
     this.modalservice.fecharModalEvent.subscribe(() => {
       this.fecharModal();
     });
-
   }
 
   submitForm() {
-
     const dadosParaEnviar = {
       produto: this.produto,
       avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
@@ -61,8 +58,8 @@ export class CadastrarProdutosComponent implements OnInit {
 
     this.produtosService.cadastrarProduto(dadosParaEnviar).subscribe(
       (response) => {
-        alert('Produto cadastrado com sucesso.')
-        this.router.navigate(['listarProduto'])
+        alert('Produto cadastrado com sucesso.');
+        this.router.navigate(['listarProduto']);
       },
       (error) => {
         console.error('Erro ao cadastrar produto:', error);
@@ -83,11 +80,11 @@ export class CadastrarProdutosComponent implements OnInit {
     return `http://localhost:8080/api/upload/${imageName}`;
   }
 
-  receberListaFotos(fotos: CarregarFotos[]){
+  receberListaFotos(fotos: CarregarFotos[]) {
     this.fotosProduto = fotos;
   }
 
   irParaListaProdutos() {
-    this.router.navigate(['listarProduto'])
+    this.router.navigate(['listarProduto']);
   }
 }

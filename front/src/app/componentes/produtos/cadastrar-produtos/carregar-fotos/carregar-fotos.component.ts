@@ -8,11 +8,9 @@ import { CarregarFotos } from '../cadastrar-produtos';
 @Component({
   selector: 'app-carregar-fotos',
   templateUrl: './carregar-fotos.component.html',
-  styleUrls: ['./carregar-fotos.component.css']
+  styleUrls: ['./carregar-fotos.component.css'],
 })
-
 export class CarregarFotosComponent implements OnInit {
-
   file: File | null = null;
   preview!: string;
   fotosProduto: CarregarFotos[] = [];
@@ -21,11 +19,10 @@ export class CarregarFotosComponent implements OnInit {
   constructor(
     private produtoService: ProdutosService,
     public modalservice: ModalService,
-    private cadastrarProduto: CadastrarProdutosComponent,
-  ) { }
+    private cadastrarProduto: CadastrarProdutosComponent
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   concluirUpload() {
     this.cadastrarProduto.receberListaFotos(this.fotosProduto);
@@ -58,13 +55,12 @@ export class CarregarFotosComponent implements OnInit {
     });
   }
 
-
   enviarImagem(): void {
     if (this.file) {
       this.produtoService.enviarImagem(this.file).subscribe(
         (response) => {
           this.fotosProduto.push(response);
-          this.selecionarImagemPrincipal(response.nomeImg)
+          this.selecionarImagemPrincipal(response.nomeImg);
         },
         (error) => {
           console.error('Erro ao enviar a imagem:', error);
@@ -74,6 +70,4 @@ export class CarregarFotosComponent implements OnInit {
       alert('Nenhuma imagem selecionada.');
     }
   }
-
-
 }
