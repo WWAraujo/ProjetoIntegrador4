@@ -72,8 +72,7 @@ public class ProdutoController {
                     new FotosProdutoModel(produtoSalvo, fotoRecord);
             fotosProdutoRepository.save(fotosProdutoModel);
         }
-
-
+        
         Long idProdutoSalvo = Long.parseLong(String.valueOf(produtoSalvo.getId()));
         return ResponseEntity.ok(idProdutoSalvo);
     }
@@ -82,13 +81,14 @@ public class ProdutoController {
     public ResponseEntity<ProdutoRecordConstructor> mostrarProdutoCompleto(@PathVariable Long id) {
 
         Optional<ProdutoModel> produtoModel = repository.findById(Integer.parseInt(id.toString()));
-        ProdutoRecord produtoRecord = new ProdutoRecord(
-                produtoModel.get().getId(),
-                produtoModel.get().getNomeProduto(),
-                produtoModel.get().getDescricaoDetalhadaProduto(),
-                produtoModel.get().getPrecoProduto(),
-                produtoModel.get().getQtdEstoque(),
-                produtoModel.get().getAtivoInativo()
+        ProdutoRecord produtoRecord =
+                new ProdutoRecord(
+                        produtoModel.get().getId(),
+                        produtoModel.get().getNomeProduto(),
+                        produtoModel.get().getDescricaoDetalhadaProduto(),
+                        produtoModel.get().getPrecoProduto(),
+                        produtoModel.get().getQtdEstoque(),
+                        produtoModel.get().getAtivoInativo()
         );
 
 
@@ -98,14 +98,16 @@ public class ProdutoController {
                         avaliacaoProdutoRepository.calcularMediaAvaliacao(id));
 
 
-        Optional<FotosProdutoModel[]> fotosProdutoModel = fotosProdutoRepository.buscarFotosPorIdProduto(id);
+
         List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
+        Optional<FotosProdutoModel[]> fotosProdutoModel = fotosProdutoRepository.buscarFotosPorIdProduto(id);
         for (FotosProdutoModel fotos : fotosProdutoModel.get()){
-            FotosProdutoRecord foto = new FotosProdutoRecord(
-                    Integer.parseInt(fotos.getIdProduto().toString()),
-                    fotos.getNomeImg(),
-                    fotos.getCaminhoImg(),
-                    fotos.getFlagImg()
+            FotosProdutoRecord foto =
+                    new FotosProdutoRecord(
+                            Integer.parseInt(fotos.getIdProduto().toString()),
+                            fotos.getNomeImg(),
+                            fotos.getCaminhoImg(),
+                            fotos.getFlagImg()
             );
             fotosresponse.add(foto);
         }
