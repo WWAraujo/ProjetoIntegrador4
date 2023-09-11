@@ -4,7 +4,9 @@ import { ProdutosService } from '../produtos.service';
 import { ModalService } from './modal.service';
 import { AvaliacaoProduto, Produto, CarregarFotos } from './cadastrar-produtos';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
+const API = environment.apiURL;
 @Component({
   selector: 'app-cadastrar-produtos',
   templateUrl: './cadastrar-produtos.component.html',
@@ -77,7 +79,7 @@ export class CadastrarProdutosComponent implements OnInit {
   }
 
   getFullPath(imageName: string): string {
-    return `http://localhost:8080/api/upload/${imageName}`;
+    return `${API}/api/upload/${imageName}`;
   }
 
   receberListaFotos(fotos: CarregarFotos[]) {
