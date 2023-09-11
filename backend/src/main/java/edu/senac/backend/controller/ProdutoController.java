@@ -53,8 +53,8 @@ public class ProdutoController {
     }
 
 
-    @PostMapping("/cadastrar-produto")
-    public ResponseEntity<Long> cadastrarProduto(@RequestBody ProdutoRecordConstructor produto) {
+    @PutMapping("/alterar-produto")
+    public ResponseEntity<String> alterarProduto(@RequestBody ProdutoRecordConstructor produto){
 
         System.out.println(produto);
 
@@ -62,9 +62,35 @@ public class ProdutoController {
 
         ProdutoModel produtoSalvo = repository.save(produtoModel);
 
+        AvaliacaoProdutoModel avaliacaoProdutoModel  =
+                new AvaliacaoProdutoModel(
+                        produtoSalvo,
+                        produto.avaliacaoProdutoRecord());
+        avaliacaoProdutoRepository.save(avaliacaoProdutoModel);
+
+
+        fotosProdutoRepository.deleteByProdutoId(produtoSalvo.getId());
+
+        for (FotosProdutoRecord fotoRecord : produto.fotosProdutoRecord()) {
+            FotosProdutoModel fotosProdutoModel =
+                    new FotosProdutoModel(produtoSalvo, fotoRecord);
+            fotosProdutoRepository.save(fotosProdutoModel);
+        }
+
+        return ResponseEntity.ok("Produto atualizado!");
+    }
+
+
+    @PostMapping("/cadastrar-produto")
+    public ResponseEntity<Long> cadastrarProduto(@RequestBody ProdutoRecordConstructor produto) {
+
+        ProdutoModel produtoSalvo = repository.save(new ProdutoModel(produto));
+
 
         AvaliacaoProdutoModel avaliacaoProdutoModel  =
-                new AvaliacaoProdutoModel(produtoSalvo, produto.avaliacaoProdutoRecord());
+                new AvaliacaoProdutoModel(
+                        produtoSalvo,
+                        produto.avaliacaoProdutoRecord());
         avaliacaoProdutoRepository.save(avaliacaoProdutoModel);
 
         for (FotosProdutoRecord fotoRecord : produto.fotosProdutoRecord()) {
@@ -72,7 +98,7 @@ public class ProdutoController {
                     new FotosProdutoModel(produtoSalvo, fotoRecord);
             fotosProdutoRepository.save(fotosProdutoModel);
         }
-        
+
         Long idProdutoSalvo = Long.parseLong(String.valueOf(produtoSalvo.getId()));
         return ResponseEntity.ok(idProdutoSalvo);
     }

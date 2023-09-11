@@ -4,7 +4,9 @@ import { ProdutosService } from '../../produtos.service';
 import { ModalService } from '../modal.service';
 import { CadastrarProdutosComponent } from '../cadastrar-produtos.component';
 import { CarregarFotos } from '../cadastrar-produtos';
+import { environment } from 'src/environments/environment';
 
+const API = environment.apiURL;
 @Component({
   selector: 'app-carregar-fotos',
   templateUrl: './carregar-fotos.component.html',
@@ -34,7 +36,7 @@ export class CarregarFotosComponent implements OnInit {
   }
 
   getFullPath(imageName: string): string {
-    return `http://localhost:8080/api/upload/${imageName}`;
+    return `${API}/api/upload/${imageName}`;
   }
 
   selecionarImagem(event: any): void {
