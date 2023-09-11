@@ -12,10 +12,15 @@ const NOT_MODIFIED = '304';
   providedIn: 'root',
 })
 export class ProdutosService {
+  private idProduto!: number;
   constructor(private http: HttpClient) {}
 
   getProdutos(page: number): Observable<PaginaProdutos> {
     return this.http.get<PaginaProdutos>(`${API}/produto/listar?page=${page}`);
+  }
+
+  getProdutosCompleto(id: number): Observable<PaginaProdutos> {
+    return this.http.get<PaginaProdutos>(`${API}/produto/mostrar-produto-completo/${id}`);
   }
 
   getProdutosByString(pesquisa: string): Observable<Produto[]> {
@@ -47,5 +52,17 @@ export class ProdutosService {
   excluir(id: number, status: string): Observable<any> {
     const url = `${API}/produto/${id}/${status}`;
     return this.http.delete<any>(url);
+  }
+
+  getPegarId(page: number): Observable<PaginaProdutos> {
+    return this.http.get<PaginaProdutos>(`${API}/produto/listar?page=${page}`);
+  }
+
+  setIdProduto(id: number) {
+    this.idProduto = id;
+  }
+
+  getIdProduto(): number {
+    return this.idProduto;
   }
 }

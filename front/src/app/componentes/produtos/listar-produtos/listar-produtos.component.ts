@@ -17,6 +17,7 @@ export class ListarProdutosComponent implements OnInit {
   nextPage: boolean = false;
   beforPage: boolean = false;
   termoPesquisa!: string;
+  id: Produto [] = [];
 
   constructor(private service: ProdutosService, private router: Router) {}
 
@@ -97,4 +98,10 @@ export class ListarProdutosComponent implements OnInit {
       this.router.navigate([this.router.url]);
     });
   }
+
+  pegarId(idProduto: number) {
+    this.service.setIdProduto(idProduto);
+    this.router.navigate(['/visualizarProdutos']);
+  }
+
 }

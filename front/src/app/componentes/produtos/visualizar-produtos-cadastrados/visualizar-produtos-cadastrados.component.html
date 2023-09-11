@@ -1,1 +1,36 @@
-<p>visualizar-produtos-cadastrados works!</p>
+<section class="container">
+  <div class="title">
+    <label>Produtos</label>
+  </div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Nome do Produto</th>
+      <th>Descrição Detalhada</th>
+      <th>Preço</th>
+      <th>Quantidade em Estoque</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td>{{ productData.produto.id }}</td>
+      <td>{{ productData.produto.nomeProduto }}</td>
+      <td>{{ productData.produto.descricaoDetalhadaProduto }}</td>
+      <td>{{ productData.produto.precoProduto }}</td>
+      <td>{{ productData.produto.qtdEstoque }}</td>
+      <td>{{ productData.produto.ativoInativo }}</td>
+    </tr>
+  </table>
+
+  <h2>Avaliação do Produto</h2>
+  <p>Avaliação Média: {{ productData.avaliacaoProdutoRecord.avaliacao }}</p>
+
+  <div *ngFor="let foto of productData.fotosProdutoRecord">
+    <img
+      [src]="getFullPath(foto.nomeImg)"
+      [alt]="foto.nomeImg"
+      [width]="150"
+      [height]="150"
+    />
+  </div>
+
+</section>

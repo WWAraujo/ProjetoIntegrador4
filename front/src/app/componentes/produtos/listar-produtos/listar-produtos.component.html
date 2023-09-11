@@ -49,7 +49,9 @@
           </button>
         </td>
         <td>
-          <button class="btnUserEdit"><p>Visualizar</p></button>
+          <button class="btnUserEdit"
+          (click)="pegarId(item.id)"
+          ><p>Visualizar</p></button>
         </td>
       </tr>
     </table>
@@ -68,4 +70,5 @@
   <button class="btnPesquisar" *ngIf="beforPage" (click)="paginaAnterior()">
     <img src="../../../../assets/image/before.page.png" alt="proxima pagina" />
   </button>
+
 </section>
