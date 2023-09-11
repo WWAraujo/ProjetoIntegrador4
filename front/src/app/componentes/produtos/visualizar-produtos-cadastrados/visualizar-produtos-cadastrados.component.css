@@ -2,121 +2,134 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin: auto;
   padding: 0;
   background-color: #fff;
   height: 100%;
 }
 
-.title {
-  margin-top: 20px;
+.container-produtos {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 2;
+  grid-template-rows: 6;
+  box-shadow: 0px 0px 2px 2px gray;
+  width: 800px;
+  height: 600px;
+  z-index: 1;
 }
-.title label {
-  font: 3em "Inter", sans-serif;
+
+.title {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+
+.title p {
+  font: 2em 'Inter', sans-serif;
   color: #000;
+  text-align: center;
+}
+
+.infoProdutos {
+  width: 400px;
+  height: 100%;
+  grid-column: 2;
+  grid-row: 2 / span 6;
+}
+
+.quantidade {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  height: 10%;
+}
+
+.quantidade p {
+  font: 1.2em 'Inter', sans-serif;
+  margin: 0px 20px;
+}
+
+.quantidade label {
+  font: 1.2em 'Inter', sans-serif;
+}
+
+.preco {
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: end;
+  height: 40%;
+}
+
+.preco p {
+  font: 2.5em 'Inter', sans-serif;
+  margin: 0px 15px;
   font-weight: bold;
 }
 
-.userSearch {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  margin-top: 50px;
-  margin-bottom: 30px;
-  width: 100%;
+.preco label {
+  font: 2.5em 'Inter', sans-serif;
+  font-weight: bold;
 }
 
-.userSearch label {
-  font: 1.8em "Inter", sans-serif;
-  margin-right: 20px;
-  font-weight: 600;
-}
-
-.userSearch input {
-  position: relative;
-  width: 60%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 0.5px solid;
-  box-shadow: 0px 0px 2px 2px gray;
-}
-
-.btnPesquisar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: #fff;
-  margin: 0px 100px 0px 20px;
-}
-
-.btnPesquisar img {
-  width: 30px;
-  height: 30px;
-}
-
-.btnPesquisar:hover {
-  cursor: pointer;
-}
-
-.btnUserEdit {
-  background-color: #fff;
-  border: 1px solid transparent;
-}
-
-.btnUserEdit:hover {
-  cursor: pointer;
-}
-
-table {
-  background-color: #fff;
-  border-radius: 5px;
-  overflow: auto;
-  width: 100%;
-  margin: 0;
-}
-
-table th {
-  padding: 10px 0px;
-  font: 1.1em "Inter", sans-serif;
-  font-weight: 600;
-}
-
-table td {
-  font: 1em "Inter", sans-serif;
-  text-align: center;
-  border: 1px solid #000;
-  max-width: 200px;
-  min-width: 50px;
-  text-transform: lowercase;
-}
-
-table td p {
-  font: 1em "Inter", sans-serif;
-}
-
-.container_table {
+.descricao {
+  grid-column: 2;
+  grid-row: 4;
   display: flex;
   flex-direction: column;
+  padding: 50px 0px;
+  height: 40%;
+}
+
+.descricao p {
+  font: 1.2em 'Inter', sans-serif;
+}
+
+.descricao label {
+  font: 1.2em 'Inter', sans-serif;
+}
+
+.avaliacao {
+  grid-column: 2;
+  grid-row: 5;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  width: 65%;
-  height: 450px;
-  overflow: auto;
-  overflow-x: auto;
-  border: 2px solid;
 }
 
-.newUser {
-  padding: 25px 50px;
-  background-color: #1e90ff;
-  color: #fff;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  border: 2px solid transparent;
+.avaliacao p {
+  font: 1.2em 'Inter', sans-serif;
+  margin: 0px 10px;
 }
 
-.newUser:hover {
-  cursor: pointer;
+.avaliacao label {
+  font: 1.2em 'Inter', sans-serif;
+  margin: 0px 0px 0px 10px;
+}
+
+.avaliacao img {
+  width: 100px;
+  height: 100px;
+}
+
+.imagens {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  grid-column: 1;
+  grid-row: 2 / span 6;
+}
+
+.imagens img {
+  width: 100%;
+  height: 100%;
 }
