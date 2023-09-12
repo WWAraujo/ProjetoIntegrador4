@@ -20,8 +20,10 @@ export class VisualizarProdutosCadastradosComponent implements OnInit {
   beforePage: boolean = false;
   termoPesquisa!: string;
   productData: any = {};
+  productImg: any = {};
   fotosProduto: CarregarFotos[] = [];
   idProduto!: number;
+  imagemPrincipal!: string;
 
   constructor(private service: ProdutosService, private router: Router, private route: ActivatedRoute) {}
 
@@ -31,13 +33,23 @@ export class VisualizarProdutosCadastradosComponent implements OnInit {
       this.productData = data;
 
       console.log("Dados Recebidos: " , data);
+
+      const primeiraImagemPrincipal = this.productData.fotosProdutoRecord.find(
+        (foto: { flagImg: string; }) => foto.flagImg === 'p'
+      );
+
+      if (primeiraImagemPrincipal) {
+        this.imagemPrincipal = this.getFullPath(primeiraImagemPrincipal.nomeImg);
+      }
     })
-
-  }
-
+    }
 
   getFullPath(imageName: string): string {
     return `http://localhost:8080/api/upload/${imageName}`;
+  }
+
+  trocarImagemPrincipal(novaImagem: string): void {
+    this.imagemPrincipal = novaImagem;
   }
 
 }

@@ -23,12 +23,23 @@
         <img src="../../../../assets/image/estrelas.png" alt="avaliacao">
       </div>
     </div>
-    <div class="imagens" *ngFor="let foto of productData.fotosProdutoRecord">
-      <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="150" [height]="150" />
+    <div class="containerImage">
+      <div class="imagemPrincipal">
+        <img
+          [src]="imagemPrincipal"
+          [alt]="imagemPrincipal"
+          [width]="300"
+          [height]="300"
+          (click)="trocarImagemPrincipal(imagemPrincipal)"
+        />
+      </div>
+      <div class="imagensSecundarias" *ngFor="let foto of productData.fotosProdutoRecord">
+        <ng-container class="imagensSecundarias" *ngIf="foto.nomeImg">
+          <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="90" [height]="90" (click)="trocarImagemPrincipal(getFullPath(foto.nomeImg))" />
+        </ng-container>
+      </div>
     </div>
+
   </div>
-
-
   <p class="Ativo">{{ productData.produto.ativoInativo }}</p>
-
 </section>
