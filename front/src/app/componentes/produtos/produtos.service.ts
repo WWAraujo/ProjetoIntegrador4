@@ -1,9 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaginaProdutos, Produto } from './listar-produtos/listar-produtos';
 import { environment } from 'src/environments/environment';
-import { CarregarFotos } from './cadastrar-produtos/cadastrar-produtos';
+import {
+  CarregarFotos,
+  ProdutoCompletoListar,
+} from './cadastrar-produtos/cadastrar-produtos';
 
 const API = environment.apiURL;
 const NOT_MODIFIED = '304';
@@ -19,8 +22,16 @@ export class ProdutosService {
     return this.http.get<PaginaProdutos>(`${API}/produto/listar?page=${page}`);
   }
 
-  getProdutosCompleto(id: number): Observable<PaginaProdutos> {
-    return this.http.get<PaginaProdutos>(`${API}/produto/mostrar-produto-completo/${id}`);
+  getProdutoCompleto(id: number): Observable<PaginaProdutos> {
+    return this.http.get<PaginaProdutos>(
+      `${API}/produto/mostrar-produto-completo/${id}`
+    );
+  }
+
+  getProdutoAlterar(id: number): Observable<ProdutoCompletoListar> {
+    return this.http.get<ProdutoCompletoListar>(
+      `${API}/produto/mostrar-produto-completo/${id}`
+    );
   }
 
   getProdutosByString(pesquisa: string): Observable<Produto[]> {
@@ -65,4 +76,12 @@ export class ProdutosService {
   getIdProduto(): number {
     return this.idProduto;
   }
+
+  setAlterarProduto(produto: any) {
+    return this.http.put(`${API}/alterar-produto`, produto);
+  }
+
+  // deletarImagem(img: any) {
+  //   return this.http.delete(`${API}/api/upload/deleteFile`, img);
+  // }
 }

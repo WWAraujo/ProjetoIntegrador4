@@ -18,3 +18,9 @@ export interface CarregarFotos {
   caminhoImg: string;
   flagImg: string;
 }
+
+export interface ProdutoCompletoListar {
+  produto: Produto;
+  avaliacaoProdutoRecord: AvaliacaoProduto;
+  fotosProdutoRecord: CarregarFotos[] ;
+}

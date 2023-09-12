@@ -1,9 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CarregarFotos } from './../cadastrar-produtos';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProdutosService } from '../../produtos.service';
 import { ModalService } from '../modal.service';
 import { CadastrarProdutosComponent } from '../cadastrar-produtos.component';
-import { CarregarFotos } from '../cadastrar-produtos';
 import { environment } from 'src/environments/environment';
 
 const API = environment.apiURL;
@@ -15,8 +14,10 @@ const API = environment.apiURL;
 export class CarregarFotosComponent implements OnInit {
   file: File | null = null;
   preview!: string;
-  fotosProduto: CarregarFotos[] = [];
+  // fotosProduto: CarregarFotos[] = [];
   imagemPrincipalId: string = '';
+
+  @Input() fotosProduto: CarregarFotos[] = [];
 
   constructor(
     private produtoService: ProdutosService,
@@ -72,4 +73,15 @@ export class CarregarFotosComponent implements OnInit {
       alert('Nenhuma imagem selecionada.');
     }
   }
+
+  // deletarImagem(nome: string): void{
+  //   console.log('Nome da imagem para deletar', nome)
+  //   this.produtoService.deletarImagem(nome).subscribe(
+  //     (response) => {
+  //       console.log('response', response)
+  //     },
+  //     (error) => {
+  //       console.log('Erro ao deletar imagem', error)
+  //     })
+  // }
 }

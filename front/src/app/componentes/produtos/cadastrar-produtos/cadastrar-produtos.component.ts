@@ -13,8 +13,10 @@ const API = environment.apiURL;
   styleUrls: ['./cadastrar-produtos.component.css'],
 })
 export class CadastrarProdutosComponent implements OnInit {
+
   modalAberto = false;
   formularioProduto!: FormGroup;
+  idProduto!: number;
 
   produto: Produto = {
     id: 0,
@@ -36,7 +38,7 @@ export class CadastrarProdutosComponent implements OnInit {
     private formBuilder: FormBuilder,
     private produtosService: ProdutosService,
     public modalservice: ModalService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,16 @@ export class CadastrarProdutosComponent implements OnInit {
     this.modalservice.fecharModalEvent.subscribe(() => {
       this.fecharModal();
     });
+
+    this.idProduto = this.produtosService.getIdProduto()
+    if(this.idProduto) {
+      this.produtosService.getProdutoAlterar(this.idProduto).subscribe(data => {
+
+        this.produto = data.produto;
+        this.avaliacaoProdutoRecord = data.avaliacaoProdutoRecord;
+        this.fotosProduto = data.fotosProdutoRecord;
+      })
+    }
   }
 
   submitForm() {
@@ -86,7 +98,16 @@ export class CadastrarProdutosComponent implements OnInit {
     this.fotosProduto = fotos;
   }
 
+  enviarListaFotos(){
+    return this.fotosProduto;
+  }
+
   irParaListaProdutos() {
     this.router.navigate(['listarProduto']);
+  }
+
+  novaAvaliacao() {
+    this.avaliacaoProdutoRecord.idProduto = 0;
+    this.avaliacaoProdutoRecord.avaliacao = 0;
   }
 }

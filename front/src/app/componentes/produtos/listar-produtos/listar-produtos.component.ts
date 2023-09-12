@@ -86,10 +86,14 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   cadastrarNovo() {
+    this.service.setIdProduto(0);
     this.router.navigate(['/cadastrarProduto']);
   }
 
-  alterarProduto(id: number) {}
+  alterarProduto(idProduto: number) {
+    this.service.setIdProduto(idProduto);
+    this.router.navigate(['/cadastrarProduto']);
+  }
 
   deletarProduto(id: number, status: string) {
     this.service.excluir(id, status).subscribe(() => {
@@ -103,5 +107,4 @@ export class ListarProdutosComponent implements OnInit {
     this.service.setIdProduto(idProduto);
     this.router.navigate(['/visualizarProdutos']);
   }
-
 }

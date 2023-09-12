@@ -59,7 +59,8 @@
   </div>
 
   <div class="form-group col-md-4">
-    <label for="ativoInativo">Avaliação</label>
+    <label for="ativoInativo" *ngIf="!produto.id">Avaliação</label>
+    <label for="ativoInativo" *ngIf="produto.id">Nova Avaliação</label>
     <select
       id="ativoInativo"
       [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
@@ -80,11 +81,23 @@
     </select>
   </div>
 
+  <div class="form-group col-md-4" *ngIf="avaliacaoProdutoRecord.avaliacao">
+    <label for="ativoInativo">Média Avaliação</label>
+    <input
+      type="text"
+      [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
+      class="form-control"
+    />
+    <!-- <button (click)="novaAvaliacao()">Nova Avaliação</button> -->
+  </div>
+
   <button class="newUser" (click)="abrirModal()">Carregar Fotos</button>
 
   <div class="modal" *ngIf="modalAberto">
     <div class="modal-overlay"></div>
-    <div class="modal-content"><app-carregar-fotos></app-carregar-fotos></div>
+    <div class="modal-content">
+      <app-carregar-fotos [fotosProduto]="fotosProduto"></app-carregar-fotos>
+    </div>
     <button class="modal-fechar" (click)="fecharModal()">&times;</button>
   </div>
 

@@ -29,7 +29,7 @@ export class VisualizarProdutosCadastradosComponent implements OnInit {
 
   ngOnInit(): void {
     this.idProduto = this.service.getIdProduto()
-    this.service.getProdutosCompleto(this.idProduto).subscribe(data => {
+    this.service.getProdutoCompleto(this.idProduto).subscribe(data => {
       this.productData = data;
 
       console.log("Dados Recebidos: " , data);

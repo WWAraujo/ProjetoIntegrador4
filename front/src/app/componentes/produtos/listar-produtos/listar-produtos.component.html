@@ -49,9 +49,9 @@
           </button>
         </td>
         <td>
-          <button class="btnUserEdit"
-          (click)="pegarId(item.id)"
-          ><p>Visualizar</p></button>
+          <button class="btnUserEdit" (click)="pegarId(item.id)">
+            <p>Visualizar</p>
+          </button>
         </td>
       </tr>
     </table>
@@ -64,11 +64,21 @@
   >
     CADASTRAR
   </button>
-  <button class="btnPesquisar" *ngIf="nextPage" (click)="proximaPagina()">
-    <img src="../../../../assets/image/next.page.png" alt="proxima pagina" />
-  </button>
-  <button class="btnPesquisar" *ngIf="beforPage" (click)="paginaAnterior()">
-    <img src="../../../../assets/image/before.page.png" alt="proxima pagina" />
-  </button>
 
+  <div
+    class="btn-group"
+    role="group"
+    aria-label="Grupo de botões com dropdown aninhado"
+  >
+    <button class="btnPesquisar" *ngIf="beforPage" (click)="paginaAnterior()">
+      <img
+        src="../../../../assets/image/before.page.png"
+        alt="proxima pagina"
+      />
+    </button>
+
+    <button class="btnPesquisar" *ngIf="nextPage" (click)="proximaPagina()">
+      <img src="../../../../assets/image/next.page.png" alt="proxima pagina" />
+    </button>
+  </div>
 </section>

@@ -4,12 +4,23 @@
   </form>
 
   <div *ngFor="let foto of fotosProduto; let i = index">
+    <!-- <button type="button" class="btn btn-link">
+      <img
+        src="../../../../../assets/image/lixeira.png"
+        [width]="25"
+        [height]="25"
+        alt="lupaPesquisar"
+        (click)="deletarImagem(foto.nomeImg)"
+      />
+    </button> -->
+
     <img
       [src]="getFullPath(foto.nomeImg)"
       [alt]="foto.nomeImg"
       [width]="150"
       [height]="150"
     />
+
     <label>
       <input
         type="radio"
