@@ -4,21 +4,19 @@
       <p>{{ productData.produto.nomeProduto }}</p>
     </div>
     <div class="infoProdutos">
-      <div class="quantidade">
-        <label>Quantidade: </label>
-        <p>{{ productData.produto.qtdEstoque }}</p>
-        <label> Disponiveis</label>
+      <div class="descricao">
+        <p>{{ productData.produto.descricaoDetalhadaProduto }}</p>
       </div>
       <div class="preco">
         <label>R$</label>
         <p>{{ productData.produto.precoProduto }}</p>
       </div>
-      <div class="descricao">
-        <label>Descrição:</label>
-        <p>{{ productData.produto.descricaoDetalhadaProduto }}</p>
+      <div class="quantidade">
+        <label>Disponivel </label>
+        <p>{{ productData.produto.qtdEstoque }}</p>
+        <label> Unidades</label>
       </div>
       <div class="avaliacao">
-        <label>Avaliação: </label>
         <p>{{ productData.avaliacaoProdutoRecord.avaliacao }}</p>
         <img src="../../../../assets/image/estrelas.png" alt="avaliacao">
       </div>
@@ -28,14 +26,14 @@
         <img
           [src]="imagemPrincipal"
           [alt]="imagemPrincipal"
-          [width]="300"
-          [height]="300"
+          [width]="250"
+          [height]="250"
           (click)="trocarImagemPrincipal(imagemPrincipal)"
         />
       </div>
       <div class="imagensSecundarias" *ngFor="let foto of productData.fotosProdutoRecord">
         <ng-container class="imagensSecundarias" *ngIf="foto.nomeImg">
-          <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="90" [height]="90" (click)="trocarImagemPrincipal(getFullPath(foto.nomeImg))" />
+          <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="80" [height]="80" (click)="trocarImagemPrincipal(getFullPath(foto.nomeImg))" />
         </ng-container>
       </div>
     </div>
