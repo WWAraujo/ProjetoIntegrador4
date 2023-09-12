@@ -28,7 +28,7 @@ export class CadastroUsuarioComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       nome: ['', [Validators.required]],
       cpf: ['', [Validators.required, Validacoes.ValidaCPF]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       tipoUsuario: ['', [Validators.required]],
       senha: ['', [Validators.required, , Validators.minLength(3)]],
       confirmacaoSenha: ['', [Validators.required]],

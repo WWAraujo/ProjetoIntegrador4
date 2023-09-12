@@ -56,6 +56,12 @@
     >
       Email Obrigatório
     </div>
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('usuario')?.hasError('pattern') && formulario.get('usuario')?.touched"
+    >
+      E-mail inválido! Deve ser no formato correto.
+    </div>
 
     <label for="tipoUsuario">Tipo de Usuário</label>
     <select formControlName="tipoUsuario" id="tipoUsuario">

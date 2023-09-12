@@ -2,28 +2,34 @@
   <div class="title">
     <label>Login</label>
   </div>
-  <h2>Fazer Login:</h2>
-  <form class="form-login" [formGroup]="formulario">
-    <label for="usuario">E-mail</label>
-    <input
-      type="text"
-      class="input"
-      id="usuario"
-      formControlName="usuario"
-      placeholder="Digite o e-mail"
-    />
-    <div
+    <h2>Fazer Login:</h2>
+    <form class="form-login" [formGroup]="formulario">
+      <label for="usuario">E-mail</label>
+      <input
+        type="text"
+        class="input"
+        id="usuario"
+        formControlName="usuario"
+        placeholder="Digite o e-mail"
+      />
+      <div
+        class="mensagem__erro"
+        *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched"
+      >
+        E-mail é obrigatório!
+      </div>
+      <div
+        class="mensagem__erro"
+        *ngIf="formulario.get('usuario')?.errors?.['email'] && formulario.get('usuario')?.touched"
+      >
+        Digite um e-mail válido!
+      </div>
+      <div
       class="mensagem__erro"
-      *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched"
-    >
-      E-mail é obrigatorio!
-    </div>
-    <div
-      class="mensagem__erro"
-      *ngIf="formulario.get('usuario')?.errors?.['email'] && formulario.get('usuario')?.touched"
-    >
-      Digite um e-mail valido.
-    </div>
+      *ngIf="formulario.get('usuario')?.hasError('pattern') && formulario.get('usuario')?.touched"
+      >
+      E-mail inválido! Deve ser no formato correto.
+      </div>
     <label for="senha">Senha</label>
     <input
       type="password"
