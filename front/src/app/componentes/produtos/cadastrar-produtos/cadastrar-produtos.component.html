@@ -4,6 +4,7 @@
   <div class="form-group col-md-4">
     <label for="nomeProduto">Nome do Produto:</label>
     <input
+      [disabled]="isEstoquista"
       type="text"
       id="nomeProduto"
       [(ngModel)]="produto.nomeProduto"
@@ -15,6 +16,7 @@
   <div class="form-group col-md-4">
     <label for="descricaoProduto">Descrição do Produto:</label>
     <textarea
+      [disabled]="isEstoquista"
       type="text"
       id="descricaoProduto"
       [(ngModel)]="produto.descricaoDetalhadaProduto"
@@ -26,6 +28,7 @@
   <div class="col-md-4">
     <label for="precoProduto">Preço do Produto:</label>
     <input
+      [disabled]="isEstoquista"
       type="number"
       id="precoProduto"
       [(ngModel)]="produto.precoProduto"
@@ -48,6 +51,7 @@
   <div class="form-group col-md-4">
     <label for="ativoInativo">Status</label>
     <select
+      [disabled]="isEstoquista"
       id="ativoInativo"
       [(ngModel)]="produto.ativoInativo"
       class="form-control"
@@ -62,6 +66,7 @@
     <label for="ativoInativo" *ngIf="!produto.id">Avaliação</label>
     <label for="ativoInativo" *ngIf="produto.id">Nova Avaliação</label>
     <select
+      [disabled]="isEstoquista"
       id="ativoInativo"
       [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
       class="form-control"
@@ -84,6 +89,7 @@
   <div class="form-group col-md-4" *ngIf="avaliacaoProdutoRecord.avaliacao">
     <label for="ativoInativo">Média Avaliação</label>
     <input
+      [disabled]="isEstoquista"
       type="text"
       [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
       class="form-control"
@@ -91,7 +97,7 @@
     <!-- <button (click)="novaAvaliacao()">Nova Avaliação</button> -->
   </div>
 
-  <button class="newUser" (click)="abrirModal()">Carregar Fotos</button>
+  <button class="newUser" (click)="abrirModal()" [disabled]="isEstoquista" >Carregar Fotos</button>
 
   <div class="modal" *ngIf="modalAberto">
     <div class="modal-overlay"></div>
