@@ -56,11 +56,7 @@ export class CadastrarProdutosComponent implements OnInit {
     } else if (userType === '3') {
       this.isCliente = true;
     }
-    this.formularioProduto = this.formBuilder.group({
-      produto: this.produto,
-      avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
-      fotosProdutoRecord: this.fotosProduto,
-    });
+
 
     this.modalservice.fecharModalEvent.subscribe(() => {
       this.fecharModal();
@@ -84,16 +80,39 @@ export class CadastrarProdutosComponent implements OnInit {
       fotosProdutoRecord: this.fotosProduto,
     };
 
-    this.produtosService.cadastrarProduto(dadosParaEnviar).subscribe(
-      (response) => {
-        alert('Produto cadastrado com sucesso.');
-        this.router.navigate(['listarProduto']);
-      },
-      (error) => {
-        console.error('Erro ao cadastrar produto:', error);
-        alert('Erro ao cadastrar produto:');
-      }
-    );
+    if(!this.idProduto) {
+      this.produtosService.cadastrarProduto(dadosParaEnviar).subscribe(
+        (response) => {
+          alert('Produto cadastrado com sucesso.');
+          this.router.navigate(['listarProduto']);
+        },
+        (error) => {
+          console.error('Erro ao cadastrar produto:', error);
+          alert('Erro ao cadastrar produto:');
+        }
+      );
+    }
+
+    if (this.idProduto){
+      this.produtosService.alterarProduto(dadosParaEnviar).subscribe(
+        (response) => {
+          alert('Produto cadastrado com sucesso.');
+          this.router.navigate(['listarProduto']);
+        },
+        (error) => {
+          console.error('Erro ao cadastrar produto:', error);
+          alert('Erro ao cadastrar produto:');
+        }
+      );
+    }
+  }
+
+  buscarProduto(){
+    this.produtosService.getProdutoAlterar(this.idProduto).subscribe(data => {
+      this.produto = data.produto;
+      this.avaliacaoProdutoRecord = data.avaliacaoProdutoRecord;
+      this.fotosProduto = data.fotosProdutoRecord;
+    })
   }
 
   abrirModal() {

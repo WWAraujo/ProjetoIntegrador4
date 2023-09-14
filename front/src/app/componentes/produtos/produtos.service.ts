@@ -60,6 +60,10 @@ export class ProdutosService {
     return this.http.post(`${API}/produto/cadastrar-produto`, produtoData);
   }
 
+  alterarProduto(produto: any) {
+    return this.http.put(`${API}/produto/alterar-produto`, produto);
+  }
+
   excluir(id: number, status: string): Observable<any> {
     const url = `${API}/produto/${id}/${status}`;
     return this.http.delete<any>(url);
@@ -77,9 +81,7 @@ export class ProdutosService {
     return this.idProduto;
   }
 
-  setAlterarProduto(produto: any) {
-    return this.http.put(`${API}/alterar-produto`, produto);
-  }
+
 
   // deletarImagem(img: any) {
   //   return this.http.delete(`${API}/api/upload/deleteFile`, img);
