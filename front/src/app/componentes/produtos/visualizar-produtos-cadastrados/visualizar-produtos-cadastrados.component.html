@@ -17,7 +17,7 @@
         <label> Unidades</label>
       </div>
       <div class="avaliacao">
-        <p>{{ productData.avaliacaoProdutoRecord.avaliacao }}</p>
+        <p>{{ productData.produto.avaliacao }}</p>
         <img src="../../../../assets/image/estrelas.png" alt="avaliacao">
       </div>
     </div>
@@ -33,11 +33,16 @@
       </div>
       <div class="imagensSecundarias" *ngFor="let foto of productData.fotosProdutoRecord">
         <ng-container class="imagensSecundarias" *ngIf="foto.nomeImg">
-          <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="80" [height]="80" (click)="trocarImagemPrincipal(getFullPath(foto.nomeImg))" />
+          <img
+            [src]="getFullPath(foto.nomeImg)"
+            [alt]="foto.nomeImg"
+            [width]="80"
+            [height]="80"
+            (click)="trocarImagemPrincipal(getFullPath(foto.nomeImg))" />
         </ng-container>
       </div>
     </div>
-
   </div>
   <p class="Ativo">{{ productData.produto.ativoInativo }}</p>
+  
 </section>
