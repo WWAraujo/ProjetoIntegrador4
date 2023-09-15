@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../produtos.service';
 import { ModalService } from './modal.service';
 import { Router } from '@angular/router';
@@ -16,7 +15,6 @@ const API = environment.apiURL;
 export class CadastrarProdutosComponent implements OnInit {
 
   modalAberto = false;
-  formularioProduto!: FormGroup;
   idProduto!: number;
   isEstoquista: boolean = false;
   isAdmin: boolean = false;
@@ -36,7 +34,6 @@ export class CadastrarProdutosComponent implements OnInit {
   fotosProduto: CarregarFotos[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
     private produtosService: ProdutosService,
     public modalservice: ModalService,
     private router: Router,
