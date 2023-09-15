@@ -29,7 +29,7 @@ export class CadastrarProdutosComponent implements OnInit {
     descricaoDetalhadaProduto: '',
     precoProduto: 0,
     qtdEstoque: 0,
-    ativoInativo: '',
+    ativoInativo: 'ATIVO',
   };
 
   avaliacaoProdutoRecord: AvaliacaoProduto = {
@@ -71,6 +71,15 @@ export class CadastrarProdutosComponent implements OnInit {
         this.fotosProduto = data.fotosProdutoRecord;
       })
     }
+  }
+
+  removeItem(itemToRemove: CarregarFotos) {
+    console.log('lista antes ', this.fotosProduto)
+    const index = this.fotosProduto.findIndex(item => item.idProduto === itemToRemove.idProduto);
+    if (index !== -1) {
+      this.fotosProduto.splice(index, 1);
+    }
+    console.log('lista depois ', this.fotosProduto)
   }
 
   submitForm() {

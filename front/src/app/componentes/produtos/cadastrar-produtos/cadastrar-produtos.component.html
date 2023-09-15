@@ -22,7 +22,7 @@
       <input type="text" id="quantidadeEstoque" [(ngModel)]="produto.qtdEstoque" class="form-control" required />
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-4" *ngIf="idProduto">
       <label for="ativoInativo">Status</label>
       <select [disabled]="isEstoquista" id="ativoInativo" [(ngModel)]="produto.ativoInativo" class="form-control"
         required>
@@ -30,6 +30,11 @@
         <option value="INATIVO">Inativo</option>
       </select>
     </div>
+
+    <div class="form-group col-md-4" *ngIf="idProduto">
+      <label for="ativoInativo">Status</label>
+    </div>
+
 
     <div class="form-group col-md-4">
       <label for="ativoInativo" *ngIf="!produto.id">Avaliação</label>
@@ -78,5 +83,6 @@
     </div>
     <div *ngFor="let foto of fotosProduto; let i = index">
       <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="150" [height]="150" />
+      <button (click)="removeItem(foto)">Remover</button>
     </div>
 </section>
