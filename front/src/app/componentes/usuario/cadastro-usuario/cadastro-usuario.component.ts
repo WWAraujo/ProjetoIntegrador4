@@ -1,11 +1,10 @@
-import { UserService } from 'src/app/componentes/usuario/user.services';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../usuario.service';
+import { TipoUsuario } from '../user-role.enum';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Validacoes } from './validacoes';
-import { TipoUsuario } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -22,8 +21,7 @@ export class CadastroUsuarioComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: UsuarioService,
-    private router: Router,
-    private userService: UserService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,8 +46,6 @@ export class CadastroUsuarioComponent implements OnInit {
       this.emailEncontrado = emailEncontrado;
     });
   }
-
-  
 
   cadastrarUsuario() {
     if (!this.emailEncontrado.valueOf()) {

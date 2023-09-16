@@ -5,18 +5,10 @@
   margin: auto;
   padding: 0;
   background-color: #fff;
-  height: 100vh;
+  height: 100%;
 }
 
-
-.title label {
-  text-align: center;
-  width: 100%;
-  font: 3em "Inter", sans-serif;
-  color: #000;
-  font-weight: bold;
-}
-
+/* Estilize o modal para cobrir toda a tela */
 .modal {
   position: fixed;
   top: 0;
@@ -26,30 +18,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 9999; /* Ajuste o z-index conforme necessário */
 }
 
-
+/* Estilize o fundo escurecido */
 .modal-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); /* Cor escura com transparência */
 }
 
-
+/* Estilize o conteúdo do modal */
 .modal-content {
-  background-color: #fff;
+  background-color: #fff; /* Cor de fundo do modal */
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra */
   position: relative;
-  z-index: 10000;
+  z-index: 10000; /* Ajuste o z-index conforme necessário */
 }
 
-
+/* Estilize o botão de fechar o modal */
 .modal-fechar {
   position: absolute;
   top: 10px;
@@ -62,70 +54,12 @@
   outline: none;
 }
 
-.form-group{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.form-group label {
-  width: 60%;
-  font: 1.2em "Inter", sans-serif;
-  margin: 15px 0px;
-  color: #1e90ff;
-}
-.form-group input , select, textarea {
-  width: 60%;
-  height: 40px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #1e90ff;
-  font: 18px "Inter", sans-serif;
-  color: #1e90ff;
-}
-
-.form-group textarea {
-  width: 60%;
-  height: 100px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #1e90ff;
-  font: 18px "Inter", sans-serif;
-  color: #1e90ff;
-}
-
-
-.newProduct, .cancel, .pictures {
-  padding: 20px 40px;
+.newUser {
+  padding: 25px 50px;
   background-color: #1e90ff;
   color: #fff;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
   border: 2px solid transparent;
-  margin: 10px;
 }
-
-.buttons{
-  display: grid;
-  grid-template-columns: 2;
-  grid-template-rows: 2;
-}
-
-.newProduct{
-  grid-column: 1;
-  grid-row: 1;
-}
-.pictures{
-  grid-column: 2;
-  grid-row: 1;
-}
-.cancel{
-  grid-column: 1 / span 2;
-  grid-row: 2;
-  background-color: red;
-}
-
-

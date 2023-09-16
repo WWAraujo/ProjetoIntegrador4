@@ -3,12 +3,16 @@
     <label>Produtos</label>
   </div>
   <form class="userSearch" (keypress)="pesquisar()">
+    <label>Pesquisar</label>
     <input
       type="text"
       [(ngModel)]="termoPesquisa"
       name="termoPesquisa"
       placeholder="Digite sua pesquisa"
     />
+    <button type="submit" class="btnPesquisar">
+      <img src="../../../../assets/image/lupa.png" alt="lupaPesquisar" />
+    </button>
   </form>
   <div class="container_table">
     <table>

@@ -21,7 +21,6 @@
     "bootstrap": "^5.3.1",
     "cpf-check": "^3.0.0",
     "jquery": "^3.7.1",
-    "ngx-bootstrap-icons": "^1.9.2",
     "ngx-owl-carousel": "^2.0.7",
     "ngx-pagination": "^6.0.3",
     "ngx-slick-carousel": "^15.0.0",
