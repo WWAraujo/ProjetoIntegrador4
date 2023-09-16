@@ -1,9 +1,9 @@
-import { CarregarFotos } from './../cadastrar-produtos';
 import { Component, Input, OnInit } from '@angular/core';
 import { ProdutosService } from '../../produtos.service';
 import { ModalService } from '../modal.service';
 import { CadastrarProdutosComponent } from '../cadastrar-produtos.component';
 import { environment } from 'src/environments/environment';
+import { CarregarFotos } from 'src/app/core/types/type';
 
 const API = environment.apiURL;
 @Component({
@@ -12,9 +12,9 @@ const API = environment.apiURL;
   styleUrls: ['./carregar-fotos.component.css'],
 })
 export class CarregarFotosComponent implements OnInit {
+  
   file: File | null = null;
   preview!: string;
-  // fotosProduto: CarregarFotos[] = [];
   imagemPrincipalId: string = '';
 
   @Input() fotosProduto: CarregarFotos[] = [];
@@ -74,14 +74,4 @@ export class CarregarFotosComponent implements OnInit {
     }
   }
 
-  // deletarImagem(nome: string): void{
-  //   console.log('Nome da imagem para deletar', nome)
-  //   this.produtoService.deletarImagem(nome).subscribe(
-  //     (response) => {
-  //       console.log('response', response)
-  //     },
-  //     (error) => {
-  //       console.log('Erro ao deletar imagem', error)
-  //     })
-  // }
 }

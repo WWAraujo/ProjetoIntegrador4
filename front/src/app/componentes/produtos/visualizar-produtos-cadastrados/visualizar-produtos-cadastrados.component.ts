@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Produto } from './visualizar-produtos-cadastrados';
 import { ProdutosService } from '../produtos.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CarregarFotos } from '../cadastrar-produtos/cadastrar-produtos';
+import { Router } from '@angular/router';
+import { CarregarFotos, Produto } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-visualizar-produtos-cadastrados',
@@ -11,28 +10,20 @@ import { CarregarFotos } from '../cadastrar-produtos/cadastrar-produtos';
 })
 export class VisualizarProdutosCadastradosComponent implements OnInit {
 
-  resultadosPesquisa: Produto[] = [];
-  produtos: Produto[] = [];
-  itemsPerPage: number = 10;
-  page: number = 0;
-  totalPages!: number;
-  nextPage: boolean = false;
-  beforePage: boolean = false;
-  termoPesquisa!: string;
   productData: any = {};
-  productImg: any = {};
-  fotosProduto: CarregarFotos[] = [];
   idProduto!: number;
   imagemPrincipal!: string;
 
-  constructor(private service: ProdutosService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private service: ProdutosService, private router: Router) {}
 
   ngOnInit(): void {
     this.idProduto = this.service.getIdProduto()
-    this.service.getProdutoCompleto(this.idProduto).subscribe(data => {
-      this.productData = data;
+    console.log('chegou no visualizar')
 
-      console.log("Dados Recebidos: " , data);
+    this.service.getProduto(this.idProduto).subscribe(data => {
+      console.log('pegou o arquivo')
+      this.productData = data;
+      console.log('transformou o arquivo')
 
       const primeiraImagemPrincipal = this.productData.fotosProdutoRecord.find(
         (foto: { flagImg: string; }) => foto.flagImg === 'p'

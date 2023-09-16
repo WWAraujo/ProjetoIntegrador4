@@ -8,6 +8,7 @@ public record ProdutoRecord(
         String descricaoDetalhadaProduto,
         Double precoProduto,
         Integer qtdEstoque,
-        String ativoInativo
+        String ativoInativo,
+        Double avaliacao
 ){
 }

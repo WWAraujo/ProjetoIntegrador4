@@ -1,14 +1,7 @@
-import { AlterarUsuario } from '../alterar-usuario';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../usuario.service';
-import { ListarUsuario } from './listar-usuarios';
 import { Router } from '@angular/router';
+import { AlterarUsuario, ListarUsuario } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-listar-usuario',

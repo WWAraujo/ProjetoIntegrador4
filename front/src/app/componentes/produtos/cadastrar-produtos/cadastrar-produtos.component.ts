@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../produtos.service';
 import { ModalService } from './modal.service';
-import { AvaliacaoProduto, Produto, CarregarFotos } from './cadastrar-produtos';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../../usuario/user.services';
+<<<<<<< HEAD
+=======
+import { CarregarFotos, Produto } from 'src/app/core/types/type';
+>>>>>>> b3e2e2c7bbdcfefb3133b0b93b011f0d19c37756
 
 const API = environment.apiURL;
 @Component({
@@ -16,11 +18,17 @@ const API = environment.apiURL;
 export class CadastrarProdutosComponent implements OnInit {
 
   modalAberto = false;
-  formularioProduto!: FormGroup;
   idProduto!: number;
+<<<<<<< HEAD
   isEstoquista : boolean = false;
   isAdmin : boolean = false;
   isCliente : boolean = false;
+=======
+  isEstoquista: boolean = false;
+  isAdmin: boolean = false;
+  isCliente: boolean = false;
+
+>>>>>>> b3e2e2c7bbdcfefb3133b0b93b011f0d19c37756
 
   produto: Produto = {
     id: 0,
@@ -28,18 +36,13 @@ export class CadastrarProdutosComponent implements OnInit {
     descricaoDetalhadaProduto: '',
     precoProduto: 0,
     qtdEstoque: 0,
-    ativoInativo: '',
-  };
-
-  avaliacaoProdutoRecord: AvaliacaoProduto = {
-    idProduto: 0,
-    avaliacao: 0,
+    ativoInativo: 'ATIVO',
+    avaliacao: 5.0,
   };
 
   fotosProduto: CarregarFotos[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
     private produtosService: ProdutosService,
     public modalservice: ModalService,
     private router: Router,
@@ -56,11 +59,14 @@ export class CadastrarProdutosComponent implements OnInit {
       this.isCliente = true;
     }
 
+<<<<<<< HEAD
     this.formularioProduto = this.formBuilder.group({
       produto: this.produto,
       avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
       fotosProdutoRecord: this.fotosProduto,
     });
+=======
+>>>>>>> b3e2e2c7bbdcfefb3133b0b93b011f0d19c37756
 
     this.modalservice.fecharModalEvent.subscribe(() => {
       this.fecharModal();
@@ -68,32 +74,61 @@ export class CadastrarProdutosComponent implements OnInit {
 
     this.idProduto = this.produtosService.getIdProduto()
     if(this.idProduto) {
-      this.produtosService.getProdutoAlterar(this.idProduto).subscribe(data => {
+      this.produtosService.getProduto(this.idProduto).subscribe(data => {
 
         this.produto = data.produto;
-        this.avaliacaoProdutoRecord = data.avaliacaoProdutoRecord;
         this.fotosProduto = data.fotosProdutoRecord;
       })
+    }
+  }
+
+  removeItem(itemToRemove: CarregarFotos) {
+    const index = this.fotosProduto.findIndex(item => item.idProduto === itemToRemove.idProduto);
+    if (index !== -1) {
+      this.fotosProduto.splice(index, 1);
     }
   }
 
   submitForm() {
     const dadosParaEnviar = {
       produto: this.produto,
-      avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
+      // avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
       fotosProdutoRecord: this.fotosProduto,
     };
 
-    this.produtosService.cadastrarProduto(dadosParaEnviar).subscribe(
-      (response) => {
-        alert('Produto cadastrado com sucesso.');
-        this.router.navigate(['listarProduto']);
-      },
-      (error) => {
-        console.error('Erro ao cadastrar produto:', error);
-        alert('Erro ao cadastrar produto:');
-      }
-    );
+    if(!this.idProduto) {
+      this.produtosService.cadastrarProduto(dadosParaEnviar).subscribe(
+        (response) => {
+          alert('Produto cadastrado com sucesso.');
+          this.router.navigate(['listarProduto']);
+        },
+        (error) => {
+          console.error('Erro ao cadastrar produto:', error);
+          alert('Erro ao cadastrar produto:');
+        }
+      );
+    }
+
+    if (this.idProduto){
+      this.produtosService.alterarProduto(dadosParaEnviar).subscribe(
+        (response) => {
+          alert('Produto cadastrado com sucesso.');
+          this.router.navigate(['listarProduto']);
+        },
+        (error) => {
+          console.error('Erro ao cadastrar produto:', error);
+          alert('Erro ao cadastrar produto:');
+        }
+      );
+    }
+  }
+
+  buscarProduto(){
+    this.produtosService.getProduto(this.idProduto).subscribe(data => {
+      this.produto = data.produto;
+      // this.avaliacaoProdutoRecord = data.avaliacaoProdutoRecord;
+      this.fotosProduto = data.fotosProdutoRecord;
+    })
   }
 
   abrirModal() {
@@ -120,8 +155,8 @@ export class CadastrarProdutosComponent implements OnInit {
     this.router.navigate(['listarProduto']);
   }
 
-  novaAvaliacao() {
-    this.avaliacaoProdutoRecord.idProduto = 0;
-    this.avaliacaoProdutoRecord.avaliacao = 0;
-  }
+  // novaAvaliacao() {
+  //   this.avaliacaoProdutoRecord.idProduto = 0;
+  //   this.avaliacaoProdutoRecord.avaliacao = 0;
+  // }
 }

@@ -1,9 +1,9 @@
-import { Logado } from './../logado';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../usuario/user.services';
+import { Logado } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-login',
