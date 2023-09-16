@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/componentes/usuario/user.services';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../usuario.service';
@@ -21,7 +22,8 @@ export class CadastroUsuarioComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: UsuarioService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,8 @@ export class CadastroUsuarioComponent implements OnInit {
       this.emailEncontrado = emailEncontrado;
     });
   }
+
+  
 
   cadastrarUsuario() {
     if (!this.emailEncontrado.valueOf()) {

@@ -7,23 +7,14 @@ main {
   margin: 0;
 }
 
-
-app-cabecalho,
 app-rodape {
   background-color: #1e90ff;
   color: white;
   flex-shrink: 0;
-  height: 60px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-app-cabecalho p{
-  font-size: 3rem;
-  color: #fff;
-  font-weight: bolder;
-  text-shadow: 0px 0px 10px #ffffff;
 }
 
 app-rodape{

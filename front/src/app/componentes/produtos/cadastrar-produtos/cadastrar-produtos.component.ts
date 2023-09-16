@@ -5,6 +5,7 @@ import { ModalService } from './modal.service';
 import { AvaliacaoProduto, Produto, CarregarFotos } from './cadastrar-produtos';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { UserService } from '../../usuario/user.services';
 
 const API = environment.apiURL;
 @Component({
@@ -17,6 +18,9 @@ export class CadastrarProdutosComponent implements OnInit {
   modalAberto = false;
   formularioProduto!: FormGroup;
   idProduto!: number;
+  isEstoquista : boolean = false;
+  isAdmin : boolean = false;
+  isCliente : boolean = false;
 
   produto: Produto = {
     id: 0,
@@ -39,9 +43,19 @@ export class CadastrarProdutosComponent implements OnInit {
     private produtosService: ProdutosService,
     public modalservice: ModalService,
     private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    const userType = this.userService.getUserType();
+    if (userType === '1') {
+      this.isAdmin = true;
+    } else if (userType === '2') {
+      this.isEstoquista = true;
+    } else if (userType === '3') {
+      this.isCliente = true;
+    }
+
     this.formularioProduto = this.formBuilder.group({
       produto: this.produto,
       avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,

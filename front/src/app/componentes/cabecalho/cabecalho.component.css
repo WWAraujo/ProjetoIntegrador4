@@ -1,0 +1,70 @@
+.header {
+  font-family: Arial, sans-serif;
+  background-color: #1e90ff;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo img {
+  width: 100px; /* Ajuste o tamanho do logotipo conforme necessário */
+  border-radius: 100%;
+}
+.carrinho a {
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.carrinho a:hover {
+  background-color: #0056b3;
+}
+.conta {
+  padding-left: 50px;
+  font-size: 15px;
+
+}
+.conta a {
+
+  color: #070707;
+}
+
+.icone {
+  width: 25px;
+  margin-right: 5px;
+}
+
+.pesquisa {
+  display: flex;
+  align-items: center;
+}
+.pesquisa input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 5px;
+  font-size: 16px;
+  width: 400px;
+}
+
+.pesquisa button[type="submit"] {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+  .pesquisa button[type="submit"]:hover {
+      background-color: #0056b3;
+  }
+.pesquisa button img{
+  font-size: 20px; /* Tamanho do ícone */
+  color: #000000; /* Cor do ícone */
+  width: 20px;
+}
