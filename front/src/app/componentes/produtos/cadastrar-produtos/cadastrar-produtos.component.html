@@ -1,62 +1,31 @@
-<div class="container">
-  <h1>Formulário de Produto</h1>
-
+<section class="container">
   <div class="form-group col-md-4">
     <label for="nomeProduto">Nome do Produto:</label>
-    <input
-      [disabled]="isEstoquista"
-      type="text"
-      id="nomeProduto"
-      [(ngModel)]="produto.nomeProduto"
-      class="form-control"
-      required
-    />
+    <input [disabled]="isEstoquista" type="text" id="nomeProduto" [(ngModel)]="produto.nomeProduto"
+      class="form-control" required />
   </div>
 
   <div class="form-group col-md-4">
     <label for="descricaoProduto">Descrição do Produto:</label>
-    <textarea
-      [disabled]="isEstoquista"
-      type="text"
-      id="descricaoProduto"
-      [(ngModel)]="produto.descricaoDetalhadaProduto"
-      class="form-control"
-      required
-    ></textarea>
-  </div>
-
-  <div class="col-md-4">
-    <label for="precoProduto">Preço do Produto:</label>
-    <input
-      [disabled]="isEstoquista"
-      type="number"
-      id="precoProduto"
-      [(ngModel)]="produto.precoProduto"
-      class="form-control"
-      required
-    />
-  </div>
-
-  <div class="col-md-4">
-    <label for="quantidadeEstoque">Quantidade estoque</label>
-    <input
-      type="text"
-      id="quantidadeEstoque"
-      [(ngModel)]="produto.qtdEstoque"
-      class="form-control"
-      required
-    />
+    <textarea [disabled]="isEstoquista" type="text" id="descricaoProduto"
+      [(ngModel)]="produto.descricaoDetalhadaProduto" class="form-control" required></textarea>
   </div>
 
   <div class="form-group col-md-4">
+    <label for="precoProduto">Preço do Produto:</label>
+    <input [disabled]="isEstoquista" type="number" id="precoProduto" [(ngModel)]="produto.precoProduto"
+      class="form-control" required />
+  </div>
+
+  <div class="form-group col-md-4">
+    <label for="quantidadeEstoque">Quantidade estoque</label>
+    <input type="text" id="quantidadeEstoque" [(ngModel)]="produto.qtdEstoque" class="form-control" required />
+  </div>
+
+  <div class="form-group col-md-4" *ngIf="idProduto">
     <label for="ativoInativo">Status</label>
-    <select
-      [disabled]="isEstoquista"
-      id="ativoInativo"
-      [(ngModel)]="produto.ativoInativo"
-      class="form-control"
-      required
-    >
+    <select [disabled]="isEstoquista" id="ativoInativo" [(ngModel)]="produto.ativoInativo" class="form-control"
+      required>
       <option value="ATIVO">Ativo</option>
       <option value="INATIVO">Inativo</option>
     </select>
@@ -65,13 +34,8 @@
   <div class="form-group col-md-4">
     <label for="ativoInativo" *ngIf="!produto.id">Avaliação</label>
     <label for="ativoInativo" *ngIf="produto.id">Nova Avaliação</label>
-    <select
-      [disabled]="isEstoquista"
-      id="ativoInativo"
-      [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
-      class="form-control"
-      required
-    >
+    <select [disabled]="isEstoquista" id="ativoInativo" [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
+      class="form-control" required>
       <option value="5.0">5.0</option>
       <option value="4.5">4.5</option>
       <option value="4.0">4.0</option>
@@ -88,16 +52,12 @@
 
   <div class="form-group col-md-4" *ngIf="avaliacaoProdutoRecord.avaliacao">
     <label for="ativoInativo">Média Avaliação</label>
-    <input
-      [disabled]="isEstoquista"
-      type="text"
-      [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
-      class="form-control"
-    />
+    <input [disabled]="isEstoquista" type="text" [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
+      class="form-control" />
     <!-- <button (click)="novaAvaliacao()">Nova Avaliação</button> -->
   </div>
 
-  <button class="newUser" (click)="abrirModal()" [disabled]="isEstoquista" >Carregar Fotos</button>
+
 
   <div class="modal" *ngIf="modalAberto">
     <div class="modal-overlay"></div>
@@ -107,16 +67,17 @@
     <button class="modal-fechar" (click)="fecharModal()">&times;</button>
   </div>
 
-  <button class="newUser" (click)="submitForm()">Cadastrar Produto</button>
+  <div class="buttons">
 
-  <button class="newUser" (click)="irParaListaProdutos()">Cancelar</button>
+    <button class="pictures" (click)="abrirModal()" [disabled]="isEstoquista">Carregar Fotos</button>
 
-  <div *ngFor="let foto of fotosProduto; let i = index">
-    <img
-      [src]="getFullPath(foto.nomeImg)"
-      [alt]="foto.nomeImg"
-      [width]="150"
-      [height]="150"
-    />
+    <button class="newProduct" (click)="submitForm()">Cadastrar Produto</button>
+
+    <button class="cancel" (click)="irParaListaProdutos()">Cancelar</button>
+
   </div>
-</div>
+  <div *ngFor="let foto of fotosProduto; let i = index">
+    <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="150" [height]="150" />
+    <button (click)="removeItem(foto)">Remover</button>
+  </div>
+</section>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { PaginaProdutos, Produto } from './listar-produtos/listar-produtos';
 import { environment } from 'src/environments/environment';
 import {
@@ -26,6 +26,19 @@ export class ProdutosService {
     return this.http.get<PaginaProdutos>(
       `${API}/produto/mostrar-produto-completo/${id}`
     );
+  }
+
+  getProdutosComIds(ids: number[]): Observable<PaginaProdutos[]> {
+    const requests: Observable<PaginaProdutos>[] = [];
+
+    for (const id of ids) {
+      const request = this.http.get<PaginaProdutos>(
+        `${API}/produto/mostrar-produto-completo/${id}`
+      );
+      requests.push(request);
+    }
+
+    return forkJoin(requests);
   }
 
   getProdutoAlterar(id: number): Observable<ProdutoCompletoListar> {
@@ -60,6 +73,10 @@ export class ProdutosService {
     return this.http.post(`${API}/produto/cadastrar-produto`, produtoData);
   }
 
+  alterarProduto(produto: any) {
+    return this.http.put(`${API}/produto/alterar-produto`, produto);
+  }
+
   excluir(id: number, status: string): Observable<any> {
     const url = `${API}/produto/${id}/${status}`;
     return this.http.delete<any>(url);
@@ -77,9 +94,7 @@ export class ProdutosService {
     return this.idProduto;
   }
 
-  setAlterarProduto(produto: any) {
-    return this.http.put(`${API}/alterar-produto`, produto);
-  }
+
 
   // deletarImagem(img: any) {
   //   return this.http.delete(`${API}/api/upload/deleteFile`, img);
