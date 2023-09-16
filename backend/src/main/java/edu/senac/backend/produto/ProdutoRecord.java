@@ -1,14 +1,13 @@
 package edu.senac.backend.produto;
 
 
-public record ProdutoRecord(
 
+public record ProdutoRecord(
         Long id,
         String nomeProduto,
         String descricaoDetalhadaProduto,
         Double precoProduto,
         Integer qtdEstoque,
-        String ativoInativo,
-        Double avaliacao
+        String ativoInativo
 ){
 }

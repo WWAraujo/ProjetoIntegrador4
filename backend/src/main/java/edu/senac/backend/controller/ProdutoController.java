@@ -54,10 +54,20 @@ public class ProdutoController {
 
 
     @PutMapping("/alterar-produto")
-    public ResponseEntity<Long> alterarProduto(@RequestBody ProdutoRecordConstructor produto){
+        public ResponseEntity<String> alterarProduto(@RequestBody ProdutoRecordConstructor produto){
+
+        System.out.println(produto);
 
         ProdutoModel produtoModel = new ProdutoModel(produto);
+
         ProdutoModel produtoSalvo = repository.save(produtoModel);
+
+        AvaliacaoProdutoModel avaliacaoProdutoModel  =
+                new AvaliacaoProdutoModel(
+                        produtoSalvo,
+                        produto.avaliacaoProdutoRecord());
+        avaliacaoProdutoRepository.save(avaliacaoProdutoModel);
+
 
         fotosProdutoRepository.deleteByProdutoId(produtoSalvo.getId());
 
@@ -67,7 +77,7 @@ public class ProdutoController {
             fotosProdutoRepository.save(fotosProdutoModel);
         }
 
-        return ResponseEntity.ok(Long.parseLong(String.valueOf(produtoSalvo.getId())));
+        return ResponseEntity.ok("Produto atualizado!");
     }
 
 
@@ -76,19 +86,24 @@ public class ProdutoController {
 
         ProdutoModel produtoSalvo = repository.save(new ProdutoModel(produto));
 
+
+        AvaliacaoProdutoModel avaliacaoProdutoModel  =
+                new AvaliacaoProdutoModel(
+                        produtoSalvo,
+                        produto.avaliacaoProdutoRecord());
+        avaliacaoProdutoRepository.save(avaliacaoProdutoModel);
+
         for (FotosProdutoRecord fotoRecord : produto.fotosProdutoRecord()) {
             FotosProdutoModel fotosProdutoModel =
                     new FotosProdutoModel(produtoSalvo, fotoRecord);
             fotosProdutoRepository.save(fotosProdutoModel);
         }
-
         Long idProdutoSalvo = Long.parseLong(String.valueOf(produtoSalvo.getId()));
         return ResponseEntity.ok(idProdutoSalvo);
     }
 
     @GetMapping("/mostrar-produto-completo/{id}")
     public ResponseEntity<ProdutoRecordConstructor> mostrarProdutoCompleto(@PathVariable Long id) {
-
         Optional<ProdutoModel> produtoModel = repository.findById(Integer.parseInt(id.toString()));
         ProdutoRecord produtoRecord =
                 new ProdutoRecord(
@@ -97,15 +112,14 @@ public class ProdutoController {
                         produtoModel.get().getDescricaoDetalhadaProduto(),
                         produtoModel.get().getPrecoProduto(),
                         produtoModel.get().getQtdEstoque(),
-                        produtoModel.get().getAtivoInativo(),
-                        produtoModel.get().getAvaliacao()
-        );
+                        produtoModel.get().getAtivoInativo()
+                );
 
 
-//        AvaliacaoProdutoRecord avaliacaoProdutoRecord =
-//                new AvaliacaoProdutoRecord(
-//                        id.toString(),
-//                        avaliacaoProdutoRepository.calcularMediaAvaliacao(id));
+        AvaliacaoProdutoRecord avaliacaoProdutoRecord =
+                new AvaliacaoProdutoRecord(
+                        id.toString(),
+                        avaliacaoProdutoRepository.calcularMediaAvaliacao(id));
 
 
 
@@ -123,7 +137,7 @@ public class ProdutoController {
         }
 
 
-        ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, fotosresponse);
+        ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, avaliacaoProdutoRecord, fotosresponse);
 
         return ResponseEntity.ok(response);
     }

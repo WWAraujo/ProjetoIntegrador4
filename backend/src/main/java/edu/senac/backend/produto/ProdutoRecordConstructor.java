@@ -5,6 +5,7 @@ import java.util.List;
 
 public record ProdutoRecordConstructor(
         ProdutoRecord produto,
+        AvaliacaoProdutoRecord avaliacaoProdutoRecord,
         List<FotosProdutoRecord> fotosProdutoRecord
 ) {
 }

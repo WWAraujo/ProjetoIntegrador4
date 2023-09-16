@@ -61,7 +61,7 @@ public class ArquivosController {
 
     @GetMapping("/{imageName:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable String imageName) {
-
+        System.out.println("Entrou aqui : "+imageName);
         Path imagePath = Paths.get(uploadDirectory, imageName);
         Resource resource;
 
@@ -107,6 +107,31 @@ public class ArquivosController {
 
         return response;
     }
+    @DeleteMapping("/deleteFile")
+    public ResponseEntity deleteFile(@RequestBody ArquivosRecord arquivosRecord) {
 
+        System.out.println(arquivosRecord);
+
+        try {
+            String caminhoCompleto = uploadDirectory + File.separator + arquivosRecord.nomeImg();
+
+            File arquivoParaExcluir = new File(caminhoCompleto);
+
+            // Verifique se o arquivo existe e é um arquivo regular
+            if (arquivoParaExcluir.exists() && arquivoParaExcluir.isFile()) {
+                // Exclua o arquivo
+                if (arquivoParaExcluir.delete()) {
+                    return ResponseEntity.ok("Arquivo excluído com sucesso.");
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir o arquivo.");
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Arquivo não encontrado.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir o arquivo.");
+        }
+    }
 }
 
