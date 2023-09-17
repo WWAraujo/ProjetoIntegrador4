@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class ProdutoController {
     private FotosProdutoRepository fotosProdutoRepository;
 
     @GetMapping("/listar")
-    public Page<ProdutoModel> listarProdutos (@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pagina) {
+    public Page<ProdutoModel> listarProdutos(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pagina) {
         return repository.findAll(pagina);
     }
 
@@ -48,13 +49,13 @@ public class ProdutoController {
     public ResponseEntity deleteProduto(@PathVariable Long id, @PathVariable String status) {
         System.out.println("Chegou id :" + id + " Status : " + status);
 
-        new DeletProdutc(status ,id, repository);
-        return  ResponseEntity.noContent().build();
+        new DeletProdutc(status, id, repository);
+        return ResponseEntity.noContent().build();
     }
 
 
     @PutMapping("/alterar-produto")
-        public ResponseEntity<String> alterarProduto(@RequestBody ProdutoRecordConstructor produto){
+    public ResponseEntity<String> alterarProduto(@RequestBody ProdutoRecordConstructor produto) {
 
         System.out.println(produto);
 
@@ -62,7 +63,7 @@ public class ProdutoController {
 
         ProdutoModel produtoSalvo = repository.save(produtoModel);
 
-        AvaliacaoProdutoModel avaliacaoProdutoModel  =
+        AvaliacaoProdutoModel avaliacaoProdutoModel =
                 new AvaliacaoProdutoModel(
                         produtoSalvo,
                         produto.avaliacaoProdutoRecord());
@@ -87,7 +88,7 @@ public class ProdutoController {
         ProdutoModel produtoSalvo = repository.save(new ProdutoModel(produto));
 
 
-        AvaliacaoProdutoModel avaliacaoProdutoModel  =
+        AvaliacaoProdutoModel avaliacaoProdutoModel =
                 new AvaliacaoProdutoModel(
                         produtoSalvo,
                         produto.avaliacaoProdutoRecord());
@@ -122,17 +123,16 @@ public class ProdutoController {
                         avaliacaoProdutoRepository.calcularMediaAvaliacao(id));
 
 
-
         List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
         Optional<FotosProdutoModel[]> fotosProdutoModel = fotosProdutoRepository.buscarFotosPorIdProduto(id);
-        for (FotosProdutoModel fotos : fotosProdutoModel.get()){
+        for (FotosProdutoModel fotos : fotosProdutoModel.get()) {
             FotosProdutoRecord foto =
                     new FotosProdutoRecord(
                             Integer.parseInt(fotos.getIdProduto().toString()),
                             fotos.getNomeImg(),
                             fotos.getCaminhoImg(),
                             fotos.getFlagImg()
-            );
+                    );
             fotosresponse.add(foto);
         }
 
@@ -142,4 +142,48 @@ public class ProdutoController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/listar-todos-produtos")
+    public ResponseEntity<List<ProdutoRecordConstructor>> listarTodosProdutos() {
+        List<ProdutoModel> produtosModel = repository.findAll();
+        List<ProdutoRecordConstructor> produtosRecordList = new ArrayList<>();
+
+        for (ProdutoModel produtoModel : produtosModel) {
+            ProdutoRecord produtoRecord =
+                    new ProdutoRecord(
+                            produtoModel.getId(),
+                            produtoModel.getNomeProduto(),
+                            produtoModel.getDescricaoDetalhadaProduto(),
+                            produtoModel.getPrecoProduto(),
+                            produtoModel.getQtdEstoque(),
+                            produtoModel.getAtivoInativo()
+                    );
+
+            AvaliacaoProdutoRecord avaliacaoProdutoRecord =
+                    new AvaliacaoProdutoRecord(
+                            produtoModel.getId().toString(),
+                            avaliacaoProdutoRepository.calcularMediaAvaliacao(produtoModel.getId())
+                    );
+
+            List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
+            Optional<FotosProdutoModel[]> fotosProdutoModelOptional = fotosProdutoRepository.buscarFotosPorIdProduto(produtoModel.getId());
+                if (fotosProdutoModelOptional.isPresent()) {
+                    FotosProdutoModel[] fotosProdutoModel = fotosProdutoModelOptional.get();
+
+                    for (FotosProdutoModel fotos : fotosProdutoModel) {
+                        FotosProdutoRecord foto = new FotosProdutoRecord(
+                                Integer.parseInt(fotos.getIdProduto().toString()),
+                                fotos.getNomeImg(),
+                                fotos.getCaminhoImg(),
+                                fotos.getFlagImg()
+                        );
+                        fotosresponse.add(foto);
+                    }
+                }
+
+            ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, avaliacaoProdutoRecord, fotosresponse);
+            produtosRecordList.add(response);
+        }
+
+        return new ResponseEntity<>(produtosRecordList, HttpStatus.OK);
+    }
 }

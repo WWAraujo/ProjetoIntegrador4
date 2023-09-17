@@ -13,7 +13,7 @@
   margin-top: 20px;
 }
 .title label {
-  font: 3em "Inter", sans-serif;
+  font: 2.5em "Inter", sans-serif;
   color: #000;
   font-weight: bold;
 }
@@ -63,18 +63,21 @@ table {
 }
 
 table th {
+  text-align: center;
   padding: 10px 0px;
-  font: 1.1em "Inter", sans-serif;
+  font: 1em "Inter", sans-serif;
   font-weight: 600;
 }
 
 table td {
-  font: 1em "Inter", sans-serif;
+  vertical-align: middle;
+  padding: auto;
+  font: 0.81em "Inter", sans-serif;
   text-align: center;
   border: 1px solid #000;
   max-width: 200px;
   min-width: 50px;
-  text-transform: lowercase;
+  text-align: center;
 }
 
 table td p {
@@ -85,8 +88,8 @@ table td p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65%;
-  height: 450px;
+  width: 75%;
+  height: 700px;
   overflow: auto;
   overflow-x: auto;
   border: 2px solid;
@@ -96,8 +99,7 @@ table td p {
   padding: 25px 50px;
   background-color: #1e90ff;
   color: #fff;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0px;
   border-radius: 10px;
   border: 2px solid transparent;
 }

@@ -2,12 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  justify-content: center;
   padding: 0;
   background-color: #fff;
-  height: 100vh;
+  height: 100%;
 }
 
+.cadastrar-produto{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+}
 
 .title label {
   text-align: center;
@@ -98,17 +106,32 @@
 
 
 .newProduct, .cancel, .pictures {
+  font-size: 1.1em;
   padding: 20px 40px;
   background-color: #1e90ff;
   color: #fff;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 10px 20px;
   border-radius: 10px;
   border: 2px solid transparent;
-  margin: 10px;
+}
+
+.newProduct:hover, .pictures:hover{
+  border: 1px solid #1e90ff;
+  color: #1e90ff;
+  background-color: #fff;
+  font-weight: bolder;
+}
+
+.cancel:hover{
+  border: 1px solid red;
+  color: red;
+  background-color: #fff;
+  font-weight: bolder;
 }
 
 .buttons{
+  margin: 20px 0px;
+  width: 40%;
   display: grid;
   grid-template-columns: 2;
   grid-template-rows: 2;

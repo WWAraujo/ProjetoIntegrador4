@@ -1,0 +1,16 @@
+<section class="container">
+  <div class="row">
+    <div class="container-card col-md-4" *ngFor="let produto of productData; let i = index">
+      <div class="card">
+        <h2>{{ produto.produto.nomeProduto }}</h2>
+        <div *ngFor="let foto of produto.fotosProdutoRecord">
+          <ng-container *ngIf="foto.flagImg === 'p'">
+            <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="80" [height]="80" />
+          </ng-container>
+        </div>
+        <p>R${{ produto.produto.precoProduto }}</p>
+        <button class="detail" (click)="pegarId(produto.produto.id)">+Detalhes</button>
+      </div>
+    </div>
+  </div>
+</section>

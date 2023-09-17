@@ -1,83 +1,83 @@
 <section class="container">
-  <div class="form-group col-md-4">
-    <label for="nomeProduto">Nome do Produto:</label>
-    <input [disabled]="isEstoquista" type="text" id="nomeProduto" [(ngModel)]="produto.nomeProduto"
-      class="form-control" required />
-  </div>
-
-  <div class="form-group col-md-4">
-    <label for="descricaoProduto">Descrição do Produto:</label>
-    <textarea [disabled]="isEstoquista" type="text" id="descricaoProduto"
-      [(ngModel)]="produto.descricaoDetalhadaProduto" class="form-control" required></textarea>
-  </div>
-
-  <div class="form-group col-md-4">
-    <label for="precoProduto">Preço do Produto:</label>
-    <input [disabled]="isEstoquista" type="number" id="precoProduto" [(ngModel)]="produto.precoProduto"
-      class="form-control" required />
-  </div>
-
-  <div class="form-group col-md-4">
-    <label for="quantidadeEstoque">Quantidade estoque</label>
-    <input type="text" id="quantidadeEstoque" [(ngModel)]="produto.qtdEstoque" class="form-control" required />
-  </div>
-
-  <div class="form-group col-md-4" *ngIf="idProduto">
-    <label for="ativoInativo">Status</label>
-    <select [disabled]="isEstoquista" id="ativoInativo" [(ngModel)]="produto.ativoInativo" class="form-control"
-      required>
-      <option value="ATIVO">Ativo</option>
-      <option value="INATIVO">Inativo</option>
-    </select>
-  </div>
-
-  <div class="form-group col-md-4">
-    <label for="ativoInativo" *ngIf="!produto.id">Avaliação</label>
-    <label for="ativoInativo" *ngIf="produto.id">Nova Avaliação</label>
-    <select [disabled]="isEstoquista" id="ativoInativo" [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
-      class="form-control" required>
-      <option value="5.0">5.0</option>
-      <option value="4.5">4.5</option>
-      <option value="4.0">4.0</option>
-      <option value="3.5">3.5</option>
-      <option value="3.0">3.0</option>
-      <option value="2.5">2.5</option>
-      <option value="2.0">2.0</option>
-      <option value="1.5">1.5</option>
-      <option value="1.0">1.0</option>
-      <option value="0.5">0.5</option>
-      <option value="0.0">0.0</option>
-    </select>
-  </div>
-
-  <div class="form-group col-md-4" *ngIf="avaliacaoProdutoRecord.avaliacao">
-    <label for="ativoInativo">Média Avaliação</label>
-    <input [disabled]="isEstoquista" type="text" [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
-      class="form-control" />
-    <!-- <button (click)="novaAvaliacao()">Nova Avaliação</button> -->
-  </div>
-
-
-
-  <div class="modal" *ngIf="modalAberto">
-    <div class="modal-overlay"></div>
-    <div class="modal-content">
-      <app-carregar-fotos [fotosProduto]="fotosProduto"></app-carregar-fotos>
+  <div class="cadastrar-produto">
+    <div class="form-group col-md-4">
+      <label for="nomeProduto">Nome do Produto:</label>
+      <input [disabled]="isEstoquista" type="text" id="nomeProduto" [(ngModel)]="produto.nomeProduto"
+        class="form-control" required />
     </div>
-    <button class="modal-fechar" (click)="fecharModal()">&times;</button>
-  </div>
 
-  <div class="buttons">
+    <div class="form-group col-md-4">
+      <label for="descricaoProduto">Descrição do Produto:</label>
+      <textarea [disabled]="isEstoquista" type="text" id="descricaoProduto"
+        [(ngModel)]="produto.descricaoDetalhadaProduto" class="form-control" required></textarea>
+    </div>
 
-    <button class="pictures" (click)="abrirModal()" [disabled]="isEstoquista">Carregar Fotos</button>
+    <div class="form-group col-md-4">
+      <label for="precoProduto">Preço do Produto:</label>
+      <input [disabled]="isEstoquista" type="number" id="precoProduto" [(ngModel)]="produto.precoProduto"
+        class="form-control" required />
+    </div>
 
-    <button class="newProduct" (click)="submitForm()">Cadastrar Produto</button>
+    <div class="form-group col-md-4">
+      <label for="quantidadeEstoque">Quantidade estoque</label>
+      <input type="text" id="quantidadeEstoque" [(ngModel)]="produto.qtdEstoque" class="form-control" required />
+    </div>
 
-    <button class="cancel" (click)="irParaListaProdutos()">Cancelar</button>
+    <div class="form-group col-md-4" *ngIf="idProduto">
+      <label for="ativoInativo">Status</label>
+      <select [disabled]="isEstoquista" id="ativoInativo" [(ngModel)]="produto.ativoInativo" class="form-control"
+        required>
+        <option value="ATIVO">Ativo</option>
+        <option value="INATIVO">Inativo</option>
+      </select>
+    </div>
 
-  </div>
-  <div *ngFor="let foto of fotosProduto; let i = index">
-    <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="150" [height]="150" />
-    <button (click)="removeItem(foto)">Remover</button>
+    <div class="form-group col-md-4">
+      <label for="ativoInativo" *ngIf="!produto.id">Avaliação</label>
+      <label for="ativoInativo" *ngIf="produto.id">Nova Avaliação</label>
+      <select [disabled]="isEstoquista" id="ativoInativo" [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
+        class="form-control" required>
+        <option value="5.0">5.0</option>
+        <option value="4.5">4.5</option>
+        <option value="4.0">4.0</option>
+        <option value="3.5">3.5</option>
+        <option value="3.0">3.0</option>
+        <option value="2.5">2.5</option>
+        <option value="2.0">2.0</option>
+        <option value="1.5">1.5</option>
+        <option value="1.0">1.0</option>
+        <option value="0.5">0.5</option>
+        <option value="0.0">0.0</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4" *ngIf="avaliacaoProdutoRecord.avaliacao">
+      <label for="ativoInativo">Média Avaliação</label>
+      <input [disabled]="isEstoquista" type="text" [(ngModel)]="avaliacaoProdutoRecord.avaliacao"
+        class="form-control" />
+      <!-- <button (click)="novaAvaliacao()">Nova Avaliação</button> -->
+    </div>
+
+    <div class="modal" *ngIf="modalAberto">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <app-carregar-fotos [fotosProduto]="fotosProduto"></app-carregar-fotos>
+      </div>
+      <button class="modal-fechar" (click)="fecharModal()">&times;</button>
+    </div>
+
+    <div class="buttons">
+
+      <button class="pictures" (click)="abrirModal()" [disabled]="isEstoquista">Carregar Fotos</button>
+
+      <button class="newProduct" (click)="submitForm()">Cadastrar Produto</button>
+
+      <button class="cancel" (click)="irParaListaProdutos()">Cancelar</button>
+
+    </div>
+    <div *ngFor="let foto of fotosProduto; let i = index">
+      <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="150" [height]="150" />
+      <button (click)="removeItem(foto)">Remover</button>
+    </div>
   </div>
 </section>

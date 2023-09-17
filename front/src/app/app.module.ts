@@ -20,7 +20,11 @@ import { MensagemComponent } from './componentes/mensagem/mensagem.component';
 import { ProdutoComponent } from './componentes/produtos/produto/produto.component';
 import { CarregarFotosComponent } from './componentes/produtos/cadastrar-produtos/carregar-fotos/carregar-fotos.component';
 import { UserPipe } from './componentes/usuario/listar-usuario/usuarios.pipe';
-
+import { CommonModule } from '@angular/common';
+import { TelaprincipalComponent } from './componentes/tela-principal/tela-principal.component';
+import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
+import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
+import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carrinho.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +42,11 @@ import { UserPipe } from './componentes/usuario/listar-usuario/usuarios.pipe';
     ProdutoComponent,
     CarregarFotosComponent,
     UserPipe,
+    TelaprincipalComponent,
+    CadastroClienteComponent,
+    ProdutoDetalhadoComponent,
+    CarrinhoComponent
+
   ],
   imports: [
     BrowserModule,
@@ -46,6 +55,7 @@ import { UserPipe } from './componentes/usuario/listar-usuario/usuarios.pipe';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    CommonModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent],

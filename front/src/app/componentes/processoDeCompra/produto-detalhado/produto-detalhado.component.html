@@ -1,0 +1,55 @@
+<section class="container">
+  <div class="container-produtos">
+    <div class="title">
+      <p>{{ productData.produto.nomeProduto }}</p>
+    </div>
+    <div class="infoProdutos">
+      <div class="descricao">
+        <p>{{ productData.produto.descricaoDetalhadaProduto }}</p>
+      </div>
+      <div class="preco">
+        <label>R$</label>
+        <p>{{ productData.produto.precoProduto }}</p>
+      </div>
+      <div class="indisponivel" *ngIf="produtoIndisponivel">
+        <span>Produto indisponível no momento.</span>
+      </div>
+      <div *ngIf="!produtoIndisponivel">
+        <div class="quantidade">
+          <label> Em Estoque</label>
+        </div>
+      </div>
+      <div class="avaliacao">
+        <p>{{ productData.avaliacaoProdutoRecord.avaliacao }}</p>
+        <img src="../../../../assets/image/estrelas.png" alt="avaliacao">
+      </div>
+      <div class="buttons">
+        <button class="btn-comprar"
+        [disabled]="botaoDesabilitado" [ngClass]="habilitarBotao()">COMPRAR</button>
+        <button type="button" name="cadastrar" class="btn-add-carrinho"><img src="../../../../assets/image/adicionar-ao-carrinho.png"></button>
+      </div>
+    </div>
+    <div class="containerImage">
+      <div id="carousel-container" class="container">
+        <div id="carousel-image" class="carousel carousel-dark slide">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img [src]="imagemPrincipal" [alt]="imagemPrincipal" class="img-carousel">
+            </div>
+            <div class="carousel-item" *ngFor="let foto of imagensSecundarias">
+              <img [src]="foto" [alt]="foto" class="img-carousel">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-image" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-image" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

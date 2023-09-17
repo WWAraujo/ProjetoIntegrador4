@@ -28,17 +28,10 @@ export class ProdutosService {
     );
   }
 
-  getProdutosComIds(ids: number[]): Observable<PaginaProdutos[]> {
-    const requests: Observable<PaginaProdutos>[] = [];
-
-    for (const id of ids) {
-      const request = this.http.get<PaginaProdutos>(
-        `${API}/produto/mostrar-produto-completo/${id}`
-      );
-      requests.push(request);
-    }
-
-    return forkJoin(requests);
+  getListarProdutosCompletos(): Observable<any> {
+    return this.http.get<PaginaProdutos>(
+      `${API}/produto/listar-todos-produtos`
+    );
   }
 
   getProdutoAlterar(id: number): Observable<ProdutoCompletoListar> {
