@@ -61,4 +61,7 @@ export class LoginComponent implements OnInit {
       return 'botao__desabilitado';
     }
   }
+  cadastrarCliente(){
+    this.router.navigate(['/cadastrarCliente'])
+  }
 }

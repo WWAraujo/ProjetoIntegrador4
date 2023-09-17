@@ -46,3 +46,15 @@
 .login {
   margin: 50px 0px;
 }
+
+#sign-up-text{
+  font: 1em'Inter', sans-serif;
+  width: 40%;
+  text-decoration: none;
+  text-align: end;
+}
+
+#sign-up:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
