@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carrinho.component.css']
 })
 export class CarrinhoComponent implements OnInit {
-
+  exibirCabecalho: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

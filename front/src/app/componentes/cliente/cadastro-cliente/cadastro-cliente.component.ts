@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cadastro-cliente.component.css']
 })
 export class CadastroClienteComponent implements OnInit {
-
+  exibirCabecalho: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

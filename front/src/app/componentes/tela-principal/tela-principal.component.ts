@@ -19,6 +19,7 @@ export class TelaprincipalComponent implements OnInit {
   beforPage: boolean = false;
   idProduto: number = 3;
   productData: any= {};
+  exibirCabecalho: boolean = true;
 
   get productDataGroups(): any[][] {
     const groups: any[][] = [];

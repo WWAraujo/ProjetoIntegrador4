@@ -55,13 +55,13 @@ const routes: Routes = [
     component: TelaprincipalComponent,
   },
   {
-    path: 'cadastroCliente',
+    path: 'cadastrarCliente',
     component: CadastroClienteComponent,
   },
   {
     path: 'produtoDetalhado',
-    component: ProdutoDetalhadoComponent,
-  }
+    component: ProdutoDetalhadoComponent,data: { mostrarCabecalho: true }
+  },
 ];
 
 @NgModule({

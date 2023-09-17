@@ -18,7 +18,7 @@ export class ProdutoDetalhadoComponent implements OnInit {
   produtoIndisponivel: boolean = false;
   imagensSecundarias: string[] = [];
   botaoDesabilitado: boolean = false;
-
+  exibirCabecalho: boolean = true;
 
   constructor(private service: ProdutosService) { }
 

@@ -16,6 +16,10 @@ export class CabecalhoComponent implements OnInit {
   }
 
   Register(){
+    this.router.navigate(['/cadastrarCliente']);
+  }
+
+  telaPrincipal(){
     this.router.navigate(['/cadastroCliente']);
   }
 }
