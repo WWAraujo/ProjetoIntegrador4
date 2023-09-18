@@ -10,10 +10,10 @@ import { UserService } from 'src/app/componentes/usuario/user.services';
 })
 export class BackofficeComponent implements OnInit {
   logado!: Logado;
-
   isAdmin: boolean = false;
   isEstoquista: boolean = false;
   isCliente: boolean = false;
+  exibirCabecalho: boolean = true;
 
   constructor(private router: Router, private userService: UserService) {}
 

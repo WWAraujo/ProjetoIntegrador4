@@ -12,11 +12,12 @@ import { Validacoes } from '../cadastro-usuario/validacoes';
   styleUrls: ['./alterar-usuario.component.css'],
 })
 export class AlterarUsuarioComponent implements OnInit {
-  formulario!: FormGroup;
   private usuario!: AlterarUsuario;
+  formulario!: FormGroup;
   tiposUsuario = Object.values(TipoUsuario);
   campoBloqueado = true;
   senhaCorrespondente: boolean = true;
+  exibirCabecalho: boolean = true;
 
   constructor(
     private formbuilder: FormBuilder,

@@ -48,10 +48,15 @@
 }
 
 #sign-up-text{
+  color:#7a7f87;
   font: 1em'Inter', sans-serif;
   width: 40%;
   text-decoration: none;
   text-align: end;
+}
+
+#sign-up{
+  color:#1e90ff
 }
 
 #sign-up:hover{

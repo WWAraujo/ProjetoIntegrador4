@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CabecalhoComponent } from './componentes/cabecalho/cabecalho.component';
+import { CabecalhoComponent } from './componentes/cabecalhos/cabecalho/cabecalho.component';
 import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { LoginComponent } from './componentes/logins/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +25,7 @@ import { TelaprincipalComponent } from './componentes/tela-principal/tela-princi
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
 import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
 import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carrinho.component';
+import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho-secundario/cabecalho-secundario.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carri
     TelaprincipalComponent,
     CadastroClienteComponent,
     ProdutoDetalhadoComponent,
-    CarrinhoComponent
+    CarrinhoComponent,
+    CabecalhoSecundarioComponent
 
   ],
   imports: [

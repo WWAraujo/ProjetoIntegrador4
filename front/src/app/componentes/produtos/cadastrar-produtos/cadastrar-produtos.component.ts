@@ -21,6 +21,7 @@ export class CadastrarProdutosComponent implements OnInit {
   isEstoquista: boolean = false;
   isAdmin: boolean = false;
   isCliente: boolean = false;
+  exibirCabecalho: boolean = true;
 
 
   produto: Produto = {

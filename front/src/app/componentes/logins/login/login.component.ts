@@ -13,6 +13,7 @@ import { UserService } from '../../usuario/user.services';
 export class LoginComponent implements OnInit {
   formulario!: FormGroup;
   logado!: Logado;
+  exibirCabecalho: boolean = true;
 
   constructor(
     private service: LoginService,

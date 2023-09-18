@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 export class ListarUsuarioComponent implements OnInit {
   listausuario!: ListarUsuario;
   alterarUser!: AlterarUsuario;
-
+  exibirCabecalho: boolean = true;
   arr: Array<ListarUsuario> = [];
 
   constructor(private router: Router, private service: UsuarioService) {}

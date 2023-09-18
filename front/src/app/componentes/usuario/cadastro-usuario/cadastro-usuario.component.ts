@@ -17,6 +17,7 @@ export class CadastroUsuarioComponent implements OnInit {
   emailEncontrado: boolean = false;
   clienteCadastrado: boolean = false;
   senhaCorrespondente: boolean = true;
+  exibirCabecalho: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,

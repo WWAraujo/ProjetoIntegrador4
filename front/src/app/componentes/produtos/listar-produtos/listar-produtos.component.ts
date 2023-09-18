@@ -18,6 +18,7 @@ export class ListarProdutosComponent implements OnInit {
   beforPage: boolean = false;
   termoPesquisa!: string;
   id: Produto [] = [];
+  exibirCabecalho: boolean = true;
 
   constructor(private service: ProdutosService, private router: Router) {}
 
