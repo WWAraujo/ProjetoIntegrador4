@@ -21,7 +21,7 @@ import { ProdutoComponent } from './componentes/produtos/produto/produto.compone
 import { CarregarFotosComponent } from './componentes/produtos/cadastrar-produtos/carregar-fotos/carregar-fotos.component';
 import { UserPipe } from './componentes/usuario/listar-usuario/usuarios.pipe';
 import { CommonModule } from '@angular/common';
-import { TelaprincipalComponent } from './componentes/tela-principal/tela-principal.component';
+import { TelaPrincipalComponent } from './componentes/tela-principal/tela-principal.component';
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
 import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
 import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carrinho.component';
@@ -43,7 +43,7 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
     ProdutoComponent,
     CarregarFotosComponent,
     UserPipe,
-    TelaprincipalComponent,
+    TelaPrincipalComponent,
     CadastroClienteComponent,
     ProdutoDetalhadoComponent,
     CarrinhoComponent,

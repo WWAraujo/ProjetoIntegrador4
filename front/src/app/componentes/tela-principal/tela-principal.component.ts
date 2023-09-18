@@ -9,7 +9,7 @@ import { Route, Router } from '@angular/router';
   templateUrl: './tela-principal.component.html',
   styleUrls: ['./tela-principal.component.css']
 })
-export class TelaprincipalComponent implements OnInit {
+export class TelaPrincipalComponent implements OnInit {
   produtos: Produto[] = [];
   imagemPrincipal!: string;
   itemsPerPage: number = 10;

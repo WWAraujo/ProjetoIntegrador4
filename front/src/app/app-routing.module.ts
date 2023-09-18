@@ -8,7 +8,7 @@ import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/a
 import { ListarProdutosComponent } from './componentes/produtos/listar-produtos/listar-produtos.component';
 import { CadastrarProdutosComponent } from './componentes/produtos/cadastrar-produtos/cadastrar-produtos.component';
 import { VisualizarProdutosCadastradosComponent } from './componentes/produtos/visualizar-produtos-cadastrados/visualizar-produtos-cadastrados.component';
-import { TelaprincipalComponent } from './componentes/tela-principal/tela-principal.component';
+import { TelaPrincipalComponent } from './componentes/tela-principal/tela-principal.component';
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
 import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
 
@@ -52,7 +52,7 @@ const routes: Routes = [
   },
   {
     path: 'telaPrincipal',
-    component: TelaprincipalComponent,
+    component: TelaPrincipalComponent,
   },
   {
     path: 'cadastrarCliente',
