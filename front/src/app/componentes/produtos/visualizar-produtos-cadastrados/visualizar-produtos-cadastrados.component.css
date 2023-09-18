@@ -88,11 +88,6 @@
   font-weight: bold;
 }
 
-.preco label {
-  font: 2em 'Inter', sans-serif;
-  font-weight: bold;
-}
-
 .descricao {
   grid-column: 2;
   grid-row: 2;

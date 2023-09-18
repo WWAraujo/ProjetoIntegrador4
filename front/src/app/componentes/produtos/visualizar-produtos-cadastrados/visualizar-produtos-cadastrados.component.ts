@@ -53,4 +53,8 @@ export class VisualizarProdutosCadastradosComponent implements OnInit {
     this.imagemPrincipal = novaImagem;
   }
 
+  formatarMoeda(valor: number): string {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
 }

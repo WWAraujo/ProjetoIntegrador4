@@ -9,8 +9,7 @@
         <p>{{ productData.produto.descricaoDetalhadaProduto }}</p>
       </div>
       <div class="preco">
-        <label>R$</label>
-        <p>{{ productData.produto.precoProduto }}</p>
+        <p>{{ formatarMoeda(productData.produto.precoProduto) }}</p>
       </div>
       <div class="quantidade">
         <label>Disponivel </label>

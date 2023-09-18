@@ -60,5 +60,9 @@ export class TelaprincipalComponent implements OnInit {
     this.router.navigate(['/produtoDetalhado']);
   }
 
+  formatarMoeda(valor: number): string {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
 
 }

@@ -9,7 +9,7 @@
             <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="80" [height]="80" />
           </ng-container>
         </div>
-        <p>R${{ produto.produto.precoProduto }}</p>
+        <p>{{ formatarMoeda(produto.produto.precoProduto) }}</p>
         <button class="detail" (click)="pegarId(produto.produto.id)">+Detalhes</button>
       </div>
     </div>
