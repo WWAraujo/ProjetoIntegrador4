@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Produto } from '../../produtos/visualizar-produtos-cadastrados/visualizar-produtos-cadastrados';
 import { ProdutosService } from '../../produtos/produtos.service';
+import { Produto } from '../../tela-principal/tela-principal';
 
 @Component({
   selector: 'app-produto-detalhado',

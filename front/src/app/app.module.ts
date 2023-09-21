@@ -16,7 +16,6 @@ import { VisualizarProdutosCadastradosComponent } from './componentes/produtos/v
 import { ListarProdutosComponent } from './componentes/produtos/listar-produtos/listar-produtos.component';
 import { CadastrarProdutosComponent } from './componentes/produtos/cadastrar-produtos/cadastrar-produtos.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { MensagemComponent } from './componentes/mensagem/mensagem.component';
 import { ProdutoComponent } from './componentes/produtos/produto/produto.component';
 import { CarregarFotosComponent } from './componentes/produtos/cadastrar-produtos/carregar-fotos/carregar-fotos.component';
 import { UserPipe } from './componentes/usuario/listar-usuario/usuarios.pipe';
@@ -39,7 +38,6 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
     VisualizarProdutosCadastradosComponent,
     ListarProdutosComponent,
     CadastrarProdutosComponent,
-    MensagemComponent,
     ProdutoComponent,
     CarregarFotosComponent,
     UserPipe,

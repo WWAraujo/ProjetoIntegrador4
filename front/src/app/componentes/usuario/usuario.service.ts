@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListarUsuario } from './listar-usuario/listar-usuarios';
 import { CadastroUsuario } from './cadastro-usuario/cadastro-usuario';
-import { AlterarUsuario } from './alterar-usuario';
 import { environment } from 'src/environments/environment';
+import { AlterarUsuario, ListarUsuario } from 'src/app/core/types/type';
 
 const API = environment.apiURL;
 
