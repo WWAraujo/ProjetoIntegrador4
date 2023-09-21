@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../../produtos/produtos.service';
-import { Produto } from '../../tela-principal/tela-principal';
+import { ProdutoFotos } from 'src/app/core/types/type';
+import { environment } from 'src/environments/environment';
+
+const API = environment.apiURL;
 
 @Component({
   selector: 'app-produto-detalhado',
@@ -10,9 +13,8 @@ import { Produto } from '../../tela-principal/tela-principal';
 export class ProdutoDetalhadoComponent implements OnInit {
 
   imagemPrincipal!: string;
-  productData: any = {};
+  productData!: ProdutoFotos;
   idProduto!: number;
-  produtos: Produto[] = [];
   ativoInativo!: string;
   semEstoque: number = 0;
   produtoIndisponivel: boolean = false;
@@ -55,7 +57,7 @@ export class ProdutoDetalhadoComponent implements OnInit {
   }
 
   getFullPath(imageName: string): string {
-    return `http://localhost:8080/api/upload/${imageName}`;
+    return `${API}/api/upload/${imageName}`;
   }
 
   trocarImagemPrincipal(novaImagem: string): void {
