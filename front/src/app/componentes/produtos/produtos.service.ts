@@ -17,8 +17,8 @@ export class ProdutosService {
     return this.http.get<PaginaProdutos>(`${API}/produto/listar?page=${page}`);
   }
 
-  getProdutoCompleto(id: number): Observable<PaginaProdutos> {
-    return this.http.get<PaginaProdutos>(
+  getProdutoCompleto(id: number): Observable<ProdutoFotos> {
+    return this.http.get<ProdutoFotos>(
       `${API}/produto/mostrar-produto-completo/${id}`
     );
   }
@@ -33,8 +33,8 @@ export class ProdutosService {
     return this.http.get<Produto[]>(`${API}/produto/buscarproduto/${pesquisa}`);
   }
 
-  getListarProdutosCompletos(): Observable<any> {
-    return this.http.get<PaginaProdutos>(`${API}/produto/listar-todos-produtos`)
+  getListarProdutosCompletos(): Observable<ProdutoFotos[]> {
+    return this.http.get<ProdutoFotos[]>(`${API}/produto/listar-todos-produtos`)
   }
 
   upload(descricao: string, permiteComentario: boolean, arquivo: File) {
