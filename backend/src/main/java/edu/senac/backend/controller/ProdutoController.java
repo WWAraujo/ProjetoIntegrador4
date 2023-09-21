@@ -103,12 +103,6 @@ public class ProdutoController {
                 );
 
 
-//        AvaliacaoProdutoRecord avaliacaoProdutoRecord =
-//                new AvaliacaoProdutoRecord(
-//                        id.toString(),
-//                        avaliacaoProdutoRepository.calcularMediaAvaliacao(id));
-
-
         List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
         Optional<FotosProdutoModel[]> fotosProdutoModel = fotosProdutoRepository.buscarFotosPorIdProduto(id);
         for (FotosProdutoModel fotos : fotosProdutoModel.get()) {
@@ -130,8 +124,9 @@ public class ProdutoController {
 
     @GetMapping("/listar-todos-produtos")
     public ResponseEntity<List<ProdutoRecordConstructor>> listarTodosProdutos() {
-        List<ProdutoModel> produtosModel = repository.findAll();
+        
         List<ProdutoRecordConstructor> produtosRecordList = new ArrayList<>();
+        List<ProdutoModel> produtosModel = repository.findAll();
 
         for (ProdutoModel produtoModel : produtosModel) {
             ProdutoRecord produtoRecord =
@@ -145,11 +140,6 @@ public class ProdutoController {
                             produtoModel.getAvaliacao()
                     );
 
-            AvaliacaoProdutoRecord avaliacaoProdutoRecord =
-                    new AvaliacaoProdutoRecord(
-                            produtoModel.getId().toString(),
-                            avaliacaoProdutoRepository.calcularMediaAvaliacao(produtoModel.getId())
-                    );
 
             List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
             Optional<FotosProdutoModel[]> fotosProdutoModelOptional = fotosProdutoRepository.buscarFotosPorIdProduto(produtoModel.getId());
@@ -166,9 +156,7 @@ public class ProdutoController {
                         fotosresponse.add(foto);
                     }
                 }
-//  Erro no avaliacaoProdutoRecord com a adição no construtor do atributo da avaliação
-//            ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, avaliacaoProdutoRecord, fotosresponse);
-//            produtosRecordList.add(response);
+            produtosRecordList.add(new ProdutoRecordConstructor(produtoRecord,fotosresponse));
         }
 
         return new ResponseEntity<>(produtosRecordList, HttpStatus.OK);
