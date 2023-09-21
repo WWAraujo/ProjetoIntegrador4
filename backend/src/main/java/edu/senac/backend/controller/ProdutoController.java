@@ -57,18 +57,9 @@ public class ProdutoController {
     @PutMapping("/alterar-produto")
     public ResponseEntity<String> alterarProduto(@RequestBody ProdutoRecordConstructor produto) {
 
-        System.out.println(produto);
-
         ProdutoModel produtoModel = new ProdutoModel(produto);
 
         ProdutoModel produtoSalvo = repository.save(produtoModel);
-
-        AvaliacaoProdutoModel avaliacaoProdutoModel =
-                new AvaliacaoProdutoModel(
-                        produtoSalvo,
-                        produto.avaliacaoProdutoRecord());
-        avaliacaoProdutoRepository.save(avaliacaoProdutoModel);
-
 
         fotosProdutoRepository.deleteByProdutoId(produtoSalvo.getId());
 
@@ -87,12 +78,6 @@ public class ProdutoController {
 
         ProdutoModel produtoSalvo = repository.save(new ProdutoModel(produto));
 
-
-        AvaliacaoProdutoModel avaliacaoProdutoModel =
-                new AvaliacaoProdutoModel(
-                        produtoSalvo,
-                        produto.avaliacaoProdutoRecord());
-        avaliacaoProdutoRepository.save(avaliacaoProdutoModel);
 
         for (FotosProdutoRecord fotoRecord : produto.fotosProdutoRecord()) {
             FotosProdutoModel fotosProdutoModel =
@@ -113,14 +98,15 @@ public class ProdutoController {
                         produtoModel.get().getDescricaoDetalhadaProduto(),
                         produtoModel.get().getPrecoProduto(),
                         produtoModel.get().getQtdEstoque(),
-                        produtoModel.get().getAtivoInativo()
+                        produtoModel.get().getAtivoInativo(),
+                        produtoModel.get().getAvaliacao()
                 );
 
 
-        AvaliacaoProdutoRecord avaliacaoProdutoRecord =
-                new AvaliacaoProdutoRecord(
-                        id.toString(),
-                        avaliacaoProdutoRepository.calcularMediaAvaliacao(id));
+//        AvaliacaoProdutoRecord avaliacaoProdutoRecord =
+//                new AvaliacaoProdutoRecord(
+//                        id.toString(),
+//                        avaliacaoProdutoRepository.calcularMediaAvaliacao(id));
 
 
         List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
@@ -137,7 +123,7 @@ public class ProdutoController {
         }
 
 
-        ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, avaliacaoProdutoRecord, fotosresponse);
+        ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, fotosresponse);
 
         return ResponseEntity.ok(response);
     }
@@ -155,7 +141,8 @@ public class ProdutoController {
                             produtoModel.getDescricaoDetalhadaProduto(),
                             produtoModel.getPrecoProduto(),
                             produtoModel.getQtdEstoque(),
-                            produtoModel.getAtivoInativo()
+                            produtoModel.getAtivoInativo(),
+                            produtoModel.getAvaliacao()
                     );
 
             AvaliacaoProdutoRecord avaliacaoProdutoRecord =
@@ -179,9 +166,9 @@ public class ProdutoController {
                         fotosresponse.add(foto);
                     }
                 }
-
-            ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, avaliacaoProdutoRecord, fotosresponse);
-            produtosRecordList.add(response);
+//  Erro no avaliacaoProdutoRecord com a adição no construtor do atributo da avaliação
+//            ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, avaliacaoProdutoRecord, fotosresponse);
+//            produtosRecordList.add(response);
         }
 
         return new ResponseEntity<>(produtosRecordList, HttpStatus.OK);
