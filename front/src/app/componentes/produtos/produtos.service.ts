@@ -1,15 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
-import { PaginaProdutos, Produto } from './listar-produtos/listar-produtos';
 import { environment } from 'src/environments/environment';
-import {
-  CarregarFotos,
-  ProdutoCompletoListar,
-} from './cadastrar-produtos/cadastrar-produtos';
+import { CarregarFotos, PaginaProdutos, Produto, ProdutoFotos } from 'src/app/core/types/type';
 
 const API = environment.apiURL;
-const NOT_MODIFIED = '304';
 
 @Injectable({
   providedIn: 'root',
@@ -22,26 +17,24 @@ export class ProdutosService {
     return this.http.get<PaginaProdutos>(`${API}/produto/listar?page=${page}`);
   }
 
-  getProdutoCompleto(id: number): Observable<PaginaProdutos> {
-    return this.http.get<PaginaProdutos>(
+  getProdutoCompleto(id: number): Observable<ProdutoFotos> {
+    return this.http.get<ProdutoFotos>(
       `${API}/produto/mostrar-produto-completo/${id}`
     );
   }
 
-  getListarProdutosCompletos(): Observable<any> {
-    return this.http.get<PaginaProdutos>(
-      `${API}/produto/listar-todos-produtos`
-    );
-  }
-
-  getProdutoAlterar(id: number): Observable<ProdutoCompletoListar> {
-    return this.http.get<ProdutoCompletoListar>(
+  getProduto(id: number): Observable<ProdutoFotos> {
+    return this.http.get<ProdutoFotos>(
       `${API}/produto/mostrar-produto-completo/${id}`
     );
   }
 
   getProdutosByString(pesquisa: string): Observable<Produto[]> {
     return this.http.get<Produto[]>(`${API}/produto/buscarproduto/${pesquisa}`);
+  }
+
+  getListarProdutosCompletos(): Observable<ProdutoFotos[]> {
+    return this.http.get<ProdutoFotos[]>(`${API}/produto/listar-todos-produtos`)
   }
 
   upload(descricao: string, permiteComentario: boolean, arquivo: File) {
@@ -87,9 +80,4 @@ export class ProdutosService {
     return this.idProduto;
   }
 
-
-
-  // deletarImagem(img: any) {
-  //   return this.http.delete(`${API}/api/upload/deleteFile`, img);
-  // }
 }

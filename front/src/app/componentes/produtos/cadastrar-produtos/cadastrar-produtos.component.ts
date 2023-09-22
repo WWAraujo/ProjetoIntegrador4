@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutosService } from '../produtos.service';
 import { ModalService } from './modal.service';
-import { AvaliacaoProduto, Produto, CarregarFotos } from './cadastrar-produtos';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../../usuario/user.services';
+import { CarregarFotos, Produto } from 'src/app/core/types/type';
 
 const API = environment.apiURL;
 @Component({
@@ -31,11 +31,8 @@ export class CadastrarProdutosComponent implements OnInit {
     precoProduto: 0,
     qtdEstoque: 0,
     ativoInativo: 'ATIVO',
-  };
+    avaliacao: 5.0,
 
-  avaliacaoProdutoRecord: AvaliacaoProduto = {
-    idProduto: 0,
-    avaliacao: 0,
   };
 
   fotosProduto: CarregarFotos[] = [];
@@ -65,17 +62,15 @@ export class CadastrarProdutosComponent implements OnInit {
 
     this.idProduto = this.produtosService.getIdProduto()
     if(this.idProduto) {
-      this.produtosService.getProdutoAlterar(this.idProduto).subscribe(data => {
+      this.produtosService.getProduto(this.idProduto).subscribe(data => {
 
         this.produto = data.produto;
-        this.avaliacaoProdutoRecord = data.avaliacaoProdutoRecord;
         this.fotosProduto = data.fotosProdutoRecord;
       })
     }
   }
 
   removeItem(itemToRemove: CarregarFotos) {
-    console.log('lista antes ', this.fotosProduto)
     const index = this.fotosProduto.findIndex(item => item.idProduto === itemToRemove.idProduto);
     if (index !== -1) {
       this.fotosProduto.splice(index, 1);
@@ -86,7 +81,7 @@ export class CadastrarProdutosComponent implements OnInit {
   submitForm() {
     const dadosParaEnviar = {
       produto: this.produto,
-      avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
+      //avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
       fotosProdutoRecord: this.fotosProduto,
     };
 
@@ -118,9 +113,8 @@ export class CadastrarProdutosComponent implements OnInit {
   }
 
   buscarProduto(){
-    this.produtosService.getProdutoAlterar(this.idProduto).subscribe(data => {
-      this.produto = data.produto;
-      this.avaliacaoProdutoRecord = data.avaliacaoProdutoRecord;
+    this.produtosService.getProduto(this.idProduto).subscribe(data => {
+      //this.avaliacaoProdutoRecord = data.avaliacaoProdutoRecord;
       this.fotosProduto = data.fotosProdutoRecord;
     })
   }
@@ -149,8 +143,8 @@ export class CadastrarProdutosComponent implements OnInit {
     this.router.navigate(['listarProduto']);
   }
 
-  novaAvaliacao() {
-    this.avaliacaoProdutoRecord.idProduto = 0;
-    this.avaliacaoProdutoRecord.avaliacao = 0;
-  }
+//  novaAvaliacao() {
+//    this.avaliacaoProdutoRecord.idProduto = 0;
+//    this.avaliacaoProdutoRecord.avaliacao = 0;
+//  }
 }
