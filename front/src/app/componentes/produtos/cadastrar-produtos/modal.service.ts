@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { CarregarFotos } from './cadastrar-produtos';
+import { CarregarFotos } from 'src/app/core/types/type';
 
 @Injectable({
   providedIn: 'root',

@@ -21,6 +21,7 @@ public class ProdutoModel {
     private double precoProduto;
     private int qtdEstoque;
     private String ativoInativo;
+    private double avaliacao;
 
 
 
@@ -34,6 +35,7 @@ public class ProdutoModel {
         this.precoProduto = produto.produto().precoProduto();
         this.qtdEstoque =  produto.produto().qtdEstoque();
         this.ativoInativo = produto.produto().ativoInativo();
+        this.avaliacao = produto.produto().avaliacao();
 
     }
 }
