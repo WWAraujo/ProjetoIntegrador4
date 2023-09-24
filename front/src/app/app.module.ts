@@ -24,11 +24,14 @@ import { TelaPrincipalComponent } from './componentes/tela-principal/tela-princi
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
 import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
 import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carrinho.component';
+import { CabecalhoNaoLogadoComponent } from './componentes/cabecalhos/cabecalho-nao-logado/cabecalho-nao-logado.component';
 import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho-secundario/cabecalho-secundario.component';
 @NgModule({
   declarations: [
     AppComponent,
     CabecalhoComponent,
+    CabecalhoNaoLogadoComponent,
+    CabecalhoSecundarioComponent,
     RodapeComponent,
     LoginComponent,
     BackofficeComponent,
@@ -45,7 +48,7 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
     CadastroClienteComponent,
     ProdutoDetalhadoComponent,
     CarrinhoComponent,
-    CabecalhoSecundarioComponent
+
 
   ],
   imports: [
