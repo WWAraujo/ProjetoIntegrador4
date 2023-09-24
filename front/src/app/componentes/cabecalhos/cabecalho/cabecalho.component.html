@@ -1,29 +1,32 @@
 <header>
   <div class="header">
-  <div class="logo">
-    <a href="" (click)="telaPrincipal">
-      <img src="../../../assets/image/logo-nexustech.png" alt="logo-nexustech" >
-    </a>
-  </div>
-  <div class="pesquisa">
+
+    <div class="logo">
+      <a href="" (click)="telaPrincipal">
+        <img src="../../../assets/image/logo_cabecalho.png" alt="logo-nexustech">
+      </a>
+    </div>
+
+    <div class="pesquisa">
       <input type="text" placeholder="Pesquisar">
       <button type="submit"><img class="icone-lupa" src="../../../assets/image/lupa.png" alt="lupa-pesquisar"></button>
+    </div>
 
-  <div class="conta">
+    <div class="conta">
+      <img class="icone-login" src="../../../assets/image/avatar.png" alt="login">
       <span>
-         <img class="icone-login" src="../../../assets/image/icone-login.png" alt="login">
-          Faça <a (click)="Login()">LOGIN</a>
-          ou
-          <br>
-          crie seu
-          <a (click)="Register()">CADASTRO</a>
+        Faça <a (click)="Login()">LOGIN</a> ou <br>
+        crie seu <a (click)="Register()">CADASTRO</a>
       </span>
-  </div>
+    </div>
+
+    <div class="carrinho">
+      <a href="#">
+        <img class="icone-carrinho" src="../../../assets/image/carrinho-de-compras.png" alt="carrinho">
+      </a>
+    </div>
 
   </div>
-  <div class="carrinho">
-      <a href="#">
-          <img class="icone-carrinho" src="../../../assets/image/icone-carrinho.png" alt="carrinho"></a>
-  </div>
-</div>
+
+
 </header>

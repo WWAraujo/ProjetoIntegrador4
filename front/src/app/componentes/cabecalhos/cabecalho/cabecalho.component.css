@@ -1,82 +1,109 @@
 .header {
-  background-color: #007BFF;
-  color: #fff;
+  background-color: #1e90ff;
+  display: grid;
+  grid-template-columns: 20% 45% 15% 15% 5%;
+  grid-template-rows: 1;
+  grid-auto-columns: auto;
+  justify-content: baseline;
+  margin: 0;
+  width: 100%;
+  height: 100px;
+}
+
+.logo{
+  grid-column: 1;
+  margin: 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 10px 20px;
-  font-family: sans-serif;
+  width: 100%;
+  height: 100px;
+
 }
 
-.logo img {
+.logo img{
   width: 100px;
-  border-radius: 100%;
+  object-fit: cover;
 }
 
-.icone-lupa {
-  width: 25px;
+.pesquisa{
+  grid-column: 2;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
 }
 
-.icone-carrinho {
-  width: 25px;
+.pesquisa input{
+  width: 100%;
+  margin-right: 10px;
+  padding-left: 20px;
 }
 
-.icone-login {
-  width: 20px;
+.pesquisa button{
+  padding: 0;
+  border: none;
 }
 
-.carrinho a {
-  background-color: #1b75d4;
-  ;
+.pesquisa img{
+  background-color: #1e90ff;
+  border: 0;
+  width: 30px;
+}
+
+.conta{
+  grid-column: 3;
+  margin: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.conta img{
+  width: 38px;
+
+}
+
+.conta span{
+  font: 0.8em 'Inter',sans-serif;
   color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
+  font-weight: 200;
 }
 
-.carrinho a:hover {
-  background-color: #0056b3;
-}
-
-.conta {
-  padding-left: 50px;
-  font-size: 15px;
-}
-
-.conta a {
-  color: #000000;
+.conta a{
+  font: 0.9em 'Inter', sans-serif;
+  font-weight: 600;
 }
 
 .conta a:hover{
-  cursor: pointer;
+  color: #fff;
   text-decoration: underline;
+  cursor: pointer;
+
 }
 
-.pesquisa {
+.carrinho{
+  grid-column: 4;
+  margin: 0;
+  width: 100%;
+  height: 100px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.pesquisa input[type="text"] {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  margin-right: 5px;
-  font-size: 16px;
-  width: 350px;
-}
 
-.pesquisa button[type="submit"] {
-  background-color: #1b75d4;
-  ;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
 
-.pesquisa button[type="submit"]:hover {
-  background-color: #0056b3;
-}
+
+
+
+
+
+
+
