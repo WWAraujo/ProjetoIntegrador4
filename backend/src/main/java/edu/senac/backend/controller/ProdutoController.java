@@ -55,10 +55,9 @@ public class ProdutoController {
 
 
     @PutMapping("/alterar-produto")
-    public ResponseEntity<String> alterarProduto(@RequestBody ProdutoRecordConstructor produto) {
+    public ResponseEntity<Long> alterarProduto(@RequestBody ProdutoRecordConstructor produto) {
 
         ProdutoModel produtoModel = new ProdutoModel(produto);
-
         ProdutoModel produtoSalvo = repository.save(produtoModel);
 
         fotosProdutoRepository.deleteByProdutoId(produtoSalvo.getId());
@@ -69,7 +68,7 @@ public class ProdutoController {
             fotosProdutoRepository.save(fotosProdutoModel);
         }
 
-        return ResponseEntity.ok("Produto atualizado!");
+        return ResponseEntity.ok(produtoSalvo.getId());
     }
 
 
