@@ -7,7 +7,19 @@
       <h1>NexusTech</h1>
     </div>
     <div class="deslogar">
-      <img (click)="deslogar()" class="icone-deslogar" src="../../../../assets/image/deslogar.png" alt="deslogar">
+      <img (click)="open(mymodal)" class="icone-deslogar" src="../../../../assets/image/deslogar.png" alt="deslogar">
     </div>
   </div>
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">LOGOFF</h4>
+    </div>
+    <div class="modal-body">
+      <p>Deseja Realmente encerrar a Sessão?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" (click)="deslogar()" (click)="modal.close()">Confirmar</button>
+      <button type="button" class="btn btn-outline-danger" (click)="modal.close()">Cancelar</button>
+    </div>
+  </ng-template>
 </header>
