@@ -26,6 +26,8 @@ import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produt
 import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carrinho.component';
 import { CabecalhoNaoLogadoComponent } from './componentes/cabecalhos/cabecalho-nao-logado/cabecalho-nao-logado.component';
 import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho-secundario/cabecalho-secundario.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,6 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
     ProdutoDetalhadoComponent,
     CarrinhoComponent,
 
-
   ],
   imports: [
     BrowserModule,
@@ -58,7 +59,8 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    CommonModule
+    CommonModule,
+    NgbModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent],
