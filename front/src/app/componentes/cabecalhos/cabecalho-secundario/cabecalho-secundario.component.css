@@ -1,15 +1,100 @@
-.header {
-  background-color: #007BFF;
+header {
+  position: relative;
+  background-color: #1e90ff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   color: #fff;
+  height: 100px;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  width: 100%;
+}
+
+.logo{
+  grid-column: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 100px;
 }
 
-.header p{
-  font: 2em 'Inter',sans-serif;
-  text-shadow: 0px 0px 10px  white;
-
+.logo img{
+  width: 100px;
+  object-fit: cover;
 }
+
+.logo img:hover{
+  cursor: pointer;
+}
+
+.titulo{
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.deslogar{
+  grid-column: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.deslogar a{
+  font: 1.1em 'Inter', sans-serif;
+  margin: 0px 10px ;
+}
+
+.deslogar a:hover{
+  cursor: pointer;
+  text-shadow: 0px 0px 8px #fff;
+}
+
+.deslogar img{
+  margin-right: 25px ;
+  width: 25px;
+}
+
+.deslogar img:hover{
+  cursor: pointer;
+}
+
+.modal-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-header h4{
+  color: red;
+}
+
+.modal-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body p{
+  font: 1em 'Inter', sans-serif;
+}
+
+.modal-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroClienteComponent implements OnInit {
   exibirCabecalho: boolean = true;
-  constructor() { }
+
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+
+  }
+  Login(){
+    this.router.navigate(['/solicitarLogin'])
   }
 
 }

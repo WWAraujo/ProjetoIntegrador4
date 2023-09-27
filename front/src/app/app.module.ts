@@ -25,10 +25,15 @@ import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente
 import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
 import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carrinho.component';
 import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho-secundario/cabecalho-secundario.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarUsuarioComponent } from './componentes/navbar/navbar-usuario/navbar-usuario.component';
+import { NavbarClienteComponent } from './componentes/navbar/navbar-cliente/navbar-cliente.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     CabecalhoComponent,
+    CabecalhoSecundarioComponent,
     RodapeComponent,
     LoginComponent,
     BackofficeComponent,
@@ -45,7 +50,8 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
     CadastroClienteComponent,
     ProdutoDetalhadoComponent,
     CarrinhoComponent,
-    CabecalhoSecundarioComponent
+    NavbarUsuarioComponent,
+    NavbarClienteComponent,
 
   ],
   imports: [
@@ -55,7 +61,8 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    CommonModule
+    CommonModule,
+    NgbModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent],
