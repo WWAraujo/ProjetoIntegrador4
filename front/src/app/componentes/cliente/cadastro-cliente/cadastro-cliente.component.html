@@ -1,8 +1,63 @@
-<app-cabecalho *ngIf="exibirCabecalho"></app-cabecalho>
+<!-- <app-cabecalho *ngIf="exibirCabecalho"></app-cabecalho> -->
 
 <div class="container">
+    <div class="cadastro">
 
-  <img src="../../../../assets/image/siteemmanutençao.png">
-  <p>Em Construção!</p>
+      <input
+      type="text"
+      id="nomeCliente"
+      class="form-control"
+      placeholder="Nome"
+      required>
+
+      <input
+      type="text"
+      id="cpfCliente"
+      class="form-control"
+      placeholder="CPF"
+      required>
+
+      <input
+      type="text"
+      id="dataNascimento"
+      class="form-control"
+      placeholder="Data de Nascimento"
+      required>
+
+      <input
+      type="text"
+      id="telefone"
+      class="form-control"
+      placeholder="Telefone"
+      required>
+
+
+      <input
+      type="text"
+      id="email"
+      class="form-control"
+      placeholder="E-mail"
+      required>
+
+      <input
+      type="text"
+      id="senha"
+      class="form-control"
+      placeholder="Crie sua senha"
+      required>
+
+      <input
+      type="text"
+      id="confirmaSenha"
+      class="form-control"
+      placeholder="Confirme sua senha"
+      required>
+    </div>
+    <div class="fim">
+      <button>Cadastrar</button>
+      <span>
+        já possui cadastro? <a (click)="Login()">Entrar</a>
+      </span>
+    </div>
 
 </div>
