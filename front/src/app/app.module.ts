@@ -24,15 +24,15 @@ import { TelaPrincipalComponent } from './componentes/tela-principal/tela-princi
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
 import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
 import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carrinho.component';
-import { CabecalhoNaoLogadoComponent } from './componentes/cabecalhos/cabecalho-nao-logado/cabecalho-nao-logado.component';
 import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho-secundario/cabecalho-secundario.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarUsuarioComponent } from './componentes/navbar/navbar-usuario/navbar-usuario.component';
+import { NavbarClienteComponent } from './componentes/navbar/navbar-cliente/navbar-cliente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CabecalhoComponent,
-    CabecalhoNaoLogadoComponent,
     CabecalhoSecundarioComponent,
     RodapeComponent,
     LoginComponent,
@@ -50,6 +50,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CadastroClienteComponent,
     ProdutoDetalhadoComponent,
     CarrinhoComponent,
+    NavbarUsuarioComponent,
+    NavbarClienteComponent,
 
   ],
   imports: [

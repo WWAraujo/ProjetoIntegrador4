@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../../usuario/user.services';
 
 @Component({
   selector: 'app-cabecalho-secundario',
@@ -8,16 +9,34 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./cabecalho-secundario.component.css']
 })
 export class CabecalhoSecundarioComponent implements OnInit {
-  closeResult: string = '';
 
-  constructor(private router:Router, private modalService: NgbModal) { }
+  closeResult: string = '';
+  isLogado: boolean = false;
+  isDeslogado: boolean = false;
+
+
+  constructor(
+    private router:Router,
+    private modalService: NgbModal,
+    private userService: UserService) { }
 
   ngOnInit(): void {
+
+    this.verificarLogado();
+    
+  }
+
+  verificarLogado(){
+    const usuarioLogado = this.userService.getUsuarioLogado();
+    console.log(this.isLogado);
+    if(usuarioLogado === true){
+      this.isLogado = true;
+    }
   }
 
   deslogar(){
     this.router.navigate(['/solicitarLogin']);
-
+    const usuarioDeslogado = this.userService.setUsuarioLogado(this.isDeslogado);
   }
 
   telaPrincipal(){

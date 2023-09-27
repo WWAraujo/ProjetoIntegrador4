@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   formulario!: FormGroup;
   logado!: Logado;
   exibirCabecalho: boolean = true;
+  usuarioLogado: boolean = true;
 
   constructor(
     private service: LoginService,
@@ -22,6 +23,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService
   ) {}
   ngOnInit(): void {
+    this.userService.setUsuarioLogado(!this.usuarioLogado);
+
     this.formulario = this.formBuilder.group({
       usuario: [
         '',
@@ -42,7 +45,9 @@ export class LoginComponent implements OnInit {
       this.service.login(this.formulario.value).subscribe((logado) => {
         this.logado = logado;
         this.userService.setUserType(logado.tipoUsuario);
+        this.userService.setUsuarioLogado(this.usuarioLogado);
         this.validarUsuario();
+
       });
     }
   }

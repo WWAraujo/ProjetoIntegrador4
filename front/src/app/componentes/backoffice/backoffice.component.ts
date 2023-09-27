@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/componentes/usuario/user.services';
 import { Logado } from 'src/app/core/types/type';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Component({
   selector: 'app-backoffice',

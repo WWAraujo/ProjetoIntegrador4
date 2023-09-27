@@ -16,7 +16,6 @@ export class AlterarUsuarioComponent implements OnInit {
   tiposUsuario = Object.values(TipoUsuario);
   campoBloqueado = true;
   senhaCorrespondente: boolean = true;
-  exibirCabecalho: boolean = true;
 
   constructor(
     private formbuilder: FormBuilder,
