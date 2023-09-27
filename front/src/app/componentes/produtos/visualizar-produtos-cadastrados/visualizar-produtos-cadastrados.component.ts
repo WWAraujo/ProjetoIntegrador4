@@ -14,7 +14,6 @@ export class VisualizarProdutosCadastradosComponent implements OnInit {
   productData: any = {};
   idProduto!: number;
   imagemPrincipal!: string;
-  exibirCabecalho: boolean = true;
 
   constructor(private service: ProdutosService, private router: Router) {}
 

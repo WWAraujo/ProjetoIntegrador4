@@ -42,14 +42,26 @@ header {
 
 .deslogar{
   grid-column: 3;
-  margin-right: 20px;
   display: flex;
+  flex-direction: row;
+  align-items: flex-end;
   justify-content: flex-end;
-  align-items: center;
+  padding: 20px;
+}
+
+.deslogar a{
+  font: 1.1em 'Inter', sans-serif;
+  margin: 0px 10px ;
+}
+
+.deslogar a:hover{
+  cursor: pointer;
+  text-shadow: 0px 0px 8px #fff;
 }
 
 .deslogar img{
-  width: 30px;
+  margin-right: 25px ;
+  width: 25px;
 }
 
 .deslogar img:hover{
