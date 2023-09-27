@@ -6,7 +6,7 @@
 <li> Java 17 </li> 
 <li> SQL</li> 
 <li> Node js 18.17.1(LTS)</li> 
-<li> Angular 16.0.0</li> 
+<li> Angular 14.0.0</li> 
 <li> Typescrip </li> 
 <li> Loombk </li> 
 <li> Spring boot JPA </li> 
