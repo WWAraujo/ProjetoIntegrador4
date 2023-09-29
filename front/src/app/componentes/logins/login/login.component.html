@@ -50,6 +50,12 @@
     >
       Senha tem mínimo de 3 caracteres!
     </div>
+    <div
+      class="mensagem__erro"
+      *ngIf="usuarioSenhaInvalido"
+    >
+      Usuario ou senha Invalido!
+    </div>
     <label for="sign-up" id="sign-up-text">Novidades tech na NexusTech. <a (click)="cadastrarCliente()" id="sign-up">Inscreva-se já!</a></label>
     <div class="login">
       <button
