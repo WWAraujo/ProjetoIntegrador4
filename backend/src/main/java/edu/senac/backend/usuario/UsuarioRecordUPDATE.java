@@ -9,6 +9,6 @@ public record UsuarioRecordUPDATE(
         String cpfUsuario,
         String emailUsuario,
         TipoUsuario tipoUsuario,
-        String senhaUsuario,
+        String senha,
         AtivoInativo ativoInativo) {
 }

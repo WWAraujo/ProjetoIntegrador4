@@ -45,7 +45,7 @@ public class UsuarioModel {
         this.nomeUsuario = usuario.nomeUsuario();
         this.cpfUsuario = usuario.cpfUsuario();
         this.emailUsuario = usuario.emailUsuario();
-        this.senhaUsuario = new Criptografia().encriptar(usuario.senhaUsuario());
+        this.senhaUsuario = new Criptografia().encriptar(usuario.senha());
         this.tipoUsuario = new AlterarTipoUsuario().deEnumParaInt(usuario.tipoUsuario());
         this.ativoInativo = usuario.ativoInativo().toString();
     }
