@@ -28,6 +28,7 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarUsuarioComponent } from './componentes/navbar/navbar-usuario/navbar-usuario.component';
 import { NavbarClienteComponent } from './componentes/navbar/navbar-cliente/navbar-cliente.component';
+import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { NavbarClienteComponent } from './componentes/navbar/navbar-cliente/navb
     CarrinhoComponent,
     NavbarUsuarioComponent,
     NavbarClienteComponent,
-
+    EnderecosComponent,
   ],
   imports: [
     BrowserModule,
