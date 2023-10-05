@@ -29,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarUsuarioComponent } from './componentes/navbar/navbar-usuario/navbar-usuario.component';
 import { NavbarClienteComponent } from './componentes/navbar/navbar-cliente/navbar-cliente.component';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
+import { FormatDirective } from './componentes/cliente/enderecos/cep/format.directive';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.co
     NavbarUsuarioComponent,
     NavbarClienteComponent,
     EnderecosComponent,
+    FormatDirective,
   ],
   imports: [
     BrowserModule,
