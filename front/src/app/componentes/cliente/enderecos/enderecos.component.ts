@@ -10,7 +10,7 @@ import { end } from '@popperjs/core';
   styleUrls: ['./enderecos.component.css']
 })
 export class EnderecosComponent implements OnInit {
-
+  exibirCabecalho: boolean = true;
   idCliente: string = '';
   enderecos: Endereco[] = [];
   abrirform: boolean = false;
