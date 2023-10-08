@@ -1,63 +1,159 @@
-<!-- <app-cabecalho *ngIf="exibirCabecalho"></app-cabecalho> -->
+<app-cabecalho *ngIf="exibirCabecalho"></app-cabecalho>
+<form class="form-cadastro" [formGroup]="formulario">
+  <div class="container">
 
-<div class="container">
-    <div class="cadastro">
+    <div class="nomes">
 
-      <input
-      type="text"
-      id="nomeCliente"
+    <div class="col-md-6">
+      <label for="nome" class="form-label">Nome</label>
+
+      <input type="text"
       class="form-control"
+      id="nome"
+      formControlName="nome"
       placeholder="Nome"
-      required>
-
-      <input
-      type="text"
-      id="cpfCliente"
-      class="form-control"
-      placeholder="CPF"
-      required>
-
-      <input
-      type="text"
-      id="dataNascimento"
-      class="form-control"
-      placeholder="Data de Nascimento"
-      required>
-
-      <input
-      type="text"
-      id="telefone"
-      class="form-control"
-      placeholder="Telefone"
-      required>
-
-
-      <input
-      type="text"
-      id="email"
-      class="form-control"
-      placeholder="E-mail"
-      required>
-
-      <input
-      type="text"
-      id="senha"
-      class="form-control"
-      placeholder="Crie sua senha"
-      required>
-
-      <input
-      type="text"
-      id="confirmaSenha"
-      class="form-control"
-      placeholder="Confirme sua senha"
-      required>
-    </div>
-    <div class="fim">
-      <button>Cadastrar</button>
-      <span>
-        já possui cadastro? <a (click)="Login()">Entrar</a>
-      </span>
+      minlength="3"
+      NgModel #nome>
+      <div class="alert alert-danger"
+      *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched"
+    >
+      Digite seu nome.
     </div>
 
-</div>
+    </div>
+
+    <div class="col-md-6">
+
+      <label for="sobrenome" class="form-label">Sobrenome</label>
+
+      <input type="text"
+      class="form-control"
+      id="sobrenome"
+      formControlName="sobrenome"
+      placeholder="Sobrenome"
+      minlength="3"
+      ngModel #sobrenome>
+      <div class="alert alert-danger"
+      *ngIf="formulario.get('sobrenome')?.errors?.['required'] && formulario.get('sobrenome')?.touched"
+    >
+      Digite seu sobrenome.
+    </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="genero" class="form-label">Genero</label>
+    <select class="form-select" id="genero" formControlName="genero" name="genero" id="genero">
+
+      <option value="masculino" id="masculino" formControlName="masculino">Masculino</option>
+
+      <option value="feminino" id="feminino" formControlName="feminino">Feminio</option>
+
+      <option value="naoDefinido" id="naoDefinido" formControlName="naoDefinido">Não definido</option>
+
+    </select>
+    <div class="alert alert-danger"
+    *ngIf="formulario.get('genero')?.errors?.['required'] && formulario.get('genero')?.touched"
+  >
+    Escolha seu genero.
+  </div>
+  </div>
+  <div class="col-md-6">
+    <label for="cpf" class="form-label">CPF</label>
+
+    <input type="text"
+    class="form-control"
+    id="cpf"
+    formControlName="cpf"
+    maxlength="11"
+    placeholder="CPF"
+     ngModel #cpf>
+  </div>
+    <div class="alert alert-danger"
+    *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched"
+    >
+    Digite seu cpf.
+    </div>
+
+  <div>
+    <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+
+    <input type="date" class="form-control data" id="dataNascimento" formControlName="dataNascimento">
+
+    <div class="alert alert-danger"
+    *ngIf="formulario.get('dataNascimento')?.errors?.['required'] && formulario.get('dataNascimento')?.touched"
+    >
+    Digite sua data de nascimento.
+    </div>
+
+    <label for="email" class="form-label">E-mail</label>
+
+    <input type="text"
+    class="form-control"
+    id="email"
+    formControlName="email"
+    name="email"
+    placeholder="E-mail"
+    ngModel #email
+    (input)="onInputChanged()"
+    (blur)="procurarEmail()"
+    >
+
+    <div class="alert alert-danger"
+    *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched"
+    >
+    Digite seu e-mail.
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="formulario.get('email')?.hasError('pattern') && formulario.get('email')?.touched"
+    >
+      E-mail inválido! Deve ser no formato correto.
+    </div>
+
+  </div>
+  <div class="col-md-6">
+
+    <label for="senha" class="form-label">Senha</label>
+
+    <input type="password"
+     class="form-control"
+     name="senha"
+     id="senha"
+     formControlName="senha"
+     placeholder="Senha"
+     ngModel #senha>
+
+     <div class="alert alert-danger"
+     *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched"
+     >
+     Crie sua senha.
+     </div>
+
+    <label for="confirmarSenha" class="form-label">Confirme sua senha</label>
+
+    <input type="password"
+    class="form-control"
+    name="confirmarSenha"
+    id="senha"
+    formControlName="confirmarSenha"
+    placeholder="Confirmar Senha"
+    ngModel #confirmarSenha>
+
+    <div class="alert alert-danger"
+    *ngIf="formulario.get('confirmaSenha')?.errors?.['required'] && formulario.get('confirmarSenha')?.touched"
+    >
+    Confirme sua senha.
+    </div>
+  </div>
+
+  <div class="d-grid gap-2 col-6 mx-auto">
+      <button type="button"
+      class="btn btn-primary"
+      (click)="cadastrarUsuario()"
+      [disabled]="!formulario.valid"
+      [ngClass]="habilitarBotao()"
+      >Cadsatrar</button>
+    </div>
+  </div>
+</form>

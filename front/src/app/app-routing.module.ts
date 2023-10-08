@@ -11,6 +11,7 @@ import { VisualizarProdutosCadastradosComponent } from './componentes/produtos/v
 import { TelaPrincipalComponent } from './componentes/tela-principal/tela-principal.component';
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
 import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
+import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'produtoDetalhado',
     component: ProdutoDetalhadoComponent,data: { mostrarCabecalho: true }
+  },
+  {
+    path: 'endereco',
+    component: EnderecosComponent
   },
 ];
 
