@@ -1,0 +1,79 @@
+.body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.linha{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.btndireita{
+  position: relative;
+  margin: 30%;
+}
+
+.btnesquerda{
+  position: relative;
+  margin: -30%;
+}
+
+.cadastro input {
+  width: 300px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.container button {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.container h2 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.tutulo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.direita{
+  position: relative;
+  left: 20%;
+}
+
+.deletarEndereco{
+  position: relative;
+  left: 40%;
+}
+
+.margemTop{
+  margin-bottom: 20px;
+}
+
+.cardEndereco{
+  margin-top: 30px;
+}
+

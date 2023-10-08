@@ -31,6 +31,11 @@ export enum TipoUsuario {
   ESTOQUISTA = 'ESTOQUISTA',
 }
 
+export enum AtivoInativo {
+  ATIVO = 'ATIVO',
+  INATIVO = 'INATIVO',
+}
+
 export interface DeletarUsuario {
   id: number;
 }
@@ -80,4 +85,18 @@ export interface PaginaProdutos {
   sort: any;
   numberOfElements: number;
   empty: boolean;
+}
+
+export interface Endereco {
+  id: string;
+  idCliente: string;
+  cep: string;
+  logradouro: string;
+  numero: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+  ativoInativo: AtivoInativo;
+  enderecoPrincipal: string;
 }
