@@ -1,7 +1,6 @@
 package edu.senac.backend.controller;
 
 import edu.senac.backend.produto.*;
-import edu.senac.backend.usuario.DeletUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
