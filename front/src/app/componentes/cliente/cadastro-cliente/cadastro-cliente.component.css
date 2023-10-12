@@ -1,33 +1,73 @@
-.container{
-  width: 100%;
-  /* height: 100vh; */
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 0;
   background-color: #fff;
-  padding: 15px;
-
+  height: 100%;
 }
 
-.nomes {
+.title {
+  margin: 50px 0px;
+}
+
+.title label {
+  text-align: center;
+  width: 100%;
+  font: 2em "Inter";
+  color: #1e90ff;
+  font-weight: bolder;
+}
+
+.form-cadastro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.form-cadastro input {
+  margin: 10px 0px;
+  width: 95%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #1e90ff;
+  font: 0.8em 'Inter', sans-serif;
+}
+
+.form-cadastro select {
+  margin: 10px 0px;
+  width: 95%;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #1e90ff;
+  font: 0.8em "Inter", sans-serif;
+}
+
+.dataNascimento-telefone, .genero-cpf, .senha-confirmarSenha{
   display: flex;
   flex-direction: row;
-  align-items: center;
-  width: 670px;
-  padding: 10px;
-  margin-top: 20px;
+  width: 60%;
 }
-.data {
-  width: 650px;
 
+.email input{
+  width: 97.5%;
 }
-label {
-  margin-top: 10px;
 
+.nome input{
+  width: 97.5%;
 }
-button {
-  margin-top: 26px;
-  height: 60px;
-  margin-bottom: 150px;
+
+.newCustomer {
+  margin: 10px 0px;
+}
+
+
+div {
+  width: 60%;
+  color: red;
 }
