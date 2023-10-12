@@ -36,7 +36,7 @@ public class ClienteModel {
         }
         this.nomeCliente = cliente.cliente().nomeCliente();
         this.cpfCliente = cliente.cliente().cpfCliente();
-        this.datanascCliente = cliente.cliente().dataNascCliente();
+        this.datanascCliente = cliente.cliente().dataNascCliente().replace("-", "");
         this.generoCliente = cliente.cliente().generoCliente();
         this.telefoneCliente = cliente.cliente().telefoneCliente();
         this.emailCliente = cliente.cliente().emailCliente();

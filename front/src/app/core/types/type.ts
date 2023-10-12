@@ -36,6 +36,12 @@ export enum AtivoInativo {
   INATIVO = 'INATIVO',
 }
 
+export enum Genero{
+  MASCULINO = 'MASCULINO',
+  FEMININO = 'FEMININO',
+  OUTROS = 'OUTROS'
+}
+
 export interface DeletarUsuario {
   id: number;
 }
@@ -87,8 +93,19 @@ export interface PaginaProdutos {
   empty: boolean;
 }
 
+export interface Cliente{
+  id: number;
+  nomeCliente: string;
+  cpfCliente: string;
+  dataNascCliente: string;
+  generoCliente: string;
+  telefoneCliente: string;
+  emailCliente: string;
+  senhaCliente: string;
+}
+
 export interface Endereco {
-  id: string;
+  id: number;
   idCliente: string;
   cep: string;
   logradouro: string;

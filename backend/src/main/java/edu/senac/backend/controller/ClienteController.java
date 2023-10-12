@@ -20,7 +20,7 @@ public class ClienteController {
 
     @PostMapping("/cadastrar-cliente")
     public ResponseEntity<Long> cadastrarCliente(@RequestBody ClienteRecordConstructor cliente){
-
+        System.out.println(" Valor que chegou "+cliente);
         ClienteModel clienteSalvo = repository.save(new ClienteModel(cliente));
 
         for (EnderecosClienteRecord enderecoRecord : cliente.enderecos()){
