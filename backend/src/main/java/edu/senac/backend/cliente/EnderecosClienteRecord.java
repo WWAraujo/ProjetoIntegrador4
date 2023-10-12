@@ -1,10 +1,11 @@
 package edu.senac.backend.cliente;
 
 public record EnderecosClienteRecord(
+        Long id,
         Integer idCliente,
-        Integer cep,
+        String cep,
         String logradouro,
-        Integer numero,
+        String numero,
         String complemento,
         String bairro,
         String cidade,

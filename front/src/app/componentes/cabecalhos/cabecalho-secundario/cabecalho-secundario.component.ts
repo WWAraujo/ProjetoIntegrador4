@@ -23,12 +23,11 @@ export class CabecalhoSecundarioComponent implements OnInit {
   ngOnInit(): void {
 
     this.verificarLogado();
-    
+
   }
 
   verificarLogado(){
     const usuarioLogado = this.userService.getUsuarioLogado();
-    console.log(this.isLogado);
     if(usuarioLogado === true){
       this.isLogado = true;
     }

@@ -18,9 +18,9 @@ public class EnderecosClienteModel {
     private Long id;
 
     private Long idCliente;
-    private int cep;
+    private String cep;
     private String logradouro;
-    private int numero;
+    private String numero;
     private String complemento;
     private String bairro;
     private String cidade;
