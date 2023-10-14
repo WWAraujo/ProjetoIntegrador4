@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup} from '@angular/forms';
 import { ProdutosService } from '../produtos.service';
 import { ModalService } from './modal.service';
 import { Router } from '@angular/router';
@@ -36,7 +36,6 @@ export class CadastrarProdutosComponent implements OnInit {
   fotosProduto: CarregarFotos[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
     private produtosService: ProdutosService,
     public modalservice: ModalService,
     private router: Router,
