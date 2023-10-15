@@ -28,8 +28,10 @@ public class ClienteModel {
     private String emailCliente;
     private String senhaCliente;
 
-    public ClienteModel(ClienteRecordConstructor cliente) {
-        if (cliente.cliente().id() != null) {
+    public ClienteModel (ClienteRecordConstructor cliente){
+
+        if (cliente.cliente().id() != null ){
+
             this.id = cliente.cliente().id();
         }
         this.nomeCliente = cliente.cliente().nomeCliente();

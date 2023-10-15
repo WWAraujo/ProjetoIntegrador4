@@ -15,8 +15,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository repository;
 
-
-
     @PostMapping
     public UsuarioModel criarUsuario(@RequestBody UsuarioRecordCREATE usuario) {
         return repository.save(new UsuarioModel(usuario));
