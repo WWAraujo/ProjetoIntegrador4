@@ -16,9 +16,21 @@ public class LoginController {
     private LoginRepository repository;
 
 
-    @PostMapping()
+    @PostMapping("/colaborador")
     @Transactional
     public ResponseEntity<LoginResponse> salvarUsuario(@RequestBody LoginRecord login) {
+
+        LoginModel lg = new LoginModel(login);
+
+        LoginResponse loginResponse = repository.findIdAndTypeByEmailAndSenha(lg.getEmailUsuario(), lg.getSenhaUsuario());
+
+        return ResponseEntity.ok(loginResponse);
+
+    }
+
+    @PostMapping("/cliente")
+    @Transactional
+    public ResponseEntity<LoginResponse> salvarCliente(@RequestBody LoginRecord login) {
 
         LoginModel lg = new LoginModel(login);
 
