@@ -1,12 +1,10 @@
 package edu.senac.backend.cliente;
 
 import edu.senac.backend.service.Criptografia;
-import edu.senac.backend.usuario.UsuarioModel;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.*;
 
-import java.sql.Date;
 import java.util.Optional;
 
 @ToString
@@ -30,8 +28,8 @@ public class ClienteModel {
     private String emailCliente;
     private String senhaCliente;
 
-    public ClienteModel (ClienteRecordConstructor cliente){
-        if (cliente.cliente().id() != null ){
+    public ClienteModel(ClienteRecordConstructor cliente) {
+        if (cliente.cliente().id() != null) {
             this.id = cliente.cliente().id();
         }
         this.nomeCliente = cliente.cliente().nomeCliente();
@@ -56,4 +54,9 @@ public class ClienteModel {
             this.senhaCliente = clienteModel.get().getSenhaCliente();
         }
     }
-}
+
+        public ClienteModel(ClienteRecord loginCliente) {
+            this.emailCliente = loginCliente.emailCliente();
+            this.senhaCliente = new Criptografia().encriptar(loginCliente.senhaCliente());
+        }
+    }

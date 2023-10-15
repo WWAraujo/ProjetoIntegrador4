@@ -3,6 +3,11 @@ export interface Login {
   senha: string;
 }
 
+export interface clienteLogado{
+  emailCliente: string;
+  senhaCliente: string;
+}
+
 export interface Logado {
   id: string;
   tipoUsuario: string;

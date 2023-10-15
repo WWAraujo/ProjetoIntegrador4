@@ -18,7 +18,7 @@ export class LoginService {
   }
 
   loginCliente(login: Login): Observable<Logado> {
-    return this.http.post<Logado>(`${API}/login/cliente`, login);
+    return this.http.post<Logado>(`${API}/cliente/login-cliente`, login);
   }
 
 }

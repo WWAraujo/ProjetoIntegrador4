@@ -1,8 +1,10 @@
 package edu.senac.backend.controller;
 
 import edu.senac.backend.cliente.*;
+import edu.senac.backend.cliente.LoginClienteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -41,6 +43,18 @@ public class ClienteController {
     @GetMapping("/buscaremail/{email}")
     public Boolean listarCliente(@PathVariable String email) {
         return repository.findByEmailCliente(email).isPresent();
+    }
+
+    @PostMapping("/login-cliente")
+    @Transactional
+    public ResponseEntity<LoginClienteResponse> salvarCliente(@RequestBody ClienteRecord loginCliente) {
+
+        ClienteModel lg = new ClienteModel(loginCliente);
+
+        LoginClienteResponse loginResponse = repository.findIdAndTypeByEmailAndSenha(lg.getEmailCliente(), lg.getSenhaCliente());
+        System.out.println(loginResponse);
+        return ResponseEntity.ok(loginResponse);
+
     }
 
 }

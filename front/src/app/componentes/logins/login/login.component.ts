@@ -1,3 +1,4 @@
+import { clienteLogado } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
@@ -18,13 +19,14 @@ export class LoginComponent implements OnInit {
   usuarioLogado: boolean = true;
   usuarioSenhaInvalido: boolean = false;
   selectedType: string = 'usuario';
+  clienteLogado!: clienteLogado;
 
   constructor(
     private service: LoginService,
     private router: Router,
     private formBuilder: FormBuilder,
     private userService: UserService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.userService.setUsuarioLogado(!this.usuarioLogado);
     this.formularioColaborador = this.formBuilder.group({
@@ -41,14 +43,14 @@ export class LoginComponent implements OnInit {
       ],
     });
     this.formularioCliente = this.formBuilder.group({
-      usuario: [
+      emailCliente: [
         '',
         [
           Validators.required,
           Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
         ],
       ],
-      senha: [
+      senhaCliente: [
         '',
         [Validators.required, Validators.minLength(3)],
       ],
@@ -58,12 +60,12 @@ export class LoginComponent implements OnInit {
   LoginColaborador() {
     if (this.formularioColaborador.valid) {
       this.service.loginColaborador(this.formularioColaborador.value).subscribe((logado) => {
-        if (logado){
+        if (logado) {
           this.logado = logado;
           this.userService.setUserType(logado.tipoUsuario);
           this.userService.setUsuarioLogado(this.usuarioLogado);
           this.validarUsuario();
-          console.log(logado);
+          this.usuarioSenhaInvalido = false;
         } else {
           this.usuarioSenhaInvalido = true;
         }
@@ -73,11 +75,17 @@ export class LoginComponent implements OnInit {
 
   LoginCliente() {
     if (this.formularioCliente.valid) {
-
+      this.service.loginCliente(this.formularioCliente.value).subscribe((clienteLogado) => {
+        if (clienteLogado) {
+          this.logado = clienteLogado;
+          this.usuarioSenhaInvalido = false;
+          this.router.navigate(['/cadastrarCliente'])
         } else {
-
+          this.usuarioSenhaInvalido = true;
         }
+      });
     }
+  }
 
 
   validarUsuario() {
@@ -89,13 +97,13 @@ export class LoginComponent implements OnInit {
   }
 
   habilitarBotao(): string {
-    if (this.formularioColaborador.valid) {
+    if (this.formularioColaborador.valid || this.formularioCliente.valid) {
       return 'botao';
     } else {
       return 'botao__desabilitado';
     }
   }
-  cadastrarCliente(){
+  cadastrarCliente() {
     this.router.navigate(['/cadastrarCliente'])
   }
 }

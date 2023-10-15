@@ -20,8 +20,7 @@ public class LoginModel {
 
     private String emailUsuario;
     private String senhaUsuario;
-    private String emailCliente;
-    private String senhaCliente;
+
 
     private int tipoUsuario;
 
@@ -30,8 +29,4 @@ public class LoginModel {
         this.senhaUsuario = new Criptografia().encriptar(login.senha());
     }
 
-//    public LoginModel(LoginRecord loginCliente){
-//        this.emailCliente = loginCliente.usuario();
-//        this.senhaCliente = new Criptografia().encriptar(loginCliente.usuario());
-//    }
 }

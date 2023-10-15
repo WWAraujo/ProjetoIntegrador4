@@ -68,32 +68,32 @@
 
   <form class="form-login-cliente esconder-div" [formGroup]="formularioCliente" *ngIf="selectedType === 'cliente'">
 
-    <input type="text" class="input" id="usuario" formControlName="usuario" placeholder="E-mail" />
+    <input type="text" class="input" id="emailCliente" formControlName="emailCliente" placeholder="E-mail" />
 
     <div class="mensagem__erro"
-      *ngIf="formularioCliente.get('usuario')?.errors?.['required'] && formularioCliente.get('usuario')?.touched">
+      *ngIf="formularioCliente.get('emailCliente')?.errors?.['required'] && formularioCliente.get('emailCliente')?.touched">
       E-mail é obrigatório!
     </div>
 
     <div class="mensagem__erro"
-      *ngIf="formularioCliente.get('usuario')?.errors?.['email'] && formularioCliente.get('usuario')?.touched">
+      *ngIf="formularioCliente.get('emailCliente')?.errors?.['email'] && formularioCliente.get('emailCliente')?.touched">
       Digite um e-mail válido!
     </div>
 
     <div class="mensagem__erro"
-      *ngIf="formularioCliente.get('usuario')?.hasError('pattern') && formularioCliente.get('usuario')?.touched">
+      *ngIf="formularioCliente.get('emailCliente')?.hasError('pattern') && formularioCliente.get('emailCliente')?.touched">
       E-mail inválido! Deve ser no formato correto.
     </div>
 
-    <input type="password" class="input" id="senha" formControlName="senha" placeholder="Senha" />
+    <input type="password" class="input" id="senhaCliente" formControlName="senhaCliente" placeholder="Senha" />
 
     <div class="mensagem__erro"
-      *ngIf="formularioCliente.get('senha')?.errors?.['required'] && formularioCliente.get('senha')?.touched">
+      *ngIf="formularioCliente.get('senhaCliente')?.errors?.['required'] && formularioCliente.get('senhaCliente')?.touched">
       Senha é obrigatoria!
     </div>
 
     <div class="mensagem__erro"
-      *ngIf="formularioCliente.get('senha')?.errors?.['minlength'] && formularioCliente.get('senha')?.touched">
+      *ngIf="formularioCliente.get('senhaCliente')?.errors?.['minlength'] && formularioCliente.get('senhaCliente')?.touched">
       Senha tem mínimo de 3 caracteres!
     </div>
 
