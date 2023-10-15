@@ -21,10 +21,12 @@ public class LoginModel {
     private String emailUsuario;
     private String senhaUsuario;
 
+
     private int tipoUsuario;
 
     public LoginModel(LoginRecord login) {
         this.emailUsuario = login.usuario();
         this.senhaUsuario = new Criptografia().encriptar(login.senha());
     }
+
 }

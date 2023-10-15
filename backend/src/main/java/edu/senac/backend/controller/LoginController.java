@@ -15,8 +15,7 @@ public class LoginController {
     @Autowired
     private LoginRepository repository;
 
-
-    @PostMapping()
+    @PostMapping("/colaborador")
     @Transactional
     public ResponseEntity<LoginResponse> salvarUsuario(@RequestBody LoginRecord login) {
 
@@ -27,4 +26,7 @@ public class LoginController {
         return ResponseEntity.ok(loginResponse);
 
     }
+
+
+
 }
