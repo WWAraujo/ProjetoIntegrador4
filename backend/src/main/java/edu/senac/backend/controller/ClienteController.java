@@ -2,10 +2,6 @@ package edu.senac.backend.controller;
 
 import edu.senac.backend.cliente.*;
 import edu.senac.backend.cliente.LoginClienteResponse;
-import edu.senac.backend.produto.FotosProdutoModel;
-import edu.senac.backend.produto.FotosProdutoRecord;
-import edu.senac.backend.produto.ProdutoModel;
-import edu.senac.backend.produto.ProdutoRecordConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +53,7 @@ public class ClienteController {
         LoginClienteResponse loginResponse = repository.findIdAndTypeByEmailAndSenha(lg.getEmailCliente(), lg.getSenhaCliente());
         System.out.println(loginResponse);
         return ResponseEntity.ok(loginResponse);
+    }
 
     @PutMapping("/alterar")
     public ResponseEntity<Long> alterarCliente(@RequestBody ClienteRecordConstructor cliente) {
