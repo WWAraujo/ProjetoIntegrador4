@@ -31,6 +31,7 @@ public class ClienteModel {
     private String senhaCliente;
 
     public ClienteModel (ClienteRecordConstructor cliente){
+
         if (cliente.cliente().id() != null ){
             this.id = cliente.cliente().id();
         }
