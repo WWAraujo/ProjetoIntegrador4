@@ -19,7 +19,6 @@ public class ClienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nomeCliente;
     private String cpfCliente;
     private String datanascCliente;
