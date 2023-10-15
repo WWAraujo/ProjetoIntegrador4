@@ -13,7 +13,12 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-  login(login: Login): Observable<Logado> {
-    return this.http.post<Logado>(`${API}/login`, login);
+  loginColaborador(login: Login): Observable<Logado> {
+    return this.http.post<Logado>(`${API}/login/colaborador`, login);
   }
+
+  loginCliente(login: Login): Observable<Logado> {
+    return this.http.post<Logado>(`${API}/login/cliente`, login);
+  }
+
 }

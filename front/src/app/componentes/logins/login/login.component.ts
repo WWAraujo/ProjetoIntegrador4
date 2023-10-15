@@ -11,11 +11,13 @@ import { Logado } from 'src/app/core/types/type';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  formulario!: FormGroup;
+  formularioCliente!: FormGroup;
+  formularioColaborador!: FormGroup;
   logado!: Logado;
   exibirCabecalho: boolean = true;
   usuarioLogado: boolean = true;
   usuarioSenhaInvalido: boolean = false;
+  selectedType: string = 'usuario';
 
   constructor(
     private service: LoginService,
@@ -25,8 +27,20 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.userService.setUsuarioLogado(!this.usuarioLogado);
-
-    this.formulario = this.formBuilder.group({
+    this.formularioColaborador = this.formBuilder.group({
+      usuario: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
+        ],
+      ],
+      senha: [
+        '',
+        [Validators.required, Validators.minLength(3)],
+      ],
+    });
+    this.formularioCliente = this.formBuilder.group({
       usuario: [
         '',
         [
@@ -41,20 +55,30 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  solicitarLogin() {
-    if (this.formulario.valid) {
-      this.service.login(this.formulario.value).subscribe((logado) => {
+  LoginColaborador() {
+    if (this.formularioColaborador.valid) {
+      this.service.loginColaborador(this.formularioColaborador.value).subscribe((logado) => {
         if (logado){
           this.logado = logado;
           this.userService.setUserType(logado.tipoUsuario);
           this.userService.setUsuarioLogado(this.usuarioLogado);
           this.validarUsuario();
+          console.log(logado);
         } else {
           this.usuarioSenhaInvalido = true;
         }
       });
     }
   }
+
+  LoginCliente() {
+    if (this.formularioCliente.valid) {
+
+        } else {
+
+        }
+    }
+
 
   validarUsuario() {
     if (this.logado.tipoUsuario === '1') {
@@ -65,7 +89,7 @@ export class LoginComponent implements OnInit {
   }
 
   habilitarBotao(): string {
-    if (this.formulario.valid) {
+    if (this.formularioColaborador.valid) {
       return 'botao';
     } else {
       return 'botao__desabilitado';
