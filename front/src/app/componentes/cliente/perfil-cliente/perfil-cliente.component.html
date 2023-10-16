@@ -9,10 +9,12 @@
       <input [ngModel]="clienteData.nomeCliente" placeholder="Nome" formControlName="nome" />
       <input [value]="clienteData.cpfCliente" disabled />
       <input [ngModel]="clienteData.datanascCliente" placeholder="Data de Nascimento" formControlName="dataNascimento" />
-      <input [ngModel]="clienteData.generoCliente" placeholder="Genero" formControlName="genero" />
+      <select [ngModel]="clienteData.generoCliente" placeholder="Genero" formControlName="genero" >
+        <option *ngFor="let escolhido of genero" [value]="escolhido">{{ escolhido }}</option>
+      </select>
       <input [value]="clienteData.telefoneCliente" disabled />
       <input [value]="clienteData.emailCliente" disabled />
-      <input type="password" [ngModel]="clienteData.senhaCliente" placeholder="Nova Senha" formControlName="senha">
+      <input type="password" placeholder="Nova Senha" formControlName="senha">
       <input type="password" placeholder="Confime a Senha" formControlName="confirmarSenha">
 
       <button class="salvar">Salvar</button>

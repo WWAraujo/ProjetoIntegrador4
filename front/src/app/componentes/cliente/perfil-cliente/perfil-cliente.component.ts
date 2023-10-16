@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../cliente.service';
-import { Cliente } from 'src/app/core/types/type';
+import { Cliente, Genero } from 'src/app/core/types/type';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Validacoes } from '../../usuario/cadastro-usuario/validacoes';
 
@@ -14,6 +14,7 @@ export class PerfilClienteComponent implements OnInit {
   formulario!: FormGroup;
   idCliente!: number;
   clienteData!: Cliente;
+  genero = Object.values(Genero);
 
   constructor(private service : ClienteService,private formBuilder: FormBuilder,) { }
 
