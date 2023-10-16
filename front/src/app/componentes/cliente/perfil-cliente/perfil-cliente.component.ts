@@ -1,38 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { ClienteService } from '../cliente.service';
-import { Cliente } from 'src/app/core/types/type';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Validacoes } from '../../usuario/cadastro-usuario/validacoes';
+// import { Component, OnInit } from '@angular/core';
+// import { ClienteService } from '../cliente.service';
+// import { Cliente } from 'src/app/core/types/type';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { Validacoes } from '../../usuario/cadastro-usuario/validacoes';
 
-@Component({
-  selector: 'app-perfil-cliente',
-  templateUrl: './perfil-cliente.component.html',
-  styleUrls: ['./perfil-cliente.component.css']
-})
-export class PerfilClienteComponent implements OnInit {
+// @Component({
+//   selector: 'app-perfil-cliente',
+//   templateUrl: './perfil-cliente.component.html',
+//   styleUrls: ['./perfil-cliente.component.css']
+// })
+// export class PerfilClienteComponent implements OnInit {
 
-  formulario!: FormGroup;
-  idCliente!: number;
-  clienteData!: Cliente;
+//   formulario!: FormGroup;
+//   idCliente!: number;
+//   clienteData!: Cliente;
 
-  constructor(private service : ClienteService,private formBuilder: FormBuilder,) { }
+//   constructor(private service : ClienteService,
+//               private formBuilder: FormBuilder,) { }
 
-  ngOnInit(): void {
-    this.idCliente = this.service.getIdCliente();
-    console.log(this.idCliente);
+//   ngOnInit(): void {
+//     this.idCliente = this.service.getIdCliente();
 
-    this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required]],
-      dataNascimento: ['',[Validators.required]],
-      genero: ['',[Validators.required]],
-      senha: ['', [Validators.required, Validators.minLength(3)]],
-      confirmarSenha: ['', [Validators.required]],
-    });
-    this.service.exibirPerfil(this.idCliente).subscribe(data => {
+//     this.service.exibirPerfil(this.idCliente).subscribe(data => {
+//       console.log(data);
+//       this.clienteData = data;
+//     });
 
-      this.clienteData = data;
-      console.log(data);
-    } )
-  }
+//     this.formulario = this.formBuilder.group({
+//       nome: ['', [Validators.required]],
+//       dataNascimento: ['',[Validators.required]],
+//       genero: ['',[Validators.required]],
+//       senha: ['', [Validators.required, Validators.minLength(3)]],
+//       confirmarSenha: ['', [Validators.required]],
+//     });
+//   }
 
-}
+// }

@@ -62,9 +62,9 @@
   width: 97.5%;
 }
 
-.newCustomer {
+/* .newCustomer {
   margin: 10px 0px;
-}
+} */
 
 .enderecos{
   display: flex;
@@ -77,8 +77,6 @@
   background-color: #fff;
   color: #1e90ff;
   font:1.1em 'Inter', sans-serif;
-
-
 }
 
 

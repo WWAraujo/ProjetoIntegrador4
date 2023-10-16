@@ -21,7 +21,7 @@ public class UsuarioController {
     }
 
     @PutMapping
-    public void buscarUsuario(@RequestBody UsuarioRecordUPDATE usuario) {
+    public void alterarUsuario(@RequestBody UsuarioRecordUPDATE usuario) {
         repository.save(new UsuarioModel(usuario));
     }
 

@@ -12,7 +12,7 @@ import { TelaPrincipalComponent } from './componentes/tela-principal/tela-princi
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
 import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
-import { PerfilClienteComponent } from './componentes/cliente/perfil-cliente/perfil-cliente.component';
+// import { PerfilClienteComponent } from './componentes/cliente/perfil-cliente/perfil-cliente.component';
 
 const routes: Routes = [
   {
@@ -68,10 +68,10 @@ const routes: Routes = [
     path: 'endereco',
     component: EnderecosComponent
   },
-  {
-    path: 'perfil',
-    component: PerfilClienteComponent
-  }
+  // {
+  //   path: 'perfil',
+  //   component: PerfilClienteComponent
+  // }
 ];
 
 @NgModule({

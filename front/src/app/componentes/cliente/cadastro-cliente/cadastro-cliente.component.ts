@@ -10,7 +10,7 @@ import { ModalenderecoService } from '../modalendereco.service';
 @Component({
   selector: 'app-cadastro-cliente',
   templateUrl: './cadastro-cliente.component.html',
-  styleUrls: ['./cadastro-cliente.component.css']
+  styleUrls: ['./cadastro-cliente.component.css'],
 })
 export class CadastroClienteComponent implements OnInit {
   exibirCabecalho: boolean = true;
@@ -19,7 +19,8 @@ export class CadastroClienteComponent implements OnInit {
   senhaCorrespondente: boolean = true;
   genero = Object.values(Genero);
   dataNascimento!: string;
-
+  idCliente!: number;
+  clienteData!: Cliente;
 
   cliente: Cliente = {
     id: 0,
@@ -29,7 +30,7 @@ export class CadastroClienteComponent implements OnInit {
     generoCliente: '',
     telefoneCliente: '',
     emailCliente: '',
-    senhaCliente: ''
+    senhaCliente: '',
   };
 
   constructor(
@@ -37,44 +38,47 @@ export class CadastroClienteComponent implements OnInit {
     private service: ClienteService,
     private formBuilder: FormBuilder,
     private serviceEndereco: ModalenderecoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.idCliente = this.service.getIdCliente();
+
+    if (this.idCliente) {
+      this.service.exibirPerfil(this.idCliente).subscribe((data) => {
+        console.log(data);
+        this.clienteData = data;
+      });
+    }
+
     this.formulario = this.formBuilder.group({
       nome: ['', [Validators.required]],
       cpf: ['', [Validators.required, Validacoes.ValidaCPF]],
-      dataNascimento: ['',[Validators.required]],
-      genero: ['',[Validators.required]],
-      telefone: ['',[Validators.required]],
-      email: ['', [Validators.required, Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      dataNascimento: ['', [Validators.required]],
+      genero: ['', [Validators.required]],
+      telefone: ['', [Validators.required]],
+      email: ['', [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
+      ],
       senha: ['', [Validators.required, Validators.minLength(3)]],
       confirmacaoSenha: ['', [Validators.required]],
     });
 
     const dadosCliente = this.service.getDadosCliente();
-    if(dadosCliente) {
+    if (dadosCliente) {
       this.formulario.patchValue(dadosCliente);
       this.service.setDadosCliente([]);
-
     }
-
-    this.cliente = {
-      id: 0,
-      nomeCliente: '',
-      cpfCliente: '',
-      datanascCliente: '',
-      generoCliente: '',
-      telefoneCliente: '',
-      emailCliente: '',
-      senhaCliente: ''
-    };
-
   }
 
   inputChanged = new Subject<void>();
+
   onInputChanged() {
     this.inputChanged.next();
   }
+
   procurarEmail() {
     const email = this.formulario.get('email')?.value;
     this.service.procurarEmail(email).subscribe((emailEncontrado) => {
@@ -82,53 +86,64 @@ export class CadastroClienteComponent implements OnInit {
     });
   }
 
-  cadastrarCliente(){
+  cadastrarCliente() {
     this.cliente = {
-      id: 0,
+      id: this.idCliente,
       nomeCliente: this.formulario.get('nome')?.value,
       cpfCliente: this.formulario.get('cpf')?.value,
       datanascCliente: this.formulario.get('dataNascimento')?.value,
       generoCliente: this.formulario.get('genero')?.value,
       telefoneCliente: this.formulario.get('telefone')?.value,
       emailCliente: this.formulario.get('email')?.value,
-      senhaCliente: this.formulario.get('senha')?.value
+      senhaCliente: this.formulario.get('senha')?.value,
     };
 
-    const dadosParaEnviar ={
-
+    const dadosParaEnviar = {
       cliente: this.cliente,
-      enderecos: this.serviceEndereco.getListaEndereco()
-    }
-    console.log('Dados enviados', dadosParaEnviar);
+      enderecos: this.serviceEndereco.getListaEndereco(),
+    };
 
-      if (!this.emailEncontrado.valueOf()) {
-        this.service
-          .cadastrarCliente(dadosParaEnviar)
-          .subscribe((clienteCadastrado) => {
-            if (clienteCadastrado) {
-              this.router.navigate(['/solicitarLogin']);
-            } else {
-              alert('Algo deu errado no cadastro');
-            }});
-      } else {
+    if (this.idCliente) {
+      console.log('dados alterar', dadosParaEnviar);
+      this.service
+        .alterarCliente(dadosParaEnviar)
+        .subscribe((clienteCadastrado) => {
+          if (clienteCadastrado) {
+            alert('Informações alterada com sucesso');
+          } else {
+            alert('Algo deu errado no cadastro');
+          }
+        });
+    }
+
+    if (!this.emailEncontrado.valueOf() && !this.idCliente) {
+      console.log('dados cadastrar', dadosParaEnviar);
+      this.service
+        .cadastrarCliente(dadosParaEnviar)
+        .subscribe((clienteCadastrado) => {
+          if (clienteCadastrado) {
+            this.router.navigate(['/solicitarLogin']);
+          } else {
+            alert('Algo deu errado no cadastro');
+          }
+        });
+    } else {
+      if (!this.idCliente){
         alert('Email ja Cadastrado!');
       }
-
-      if (this.formulario.valid && this.senhaCorrespondente) {
-      } else {
-        alert('Verifique os campos obrigatórios e a confimação de senha');
-      }
-
-
-    console.log(this.formulario.value);
     }
 
-    addEnderecos(){
-      const estadoFormularioCliente = this.formulario.getRawValue();
-      this.service.setDadosCliente(estadoFormularioCliente);
-      this.router.navigate(['/endereco']);
+    if (this.formulario.valid && this.senhaCorrespondente) {
+    } else {
+      alert('Verifique os campos obrigatórios e a confimação de senha');
     }
+  }
 
+  addEnderecos() {
+    const estadoFormularioCliente = this.formulario.getRawValue();
+    this.service.setDadosCliente(estadoFormularioCliente);
+    this.router.navigate(['/endereco']);
+  }
 
   validarSenha() {
     const senha = this.formulario.get('senha')?.value;
@@ -144,7 +159,6 @@ export class CadastroClienteComponent implements OnInit {
     }
   }
 
-  //formata campo date em text com os valores formatados
   changeInputType(type: string) {
     const input = document.getElementById('dataNascimento') as HTMLInputElement;
     input.type = type;
@@ -162,6 +176,4 @@ export class CadastroClienteComponent implements OnInit {
     input.type = type;
   }
   //
-
-
 }

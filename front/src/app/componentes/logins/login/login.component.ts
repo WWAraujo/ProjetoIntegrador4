@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   exibirCabecalho: boolean = true;
   usuarioLogado: boolean = true;
   usuarioSenhaInvalido: boolean = false;
-  selectedType: string = 'usuario';
+  selectedType: string = 'cliente';
   clienteLogado!: ClienteLogado;
   idCliente!: number;
 
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     private userService : UserService,
     private serviceiD : ClienteService,
   ) { }
+
   ngOnInit(): void {
     this.userService.setUsuarioLogado(!this.usuarioLogado);
     this.formularioColaborador = this.formBuilder.group({
@@ -83,7 +84,7 @@ export class LoginComponent implements OnInit {
           const id = parseInt(clienteLogado.id);
           this.serviceiD.setIdCliente(id);
           this.usuarioSenhaInvalido = false;
-          this.router.navigate(['/perfil'])
+          this.router.navigate(['/cadastrarCliente'])
         } else {
           this.usuarioSenhaInvalido = true;
         }

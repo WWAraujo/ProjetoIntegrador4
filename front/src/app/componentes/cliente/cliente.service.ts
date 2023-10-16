@@ -23,7 +23,7 @@ export class ClienteService{
   }
 
   alterarCliente(cliente: any) {
-    return this.http.put(`${API}/cliente/alterar-cliente`, cliente);
+    return this.http.put(`${API}/cliente/alterar`, cliente);
   }
 
   exibirPerfil(id: number) : Observable <Cliente>{
@@ -53,7 +53,5 @@ export class ClienteService{
   getIdCliente(): number{
     return this.idCliente;
   }
-
-
 
 }

@@ -28,7 +28,7 @@ import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { FormatDirective } from './componentes/cliente/enderecos/cep/format.directive';
-import { PerfilClienteComponent } from './componentes/cliente/perfil-cliente/perfil-cliente.component';
+// import { PerfilClienteComponent } from './componentes/cliente/perfil-cliente/perfil-cliente.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { PerfilClienteComponent } from './componentes/cliente/perfil-cliente/per
     CarrinhoComponent,
     EnderecosComponent,
     FormatDirective,
-    PerfilClienteComponent,
+    // PerfilClienteComponent,
   ],
   imports: [
     BrowserModule,
