@@ -26,10 +26,9 @@ import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produt
 import { CarrinhoComponent } from './componentes/processoDeCompra/carrinho/carrinho.component';
 import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho-secundario/cabecalho-secundario.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarUsuarioComponent } from './componentes/navbar/navbar-usuario/navbar-usuario.component';
-import { NavbarClienteComponent } from './componentes/navbar/navbar-cliente/navbar-cliente.component';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { FormatDirective } from './componentes/cliente/enderecos/cep/format.directive';
+import { PerfilClienteComponent } from './componentes/cliente/perfil-cliente/perfil-cliente.component';
 
 @NgModule({
   declarations: [
@@ -52,10 +51,9 @@ import { FormatDirective } from './componentes/cliente/enderecos/cep/format.dire
     CadastroClienteComponent,
     ProdutoDetalhadoComponent,
     CarrinhoComponent,
-    NavbarUsuarioComponent,
-    NavbarClienteComponent,
     EnderecosComponent,
     FormatDirective,
+    PerfilClienteComponent,
   ],
   imports: [
     BrowserModule,

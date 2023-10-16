@@ -1,10 +1,11 @@
-import { clienteLogado } from './../../../core/types/type';
+import { ClienteLogado } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../usuario/user.services';
 import { Logado } from 'src/app/core/types/type';
+import { ClienteService } from '../../cliente/cliente.service';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +20,15 @@ export class LoginComponent implements OnInit {
   usuarioLogado: boolean = true;
   usuarioSenhaInvalido: boolean = false;
   selectedType: string = 'usuario';
-  clienteLogado!: clienteLogado;
+  clienteLogado!: ClienteLogado;
+  idCliente!: number;
 
   constructor(
-    private service: LoginService,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private userService: UserService
+    private service : LoginService,
+    private router : Router,
+    private formBuilder : FormBuilder,
+    private userService : UserService,
+    private serviceiD : ClienteService,
   ) { }
   ngOnInit(): void {
     this.userService.setUsuarioLogado(!this.usuarioLogado);
@@ -77,9 +80,10 @@ export class LoginComponent implements OnInit {
     if (this.formularioCliente.valid) {
       this.service.loginCliente(this.formularioCliente.value).subscribe((clienteLogado) => {
         if (clienteLogado) {
-          this.logado = clienteLogado;
+          const id = parseInt(clienteLogado.id);
+          this.serviceiD.setIdCliente(id);
           this.usuarioSenhaInvalido = false;
-          this.router.navigate(['/cadastrarCliente'])
+          this.router.navigate(['/perfil'])
         } else {
           this.usuarioSenhaInvalido = true;
         }

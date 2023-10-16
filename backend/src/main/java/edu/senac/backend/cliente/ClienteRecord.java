@@ -6,7 +6,7 @@ public record ClienteRecord(
         Long id,
         String nomeCliente,
         String cpfCliente,
-        String dataNascCliente,
+        String datanascCliente,
         String generoCliente,
         String telefoneCliente,
         String emailCliente,

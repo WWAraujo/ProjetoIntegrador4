@@ -51,7 +51,6 @@ public class ClienteController {
         ClienteModel lg = new ClienteModel(loginCliente);
 
         LoginClienteResponse loginResponse = repository.findIdAndTypeByEmailAndSenha(lg.getEmailCliente(), lg.getSenhaCliente());
-        System.out.println(loginResponse);
         return ResponseEntity.ok(loginResponse);
     }
 
