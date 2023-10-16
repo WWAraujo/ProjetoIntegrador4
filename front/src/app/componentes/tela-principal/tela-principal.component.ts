@@ -44,6 +44,7 @@ export class TelaPrincipalComponent implements OnInit {
   pegarId(idProduto: number) {
     this.service.setIdProduto(idProduto);
     this.router.navigate(['/produtoDetalhado']);
+    console.log(idProduto);
   }
 
   formatarMoeda(valor: number): string {

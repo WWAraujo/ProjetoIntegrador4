@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
+import { Cliente } from 'src/app/core/types/type';
 import { environment } from "src/environments/environment";
 
 
@@ -13,6 +14,7 @@ const API = environment.apiURL;
 export class ClienteService{
   private readonly url = `${API}/cliente`;
   private FormularioCliente: any;
+  private idCliente! : number;
 
   constructor(private http: HttpClient){}
 
@@ -24,13 +26,19 @@ export class ClienteService{
     return this.http.put(`${API}/cliente/alterar-cliente`, cliente);
   }
 
+  exibirPerfil(id: number) : Observable <Cliente>{
+    return this.http.get<Cliente>(
+      `${API}/cliente/buscarid/${id}`);
+
+  }
+
   procurarEmail(email: string): Observable<boolean> {
     const caminho = 'buscaremail';
     const urlBuscarEmail = `${this.url}/${caminho}/${email}`;
     return this.http.get<boolean>(urlBuscarEmail);
   }
 
-  setDadosCliente(data: any){
+  setDadosCliente(data : any){
     this.FormularioCliente = data;
   }
 
@@ -38,6 +46,14 @@ export class ClienteService{
     return this.FormularioCliente;
   }
 
-  
+  setIdCliente(id : number){
+    this.idCliente = id;
+  }
+
+  getIdCliente(): number{
+    return this.idCliente;
+  }
+
+
 
 }

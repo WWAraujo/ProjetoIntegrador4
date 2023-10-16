@@ -66,6 +66,21 @@
   margin: 10px 0px;
 }
 
+.enderecos{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px ;
+  width: 150px;
+  height: 50px;
+  background-color: #fff;
+  color: #1e90ff;
+  font:1.1em 'Inter', sans-serif;
+
+
+}
+
 
 div {
   width: 60%;
