@@ -61,8 +61,8 @@
 
     <div class="genero-cpf">
       <div class="genero">
-        <select formControlName="genero">
-          <!-- [ngModel]="clienteData.generoCliente" -->
+        <select formControlName="genero" [ngModel]="clienteData.generoCliente">
+
           <option value="" disabled selected>Selecione um Gênero*</option>
           <option
             *ngFor="let escolhido of genero"
@@ -198,10 +198,8 @@
       type="button"
       class="btn btn-primary"
       (click)="cadastrarCliente()"
-      [disabled]="!formulario.valid"
-      [ngClass]="habilitarBotao()"
     >
-      CONTINUAR
-    </button>
+       CADASTRAR
+     </button>
   </form>
 </section>

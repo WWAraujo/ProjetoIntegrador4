@@ -42,7 +42,7 @@ export class CadastroClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.idCliente = this.service.getIdCliente();
-
+    this.idCliente = 2;
     if (this.idCliente) {
       this.service.exibirPerfil(this.idCliente).subscribe((data) => {
         console.log(data);
@@ -71,6 +71,16 @@ export class CadastroClienteComponent implements OnInit {
       this.formulario.patchValue(dadosCliente);
       this.service.setDadosCliente([]);
     }
+  }
+
+  verificaDadosInseridos(){
+      if(this.formulario.get('nome')?.value != this.clienteData.nomeCliente ||
+      this.formulario.get('genero')?.value != this.clienteData.generoCliente ||
+      this.formulario.get('dataNascimento')?.value != this.clienteData.datanascCliente){
+        return true;
+      }
+      return false;
+
   }
 
   inputChanged = new Subject<void>();
@@ -104,16 +114,20 @@ export class CadastroClienteComponent implements OnInit {
     };
 
     if (this.idCliente) {
-      console.log('dados alterar', dadosParaEnviar);
-      this.service
-        .alterarCliente(dadosParaEnviar)
-        .subscribe((clienteCadastrado) => {
-          if (clienteCadastrado) {
-            alert('Informações alterada com sucesso');
-          } else {
-            alert('Algo deu errado no cadastro');
-          }
-        });
+      const verificar = this.verificaDadosInseridos();
+      if (verificar){
+        this.service
+          .alterarCliente(dadosParaEnviar)
+          .subscribe((clienteCadastrado) => {
+            if (clienteCadastrado) {
+              alert('Informações alterada com sucesso');
+            } else {
+              alert('Algo deu errado no cadastro');
+            }
+          });
+      } else {
+        alert('Erro ao alterar.')
+      }
     }
 
     if (!this.emailEncontrado.valueOf() && !this.idCliente) {
@@ -137,6 +151,7 @@ export class CadastroClienteComponent implements OnInit {
     } else {
       alert('Verifique os campos obrigatórios e a confimação de senha');
     }
+
   }
 
   addEnderecos() {

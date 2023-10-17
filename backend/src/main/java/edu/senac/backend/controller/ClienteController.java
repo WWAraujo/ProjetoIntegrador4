@@ -36,7 +36,10 @@ public class ClienteController {
 
     @GetMapping("/buscarid/{id}")
     public Optional<ClienteModel> buscarCliente(@PathVariable Long id){
-        return repository.findById(id);
+//        Optional<PrepararClienteParaAlterar>
+//        PrepararClienteParaAlterar resposta = new PrepararClienteParaAlterar(repository.findById(id));
+        Optional resposta = (repository.findById(id));
+        return resposta;
     }
 
     @GetMapping("/buscaremail/{email}")

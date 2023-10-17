@@ -52,7 +52,7 @@ public class ClienteModel {
             this.generoCliente = clienteModel.get().getGeneroCliente();
             this.telefoneCliente = clienteModel.get().getTelefoneCliente();
             this.emailCliente = clienteModel.get().getEmailCliente();
-            this.senhaCliente = clienteModel.get().getSenhaCliente();
+            this.senhaCliente = new Criptografia().descriptar(clienteModel.get().getSenhaCliente());
         }
     }
 
