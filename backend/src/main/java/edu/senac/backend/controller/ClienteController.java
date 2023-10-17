@@ -2,6 +2,9 @@ package edu.senac.backend.controller;
 
 import edu.senac.backend.cliente.*;
 import edu.senac.backend.cliente.LoginClienteResponse;
+import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteModel;
+import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteRecord;
+import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -20,17 +22,17 @@ public class ClienteController {
     private ClienteRepository repository;
 
     @Autowired
-    private EnderecosClienteRepository enderecosClienteRepository;
+    private EnderecosEntregasClienteRepository enderecosEntregasClienteRepository;
 
     @PostMapping("/cadastrar-cliente")
     public ResponseEntity<Long> cadastrarCliente(@RequestBody ClienteRecordConstructor cliente){
 
         ClienteModel clienteSalvo = repository.save(new ClienteModel(cliente));
 
-        for (EnderecosClienteRecord enderecoRecord : cliente.enderecos()){
-            EnderecosClienteModel enderecosClienteModel =
-                    new EnderecosClienteModel (clienteSalvo, enderecoRecord);
-            enderecosClienteRepository.save(enderecosClienteModel);
+        for (EnderecosEntregasClienteRecord enderecoRecord : cliente.enderecos()){
+            EnderecosEntregasClienteModel enderecosEntregasClienteModel =
+                    new EnderecosEntregasClienteModel(clienteSalvo, enderecoRecord);
+            enderecosEntregasClienteRepository.save(enderecosEntregasClienteModel);
         }
 
         return ResponseEntity.ok(clienteSalvo.getId());
@@ -41,14 +43,14 @@ public class ClienteController {
 
         ClienteModel clienteModel = new ClienteModel(repository.findById(id));
 
-        List<EnderecosClienteModel> endereco = (enderecosClienteRepository.findIdByIdCliente(clienteModel.getId()));
+        List<EnderecosEntregasClienteModel> endereco = (enderecosEntregasClienteRepository.findIdByIdCliente(clienteModel.getId()));
 
         ClienteRecordConstructor cliente = getClienteRecordConstructor(clienteModel, endereco);
 
         return ResponseEntity.ok(cliente);
     }
 
-    private static ClienteRecordConstructor getClienteRecordConstructor(ClienteModel clienteModel, List<EnderecosClienteModel> endereco ) {
+    private static ClienteRecordConstructor getClienteRecordConstructor(ClienteModel clienteModel, List<EnderecosEntregasClienteModel> endereco ) {
 
         ClienteRecord clienteRecord = new ClienteRecord(
                 clienteModel.getId(),
@@ -60,10 +62,10 @@ public class ClienteController {
                 clienteModel.getEmailCliente(),
                 clienteModel.getSenhaCliente());
 
-        List<EnderecosClienteRecord> enderecos = new ArrayList<>();
+        List<EnderecosEntregasClienteRecord> enderecos = new ArrayList<>();
 
-        for (EnderecosClienteModel end : endereco){
-            EnderecosClienteRecord enderecoAtual = new EnderecosClienteRecord(
+        for (EnderecosEntregasClienteModel end : endereco){
+            EnderecosEntregasClienteRecord enderecoAtual = new EnderecosEntregasClienteRecord(
                     end.getId(),
                     end.getIdCliente(),
                     end.getCep(),
@@ -101,10 +103,10 @@ public class ClienteController {
 
         repository.deleteByEnderecosId(clienteSalvo.getId());
 
-        for (EnderecosClienteRecord enderecoRecord : cliente.enderecos()){
-            EnderecosClienteModel enderecosClienteModel =
-                    new EnderecosClienteModel (clienteSalvo, enderecoRecord);
-            enderecosClienteRepository.save(enderecosClienteModel);
+        for (EnderecosEntregasClienteRecord enderecoRecord : cliente.enderecos()){
+            EnderecosEntregasClienteModel enderecosEntregasClienteModel =
+                    new EnderecosEntregasClienteModel(clienteSalvo, enderecoRecord);
+            enderecosEntregasClienteRepository.save(enderecosEntregasClienteModel);
         }
 
         return ResponseEntity.ok(clienteSalvo.getId());

@@ -1,6 +1,6 @@
-package edu.senac.backend.cliente;
+package edu.senac.backend.enderecos.entrega;
 
-public record EnderecosClienteRecord(
+public record EnderecosEntregasClienteRecord(
         Long id,
         Long idCliente,
         String cep,

@@ -1,5 +1,6 @@
-package edu.senac.backend.cliente;
+package edu.senac.backend.enderecos.entrega;
 
+import edu.senac.backend.cliente.ClienteModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class EnderecosClienteModel {
+public class EnderecosEntregasClienteModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,7 @@ public class EnderecosClienteModel {
     private String cidade;
     private String uf;
 
-    public EnderecosClienteModel(ClienteModel clienteModel, EnderecosClienteRecord enderecos){
+    public EnderecosEntregasClienteModel(ClienteModel clienteModel, EnderecosEntregasClienteRecord enderecos){
         this.idCliente = clienteModel.getId();
         this.cep = enderecos.cep();
         this.logradouro = enderecos.logradouro();
@@ -36,7 +37,7 @@ public class EnderecosClienteModel {
         this.uf = enderecos.uf();
     }
 
-    public EnderecosClienteModel(EnderecosClienteModel endereco) {
+    public EnderecosEntregasClienteModel(EnderecosEntregasClienteModel endereco) {
         this.id = endereco.getId();
         this.idCliente = endereco.getIdCliente();
         this.cep = endereco.getCep();
