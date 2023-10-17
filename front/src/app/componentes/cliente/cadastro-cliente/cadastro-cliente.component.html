@@ -26,14 +26,12 @@
     <div class="dataNascimento-telefone">
       <div class="dataNascimento">
         <input
-          type="text"
+          type="date"
           class="input"
           id="dataNascimento"
           [ngModel]="clienteData.datanascCliente"
           formControlName="dataNascimento"
           placeholder="Data de Nascimento*"
-          onfocus="(this.type='date')"
-          onblur="formatDateAndChangeInputType('text')"
         />
         <div
           *ngIf="formulario.get('dataNascimento')?.errors?.['required'] && formulario.get('dataNascimento')?.touched"

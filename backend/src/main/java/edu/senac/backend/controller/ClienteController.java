@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -36,10 +37,22 @@ public class ClienteController {
 
     @GetMapping("/buscarid/{id}")
     public Optional<ClienteModel> buscarCliente(@PathVariable Long id){
-//        Optional<PrepararClienteParaAlterar>
-//        PrepararClienteParaAlterar resposta = new PrepararClienteParaAlterar(repository.findById(id));
-        Optional resposta = (repository.findById(id));
-        return resposta;
+
+//        ClienteModel clienteModel = new ClienteModel(repository.findById(id));
+//        List<EnderecosClienteModel> endereco = new EnderecosClienteModel(enderecosClienteRepository.findIdByIdCliente(clienteModel.getId()));
+//        ClienteRecordConstructor cliente = new ClienteRecordConstructor(
+//                new ClienteRecord(
+//                        clienteModel.getId(),
+//                        clienteModel.getNomeCliente(),
+//                        clienteModel.getCpfCliente(),
+//                        clienteModel.getDatanascCliente(),
+//                        clienteModel.getGeneroCliente(),
+//                        clienteModel.getTelefoneCliente(),
+//                        clienteModel.getEmailCliente(),
+//                        clienteModel.getSenhaCliente()),
+//        );
+
+        return repository.findById(id);
     }
 
     @GetMapping("/buscaremail/{email}")
@@ -52,7 +65,6 @@ public class ClienteController {
     public ResponseEntity<LoginClienteResponse> salvarCliente(@RequestBody ClienteRecord loginCliente) {
 
         ClienteModel lg = new ClienteModel(loginCliente);
-
         LoginClienteResponse loginResponse = repository.findIdAndTypeByEmailAndSenha(lg.getEmailCliente(), lg.getSenhaCliente());
         return ResponseEntity.ok(loginResponse);
     }

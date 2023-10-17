@@ -2,7 +2,6 @@ package edu.senac.backend.cliente;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @ToString
 @Table(name = "enderecos")
@@ -35,5 +34,17 @@ public class EnderecosClienteModel {
         this.bairro = enderecos.bairro();
         this.cidade = enderecos.cidade();
         this.uf = enderecos.uf();
+    }
+
+    public EnderecosClienteModel(EnderecosClienteModel endereco) {
+        this.id = endereco.getId();
+        this.idCliente = endereco.getIdCliente();
+        this.cep = endereco.getCep();
+        this.logradouro = endereco.getLogradouro();
+        this.numero = endereco.getNumero();
+        this.complemento = endereco.getComplemento();
+        this.bairro = endereco.getBairro();
+        this.cidade = endereco.getCidade();
+        this.uf = endereco.getUf();
     }
 }

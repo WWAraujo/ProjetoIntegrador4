@@ -42,7 +42,7 @@ export class CadastroClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.idCliente = this.service.getIdCliente();
-    this.idCliente = 2;
+    // this.idCliente = 2; //chumbado um id
     if (this.idCliente) {
       this.service.exibirPerfil(this.idCliente).subscribe((data) => {
         console.log(data);
@@ -80,7 +80,6 @@ export class CadastroClienteComponent implements OnInit {
         return true;
       }
       return false;
-
   }
 
   inputChanged = new Subject<void>();
@@ -174,21 +173,21 @@ export class CadastroClienteComponent implements OnInit {
     }
   }
 
-  changeInputType(type: string) {
-    const input = document.getElementById('dataNascimento') as HTMLInputElement;
-    input.type = type;
-  }
-  formatDateAndChangeInputType(type: string) {
-    const input = document.getElementById('dataNascimento') as HTMLInputElement;
-    const dateValue = input.value;
-    if (dateValue) {
-      const parts = dateValue.split('-');
-      if (parts.length === 3) {
-        const formattedDate = parts[2] + '/' + parts[1] + '/' + parts[0];
-        input.value = formattedDate;
-      }
-    }
-    input.type = type;
-  }
-  //
+  // changeInputType(type: string) {
+  //   const input = document.getElementById('dataNascimento') as HTMLInputElement;
+  //   input.type = type;
+  // }
+
+  // formatDateAndChangeInputType(type: string) {
+  //   const input = document.getElementById('dataNascimento') as HTMLInputElement;
+  //   const dateValue = input.value;
+  //   if (dateValue) {
+  //     const parts = dateValue.split('-');
+  //     if (parts.length === 3) {
+  //       const formattedDate = parts[2] + '/' + parts[1] + '/' + parts[0];
+  //       input.value = formattedDate;
+  //     }
+  //   }
+  //   input.type = type;
+  // }
 }
