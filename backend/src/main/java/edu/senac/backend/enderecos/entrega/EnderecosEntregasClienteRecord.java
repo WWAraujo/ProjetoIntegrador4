@@ -9,6 +9,7 @@ public record EnderecosEntregasClienteRecord(
         String complemento,
         String bairro,
         String cidade,
-        String uf
+        String uf,
+        String enderecoPrincipal
 ) {
 }

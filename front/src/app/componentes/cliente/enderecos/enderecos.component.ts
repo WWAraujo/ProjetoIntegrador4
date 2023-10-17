@@ -40,7 +40,6 @@ export class EnderecosComponent implements OnInit {
 
   ngOnInit(): void {
     this.enderecos = this.service.getListaEndereco();
-    console.log(this.enderecos)
   }
 
   finalizarEnderecos(){
@@ -64,13 +63,6 @@ export class EnderecosComponent implements OnInit {
     }
   }
 
-  alerta(){
-    alert('Tem certeza que deseja sair?');
-    // this.enderecos.forEach((endereco) => {
-    //   this.enderecos.splice(endereco, 1)
-    // })
-  }
-
   excluirEndereco(end: Endereco){
     this.enderecos.forEach((endereco ) => {
       if (endereco === end) {
@@ -89,6 +81,10 @@ export class EnderecosComponent implements OnInit {
 
   fecharMenu(){
     this.abrirform = false;
+  }
+
+  voltarCadastroCliente(){
+    this.router.navigate(['/cadastrarCliente'])
   }
 
   alterarEndereco(end: Endereco){

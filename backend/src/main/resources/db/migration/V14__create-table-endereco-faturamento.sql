@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS enderecoFaturamento;
-CREATE TABLE enderecoFaturamento (
+DROP TABLE IF EXISTS endereco_faturamento;
+CREATE TABLE endereco_faturamento (
 	id bigint not null,
     FOREIGN KEY (id) REFERENCES cliente(id),
     cep varchar(8)  not null,

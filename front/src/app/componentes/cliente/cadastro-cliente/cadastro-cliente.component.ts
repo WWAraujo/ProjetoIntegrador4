@@ -28,7 +28,7 @@ export class CadastroClienteComponent implements OnInit {
     nomeCliente: '',
     cpfCliente: '',
     datanascCliente: '',
-    generoCliente: '',
+    generoCliente: '.',
     telefoneCliente: '',
     emailCliente: '',
     senhaCliente: '',
@@ -44,14 +44,17 @@ export class CadastroClienteComponent implements OnInit {
   ngOnInit(): void {
     this.idCliente = this.service.getIdCliente();
     // this.idCliente = 2; //chumbado um id
+
+    const listaEnderecoAtual = this.serviceEndereco.getListaEndereco();
+    if (listaEnderecoAtual) {
+      this.enderecoData = listaEnderecoAtual;
+    }
     if (this.idCliente) {
       this.service.exibirPerfil(this.idCliente).subscribe((data) => {
-        console.log(data);
         this.clienteData = data.cliente;
-        this.enderecoData = data.enderecos;
-        console.log(this.clienteData);
-        console.log(data.enderecos);
-        console.log(this.enderecoData);
+        if (!listaEnderecoAtual){
+          this.enderecoData = data.enderecos;
+        }
       });
     }
 
@@ -135,16 +138,19 @@ export class CadastroClienteComponent implements OnInit {
     }
 
     if (!this.emailEncontrado.valueOf() && !this.idCliente) {
-      console.log('dados cadastrar', dadosParaEnviar);
-      this.service
-        .cadastrarCliente(dadosParaEnviar)
-        .subscribe((clienteCadastrado) => {
-          if (clienteCadastrado) {
-            this.router.navigate(['/solicitarLogin']);
-          } else {
-            alert('Algo deu errado no cadastro');
-          }
-        });
+      if (!dadosParaEnviar.enderecos){
+        this.service
+          .cadastrarCliente(dadosParaEnviar)
+          .subscribe((clienteCadastrado) => {
+            if (clienteCadastrado) {
+              this.router.navigate(['/solicitarLogin']);
+            } else {
+              alert('Algo deu errado no cadastro');
+            }
+          });
+      } else {
+        alert('Coloque pelomenos 1 endereço')
+      }
     } else {
       if (!this.idCliente){
         alert('Email ja Cadastrado!');
@@ -179,22 +185,4 @@ export class CadastroClienteComponent implements OnInit {
       return 'botao__desabilitado';
     }
   }
-
-  // changeInputType(type: string) {
-  //   const input = document.getElementById('dataNascimento') as HTMLInputElement;
-  //   input.type = type;
-  // }
-
-  // formatDateAndChangeInputType(type: string) {
-  //   const input = document.getElementById('dataNascimento') as HTMLInputElement;
-  //   const dateValue = input.value;
-  //   if (dateValue) {
-  //     const parts = dateValue.split('-');
-  //     if (parts.length === 3) {
-  //       const formattedDate = parts[2] + '/' + parts[1] + '/' + parts[0];
-  //       input.value = formattedDate;
-  //     }
-  //   }
-  //   input.type = type;
-  // }
 }

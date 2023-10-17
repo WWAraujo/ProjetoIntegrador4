@@ -25,6 +25,7 @@ public class EnderecosEntregasClienteModel {
     private String bairro;
     private String cidade;
     private String uf;
+    private String enderecoPrincipal;
 
     public EnderecosEntregasClienteModel(ClienteModel clienteModel, EnderecosEntregasClienteRecord enderecos){
         this.idCliente = clienteModel.getId();

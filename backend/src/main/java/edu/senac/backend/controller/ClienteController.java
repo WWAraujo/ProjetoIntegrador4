@@ -5,6 +5,7 @@ import edu.senac.backend.cliente.LoginClienteResponse;
 import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteModel;
 import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteRecord;
 import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteRepository;
+import edu.senac.backend.enderecos.faturamento.EnderecoFaturamentoClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +25,17 @@ public class ClienteController {
     @Autowired
     private EnderecosEntregasClienteRepository enderecosEntregasClienteRepository;
 
+    @Autowired
+    private EnderecoFaturamentoClienteRepository faturamento;
+
     @PostMapping("/cadastrar-cliente")
     public ResponseEntity<Long> cadastrarCliente(@RequestBody ClienteRecordConstructor cliente){
 
         ClienteModel clienteSalvo = repository.save(new ClienteModel(cliente));
+
+        for (EnderecosEntregasClienteRecord endereco : cliente.enderecos()){
+
+        }
 
         for (EnderecosEntregasClienteRecord enderecoRecord : cliente.enderecos()){
             EnderecosEntregasClienteModel enderecosEntregasClienteModel =
@@ -74,7 +82,8 @@ public class ClienteController {
                     end.getComplemento(),
                     end.getBairro(),
                     end.getCidade(),
-                    end.getUf());
+                    end.getUf(),
+                    end.getEnderecoPrincipal());
             enderecos.add(enderecoAtual);
         }
 
