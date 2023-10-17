@@ -36,6 +36,7 @@ public class EnderecosEntregasClienteModel {
         this.bairro = enderecos.bairro();
         this.cidade = enderecos.cidade();
         this.uf = enderecos.uf();
+        this.enderecoPrincipal = enderecos.enderecoPrincipal();
     }
 
     public EnderecosEntregasClienteModel(EnderecosEntregasClienteModel endereco) {

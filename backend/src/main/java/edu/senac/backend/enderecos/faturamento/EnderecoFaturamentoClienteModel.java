@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @ToString
-@Table(name = "enderecoFaturamento")
+@Table(name = "endereco_faturamento")
 @Entity(name = "EnderecoFaturamento")
 @Data
 @NoArgsConstructor
@@ -17,6 +17,7 @@ public class EnderecoFaturamentoClienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long idCliente;
     private String cep;
     private String logradouro;
     private String numero;
@@ -26,7 +27,7 @@ public class EnderecoFaturamentoClienteModel {
     private String uf;
 
     public EnderecoFaturamentoClienteModel(ClienteModel clienteModel, EnderecosEntregasClienteRecord enderecos){
-        this.id = clienteModel.getId();
+        this.idCliente = clienteModel.getId();
         this.cep = enderecos.cep();
         this.logradouro = enderecos.logradouro();
         this.numero = enderecos.numero();

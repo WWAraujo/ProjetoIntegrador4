@@ -43,7 +43,7 @@ export class CadastroClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.idCliente = this.service.getIdCliente();
-    // this.idCliente = 2; //chumbado um id
+    this.idCliente = 1; //chumbado um id
 
     const listaEnderecoAtual = this.serviceEndereco.getListaEndereco();
     if (listaEnderecoAtual) {

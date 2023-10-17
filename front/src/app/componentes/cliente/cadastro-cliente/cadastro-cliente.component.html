@@ -62,13 +62,9 @@
         <select formControlName="genero" [ngModel]="clienteData.generoCliente">
 
           <option value="" disabled selected>Selecione um Gênero*</option>
-          <option
-            *ngFor="let escolhido of genero"
-            [value]="escolhido"
-            placeholder="Escolha o genero*"
-            >
-            {{ escolhido }}
-          </option>
+          <option value="MASCULINO">MASCULINO</option>
+          <option value="FEMININO">MASCULINO</option>
+          <option value="OUTROS">MASCULINO</option>
         </select>
         <div
           class="mensagem__erro"
