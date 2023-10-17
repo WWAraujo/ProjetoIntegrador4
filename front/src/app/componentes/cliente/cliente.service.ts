@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { Cliente } from 'src/app/core/types/type';
+import { ClienteCompleto } from 'src/app/core/types/type';
 import { environment } from "src/environments/environment";
 
 
@@ -26,8 +26,8 @@ export class ClienteService{
     return this.http.put(`${API}/cliente/alterar`, cliente);
   }
 
-  exibirPerfil(id: number) : Observable <Cliente>{
-    return this.http.get<Cliente>(
+  exibirPerfil(id: number) : Observable <ClienteCompleto>{
+    return this.http.get<ClienteCompleto>(
       `${API}/cliente/buscarid/${id}`);
 
   }

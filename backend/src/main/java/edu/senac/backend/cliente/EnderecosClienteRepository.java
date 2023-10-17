@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface EnderecosClienteRepository extends JpaRepository<EnderecosClienteModel, Long> {
 
-//    @Query("SELECT FROM Enderecos end WHERE end.idCliente = :id")
-//    List<EnderecosClienteModel> findIdByIdCliente(@Param("id") Long id);
+    @Query("SELECT e FROM Enderecos e WHERE e.idCliente = :id")
+    List<EnderecosClienteModel> findIdByIdCliente(@Param("id") Long id);
 }

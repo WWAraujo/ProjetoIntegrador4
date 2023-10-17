@@ -121,3 +121,8 @@ export interface Endereco {
   ativoInativo: AtivoInativo;
   enderecoPrincipal: string;
 }
+
+export interface ClienteCompleto{
+  cliente: Cliente;
+  enderecos: Endereco[];
+}

@@ -2,8 +2,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { AtivoInativo, Endereco } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { ModalenderecoService } from '../modalendereco.service';
-import { CadastroClienteComponent } from '../cadastro-cliente/cadastro-cliente.component';
-import { end } from '@popperjs/core';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-enderecos',
@@ -15,7 +13,6 @@ export class EnderecosComponent implements OnInit {
   idCliente: string = '';
   enderecos: Endereco[] = [];
   abrirform: boolean = false;
-  // enderecoAtual!: Endereco;
 
   endereco: Endereco = {
     id: 0,
@@ -39,29 +36,27 @@ export class EnderecosComponent implements OnInit {
   constructor(
     private service: ModalenderecoService,
     private router: Router,
-    ) { }
+    ) {}
 
   ngOnInit(): void {
-    
+    this.enderecos = this.service.getListaEndereco();
+    console.log(this.enderecos)
   }
 
   finalizarEnderecos(){
     try {
       this.enderecos.forEach((endereco) => {
         if (endereco.enderecoPrincipal === 'p'){
-          console.log('encontrado endereco com flag P', endereco);
           throw new Error('Parar o loop');
         }
       });
       this.enderecos.forEach((endr) => {
         this.selecionarEnderecoPrincipal(endr.cep, endr.numero);
-        console.log('Coloquei no primeiro', endr);
         throw new Error('Parar o loop');
       })
     } catch (e: any) {
       if (e.message === 'Parar o loop') {
         this.service.setListaEndereco(this.enderecos);
-        console.log('Enderecos cadastrados',this.enderecos);
         this.router.navigate(['/cadastrarCliente'])
       } else {
         console.log('Erro desconhecido:', e)

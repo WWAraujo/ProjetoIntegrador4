@@ -21,6 +21,7 @@ export class CadastroClienteComponent implements OnInit {
   dataNascimento!: string;
   idCliente!: number;
   clienteData!: Cliente;
+  enderecoData: Endereco[] = [];
 
   cliente: Cliente = {
     id: 0,
@@ -46,7 +47,11 @@ export class CadastroClienteComponent implements OnInit {
     if (this.idCliente) {
       this.service.exibirPerfil(this.idCliente).subscribe((data) => {
         console.log(data);
-        this.clienteData = data;
+        this.clienteData = data.cliente;
+        this.enderecoData = data.enderecos;
+        console.log(this.clienteData);
+        console.log(data.enderecos);
+        console.log(this.enderecoData);
       });
     }
 
@@ -154,8 +159,10 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   addEnderecos() {
+    console.log(this.enderecoData);
     const estadoFormularioCliente = this.formulario.getRawValue();
     this.service.setDadosCliente(estadoFormularioCliente);
+    this.serviceEndereco.setListaEndereco(this.enderecoData);
     this.router.navigate(['/endereco']);
   }
 

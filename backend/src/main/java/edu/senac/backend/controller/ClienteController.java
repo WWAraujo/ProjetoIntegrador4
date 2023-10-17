@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,23 +37,47 @@ public class ClienteController {
     }
 
     @GetMapping("/buscarid/{id}")
-    public Optional<ClienteModel> buscarCliente(@PathVariable Long id){
+    public ResponseEntity<ClienteRecordConstructor> buscarCliente(@PathVariable Long id){
 
-//        ClienteModel clienteModel = new ClienteModel(repository.findById(id));
-//        List<EnderecosClienteModel> endereco = new EnderecosClienteModel(enderecosClienteRepository.findIdByIdCliente(clienteModel.getId()));
-//        ClienteRecordConstructor cliente = new ClienteRecordConstructor(
-//                new ClienteRecord(
-//                        clienteModel.getId(),
-//                        clienteModel.getNomeCliente(),
-//                        clienteModel.getCpfCliente(),
-//                        clienteModel.getDatanascCliente(),
-//                        clienteModel.getGeneroCliente(),
-//                        clienteModel.getTelefoneCliente(),
-//                        clienteModel.getEmailCliente(),
-//                        clienteModel.getSenhaCliente()),
-//        );
+        ClienteModel clienteModel = new ClienteModel(repository.findById(id));
 
-        return repository.findById(id);
+        List<EnderecosClienteModel> endereco = (enderecosClienteRepository.findIdByIdCliente(clienteModel.getId()));
+
+        ClienteRecordConstructor cliente = getClienteRecordConstructor(clienteModel, endereco);
+
+        return ResponseEntity.ok(cliente);
+    }
+
+    private static ClienteRecordConstructor getClienteRecordConstructor(ClienteModel clienteModel, List<EnderecosClienteModel> endereco ) {
+
+        ClienteRecord clienteRecord = new ClienteRecord(
+                clienteModel.getId(),
+                clienteModel.getNomeCliente(),
+                clienteModel.getCpfCliente(),
+                clienteModel.getDatanascCliente(),
+                clienteModel.getGeneroCliente(),
+                clienteModel.getTelefoneCliente(),
+                clienteModel.getEmailCliente(),
+                clienteModel.getSenhaCliente());
+
+        List<EnderecosClienteRecord> enderecos = new ArrayList<>();
+
+        for (EnderecosClienteModel end : endereco){
+            EnderecosClienteRecord enderecoAtual = new EnderecosClienteRecord(
+                    end.getId(),
+                    end.getIdCliente(),
+                    end.getCep(),
+                    end.getLogradouro(),
+                    end.getNumero(),
+                    end.getComplemento(),
+                    end.getBairro(),
+                    end.getCidade(),
+                    end.getUf());
+            enderecos.add(enderecoAtual);
+        }
+
+        ClienteRecordConstructor cliente = new ClienteRecordConstructor(clienteRecord,enderecos);
+        return cliente;
     }
 
     @GetMapping("/buscaremail/{email}")

@@ -136,6 +136,7 @@
           type="password"
           class="input"
           id="senha"
+          [ngModel]="clienteData.senhaCliente"
           formControlName="senha"
           placeholder="Senha*"
           autocomplete="off"
@@ -159,6 +160,7 @@
           type="password"
           class="input"
           id="confirmaSenha"
+          [ngModel]="clienteData.senhaCliente"
           formControlName="confirmacaoSenha"
           placeholder="Confirme sua senha*"
           autocomplete="off"
@@ -197,7 +199,7 @@
       class="btn btn-primary"
       (click)="cadastrarCliente()"
     >
-       CADASTRAR
-     </button>
+    CADASTRAR / ALTERAR
+    </button>
   </form>
 </section>
