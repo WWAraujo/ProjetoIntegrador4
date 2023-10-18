@@ -139,11 +139,11 @@
 
     <div class="linha">
       <div *ngIf="!abrirform">
-        <button type="button" class="btn btn-outline-primary btnesquerda" (click)="finalizarEnderecos()">Finalizar</button>
+        <button type="button" class="btn btn-outline-primary btnesquerda" (click)="finalizarEnderecos()">Voltar</button>
       </div>
 
       <div *ngIf="!endereco.cep">
-        <button type="button" class="btn btn-outline-primary btndireita" (click)="fecharMenu()" (click)="alerta()">Cancelar</button>
+        <button type="button" class="btn btn-outline-primary btndireita" (click)="fecharMenu()" >Cancelar</button>
       </div>
     </div>
   </div>

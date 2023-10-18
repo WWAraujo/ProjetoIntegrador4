@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProdutosService } from '../../produtos/produtos.service';
+import { ProdutosService } from '../produtos.service';
 import { ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +25,7 @@ export class ProdutoDetalhadoComponent implements OnInit {
   constructor(private service: ProdutosService) { }
 
   ngOnInit(): void {
-    this.idProduto = this.service.getIdProduto()
+    this.idProduto = this.service.getIdProduto();
     this.service.getProdutoCompleto(this.idProduto).subscribe(data => {
       this.productData = data;
       console.log(data);
@@ -72,4 +72,6 @@ export class ProdutoDetalhadoComponent implements OnInit {
       return 'botao__desabilitado';
     }
   }
+
+
 }

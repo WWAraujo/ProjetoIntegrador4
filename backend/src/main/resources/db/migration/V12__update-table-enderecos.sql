@@ -1,4 +1,4 @@
-ALTER TABLE enderecos ADD COLUMN enderecoPrincipal char (1);
+ALTER TABLE enderecos ADD COLUMN endereco_principal char (1);
 
 ALTER TABLE enderecos MODIFY COLUMN cep varchar (8) not null;
 

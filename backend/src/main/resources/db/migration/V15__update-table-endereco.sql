@@ -1,0 +1,1 @@
+ALTER TABLE enderecos ADD COLUMN ativo_inativo ENUM ('ATIVO', 'INATIVO');

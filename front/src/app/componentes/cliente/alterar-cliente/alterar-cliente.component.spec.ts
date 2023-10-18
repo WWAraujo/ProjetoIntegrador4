@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarClienteComponent } from './navbar-cliente.component';
+import { AlterarClienteComponent } from './alterar-cliente.component';
 
-describe('NavbarClienteComponent', () => {
-  let component: NavbarClienteComponent;
-  let fixture: ComponentFixture<NavbarClienteComponent>;
+describe('AlterarClienteComponent', () => {
+  let component: AlterarClienteComponent;
+  let fixture: ComponentFixture<AlterarClienteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavbarClienteComponent ]
+      declarations: [ AlterarClienteComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavbarClienteComponent);
+    fixture = TestBed.createComponent(AlterarClienteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

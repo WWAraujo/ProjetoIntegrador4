@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
+import { Cliente, ClienteCompleto } from 'src/app/core/types/type';
 import { environment } from "src/environments/environment";
 
 
@@ -13,6 +14,8 @@ const API = environment.apiURL;
 export class ClienteService{
   private readonly url = `${API}/cliente`;
   private FormularioCliente: any;
+  private idCliente! : number;
+  private dadosAtualCliente! : Cliente;
 
   constructor(private http: HttpClient){}
 
@@ -21,7 +24,13 @@ export class ClienteService{
   }
 
   alterarCliente(cliente: any) {
-    return this.http.put(`${API}/cliente/alterar-cliente`, cliente);
+    return this.http.put(`${API}/cliente/alterar`, cliente);
+  }
+
+  exibirPerfil(id: number) : Observable <ClienteCompleto>{
+    return this.http.get<ClienteCompleto>(
+      `${API}/cliente/buscarid/${id}`);
+
   }
 
   procurarEmail(email: string): Observable<boolean> {
@@ -30,14 +39,26 @@ export class ClienteService{
     return this.http.get<boolean>(urlBuscarEmail);
   }
 
-  setDadosCliente(data: any){
-    this.FormularioCliente = data;
+  procurarCPF(cpf: string): Observable<boolean> {
+    const caminho = 'buscarcpf';
+    const urlBuscarEmail = `${this.url}/${caminho}/${cpf}`;
+    return this.http.get<boolean>(urlBuscarEmail);
+  }
+
+  setDadosCliente(cliente : Cliente){
+    this.dadosAtualCliente = cliente;
   }
 
   getDadosCliente(){
-    return this.FormularioCliente;
+    return this.dadosAtualCliente;
   }
 
-  
+  setIdCliente(id : number){
+    this.idCliente = id;
+  }
+
+  getIdCliente(): number{
+    return this.idCliente;
+  }
 
 }

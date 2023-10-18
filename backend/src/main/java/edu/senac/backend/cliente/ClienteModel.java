@@ -19,7 +19,6 @@ public class ClienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nomeCliente;
     private String cpfCliente;
     private String datanascCliente;
@@ -36,7 +35,7 @@ public class ClienteModel {
         }
         this.nomeCliente = cliente.cliente().nomeCliente();
         this.cpfCliente = cliente.cliente().cpfCliente();
-        this.datanascCliente = cliente.cliente().dataNascCliente().replace("-", "");
+        this.datanascCliente = cliente.cliente().datanascCliente();
         this.generoCliente = cliente.cliente().generoCliente();
         this.telefoneCliente = cliente.cliente().telefoneCliente();
         this.emailCliente = cliente.cliente().emailCliente();
@@ -53,7 +52,7 @@ public class ClienteModel {
             this.generoCliente = clienteModel.get().getGeneroCliente();
             this.telefoneCliente = clienteModel.get().getTelefoneCliente();
             this.emailCliente = clienteModel.get().getEmailCliente();
-            this.senhaCliente = clienteModel.get().getSenhaCliente();
+            this.senhaCliente = new Criptografia().descriptar(clienteModel.get().getSenhaCliente());
         }
     }
 

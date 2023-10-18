@@ -3,10 +3,9 @@ export interface Login {
   senha: string;
 }
 
-export interface clienteLogado{
-  emailCliente: string;
-  senhaCliente: string;
-}
+export interface ClienteLogado{
+  id: number;
+  }
 
 export interface Logado {
   id: string;
@@ -102,16 +101,16 @@ export interface Cliente{
   id: number;
   nomeCliente: string;
   cpfCliente: string;
-  dataNascCliente: string;
+  datanascCliente: string;
   generoCliente: string;
   telefoneCliente: string;
   emailCliente: string;
   senhaCliente: string;
+  confirmacaoSenha: String;
 }
 
 export interface Endereco {
   id: number;
-  idCliente: string;
   cep: string;
   logradouro: string;
   numero: string;
@@ -121,4 +120,9 @@ export interface Endereco {
   uf: string;
   ativoInativo: AtivoInativo;
   enderecoPrincipal: string;
+}
+
+export interface ClienteCompleto{
+  cliente: Cliente;
+  enderecos: Endereco[];
 }

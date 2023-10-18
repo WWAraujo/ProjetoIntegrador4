@@ -1,8 +1,9 @@
-package edu.senac.backend.cliente;
+package edu.senac.backend.enderecos.entrega;
 
+import edu.senac.backend.cliente.ClienteModel;
+import edu.senac.backend.service.AtivoInativo;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @ToString
 @Table(name = "enderecos")
@@ -11,7 +12,7 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class EnderecosClienteModel {
+public class EnderecosEntregasClienteModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +26,10 @@ public class EnderecosClienteModel {
     private String bairro;
     private String cidade;
     private String uf;
+    private String enderecoPrincipal;
+    private String ativoInativo;
 
-    public EnderecosClienteModel(ClienteModel clienteModel, EnderecosClienteRecord enderecos){
+    public EnderecosEntregasClienteModel(ClienteModel clienteModel, EnderecosEntregasClienteRecord enderecos){
         this.idCliente = clienteModel.getId();
         this.cep = enderecos.cep();
         this.logradouro = enderecos.logradouro();
@@ -35,5 +38,8 @@ public class EnderecosClienteModel {
         this.bairro = enderecos.bairro();
         this.cidade = enderecos.cidade();
         this.uf = enderecos.uf();
+        this.enderecoPrincipal = enderecos.enderecoPrincipal();
+        this.ativoInativo = enderecos.ativoInativo();
     }
+
 }
