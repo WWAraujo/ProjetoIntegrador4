@@ -14,6 +14,8 @@ public interface ClienteRepository extends JpaRepository<ClienteModel, Long> {
 
     Optional<ClienteModel> findByEmailCliente(String email);
 
+    Optional<ClienteModel> findByCpfCliente(String email);
+
     @Query("SELECT l.id as id FROM Cliente l WHERE l.emailCliente = :usuario AND l.senhaCliente = :senha")
     LoginClienteResponse findIdAndTypeByEmailAndSenha(String usuario, String senha);
 

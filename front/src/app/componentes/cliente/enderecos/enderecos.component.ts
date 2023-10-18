@@ -2,9 +2,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { AtivoInativo, Endereco } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { ModalenderecoService } from '../modalendereco.service';
-import { CadastroClienteComponent } from '../cadastro-cliente/cadastro-cliente.component';
-import { end } from '@popperjs/core';
 import { Router } from '@angular/router';
+import { ClienteService } from '../cliente.service';
 @Component({
   selector: 'app-enderecos',
   templateUrl: './enderecos.component.html',
@@ -12,14 +11,12 @@ import { Router } from '@angular/router';
 })
 export class EnderecosComponent implements OnInit {
   exibirCabecalho: boolean = true;
-  idCliente: string = '';
+  idCliente!: number ;
   enderecos: Endereco[] = [];
   abrirform: boolean = false;
-  // enderecoAtual!: Endereco;
 
   endereco: Endereco = {
     id: 0,
-    idCliente: this.idCliente,
     cep: '',
     logradouro: '',
     numero: '',
@@ -37,43 +34,35 @@ export class EnderecosComponent implements OnInit {
   ]);
 
   constructor(
-    private service: ModalenderecoService,
+    private enderecoService: ModalenderecoService,
     private router: Router,
-    ) { }
+    private clienteService: ClienteService
+    ) {}
 
   ngOnInit(): void {
-    
+    this.enderecos = this.enderecoService.getListaEndereco();
+    this.idCliente = this.clienteService.getIdCliente();
   }
 
   finalizarEnderecos(){
     try {
       this.enderecos.forEach((endereco) => {
         if (endereco.enderecoPrincipal === 'p'){
-          console.log('encontrado endereco com flag P', endereco);
           throw new Error('Parar o loop');
         }
       });
       this.enderecos.forEach((endr) => {
         this.selecionarEnderecoPrincipal(endr.cep, endr.numero);
-        console.log('Coloquei no primeiro', endr);
         throw new Error('Parar o loop');
       })
     } catch (e: any) {
       if (e.message === 'Parar o loop') {
-        this.service.setListaEndereco(this.enderecos);
-        console.log('Enderecos cadastrados',this.enderecos);
-        this.router.navigate(['/cadastrarCliente'])
+        this.enderecoService.setListaEndereco(this.enderecos);
+        this.voltarParaTela();
       } else {
         console.log('Erro desconhecido:', e)
       }
     }
-  }
-
-  alerta(){
-    alert('Tem certeza que deseja sair?');
-    // this.enderecos.forEach((endereco) => {
-    //   this.enderecos.splice(endereco, 1)
-    // })
   }
 
   excluirEndereco(end: Endereco){
@@ -94,6 +83,15 @@ export class EnderecosComponent implements OnInit {
 
   fecharMenu(){
     this.abrirform = false;
+  }
+
+  voltarParaTela(){
+    if (this.idCliente){
+      this.router.navigate(['/alterarCliente'])
+    } else{
+      this.router.navigate(['/cadastrarCliente'])
+      console.log('pulou o alterar cliente')
+    }
   }
 
   alterarEndereco(end: Endereco){
@@ -137,7 +135,7 @@ export class EnderecosComponent implements OnInit {
 
   buscarEnderecoPorCEP(cep: string) {
     if (cep.length === 8) {
-      this.service.buscarEndereco(cep).subscribe((data) => {
+      this.enderecoService.buscarEndereco(cep).subscribe((data) => {
         if (!data.erro) {
           this.endereco.logradouro = data.logradouro;
           this.endereco.bairro = data.bairro;

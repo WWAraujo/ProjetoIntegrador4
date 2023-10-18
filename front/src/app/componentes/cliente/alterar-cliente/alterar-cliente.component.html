@@ -1,0 +1,185 @@
+<app-cabecalho></app-cabecalho>
+<section class="container">
+
+  <div class="title">
+    <label *ngIf="!idCliente">Criar Conta</label>
+    <label *ngIf="idCliente">Alterar Conta</label>
+  </div>
+
+  <form class="form-cadastro">
+    <div class="nome">
+      <input
+        type="text"
+        name="nome"
+        class="form-control"
+        [(ngModel)]="cliente.nomeCliente"
+        />
+      <div
+        *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched"
+      >
+        O Nome é Obrigatório.
+      </div>
+    </div>
+
+    <div class="dataNascimento-telefone">
+      <div class="dataNascimento">
+        <input
+          type="date"
+          class="input"
+          class="form-control"
+          name="dataNascimento"
+          [(ngModel)]="cliente.datanascCliente"
+        />
+        <div
+          *ngIf="formulario.get('dataNascimento')?.errors?.['required'] && formulario.get('dataNascimento')?.touched"
+        >
+          Obrigatório informar a data de Nascimento.
+        </div>
+      </div>
+
+      <div class="telefone">
+        <input
+          type="text"
+          name="telefone"
+          class="form-control"
+          [(ngModel)]="cliente.telefoneCliente"
+          disabled
+        />
+        <div
+          *ngIf="formulario.get('telefone')?.errors?.['required'] && formulario.get('telefone')?.touched"
+        >
+          Informe ao menos um telefone.
+        </div>
+      </div>
+    </div>
+
+    <div class="genero-cpf">
+      <div class="genero">
+        <select [(ngModel)]="cliente.generoCliente" name="generoCliente">
+          <option disabled selected>Selecione um Gênero*</option>
+          <option value="MASCULINO">MASCULINO</option>
+          <option value="FEMININO">FEMININO</option>
+          <option value="OUTROS">OUTROS</option>
+        </select>
+        <div
+          class="mensagem__erro"
+          *ngIf="formulario.get('genero')?.errors?.['required'] && formulario.get('genero')?.touched"
+        >
+          Escolha seu genero.
+        </div>
+      </div>
+
+      <div class="cpf">
+        <input
+          type="text"
+          name="cpf"
+          class="form-control"
+          [(ngModel)]="cliente.cpfCliente"
+          disabled
+        />
+        <div
+          class="mensagem__erro"
+          *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched"
+        >
+          O CPF é obrigatório.
+        </div>
+        <div
+          class="mensagem__erro"
+          *ngIf="formulario.get('cpf')?.touched && formulario.get('cpf')?.hasError('cpfInvalido')"
+        >
+          Informe um cpf valido!
+        </div>
+      </div>
+    </div>
+
+    <div class="email">
+      <input
+        type="text"
+        name="email"
+        class="form-control"
+        [(ngModel)]="cliente.emailCliente"
+        disabled
+      />
+      <div
+        class="mensagem__erro"
+        *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched"
+      >
+        Digite seu e-mail.
+      </div>
+      <div
+        class="mensagem__erro"
+        *ngIf="formulario.get('email')?.hasError('pattern') && formulario.get('email')?.touched"
+      >
+        E-mail inválido! Deve ser no formato correto.
+      </div>
+    </div>
+
+    <div class="senha-confirmarSenha">
+      <div class="senha">
+        <input
+          type="password"
+          class="input"
+          name="senha"
+          [(ngModel)]="cliente.senhaCliente"
+          placeholder="Senha*"
+          autocomplete="off"
+          (blur)="validarSenha()"
+        />
+        <div
+          class="mensagem__erro"
+          *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched"
+        >
+          Senha é obrigatoria!
+        </div>
+        <div
+          class="mensagem__erro"
+          *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched"
+        >
+          Senha tem mínimo de 3 caracteres!
+        </div>
+      </div>
+
+      <div class="confirmaSenha">
+        <input
+          type="password"
+          class="input"
+          name="confirmaSenha"
+          [(ngModel)]="cliente.confirmacaoSenha"
+          placeholder="Confirme sua senha*"
+          autocomplete="off"
+          (blur)="validarSenha()"
+        />
+        <div
+          class="mensagem__erro"
+          *ngIf="formulario.get('confirmacaoSenha')?.errors?.['required'] && formulario.get('confirmacaoSenha')?.touched"
+        >
+          Senha é obrigatoria!
+        </div>
+        <div
+          class="mensagem__erro"
+          *ngIf="formulario.get('confirmacaoSenha')?.errors?.['minlength'] && formulario.get('confirmacaoSenha')?.touched"
+        >
+          Senha tem mínimo de 3 caracteres!
+        </div>
+        <div
+          class="mensagem__erro" *ngIf="!senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched">
+          As senhas não coincidem!
+        </div>
+      </div>
+    </div>
+
+    <div class="endereco">
+      <button class="enderecos" (click)="addEnderecos()">
+        Endereços<img src="../../../../assets/image/endereco.png" />
+      </button>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="alterarCliente()"
+    >
+    CADASTRAR / ALTERAR
+    </button>
+  </form>
+</section>

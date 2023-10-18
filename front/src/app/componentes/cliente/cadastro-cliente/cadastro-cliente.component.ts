@@ -6,30 +6,35 @@ import { Validacoes } from '../../usuario/cadastro-usuario/validacoes';
 import { Cliente, Endereco, Genero } from 'src/app/core/types/type';
 import { ClienteService } from '../cliente.service';
 import { ModalenderecoService } from '../modalendereco.service';
+import { nomeClienteValidator } from '../validadorCliente';
 
 @Component({
   selector: 'app-cadastro-cliente',
   templateUrl: './cadastro-cliente.component.html',
-  styleUrls: ['./cadastro-cliente.component.css']
+  styleUrls: ['./cadastro-cliente.component.css'],
 })
 export class CadastroClienteComponent implements OnInit {
   exibirCabecalho: boolean = true;
   formulario!: FormGroup;
   emailEncontrado: boolean = false;
+  cpfEncontrado: boolean = false;
   senhaCorrespondente: boolean = true;
   genero = Object.values(Genero);
   dataNascimento!: string;
-
+  idCliente!: number;
+  private dadosCliente!: Cliente;
+  enderecoData: Endereco[] = [];
 
   cliente: Cliente = {
     id: 0,
     nomeCliente: '',
     cpfCliente: '',
     datanascCliente: '',
-    generoCliente: '',
+    generoCliente: '.',
     telefoneCliente: '',
     emailCliente: '',
-    senhaCliente: ''
+    senhaCliente: '',
+    confirmacaoSenha: '',
   };
 
   constructor(
@@ -37,52 +42,86 @@ export class CadastroClienteComponent implements OnInit {
     private service: ClienteService,
     private formBuilder: FormBuilder,
     private serviceEndereco: ModalenderecoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.idCliente = this.service.getIdCliente();
+    // this.idCliente = 1; //chumbado um id
+
+    const listaEnderecoAtual = this.serviceEndereco.getListaEndereco();
+    if (listaEnderecoAtual) {
+      this.enderecoData = listaEnderecoAtual;
+    }
+
+    if (this.idCliente) {
+      this.service.exibirPerfil(this.idCliente).subscribe((data) => {
+        this.cliente = data.cliente;
+        this.dadosCliente = data.cliente;
+        if (listaEnderecoAtual.length < 1) {
+          this.enderecoData = data.enderecos;
+        }
+      });
+    }
+
     this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required]],
-      cpf: ['', [Validators.required, Validacoes.ValidaCPF]],
-      dataNascimento: ['',[Validators.required]],
-      genero: ['',[Validators.required]],
-      telefone: ['',[Validators.required]],
-      email: ['', [Validators.required, Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      nome: ['', [Validators.required, nomeClienteValidator()]],
+      cpf: ['', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
+      dataNascimento: ['', [Validators.required]],
+      genero: ['', [Validators.required]],
+      telefone: ['', [Validators.required, Validators.pattern(/^[0-9]{0,11}$/)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
+      ],
       senha: ['', [Validators.required, Validators.minLength(3)]],
       confirmacaoSenha: ['', [Validators.required]],
     });
 
     const dadosCliente = this.service.getDadosCliente();
-    if(dadosCliente) {
+    if (dadosCliente) {
       this.formulario.patchValue(dadosCliente);
-      this.service.setDadosCliente([]);
-
     }
+  }
 
-    this.cliente = {
-      id: 0,
-      nomeCliente: '',
-      cpfCliente: '',
-      datanascCliente: '',
-      generoCliente: '',
-      telefoneCliente: '',
-      emailCliente: '',
-      senhaCliente: ''
-    };
-
+  verificaDadosInseridos() {
+    if (
+      this.cliente.nomeCliente != this.dadosCliente.nomeCliente ||
+      this.cliente.generoCliente != this.dadosCliente.generoCliente ||
+      this.cliente.datanascCliente != this.dadosCliente.datanascCliente
+    ) {
+      return true;
+    }
+    console.log('cliente', this.cliente);
+    console.log('cliente Data', this.dadosCliente);
+    return false;
   }
 
   inputChanged = new Subject<void>();
+
   onInputChanged() {
     this.inputChanged.next();
   }
+
   procurarEmail() {
-    const email = this.formulario.get('email')?.value;
-    this.service.procurarEmail(email).subscribe((emailEncontrado) => {
-      this.emailEncontrado = emailEncontrado;
+    this.service
+      .procurarEmail(this.cliente.emailCliente)
+      .subscribe((response) => {
+        this.emailEncontrado = response;
+      });
+  }
+
+  procurarCpf() {
+    this.service.procurarCPF(this.cliente.cpfCliente).subscribe((response) => {
+      this.cpfEncontrado = response;
     });
   }
 
-  cadastrarCliente(){
+  cadastrarCliente() {
+
     this.cliente = {
       id: 0,
       nomeCliente: this.formulario.get('nome')?.value,
@@ -91,17 +130,18 @@ export class CadastroClienteComponent implements OnInit {
       generoCliente: this.formulario.get('genero')?.value,
       telefoneCliente: this.formulario.get('telefone')?.value,
       emailCliente: this.formulario.get('email')?.value,
-      senhaCliente: this.formulario.get('senha')?.value
+      senhaCliente: this.formulario.get('senha')?.value,
+      confirmacaoSenha: this.formulario.get('senha')?.value,
     };
 
-    const dadosParaEnviar ={
-
+    const dadosParaEnviar = {
       cliente: this.cliente,
-      enderecos: this.serviceEndereco.getListaEndereco()
-    }
+      enderecos: this.enderecoData,
+    };
     console.log('Dados enviados', dadosParaEnviar);
 
-      if (!this.emailEncontrado.valueOf()) {
+    if (!this.emailEncontrado.valueOf() && !this.idCliente) {
+      if (dadosParaEnviar.enderecos.length > 0) {
         this.service
           .cadastrarCliente(dadosParaEnviar)
           .subscribe((clienteCadastrado) => {
@@ -109,26 +149,31 @@ export class CadastroClienteComponent implements OnInit {
               this.router.navigate(['/solicitarLogin']);
             } else {
               alert('Algo deu errado no cadastro');
-            }});
+            }
+          });
       } else {
+        alert('Coloque pelo   menos 1 endereço');
+      }
+    } else {
+      if (!this.idCliente) {
         alert('Email ja Cadastrado!');
       }
-
-      if (this.formulario.valid && this.senhaCorrespondente) {
-      } else {
-        alert('Verifique os campos obrigatórios e a confimação de senha');
-      }
-
-
-    console.log(this.formulario.value);
     }
 
-    addEnderecos(){
-      const estadoFormularioCliente = this.formulario.getRawValue();
-      this.service.setDadosCliente(estadoFormularioCliente);
-      this.router.navigate(['/endereco']);
+    if (this.senhaCorrespondente) {
+    } else {
+      alert('Verifique os campos obrigatórios e a confimação de senha');
     }
 
+  }
+
+  addEnderecos() {
+    console.log(this.enderecoData);
+    const estadoFormularioCliente = this.formulario.getRawValue();
+    this.service.setDadosCliente(estadoFormularioCliente);
+    this.serviceEndereco.setListaEndereco(this.enderecoData);
+    this.router.navigate(['/endereco']);
+  }
 
   validarSenha() {
     const senha = this.formulario.get('senha')?.value;
@@ -144,24 +189,18 @@ export class CadastroClienteComponent implements OnInit {
     }
   }
 
-  //formata campo date em text com os valores formatados
-  changeInputType(type: string) {
-    const input = document.getElementById('dataNascimento') as HTMLInputElement;
-    input.type = type;
-  }
-  formatDateAndChangeInputType(type: string) {
-    const input = document.getElementById('dataNascimento') as HTMLInputElement;
-    const dateValue = input.value;
-    if (dateValue) {
-      const parts = dateValue.split('-');
-      if (parts.length === 3) {
-        const formattedDate = parts[2] + '/' + parts[1] + '/' + parts[0];
-        input.value = formattedDate;
-      }
+  apenasNumeroTelefone() {
+    const telefoneControl = this.formulario.get('telefone');
+    if (telefoneControl) {
+      telefoneControl.setValue(telefoneControl.value.replace(/[^0-9]/g, ''));
     }
-    input.type = type;
   }
-  //
 
+  apenasNumeroCPF() {
+    const telefoneControl = this.formulario.get('cpf');
+    if (telefoneControl) {
+      telefoneControl.setValue(telefoneControl.value.replace(/[^0-9]/g, ''));
+    }
+  }
 
 }

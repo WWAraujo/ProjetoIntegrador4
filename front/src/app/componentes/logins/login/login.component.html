@@ -59,7 +59,7 @@
     <label for="sign-up" id="sign-up-text">Novidades tech na NexusTech. <a (click)="cadastrarCliente()"
         id="sign-up">Inscreva-se já!</a></label>
     <div class="login">
-      <button [disabled]="!formularioColaborador.valid" (click)="LoginColaborador()" ((keypress))="LoginColaborador()"
+      <button [disabled]="!formularioColaborador.valid" (click)="LoginColaborador()" (keypress)="LoginColaborador()"
         [ngClass]="habilitarBotao()">
         Entrar
       </button>
@@ -104,7 +104,7 @@
     <label for="sign-up" id="sign-up-text">Novidades tech na NexusTech. <a (click)="cadastrarCliente()"
         id="sign-up">Inscreva-se já!</a></label>
     <div class="login">
-      <button [disabled]="!formularioCliente.valid" (click)="LoginCliente() " ((keypress))="LoginCliente()"
+      <button [disabled]="!formularioCliente.valid" (click)="LoginCliente() " (keypress)="LoginCliente()"
         [ngClass]="habilitarBotao()">
         Entrar
       </button>
