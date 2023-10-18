@@ -16,13 +16,13 @@ export class CadastroClienteComponent implements OnInit {
   exibirCabecalho: boolean = true;
   formulario!: FormGroup;
   emailEncontrado: boolean = false;
+  cpfEncontrado: boolean = false;
   senhaCorrespondente: boolean = true;
   genero = Object.values(Genero);
   dataNascimento!: string;
   idCliente!: number;
-  clienteData!: Cliente;
+  private dadosCliente!: Cliente;
   enderecoData: Endereco[] = [];
-
   cliente: Cliente = {
     id: 0,
     nomeCliente: '',
@@ -49,10 +49,12 @@ export class CadastroClienteComponent implements OnInit {
     if (listaEnderecoAtual) {
       this.enderecoData = listaEnderecoAtual;
     }
+
     if (this.idCliente) {
       this.service.exibirPerfil(this.idCliente).subscribe((data) => {
-        this.clienteData = data.cliente;
-        if (!listaEnderecoAtual){
+        this.cliente = data.cliente;
+        this.dadosCliente = data.cliente;
+        if (listaEnderecoAtual.length < 1) {
           this.enderecoData = data.enderecos;
         }
       });
@@ -64,7 +66,9 @@ export class CadastroClienteComponent implements OnInit {
       dataNascimento: ['', [Validators.required]],
       genero: ['', [Validators.required]],
       telefone: ['', [Validators.required]],
-      email: ['', [
+      email: [
+        '',
+        [
           Validators.required,
           Validators.email,
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
@@ -81,13 +85,17 @@ export class CadastroClienteComponent implements OnInit {
     }
   }
 
-  verificaDadosInseridos(){
-      if(this.formulario.get('nome')?.value != this.clienteData.nomeCliente ||
-      this.formulario.get('genero')?.value != this.clienteData.generoCliente ||
-      this.formulario.get('dataNascimento')?.value != this.clienteData.datanascCliente){
-        return true;
-      }
-      return false;
+  verificaDadosInseridos() {
+    if (
+      this.cliente.nomeCliente != this.dadosCliente.nomeCliente ||
+      this.cliente.generoCliente != this.dadosCliente.generoCliente ||
+      this.cliente.datanascCliente != this.dadosCliente.datanascCliente
+    ) {
+      return true;
+    }
+    console.log('cliente', this.cliente);
+    console.log('cliente Data', this.dadosCliente);
+    return false;
   }
 
   inputChanged = new Subject<void>();
@@ -97,32 +105,28 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   procurarEmail() {
-    const email = this.formulario.get('email')?.value;
-    this.service.procurarEmail(email).subscribe((emailEncontrado) => {
-      this.emailEncontrado = emailEncontrado;
+    this.service
+      .procurarEmail(this.cliente.emailCliente)
+      .subscribe((response) => {
+        this.emailEncontrado = response;
+      });
+  }
+
+  procurarCpf() {
+    this.service.procurarCPF(this.cliente.cpfCliente).subscribe((response) => {
+      this.cpfEncontrado = response;
     });
   }
 
   cadastrarCliente() {
-    this.cliente = {
-      id: this.idCliente,
-      nomeCliente: this.formulario.get('nome')?.value,
-      cpfCliente: this.formulario.get('cpf')?.value,
-      datanascCliente: this.formulario.get('dataNascimento')?.value,
-      generoCliente: this.formulario.get('genero')?.value,
-      telefoneCliente: this.formulario.get('telefone')?.value,
-      emailCliente: this.formulario.get('email')?.value,
-      senhaCliente: this.formulario.get('senha')?.value,
-    };
-
     const dadosParaEnviar = {
       cliente: this.cliente,
-      enderecos: this.serviceEndereco.getListaEndereco(),
+      enderecos: this.enderecoData,
     };
 
     if (this.idCliente) {
       const verificar = this.verificaDadosInseridos();
-      if (verificar){
+      if (verificar) {
         this.service
           .alterarCliente(dadosParaEnviar)
           .subscribe((clienteCadastrado) => {
@@ -133,12 +137,12 @@ export class CadastroClienteComponent implements OnInit {
             }
           });
       } else {
-        alert('Erro ao alterar.')
+        alert('Erro ao alterar.');
       }
     }
 
     if (!this.emailEncontrado.valueOf() && !this.idCliente) {
-      if (!dadosParaEnviar.enderecos){
+      if (!dadosParaEnviar.enderecos) {
         this.service
           .cadastrarCliente(dadosParaEnviar)
           .subscribe((clienteCadastrado) => {
@@ -149,19 +153,18 @@ export class CadastroClienteComponent implements OnInit {
             }
           });
       } else {
-        alert('Coloque pelomenos 1 endereço')
+        alert('Coloque pelomenos 1 endereço');
       }
     } else {
-      if (!this.idCliente){
+      if (!this.idCliente) {
         alert('Email ja Cadastrado!');
       }
     }
 
-    if (this.formulario.valid && this.senhaCorrespondente) {
+    if (this.senhaCorrespondente) {
     } else {
       alert('Verifique os campos obrigatórios e a confimação de senha');
     }
-
   }
 
   addEnderecos() {

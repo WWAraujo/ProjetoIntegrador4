@@ -75,6 +75,13 @@ public class ClienteController {
                 clienteModel.getEmailCliente(),
                 clienteModel.getSenhaCliente());
 
+        List<EnderecosEntregasClienteRecord> enderecos = getEnderecosEntregasClienteRecords(endereco);
+
+        ClienteRecordConstructor cliente = new ClienteRecordConstructor(clienteRecord,enderecos);
+        return cliente;
+    }
+
+    private static List<EnderecosEntregasClienteRecord> getEnderecosEntregasClienteRecords(List<EnderecosEntregasClienteModel> endereco) {
         List<EnderecosEntregasClienteRecord> enderecos = new ArrayList<>();
 
         for (EnderecosEntregasClienteModel end : endereco){
@@ -91,14 +98,17 @@ public class ClienteController {
                     end.getEnderecoPrincipal());
             enderecos.add(enderecoAtual);
         }
-
-        ClienteRecordConstructor cliente = new ClienteRecordConstructor(clienteRecord,enderecos);
-        return cliente;
+        return enderecos;
     }
 
     @GetMapping("/buscaremail/{email}")
     public Boolean listarCliente(@PathVariable String email) {
         return repository.findByEmailCliente(email).isPresent();
+    }
+
+    @GetMapping("/buscarcpf/{cpf}")
+    public Boolean buscarCPF(@PathVariable String cpf) {
+        return repository.findByCpfCliente(cpf).isPresent();
     }
 
     @PostMapping("/login-cliente")

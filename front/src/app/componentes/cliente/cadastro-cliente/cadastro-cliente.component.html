@@ -6,16 +6,15 @@
     <label *ngIf="idCliente">Alterar Conta</label>
   </div>
 
-  <form class="form-cadastro" [formGroup]="formulario">
+  <form class="form-cadastro" >
     <div class="nome">
       <input
         type="text"
         class="input"
-        id="nome"
-        [ngModel]="clienteData.nomeCliente"
-        formControlName="nome"
+        name="nome"
+        [(ngModel)]="cliente.nomeCliente"
         placeholder="Nome*"
-      />
+        />
       <div
         *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched"
       >
@@ -28,10 +27,8 @@
         <input
           type="date"
           class="input"
-          id="dataNascimento"
-          [ngModel]="clienteData.datanascCliente"
-          formControlName="dataNascimento"
-          placeholder="Data de Nascimento*"
+          name="dataNascimento"
+          [(ngModel)]="cliente.datanascCliente"
         />
         <div
           *ngIf="formulario.get('dataNascimento')?.errors?.['required'] && formulario.get('dataNascimento')?.touched"
@@ -44,9 +41,8 @@
         <input
           type="text"
           class="input"
-          id="telefone"
-          [ngModel]="clienteData.telefoneCliente"
-          formControlName="telefone"
+          name="telefone"
+          [(ngModel)]="cliente.telefoneCliente"
           placeholder="Telefone*"
         />
         <div
@@ -59,12 +55,11 @@
 
     <div class="genero-cpf">
       <div class="genero">
-        <select formControlName="genero" [ngModel]="clienteData.generoCliente">
-
-          <option value="" disabled selected>Selecione um Gênero*</option>
+        <select [(ngModel)]="cliente.generoCliente" name="generoCliente">
+          <option disabled selected>Selecione um Gênero*</option>
           <option value="MASCULINO">MASCULINO</option>
-          <option value="FEMININO">MASCULINO</option>
-          <option value="OUTROS">MASCULINO</option>
+          <option value="FEMININO">FEMININO</option>
+          <option value="OUTROS">OUTROS</option>
         </select>
         <div
           class="mensagem__erro"
@@ -78,11 +73,11 @@
         <input
           type="text"
           class="form-control"
-          id="cpf"
-          [ngModel]="clienteData.cpfCliente"
-          formControlName="cpf"
+          name="cpf"
+          [(ngModel)]="cliente.cpfCliente"
           maxlength="11"
           placeholder="CPF*"
+          (blur)="procurarCpf()"
         />
         <div
           class="mensagem__erro"
@@ -103,14 +98,11 @@
       <input
         type="text"
         class="form-control"
-        id="email"
-        [ngModel]="clienteData.emailCliente"
-        formControlName="email"
         name="email"
+        [(ngModel)]="cliente.emailCliente"
         placeholder="E-mail*"
         (input)="onInputChanged()"
         (blur)="procurarEmail()"
-        autocomplete="off"
       />
       <div
         class="mensagem__erro"
@@ -131,9 +123,8 @@
         <input
           type="password"
           class="input"
-          id="senha"
-          [ngModel]="clienteData.senhaCliente"
-          formControlName="senha"
+          name="senha"
+          [(ngModel)]="cliente.senhaCliente"
           placeholder="Senha*"
           autocomplete="off"
         />
@@ -155,9 +146,8 @@
         <input
           type="password"
           class="input"
-          id="confirmaSenha"
-          [ngModel]="clienteData.senhaCliente"
-          formControlName="confirmacaoSenha"
+          name="confirmaSenha"
+          [(ngModel)]="cliente.senhaCliente"
           placeholder="Confirme sua senha*"
           autocomplete="off"
         />
@@ -174,11 +164,7 @@
           Senha tem mínimo de 3 caracteres!
         </div>
         <div
-          class="mensagem__erro"
-          *ngIf="
-            !senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched
-          "
-        >
+          class="mensagem__erro" *ngIf="!senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched">
           As senhas não coincidem!
         </div>
       </div>

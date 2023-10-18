@@ -38,6 +38,12 @@ export class ClienteService{
     return this.http.get<boolean>(urlBuscarEmail);
   }
 
+  procurarCPF(cpf: string): Observable<boolean> {
+    const caminho = 'buscarcpf';
+    const urlBuscarEmail = `${this.url}/${caminho}/${cpf}`;
+    return this.http.get<boolean>(urlBuscarEmail);
+  }
+
   setDadosCliente(data : any){
     this.FormularioCliente = data;
   }
