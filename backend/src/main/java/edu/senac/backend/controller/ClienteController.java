@@ -95,7 +95,8 @@ public class ClienteController {
                     end.getBairro(),
                     end.getCidade(),
                     end.getUf(),
-                    end.getEnderecoPrincipal());
+                    end.getEnderecoPrincipal(),
+                    end.getAtivoInativo());
             enderecos.add(enderecoAtual);
         }
         return enderecos;

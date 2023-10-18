@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { ClienteCompleto } from 'src/app/core/types/type';
+import { Cliente, ClienteCompleto } from 'src/app/core/types/type';
 import { environment } from "src/environments/environment";
 
 
@@ -15,6 +15,7 @@ export class ClienteService{
   private readonly url = `${API}/cliente`;
   private FormularioCliente: any;
   private idCliente! : number;
+  private dadosAtualCliente! : Cliente;
 
   constructor(private http: HttpClient){}
 
@@ -44,12 +45,12 @@ export class ClienteService{
     return this.http.get<boolean>(urlBuscarEmail);
   }
 
-  setDadosCliente(data : any){
-    this.FormularioCliente = data;
+  setDadosCliente(cliente : Cliente){
+    this.dadosAtualCliente = cliente;
   }
 
   getDadosCliente(){
-    return this.FormularioCliente;
+    return this.dadosAtualCliente;
   }
 
   setIdCliente(id : number){

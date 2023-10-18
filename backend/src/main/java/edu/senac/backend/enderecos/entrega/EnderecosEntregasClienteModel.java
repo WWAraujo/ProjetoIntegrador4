@@ -1,6 +1,7 @@
 package edu.senac.backend.enderecos.entrega;
 
 import edu.senac.backend.cliente.ClienteModel;
+import edu.senac.backend.service.AtivoInativo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class EnderecosEntregasClienteModel {
     private String cidade;
     private String uf;
     private String enderecoPrincipal;
+    private String ativoInativo;
 
     public EnderecosEntregasClienteModel(ClienteModel clienteModel, EnderecosEntregasClienteRecord enderecos){
         this.idCliente = clienteModel.getId();
@@ -37,17 +39,7 @@ public class EnderecosEntregasClienteModel {
         this.cidade = enderecos.cidade();
         this.uf = enderecos.uf();
         this.enderecoPrincipal = enderecos.enderecoPrincipal();
+        this.ativoInativo = enderecos.ativoInativo();
     }
 
-    public EnderecosEntregasClienteModel(EnderecosEntregasClienteModel endereco) {
-        this.id = endereco.getId();
-        this.idCliente = endereco.getIdCliente();
-        this.cep = endereco.getCep();
-        this.logradouro = endereco.getLogradouro();
-        this.numero = endereco.getNumero();
-        this.complemento = endereco.getComplemento();
-        this.bairro = endereco.getBairro();
-        this.cidade = endereco.getCidade();
-        this.uf = endereco.getUf();
-    }
 }

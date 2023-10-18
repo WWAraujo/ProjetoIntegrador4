@@ -106,11 +106,11 @@ export interface Cliente{
   telefoneCliente: string;
   emailCliente: string;
   senhaCliente: string;
+  confirmacaoSenha: String;
 }
 
 export interface Endereco {
   id: number;
-  idCliente: string;
   cep: string;
   logradouro: string;
   numero: string;

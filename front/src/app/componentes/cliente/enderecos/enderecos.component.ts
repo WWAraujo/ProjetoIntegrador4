@@ -3,6 +3,7 @@ import { AtivoInativo, Endereco } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { ModalenderecoService } from '../modalendereco.service';
 import { Router } from '@angular/router';
+import { ClienteService } from '../cliente.service';
 @Component({
   selector: 'app-enderecos',
   templateUrl: './enderecos.component.html',
@@ -10,13 +11,12 @@ import { Router } from '@angular/router';
 })
 export class EnderecosComponent implements OnInit {
   exibirCabecalho: boolean = true;
-  idCliente: string = '';
+  idCliente!: number ;
   enderecos: Endereco[] = [];
   abrirform: boolean = false;
 
   endereco: Endereco = {
     id: 0,
-    idCliente: this.idCliente,
     cep: '',
     logradouro: '',
     numero: '',
@@ -34,12 +34,14 @@ export class EnderecosComponent implements OnInit {
   ]);
 
   constructor(
-    private service: ModalenderecoService,
+    private enderecoService: ModalenderecoService,
     private router: Router,
+    private clienteService: ClienteService
     ) {}
 
   ngOnInit(): void {
-    this.enderecos = this.service.getListaEndereco();
+    this.enderecos = this.enderecoService.getListaEndereco();
+    this.idCliente = this.clienteService.getIdCliente();
   }
 
   finalizarEnderecos(){
@@ -55,8 +57,8 @@ export class EnderecosComponent implements OnInit {
       })
     } catch (e: any) {
       if (e.message === 'Parar o loop') {
-        this.service.setListaEndereco(this.enderecos);
-        this.router.navigate(['/cadastrarCliente'])
+        this.enderecoService.setListaEndereco(this.enderecos);
+        this.voltarParaTela();
       } else {
         console.log('Erro desconhecido:', e)
       }
@@ -83,8 +85,13 @@ export class EnderecosComponent implements OnInit {
     this.abrirform = false;
   }
 
-  voltarCadastroCliente(){
-    this.router.navigate(['/cadastrarCliente'])
+  voltarParaTela(){
+    if (this.idCliente){
+      this.router.navigate(['/alterarCliente'])
+    } else{
+      this.router.navigate(['/cadastrarCliente'])
+      console.log('pulou o alterar cliente')
+    }
   }
 
   alterarEndereco(end: Endereco){
@@ -128,7 +135,7 @@ export class EnderecosComponent implements OnInit {
 
   buscarEnderecoPorCEP(cep: string) {
     if (cep.length === 8) {
-      this.service.buscarEndereco(cep).subscribe((data) => {
+      this.enderecoService.buscarEndereco(cep).subscribe((data) => {
         if (!data.erro) {
           this.endereco.logradouro = data.logradouro;
           this.endereco.bairro = data.bairro;

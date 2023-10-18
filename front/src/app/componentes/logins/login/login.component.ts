@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
           const id = parseInt(clienteLogado.id);
           this.serviceiD.setIdCliente(id);
           this.usuarioSenhaInvalido = false;
-          this.router.navigate(['/cadastrarCliente'])
+          this.router.navigate(['/'])
         } else {
           this.usuarioSenhaInvalido = true;
         }

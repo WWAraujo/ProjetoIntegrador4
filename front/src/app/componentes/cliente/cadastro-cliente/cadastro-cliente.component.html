@@ -1,38 +1,41 @@
 <app-cabecalho></app-cabecalho>
 <section class="container">
-
   <div class="title">
-    <label *ngIf="!idCliente">Criar Conta</label>
-    <label *ngIf="idCliente">Alterar Conta</label>
+    <label>Criar Conta</label>
   </div>
 
-  <form class="form-cadastro" >
+  <form class="form-cadastro" [formGroup]="formulario">
+
     <div class="nome">
       <input
         type="text"
         class="input"
-        name="nome"
-        [(ngModel)]="cliente.nomeCliente"
+        id="nome"
+        formControlName="nome"
         placeholder="Nome*"
-        />
-      <div
-        *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched"
-      >
+        >
+      <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
         O Nome é Obrigatório.
       </div>
+      <div *ngIf="formulario.get('nome')?.errors?.['nomeClienteValidator'] && formulario.get('nome')?.touched">
+        O nome do cliente deve conter duas palavras com pelo menos 3 letras em cada palavra.
+      </div>
+
     </div>
 
     <div class="dataNascimento-telefone">
       <div class="dataNascimento">
         <input
-          type="date"
+          type="text"
           class="input"
-          name="dataNascimento"
-          [(ngModel)]="cliente.datanascCliente"
-        />
+          id="dataNascimento"
+          formControlName="dataNascimento"
+          placeholder="Data de Nascimento*"
+          onfocus="(this.type='date')"
+          onblur="formatDateAndChangeInputType('text')"
+          >
         <div
-          *ngIf="formulario.get('dataNascimento')?.errors?.['required'] && formulario.get('dataNascimento')?.touched"
-        >
+          *ngIf="formulario.get('dataNascimento')?.errors?.['required'] && formulario.get('dataNascimento')?.touched">
           Obrigatório informar a data de Nascimento.
         </div>
       </div>
@@ -41,30 +44,29 @@
         <input
           type="text"
           class="input"
-          name="telefone"
-          [(ngModel)]="cliente.telefoneCliente"
+          id="telefone"
+          formControlName="telefone"
           placeholder="Telefone*"
-        />
-        <div
-          *ngIf="formulario.get('telefone')?.errors?.['required'] && formulario.get('telefone')?.touched"
-        >
+          maxlength="11"
+          (input)="apenasNumeroTelefone()"
+          >
+        <div *ngIf="formulario.get('telefone')?.errors?.['required'] && formulario.get('telefone')?.touched">
           Informe ao menos um telefone.
         </div>
       </div>
+
     </div>
 
     <div class="genero-cpf">
+
       <div class="genero">
-        <select [(ngModel)]="cliente.generoCliente" name="generoCliente">
-          <option disabled selected>Selecione um Gênero*</option>
-          <option value="MASCULINO">MASCULINO</option>
-          <option value="FEMININO">FEMININO</option>
-          <option value="OUTROS">OUTROS</option>
+        <select formControlName="genero">
+          <option value="" disabled selected>Selecione um Gênero*</option>
+          <option *ngFor="let escolhido of genero" [value]="escolhido">
+            {{ escolhido}}
+          </option>
         </select>
-        <div
-          class="mensagem__erro"
-          *ngIf="formulario.get('genero')?.errors?.['required'] && formulario.get('genero')?.touched"
-        >
+        <div *ngIf="formulario.get('genero')?.errors?.['required'] && formulario.get('genero')?.touched">
           Escolha seu genero.
         </div>
       </div>
@@ -73,47 +75,41 @@
         <input
           type="text"
           class="form-control"
-          name="cpf"
-          [(ngModel)]="cliente.cpfCliente"
-          maxlength="11"
+          id="cpf"
+          formControlName="cpf"
+          maxlength="14"
           placeholder="CPF*"
-          (blur)="procurarCpf()"
-        />
-        <div
-          class="mensagem__erro"
-          *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched"
-        >
-          O CPF é obrigatório.
+          (input)="apenasNumeroCPF()"
+          >
+        <div *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched">
+          O CPF é Obrigatório
         </div>
-        <div
-          class="mensagem__erro"
-          *ngIf="formulario.get('cpf')?.touched && formulario.get('cpf')?.hasError('cpfInvalido')"
-        >
+        <div *ngIf="formulario.get('cpf')?.errors?.['maxLength'] && formulario.get('cpf')?.touched">
+          Informe um cpf valido!
+        </div>
+        <div *ngIf="formulario.get('cpf')?.errors?.['minLength'] && formulario.get('cpf')?.touched">
           Informe um cpf valido!
         </div>
       </div>
+
     </div>
 
     <div class="email">
       <input
         type="text"
         class="form-control"
+        id="email"
+        formControlName="email"
         name="email"
-        [(ngModel)]="cliente.emailCliente"
         placeholder="E-mail*"
         (input)="onInputChanged()"
         (blur)="procurarEmail()"
-      />
-      <div
-        class="mensagem__erro"
-        *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched"
-      >
+        autocomplete="off"
+        >
+      <div *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">
         Digite seu e-mail.
       </div>
-      <div
-        class="mensagem__erro"
-        *ngIf="formulario.get('email')?.hasError('pattern') && formulario.get('email')?.touched"
-      >
+      <div *ngIf="formulario.get('email')?.hasError('pattern') && formulario.get('email')?.touched">
         E-mail inválido! Deve ser no formato correto.
       </div>
     </div>
@@ -123,21 +119,17 @@
         <input
           type="password"
           class="input"
-          name="senha"
-          [(ngModel)]="cliente.senhaCliente"
+          id="senha"
+          formControlName="senha"
           placeholder="Senha*"
           autocomplete="off"
-        />
-        <div
-          class="mensagem__erro"
-          *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched"
-        >
+          >
+        <div class="mensagem__erro"
+          *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
           Senha é obrigatoria!
         </div>
-        <div
-          class="mensagem__erro"
-          *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched"
-        >
+        <div class="mensagem__erro"
+          *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched">
           Senha tem mínimo de 3 caracteres!
         </div>
       </div>
@@ -146,42 +138,35 @@
         <input
           type="password"
           class="input"
-          name="confirmaSenha"
-          [(ngModel)]="cliente.senhaCliente"
+          id="confirmaSenha"
+          formControlName="confirmacaoSenha"
           placeholder="Confirme sua senha*"
           autocomplete="off"
-        />
-        <div
-          class="mensagem__erro"
-          *ngIf="formulario.get('confirmacaoSenha')?.errors?.['required'] && formulario.get('confirmacaoSenha')?.touched"
-        >
+          >
+        <div class="mensagem__erro"
+          *ngIf="formulario.get('confirmacaoSenha')?.errors?.['required'] && formulario.get('confirmacaoSenha')?.touched">
           Senha é obrigatoria!
         </div>
-        <div
-          class="mensagem__erro"
-          *ngIf="formulario.get('confirmacaoSenha')?.errors?.['minlength'] && formulario.get('confirmacaoSenha')?.touched"
-        >
+        <div class="mensagem__erro"
+          *ngIf="formulario.get('confirmacaoSenha')?.errors?.['minlength'] && formulario.get('confirmacaoSenha')?.touched">
           Senha tem mínimo de 3 caracteres!
         </div>
-        <div
-          class="mensagem__erro" *ngIf="!senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched">
+        <div class="mensagem__erro" *ngIf="
+            !senhaCorrespondente && formulario.get('confirmacaoSenha')?.touched
+          ">
           As senhas não coincidem!
         </div>
       </div>
     </div>
 
     <div class="endereco">
-      <button class="enderecos" (click)="addEnderecos()">
-        Endereços<img src="../../../../assets/image/endereco.png" />
-      </button>
+      <button class="enderecos" (click)="addEnderecos()">Endereços<img src="../../../../assets/image/endereco.png"></button>
     </div>
 
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="cadastrarCliente()"
-    >
-    CADASTRAR / ALTERAR
+    <button class="newUser" (click)="cadastrarCliente()" [disabled]="!formulario.valid" [ngClass]="habilitarBotao()">
+      CONTINUAR
     </button>
   </form>
+
+
 </section>

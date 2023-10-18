@@ -6,6 +6,7 @@ import { Validacoes } from '../../usuario/cadastro-usuario/validacoes';
 import { Cliente, Endereco, Genero } from 'src/app/core/types/type';
 import { ClienteService } from '../cliente.service';
 import { ModalenderecoService } from '../modalendereco.service';
+import { nomeClienteValidator } from '../validadorCliente';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -23,6 +24,7 @@ export class CadastroClienteComponent implements OnInit {
   idCliente!: number;
   private dadosCliente!: Cliente;
   enderecoData: Endereco[] = [];
+
   cliente: Cliente = {
     id: 0,
     nomeCliente: '',
@@ -32,6 +34,7 @@ export class CadastroClienteComponent implements OnInit {
     telefoneCliente: '',
     emailCliente: '',
     senhaCliente: '',
+    confirmacaoSenha: '',
   };
 
   constructor(
@@ -43,7 +46,7 @@ export class CadastroClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.idCliente = this.service.getIdCliente();
-    this.idCliente = 1; //chumbado um id
+    // this.idCliente = 1; //chumbado um id
 
     const listaEnderecoAtual = this.serviceEndereco.getListaEndereco();
     if (listaEnderecoAtual) {
@@ -61,11 +64,11 @@ export class CadastroClienteComponent implements OnInit {
     }
 
     this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required]],
-      cpf: ['', [Validators.required, Validacoes.ValidaCPF]],
+      nome: ['', [Validators.required, nomeClienteValidator()]],
+      cpf: ['', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
       dataNascimento: ['', [Validators.required]],
       genero: ['', [Validators.required]],
-      telefone: ['', [Validators.required]],
+      telefone: ['', [Validators.required, Validators.pattern(/^[0-9]{0,11}$/)]],
       email: [
         '',
         [
@@ -81,7 +84,6 @@ export class CadastroClienteComponent implements OnInit {
     const dadosCliente = this.service.getDadosCliente();
     if (dadosCliente) {
       this.formulario.patchValue(dadosCliente);
-      this.service.setDadosCliente([]);
     }
   }
 
@@ -119,30 +121,27 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   cadastrarCliente() {
+
+    this.cliente = {
+      id: 0,
+      nomeCliente: this.formulario.get('nome')?.value,
+      cpfCliente: this.formulario.get('cpf')?.value,
+      datanascCliente: this.formulario.get('dataNascimento')?.value,
+      generoCliente: this.formulario.get('genero')?.value,
+      telefoneCliente: this.formulario.get('telefone')?.value,
+      emailCliente: this.formulario.get('email')?.value,
+      senhaCliente: this.formulario.get('senha')?.value,
+      confirmacaoSenha: this.formulario.get('senha')?.value,
+    };
+
     const dadosParaEnviar = {
       cliente: this.cliente,
       enderecos: this.enderecoData,
     };
-
-    if (this.idCliente) {
-      const verificar = this.verificaDadosInseridos();
-      if (verificar) {
-        this.service
-          .alterarCliente(dadosParaEnviar)
-          .subscribe((clienteCadastrado) => {
-            if (clienteCadastrado) {
-              alert('Informações alterada com sucesso');
-            } else {
-              alert('Algo deu errado no cadastro');
-            }
-          });
-      } else {
-        alert('Erro ao alterar.');
-      }
-    }
+    console.log('Dados enviados', dadosParaEnviar);
 
     if (!this.emailEncontrado.valueOf() && !this.idCliente) {
-      if (!dadosParaEnviar.enderecos) {
+      if (dadosParaEnviar.enderecos.length > 0) {
         this.service
           .cadastrarCliente(dadosParaEnviar)
           .subscribe((clienteCadastrado) => {
@@ -153,7 +152,7 @@ export class CadastroClienteComponent implements OnInit {
             }
           });
       } else {
-        alert('Coloque pelomenos 1 endereço');
+        alert('Coloque pelo   menos 1 endereço');
       }
     } else {
       if (!this.idCliente) {
@@ -165,6 +164,7 @@ export class CadastroClienteComponent implements OnInit {
     } else {
       alert('Verifique os campos obrigatórios e a confimação de senha');
     }
+
   }
 
   addEnderecos() {
@@ -188,4 +188,19 @@ export class CadastroClienteComponent implements OnInit {
       return 'botao__desabilitado';
     }
   }
+
+  apenasNumeroTelefone() {
+    const telefoneControl = this.formulario.get('telefone');
+    if (telefoneControl) {
+      telefoneControl.setValue(telefoneControl.value.replace(/[^0-9]/g, ''));
+    }
+  }
+
+  apenasNumeroCPF() {
+    const telefoneControl = this.formulario.get('cpf');
+    if (telefoneControl) {
+      telefoneControl.setValue(telefoneControl.value.replace(/[^0-9]/g, ''));
+    }
+  }
+
 }
