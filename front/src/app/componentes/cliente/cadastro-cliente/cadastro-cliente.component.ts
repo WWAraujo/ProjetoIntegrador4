@@ -64,11 +64,17 @@ export class CadastroClienteComponent implements OnInit {
     }
 
     this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required, nomeClienteValidator()]],
-      cpf: ['', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
+      nome: ['', [Validators.required,
+        // nomeClienteValidator()
+      ]],
+      cpf: ['', [Validators.required,
+        // Validators.maxLength(11), Validators.minLength(11)
+      ]],
       dataNascimento: ['', [Validators.required]],
       genero: ['', [Validators.required]],
-      telefone: ['', [Validators.required, Validators.pattern(/^[0-9]{0,11}$/)]],
+      telefone: ['', [Validators.required,
+        // Validators.pattern(/^[0-9]{0,11}$/)
+      ]],
       email: [
         '',
         [
@@ -108,14 +114,14 @@ export class CadastroClienteComponent implements OnInit {
 
   procurarEmail() {
     this.service
-      .procurarEmail(this.cliente.emailCliente)
+      .procurarEmail(this.formulario.get('email')?.value)
       .subscribe((response) => {
         this.emailEncontrado = response;
       });
   }
 
   procurarCpf() {
-    this.service.procurarCPF(this.cliente.cpfCliente).subscribe((response) => {
+    this.service.procurarCPF(this.formulario.get('cpf')?.value).subscribe((response) => {
       this.cpfEncontrado = response;
     });
   }
@@ -147,6 +153,7 @@ export class CadastroClienteComponent implements OnInit {
           .subscribe((clienteCadastrado) => {
             if (clienteCadastrado) {
               this.router.navigate(['/solicitarLogin']);
+              this.service.setIdCliente(this.idCliente);
             } else {
               alert('Algo deu errado no cadastro');
             }

@@ -104,7 +104,10 @@ public class ClienteController {
 
     @GetMapping("/buscaremail/{email}")
     public Boolean listarCliente(@PathVariable String email) {
-        return repository.findByEmailCliente(email).isPresent();
+        System.out.println("Entrou no busca");
+        boolean teste = repository.findByEmailCliente(email).isPresent();
+        System.out.println(teste);
+        return teste;
     }
 
     @GetMapping("/buscarcpf/{cpf}")
