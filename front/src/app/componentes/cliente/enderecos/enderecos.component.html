@@ -100,6 +100,7 @@
         <div *ngFor="let endereco of enderecos; let i = index">
           <div class="card cardEndereco">
             <div class="form-check">
+
               <input
                 class="form-check-input"
                 type="radio"
@@ -107,9 +108,8 @@
                 id="{{ endereco }}"
                 value="{{ endereco }}"
                 (change)="selecionarEnderecoPrincipal(endereco.cep, endereco.numero)"
-
               />
-              <label class="form-check-label" for="exampleRadios1"> Principal </label>
+              <label class="form-check-label" for="exampleRadios1">Selecionar como Principal </label>
 
               <button class="btn btn-outline-primary direita" (click)="abrirMenu()" (click)="alterarEndereco(endereco)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -117,9 +117,11 @@
                   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                 </svg>
               </button>
+              <span id="enderecoPrincipal" *ngIf="endereco.enderecoPrincipal"> P </span>
 
               <button *ngIf="endereco.ativoInativo === 'INATIVO'" type="button" class="btn btn-outline-danger deletarEndereco"(click)="excluirEndereco(endereco)"> {{ endereco.ativoInativo }} </button>
               <button *ngIf="endereco.ativoInativo === 'ATIVO'" type="button" class="btn btn-outline-primary deletarEndereco" (click)="excluirEndereco(endereco)"> {{ endereco.ativoInativo }} </button>
+
             </div>
             <span role="presentation" class="w6bPT"
               ><img
@@ -130,8 +132,8 @@
               >{{ endereco.logradouro }}, {{ endereco.numero }} -
               {{ endereco.bairro }}, {{ endereco.cidade }} - {{ endereco.uf }},{{
                 endereco.cep
-              }}</span
-            >
+              }}</span>
+
           </div>
         </div>
       </div>

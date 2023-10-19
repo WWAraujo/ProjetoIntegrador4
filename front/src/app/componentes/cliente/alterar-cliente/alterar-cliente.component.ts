@@ -52,7 +52,6 @@ export class AlterarClienteComponent implements OnInit {
       this.enderecoData = listaEnderecoAtual;
     }
 
-    this.idCliente = 3; //chumbado um id
     if (this.idCliente) {
       this.serviceCliente.exibirPerfil(this.idCliente).subscribe((data) => {
         this.dadosCliente = data.cliente;

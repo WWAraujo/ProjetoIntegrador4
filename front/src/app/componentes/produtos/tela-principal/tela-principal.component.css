@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background-color: #fffcff;
+  background-color: #fff;
   width: 100%;
   height: 100%;
 }
@@ -12,11 +12,11 @@
 .row{
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: 50%;
 }
 
 .container-card{
-  width: 23%;
+  width: 20%;
   height: auto;
   margin: 10px 0px ;
 }
@@ -77,5 +77,111 @@
   background-color: #1e90ff;
 }
 
+.banner{
+  display: grid;
+  grid-template-columns: 40% 30% 30%;
+  grid-template-rows: 35% 35% 30%;
+  align-items: center;
+  justify-content: center;
+  right: 0;
+  top: auto;
+  bottom: auto;
+  width: 100%;
+  height: 40%;
+  background-color: #1e90ff;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.banner img{
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  margin: auto;
+}
+
+#desconto{
+  grid-column: 2;
+  grid-row: 1;
+  color: #fff;
+  font: 2em 'Inter',sans-serif;
+  text-align: center;
+  border: 6px #fff dotted;
+  padding: 20px;
+  border-radius: 15px 0px 15px 0px ;
+  width: 80%;
+  margin: auto;
+}
+#textoplaca{
+  grid-column: 2;
+  grid-row: 2;
+  color: #fff;
+  font: 1.5em 'Inter',sans-serif;
+  text-align: center;
+  width: 80%;
+  padding: 10px 50px ;
+  border: 6px #fff dotted;
+  border-radius: 15px 0px 15px 0px ;
+  margin: auto;
+}
+
+.logos{
+  grid-column: 2;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: 100%;
+  justify-content: space-between;
+}
+
+
+#nvidia{
+  width: 80px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#amd{
+  width: 80px;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#intel{
+  width: 80px;
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#dozex{
+  font: 2em 'Inter', sans-serif;
+  font-weight: bold;
+}
+
+#container-semjuros{
+  grid-column: 3;
+  grid-row: 1;
+  color: #fff;
+  font: 1.6em 'Inter', sans-serif;
+  margin: auto;
+}
+
+
+
+#container-cartao{
+  grid-column: 3;
+  grid-row: 2;
+  color: #fff;
+  font: 1em 'Inter',sans-serif;
+  text-align: center;
+  border: 3px solid #fff;
+  padding: 10px;
+  border-radius: 10px 0px 10px 0px;
+  margin: auto;
+  line-height: 0;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+
+}
 
 

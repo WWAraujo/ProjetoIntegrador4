@@ -16,7 +16,7 @@ h2 {
   padding: 20px;
   border-radius: 10px;
   border: 8px double #fff;
-  color: #fff;
+  color: #1e90ff;
 }
 
 .opcoes {
@@ -41,11 +41,11 @@ h2 {
   padding: 5px;
   font: 2em "Inter", sans-serif;
   font-weight: 600;
-  color: #fff;
+  color: #1e90ff;
   background-color: transparent;
   text-decoration: none;
-  border-radius: 1%;
-  border: 1px solid #fff;
+  border-radius: 5px;
+  border: 2px solid #1e90ff;
   text-transform: uppercase;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../usuario/user.services';
 import { Logado } from 'src/app/core/types/type';
 import { ClienteService } from '../../cliente/cliente.service';
+import { ClientService } from '../../cliente/cliente.services';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   usuarioLogado: boolean = true;
   usuarioSenhaInvalido: boolean = false;
   selectedType: string = 'cliente';
-  clienteLogado!: ClienteLogado;
+  clienteLogado: boolean = true ;
   idCliente!: number;
 
   constructor(
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
     private formBuilder : FormBuilder,
     private userService : UserService,
     private serviceiD : ClienteService,
+    private clientService: ClientService
   ) { }
 
   ngOnInit(): void {
@@ -85,6 +87,7 @@ export class LoginComponent implements OnInit {
           this.serviceiD.setIdCliente(id);
           this.usuarioSenhaInvalido = false;
           this.router.navigate(['/alterarCliente'])
+          this.clientService.setClienteLogado(this.clienteLogado);
         } else {
           this.usuarioSenhaInvalido = true;
         }

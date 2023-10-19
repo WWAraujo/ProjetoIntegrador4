@@ -14,6 +14,7 @@ export class EnderecosComponent implements OnInit {
   idCliente!: number ;
   enderecos: Endereco[] = [];
   abrirform: boolean = false;
+  enderecoPrincipal!: string;
 
   endereco: Endereco = {
     id: 0,
@@ -42,6 +43,9 @@ export class EnderecosComponent implements OnInit {
   ngOnInit(): void {
     this.enderecos = this.enderecoService.getListaEndereco();
     this.idCliente = this.clienteService.getIdCliente();
+    if(this.endereco.enderecoPrincipal){
+
+    }
   }
 
   finalizarEnderecos(){
