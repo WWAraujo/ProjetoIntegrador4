@@ -79,6 +79,27 @@
   font:1.1em 'Inter', sans-serif;
 }
 
+.endereco-login{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.endereco-login a{
+  font-weight: 500;
+  color: #1e90ff;
+}
+
+.endereco-login a:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.endereco-login label{
+  color:#7a7f87;
+}
+
 
 div {
   width: 60%;

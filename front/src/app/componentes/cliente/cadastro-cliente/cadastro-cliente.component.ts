@@ -203,4 +203,8 @@ export class CadastroClienteComponent implements OnInit {
     }
   }
 
+  login(){
+    this.router.navigate(['solicitarLogin']);
+  }
+
 }

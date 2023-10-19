@@ -18,8 +18,8 @@ export class TelaPrincipalComponent implements OnInit {
 
   get productDataGroups(): any[][] {
     const groups: any[][] = [];
-    for (let i = 0; i < this.productData.length; i += 4) {
-      groups.push(this.productData.slice(i, i + 4));
+    for (let i = 0; i < this.productData.length; i += 5) {
+      groups.push(this.productData.slice(i, i + 5));
     }
     return groups;
   }

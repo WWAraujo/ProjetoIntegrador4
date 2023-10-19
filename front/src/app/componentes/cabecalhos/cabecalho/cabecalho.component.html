@@ -12,7 +12,7 @@
       <button type="submit"><img class="icone-lupa" src="../../../assets/image/lupa.png" alt="lupa-pesquisar"></button>
     </div>
 
-    <div class="conta">
+    <div class="conta" *ngIf="isDeslogado">
       <img class="icone-login" src="../../../assets/image/avatar.png" alt="login">
       <span>
         Faça <a (click)="Login()">LOGIN</a> ou <br>
@@ -25,8 +25,21 @@
         <img class="icone-carrinho" src="../../../assets/image/carrinho-de-compras.png" alt="carrinho">
       </a>
     </div>
-
+    <div class="deslogar">
+      <a *ngIf="isLogado" (click)="open(mymodal)">Logoff</a>
+      <img (click)="open(mymodal)" class="icone-deslogar" src="../../../../assets/image/deslogar.png" alt="deslogar" *ngIf="isLogado">
+    </div>
   </div>
-
-
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">LOGOFF</h4>
+    </div>
+    <div class="modal-body">
+      <p>Deseja Realmente encerrar a Sessão?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" (click)="deslogar()" (click)="modal.close()" >Confirmar</button>
+      <button type="button" class="btn btn-outline-danger" (click)="modal.close()">Cancelar</button>
+    </div>
+  </ng-template>
 </header>
