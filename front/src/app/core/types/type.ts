@@ -10,6 +10,8 @@ export interface ClienteLogado{
 export interface Logado {
   id: string;
   tipoUsuario: string;
+  nomeCliente: string;
+  emailCliente: string;
 }
 
 export interface ListarUsuario {

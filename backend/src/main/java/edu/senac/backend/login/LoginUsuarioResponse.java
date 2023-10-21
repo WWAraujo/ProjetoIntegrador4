@@ -1,6 +1,6 @@
 package edu.senac.backend.login;
 
-public interface LoginResponse {
+public interface LoginUsuarioResponse {
 
     String getId();
     String getTipoUsuario();

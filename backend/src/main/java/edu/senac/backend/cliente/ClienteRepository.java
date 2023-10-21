@@ -1,6 +1,6 @@
 package edu.senac.backend.cliente;
 
-import edu.senac.backend.usuario.UsuarioModel;
+import edu.senac.backend.login.LoginClienteResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,7 +16,7 @@ public interface ClienteRepository extends JpaRepository<ClienteModel, Long> {
 
     Optional<ClienteModel> findByCpfCliente(String email);
 
-    @Query("SELECT l.id as id FROM Cliente l WHERE l.emailCliente = :usuario AND l.senhaCliente = :senha")
+    @Query("SELECT l.id, l.nomeCliente as id FROM Cliente l WHERE l.emailCliente = :usuario AND l.senhaCliente = :senha")
     LoginClienteResponse findIdAndTypeByEmailAndSenha(String usuario, String senha);
 
     @Modifying

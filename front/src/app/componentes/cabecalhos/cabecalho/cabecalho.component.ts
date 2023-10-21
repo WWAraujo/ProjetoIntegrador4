@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClientService } from '../../cliente/cliente.services';
+import { LoginService } from '../../logins/login.service';
+import { Cliente } from 'src/app/core/types/type';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cabecalho',
@@ -9,52 +12,75 @@ import { ClientService } from '../../cliente/cliente.services';
   styleUrls: ['./cabecalho.component.css'],
 })
 export class CabecalhoComponent implements OnInit {
-
   closeResult: string = '';
-  isLogado: boolean = false;
-  isDeslogado: boolean = true;
+  logado: boolean = false;
+  dadosCliente: Cliente | null = null;
+  nomeLogado: string = '';
 
-  constructor(private router: Router, private clientService:ClientService,private modalService: NgbModal) {}
+  constructor(
+    private router: Router,
+    private clientService: ClientService,
+    private modalService: NgbModal,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
-
     this.verificarLogado();
-
   }
 
-  deslogar(){
+  deslogar() {
+    this.logado = false;
+    this.deslogarCliente();
+  }
+
+  Login() {
     this.router.navigate(['/solicitarLogin']);
-    const usuarioDeslogado = this.clientService.setClienteLogado(this.isDeslogado);
   }
 
-  Login(){
-    this.router.navigate(['/solicitarLogin'])
-  }
-
-  Register(){
+  registrar() {
     this.router.navigate(['/cadastrarCliente']);
   }
 
-  telaPrincipal(){
+  telaPrincipal() {
     this.router.navigate(['/cadastroCliente']);
   }
 
-  verificarLogado(){
-    const usuarioLogado = this.clientService.getClienteLogado();
-    if(usuarioLogado === true){
-      this.isLogado = true;
-      this.isDeslogado = false;
+  alterarDados() {
+    this.router.navigate(['/alterarCliente']);
+  }
+
+  verificarLogado() {
+    if (!this.logado){
+      this.logado = this.verificarClienteLogado();
     }
   }
 
-  open(content:any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  verificarClienteLogado() {
+    this.dadosCliente = this.loginService.getData('clienteData');
+    if(this.dadosCliente){
+      this.nomeLogado = this.dadosCliente.nomeCliente;
+      return true;
+    }
+    return false;
   }
 
+  deslogarCliente(){
+    this.loginService.removeData('clienteData');
+    this.dadosCliente = null;
+  }
+
+  open(content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -62,7 +88,15 @@ export class CabecalhoComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
+  }
+
+  getPrimeiroNome() {
+    const nomeCompletoArray = this.nomeLogado.split(' ');
+    if (nomeCompletoArray.length > 0) {
+      return nomeCompletoArray[0];
+    }
+    return 'Nome não encontrado';
   }
 }

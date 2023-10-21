@@ -6,6 +6,7 @@ import { ClienteService } from '../cliente.service';
 import { ModalenderecoService } from '../modalendereco.service';
 import { Observable, Subject } from 'rxjs';
 import { nomeClienteValidator } from '../validadorCliente';
+import { LoginService } from '../../logins/login.service';
 
 @Component({
   selector: 'app-alterar-cliente',
@@ -39,13 +40,18 @@ export class AlterarClienteComponent implements OnInit {
     private router: Router,
     private serviceCliente: ClienteService,
     private serviceEndereco: ModalenderecoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
 
+    this.dadosCliente = this.loginService.getData('clienteData');
+    console.log('Dados no banco', this.dadosCliente);
+
+    this.idCliente = this.dadosCliente.id;
+    console.log('ID salvo', this.idCliente);
     const listaEnderecoAtual = this.serviceEndereco.getListaEndereco();
-    this.idCliente = this.serviceCliente.getIdCliente();
     const clienteAtual = this.serviceCliente.getDadosCliente();
 
     if (listaEnderecoAtual) {
