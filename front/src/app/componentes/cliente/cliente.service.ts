@@ -35,7 +35,7 @@ export class ClienteService{
 
   procurarEmail(email: string): Observable<boolean> {
     const caminho = 'buscaremail';
-    const urlBuscarEmail = `${this.url}/${caminho}/${email}`;
+    const urlBuscarEmail = `${API}/cliente/buscaremail/${email}`;
     return this.http.get<boolean>(urlBuscarEmail);
   }
 
