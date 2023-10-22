@@ -5,6 +5,7 @@ import edu.senac.backend.cliente.ClienteRecord;
 import edu.senac.backend.cliente.ClienteRepository;
 import edu.senac.backend.login.*;
 import edu.senac.backend.service.Criptografia;
+import edu.senac.backend.usuario.UsuarioModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,23 @@ public class LoginController {
 
     @PostMapping("/usuario")
     @Transactional
-    public ResponseEntity<LoginUsuarioResponse> salvarUsuario(@RequestBody LoginRecord login) {
+    public ResponseEntity<LoginModel> salvarUsuario(@RequestBody LoginRecord login) {
 
-        LoginModel lg = new LoginModel(login);
+//        LoginModel lg = new LoginModel(login);
+//        LoginUsuarioResponse loginUsuarioResponse = UsuarioRepository.findIdAndTypeByEmailAndSenha(lg.getEmailUsuario(), lg.getSenhaUsuario());
+//        Optional<UsuarioModel> usuarioModel = UsuarioRepository.findByEmailCliente(login.usuario());
+//        return ResponseEntity.ok(loginUsuarioResponse);
 
-        LoginUsuarioResponse loginUsuarioResponse = UsuarioRepository.findIdAndTypeByEmailAndSenha(lg.getEmailUsuario(), lg.getSenhaUsuario());
+        String senha = new Criptografia().encriptar(login.senha());
 
-        return ResponseEntity.ok(loginUsuarioResponse);
+        Optional<LoginModel> loginModel = UsuarioRepository.findByEmailUsuario(login.usuario());
 
+        LoginModel response = loginModel.get();
+
+        if (verificarSenha(loginModel.get().getSenhaUsuario(), senha)) {
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/cliente")
@@ -42,12 +52,16 @@ public class LoginController {
     public ResponseEntity<ClienteModel> salvarCliente(@RequestBody LoginRecord loginCliente) {
 
         String senha = new Criptografia().encriptar(loginCliente.senha());
-        Optional<ClienteModel> loginResponse = ClienteRepository.findByEmailCliente(loginCliente.usuario());
-        ClienteModel response;
-        response = loginResponse.get();
-        if (loginResponse.get().getSenhaCliente().equals(senha)) {
+        Optional<ClienteModel> clienteModel = ClienteRepository.findByEmailCliente(loginCliente.usuario());
+        ClienteModel response = clienteModel.get();
+
+        if (verificarSenha(clienteModel.get().getSenhaCliente(), senha)) {
             return ResponseEntity.ok(response);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    private boolean verificarSenha (String senha1, String senha2){
+        return senha1.equals(senha2);
     }
 }

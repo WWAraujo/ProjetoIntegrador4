@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   usuarioSenhaInvalido: boolean = false;
   selectedType: string = 'cliente';
   clienteLogado!: Cliente;
+  // usuarioLogado!:
 
   constructor(
     private loginService : LoginService,
@@ -23,10 +24,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    // apagando banco de dados
-    // this.loginService.removeData('clienteData');
-
     this.formulario = this.formBuilder.group({
       usuario: ['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       senha: ['', [Validators.required, Validators.minLength(3)]]
@@ -47,7 +44,8 @@ export class LoginComponent implements OnInit {
     if (this.formulario.valid) {
       this.loginService.loginColaborador(this.formulario.value).subscribe((logado: Logado) => {
         if (logado) {
-          //Passar os dados recebidos pro storage
+          // this.usuarioLogado = logado;
+          this.loginService.saveData('clienteData', this.clienteLogado);
           this.router.navigate(['/backoffice']);
         } else {
           this.falhaLogin();
