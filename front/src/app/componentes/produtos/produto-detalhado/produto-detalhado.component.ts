@@ -1,7 +1,10 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../produtos.service';
 import { ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
+import { CarrinhoComponent } from '../../carrinho/carrinho.component';
+import { CarrinhoService } from '../../carrinho/carrinho.services';
 
 const API = environment.apiURL;
 
@@ -22,13 +25,12 @@ export class ProdutoDetalhadoComponent implements OnInit {
   botaoDesabilitado: boolean = false;
   exibirCabecalho: boolean = true;
 
-  constructor(private service: ProdutosService) { }
+  constructor(private service: ProdutosService, private router: Router, private serviceCarrinho: CarrinhoService) { }
 
   ngOnInit(): void {
     this.idProduto = this.service.getIdProduto();
     this.service.getProdutoCompleto(this.idProduto).subscribe(data => {
       this.productData = data;
-      console.log(data);
 
       const primeiraImagemPrincipal = this.productData.fotosProdutoRecord.find(
         (foto: { flagImg: string; }) => foto.flagImg === 'p'
@@ -40,7 +42,6 @@ export class ProdutoDetalhadoComponent implements OnInit {
 
       this.ativoInativo = this.productData.produto.ativoInativo;
       this.semEstoque = this.productData.produto.qtdEstoque;
-      console.log('Valor de estoque:', this.semEstoque);
       if (this.ativoInativo === 'INATIVO' || this.semEstoque == 0) {
         this.produtoIndisponivel = true;
 
@@ -71,6 +72,11 @@ export class ProdutoDetalhadoComponent implements OnInit {
     } else {
       return 'botao__desabilitado';
     }
+  }
+
+  pegarId(idProduto: number) {
+    this.serviceCarrinho.adicionarAoCarrinho(idProduto);
+    this.router.navigate(['/carrinho']);
   }
 
 

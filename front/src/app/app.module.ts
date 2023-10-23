@@ -28,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { FormatDirective } from './componentes/cliente/enderecos/cep/format.directive';
 import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
+import { CarrinhoComponent } from './componentes/carrinho/carrinho.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/a
     EnderecosComponent,
     FormatDirective,
     AlterarClienteComponent,
+    CarrinhoComponent,
   ],
   imports: [
     BrowserModule,

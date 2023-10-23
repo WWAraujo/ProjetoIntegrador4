@@ -15,6 +15,7 @@ export class EnderecosComponent implements OnInit {
   enderecos: Endereco[] = [];
   abrirform: boolean = false;
   enderecoPrincipal!: string;
+  btnAlterarEndereco: boolean = false;
 
   endereco: Endereco = {
     id: 0,

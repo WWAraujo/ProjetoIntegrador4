@@ -98,6 +98,10 @@
   justify-content: center;
 }
 
+.carrinho a:hover{
+  cursor: pointer;
+}
+
 .deslogar{
   grid-column: 5;
   display: flex;

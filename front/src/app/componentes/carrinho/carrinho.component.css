@@ -1,0 +1,115 @@
+.container{
+  display: grid;
+  grid-template-columns: 68% 30%;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5%;
+}
+
+.row{
+  grid-column: 1;
+  margin:5% 0;
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid gray;
+  border-radius: 10px;
+}
+
+.container-card{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+
+
+}
+
+.card{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 1em 2em ;
+  border: 1px solid transparent;
+}
+
+.infoProduto{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  grid-template-columns: 50% 20% 30%;
+  grid-template-rows: 1;
+  margin-left: 5%;
+
+}
+
+#nomeProduto{
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 1em;
+}
+
+#valorProduto{
+  grid-column: 3;
+  grid-row: 1;
+  text-align: center;
+}
+
+#quantidadeProduto{
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+}
+
+.container-subtotal{
+  grid-column: 2;
+  width: 100%;
+  height: 55%;
+  position: sticky;
+  top: 0;
+  margin: 10% 0;
+  padding: 5%;
+  border: 1.5px solid gray ;
+  border-radius: 10px;
+}
+
+.subtotal{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#titleSubtotal{
+  font: 1.3em 'Inter',sans-serif;
+  font-weight: 700;
+}
+
+#totalSubtotal{
+  text-align: center;
+  font: 2em 'Inter',sans-serif;
+  font-weight: bolder;
+}
+
+.btn-comprarMais{
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font: 1em 'Inter',sans-serif;
+  background-color: #1e90ff;
+}
+
+
+

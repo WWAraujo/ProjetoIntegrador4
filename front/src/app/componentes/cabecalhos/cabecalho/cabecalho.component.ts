@@ -64,6 +64,10 @@ export class CabecalhoComponent implements OnInit {
     return false;
   }
 
+  carrinho(){
+    this.router.navigate(['carrinho']);
+  }
+
   deslogarCliente(){
     this.loginService.removeData('clienteData');
     this.dadosCliente = null;
