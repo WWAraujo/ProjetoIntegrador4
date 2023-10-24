@@ -111,5 +111,73 @@
   background-color: #1e90ff;
 }
 
+.quantidadeProduto{
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 30% 30% 40%;
+  justify-content: space-between;
+}
+
+#quantidadeProduto{
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+  width: 100%;
+
+}
+
+#quantidade{
+  text-align: center;
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+  margin: auto;
+}
+
+#aumentarQuantidade{
+  grid-column: 3;
+  grid-row: 2;
+  border: 1px solid transparent;
+  background-color: #fff;
+  width: 100%;
+}
+
+#diminuirQuantidade{
+  grid-column: 1;
+  grid-row: 2;
+  border: 1px solid transparent;
+  background-color: #fff;
+  width: 100%;
+}
+
+#excluirDoCarrinho{
+  grid-column: 1;
+  grid-row: 3;
+  border: 1px solid transparent;
+  background-color: #fff;
+  margin: auto;
+}
+
+#image-excluir{
+  margin: auto;
+  align-items: center;
+}
+
+#remover{
+  grid-column: 2/ span 3;
+  grid-row: 3;
+  color: red;
+  font: 0.7em 'Inter', sans-serid;
+  font-weight: 500;
+  margin: auto;
+  align-items: center;
+
+  width: 100%;
+
+}
+
+
 
 

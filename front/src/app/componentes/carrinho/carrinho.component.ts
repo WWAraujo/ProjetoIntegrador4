@@ -22,6 +22,7 @@ export class CarrinhoComponent implements OnInit {
   resultados: any[] = [];
   idsCount: { [id: number]: number } = {};
   subtotal: number = 0;
+  quantidade: number = 0;
 
   constructor(private service: CarrinhoService, private router: Router, private serviceProduto: ProdutosService) { }
 
@@ -32,7 +33,6 @@ export class CarrinhoComponent implements OnInit {
   }
 
   itenNoCarrinho() {
-
     for (let i = 0; i < this.itensNoCarrinho.length; i++) {
       const id = this.itensNoCarrinho[i];
       if (this.idsCount[id]) {
@@ -48,13 +48,47 @@ export class CarrinhoComponent implements OnInit {
     }
   }
 
-  subtotalCarrinho(){
+  aumentarQuantidade(id: number) {
+    for (let produto of this.productData) {
+      if (produto.produto.id === id) {
+        this.idsCount[produto.produto.id]++;
+        this.service.adicionarAoCarrinho(produto.produto.id);
+      }
+    }
+    this.subtotalCarrinho();
+  }
+
+  diminuirQuantidade(id: number) {
+    for (let produto of this.productData) {
+      if (produto.produto.id === id) {
+        this.idsCount[produto.produto.id]--;
+        this.service.removerDoCarrinho(id);
+        if (this.idsCount[produto.produto.id] === 0) {
+          window.location.reload();
+        }
+      }
+    }
+    this.subtotalCarrinho();
+  }
+
+excluirDoCarrinho(id: number){
+
+  this.service.excluirDoCarrinho(id);
+  window.location.reload();
+
+}
+
+
+
+
+  subtotalCarrinho() {
     this.subtotal = 0;
-    for(let produto of this.productData){
+
+    for (let produto of this.productData) {
       const precoProduto = produto.produto.precoProduto;
       const quantidade = this.idsCount[produto.produto.id];
 
-      if(quantidade){
+      if (quantidade) {
         this.subtotal += precoProduto * quantidade;
       }
     }
@@ -68,7 +102,7 @@ export class CarrinhoComponent implements OnInit {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  paginaPrincipal(){
+  paginaPrincipal() {
     this.router.navigate(['telaPrincipal'])
   }
 
