@@ -1,4 +1,4 @@
-import { Produto } from './../../core/types/type';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../produtos/produtos.service';
 import { Router } from '@angular/router';
@@ -23,13 +23,21 @@ export class CarrinhoComponent implements OnInit {
   idsCount: { [id: number]: number } = {};
   subtotal: number = 0;
   quantidade: number = 0;
+  frete: number = 0;
+  formulario!: FormGroup;
+  valorFrete: number = 0;
 
-  constructor(private service: CarrinhoService, private router: Router, private serviceProduto: ProdutosService) { }
+  constructor(private service: CarrinhoService, private router: Router, private serviceProduto: ProdutosService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.alterarValorfrete(10);
     this.itensNoCarrinho = this.service.getIdsSelecionados();
     this.itenNoCarrinho();
+  }
 
+  alterarValorfrete(vl: number){
+    this.valorFrete = vl;
+    this.subtotalCarrinho();
   }
 
   itenNoCarrinho() {
@@ -78,18 +86,14 @@ excluirDoCarrinho(id: number){
 
 }
 
-
-
-
   subtotalCarrinho() {
     this.subtotal = 0;
-
     for (let produto of this.productData) {
       const precoProduto = produto.produto.precoProduto;
       const quantidade = this.idsCount[produto.produto.id];
-
+      const valorFrete = this.valorFrete;
       if (quantidade) {
-        this.subtotal += precoProduto * quantidade;
+        this.subtotal +=(precoProduto * quantidade) + valorFrete;
       }
     }
   }

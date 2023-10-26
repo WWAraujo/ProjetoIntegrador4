@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { Validacoes } from '../../usuario/cadastro-usuario/validacoes';
 import { Cliente, Endereco, Genero } from 'src/app/core/types/type';
 import { ClienteService } from '../cliente.service';
 import { ModalenderecoService } from '../modalendereco.service';
-import { nomeClienteValidator } from '../validadorCliente';
 
 @Component({
   selector: 'app-cadastro-cliente',
