@@ -21,7 +21,11 @@ export class CarrinhoService {
 
   removerDoCarrinho(id: number) {
     const carrinho = this.getIdsSelecionados();
-    carrinho.pop(id);
+    const index = carrinho.indexOf(id);
+
+    if (index !== -1) {
+      carrinho.splice(index, 1);
+    }
     localStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
   }
 

@@ -21,18 +21,15 @@ export class LoginService {
     return this.http.post<Cliente>(`${API}/login/cliente`, login);
   }
 
-  // Método para salvar os dados no Local Storage
   saveData(key: string, data: any) {
     localStorage.setItem(key, JSON.stringify(data));
   }
 
-  // Método para recuperar os dados do Local Storage
   getData(key: string) {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : null;
   }
 
-  // Método para remover os dados do Local Storage
   removeData(key: string) {
     localStorage.removeItem(key);
   }

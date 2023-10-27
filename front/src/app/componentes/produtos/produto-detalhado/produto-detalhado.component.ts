@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../produtos.service';
 import { ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
-import { CarrinhoComponent } from '../../carrinho/carrinho.component';
-import { CarrinhoService } from '../../carrinho/carrinho.services';
+import { CarrinhoComponent } from '../../compra/carrinho/carrinho.component';
+import { CarrinhoService } from '../../compra/carrinho/carrinho.services';
 
 const API = environment.apiURL;
 

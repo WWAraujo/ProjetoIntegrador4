@@ -13,7 +13,6 @@ const API = environment.apiURL;
 
 export class ClienteService{
   private readonly url = `${API}/cliente`;
-  private FormularioCliente: any;
   private idCliente! : number;
   private dadosAtualCliente! : Cliente;
 

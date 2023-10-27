@@ -1,10 +1,10 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { ProdutosService } from '../produtos/produtos.service';
+import { ProdutosService } from '../../produtos/produtos.service';
 import { Router } from '@angular/router';
-import { ProdutoFotos } from 'src/app/core/types/type';
+import { Cliente, ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
 import { CarrinhoService } from './carrinho.services';
+import { LoginService } from '../../logins/login.service';
 
 const API = environment.apiURL;
 
@@ -15,24 +15,27 @@ const API = environment.apiURL;
 })
 export class CarrinhoComponent implements OnInit {
 
-  idProduto!: number;
   productData: ProdutoFotos[] = [];
   imagemPrincipal!: string;
   itensNoCarrinho!: number[];
-  resultados: any[] = [];
   idsCount: { [id: number]: number } = {};
   subtotal: number = 0;
-  quantidade: number = 0;
-  frete: number = 0;
-  formulario!: FormGroup;
   valorFrete: number = 0;
+  logado: boolean = false;
+  dadosCliente: Cliente | null = null;
+  nomeLogado: string = '';
+  veioDoCarrinho: boolean = false;
 
-  constructor(private service: CarrinhoService, private router: Router, private serviceProduto: ProdutosService, private formBuilder: FormBuilder) { }
+  constructor(
+    private service: CarrinhoService,
+    private router: Router,
+    private serviceProduto: ProdutosService,
+    private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.alterarValorfrete(10);
     this.itensNoCarrinho = this.service.getIdsSelecionados();
     this.itenNoCarrinho();
+    this.alterarValorfrete;
   }
 
   alterarValorfrete(vl: number){
@@ -80,10 +83,8 @@ export class CarrinhoComponent implements OnInit {
   }
 
 excluirDoCarrinho(id: number){
-
   this.service.excluirDoCarrinho(id);
   window.location.reload();
-
 }
 
   subtotalCarrinho() {
@@ -110,4 +111,21 @@ excluirDoCarrinho(id: number){
     this.router.navigate(['telaPrincipal'])
   }
 
+
+  verificarLogado() {
+    if (!this.logado){
+      this.logado = this.verificarClienteLogado();
+    }
+  }
+
+  verificarClienteLogado() {
+    this.dadosCliente = this.loginService.getData('clienteData');
+    if(this.dadosCliente){
+      this.nomeLogado = this.dadosCliente.nomeCliente;
+      this.router.navigate(['/checkout'])
+      return true;
+    }
+    this.router.navigate(['/solicitarLogin'],{ queryParams: { fromCart: 'true' } })
+    return false;
+  }
 }
