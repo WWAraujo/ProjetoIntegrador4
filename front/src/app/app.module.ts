@@ -28,7 +28,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { FormatDirective } from './componentes/cliente/enderecos/cep/format.directive';
 import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
-import { CarrinhoComponent } from './componentes/carrinho/carrinho.component';
+import { CarrinhoComponent } from './componentes/compra/carrinho/carrinho.component';
+import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CarrinhoComponent } from './componentes/carrinho/carrinho.component';
     FormatDirective,
     AlterarClienteComponent,
     CarrinhoComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,44 @@
+.container{
+  width: 100%;
+  height: 100%;
+}
+
+.container-endereco{
+  display: flex;
+  flex-direction: row;
+}
+.card-endereco{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  border: 1px solid #1e90ff;
+  padding: 2%;
+  margin: 2%;
+  border-radius: 5px;
+}
+
+#enderecoPrincipal{
+  color: #1e90ff;
+  font: 1em 'Inter', sans-serif ;
+  font-weight: 600;
+}
+
+#option{
+  width: 1.3%;
+}
+
+.btnAddEndereco{
+  display: flex;
+  align-items: end;
+  width: 100%;
+}
+
+#btnAddEnd{
+  width: 15%;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font: 1em 'Inter',sans-serif;
+  background-color: #1e90ff;
+}
+

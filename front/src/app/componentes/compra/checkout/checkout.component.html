@@ -1,0 +1,23 @@
+<app-cabecalho></app-cabecalho>
+<div class="container">
+  <div class="title">
+    <h4>Escolha o endereço de entrega:</h4>
+  </div>
+  <div *ngIf="enderecos">
+    <div class="container-endereco" *ngFor="let endereco of enderecoData; let i = index">
+      <input type="radio" id="option" name="option" [value]="endereco.cep">
+      <div class="card-endereco">
+        <span id="enderecoPrincipal" *ngIf="endereco.enderecoPrincipal"> Endereço Principal</span>
+        <span>{{ endereco.logradouro }}, {{ endereco.numero }} -
+          {{ endereco.bairro }}, {{ endereco.cidade }} - {{ endereco.uf }}, {{
+          endereco.cep
+          }}</span>
+
+      </div>
+    </div>
+  </div>
+  <div class="btnAddEndereco">
+    <button type="button" id="btnAddEnd" (click)="addEndereco()">Adicionar Endereço</button>
+  </div>
+
+</div>

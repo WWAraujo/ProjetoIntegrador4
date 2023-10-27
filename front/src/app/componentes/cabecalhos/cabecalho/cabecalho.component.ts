@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClientService } from '../../cliente/cliente.services';
 import { LoginService } from '../../logins/login.service';
 import { Cliente } from 'src/app/core/types/type';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cabecalho',
@@ -19,7 +17,6 @@ export class CabecalhoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private clientService: ClientService,
     private modalService: NgbModal,
     private loginService: LoginService
   ) {}
@@ -31,6 +28,7 @@ export class CabecalhoComponent implements OnInit {
   deslogar() {
     this.logado = false;
     this.deslogarCliente();
+    this.router.navigate(['telaPrincipal']);
   }
 
   Login() {
@@ -65,7 +63,7 @@ export class CabecalhoComponent implements OnInit {
   }
 
   carrinho(){
-    this.router.navigate(['carrinho']);
+    this.router.navigate(['/carrinho']);
   }
 
   deslogarCliente(){
