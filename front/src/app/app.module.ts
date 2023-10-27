@@ -28,6 +28,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { FormatDirective } from './componentes/cliente/enderecos/cep/format.directive';
 import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
+import { CarrinhoComponent } from './componentes/compra/carrinho/carrinho.component';
+import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
+import { SelecionarEnderecoComponent } from './componentes/compra/selecionar-endereco/selecionar-endereco.component';
+import { SelecionarFormaPagamentoComponent } from './componentes/compra/selecionar-forma-pagamento/selecionar-forma-pagamento.component';
+import { ConcluirCompraComponent } from './componentes/compra/concluir-compra/concluir-compra.component';
+import { ConfirmacaoCompraComponent } from './componentes/compra/confirmacao-compra/confirmacao-compra.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +58,12 @@ import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/a
     EnderecosComponent,
     FormatDirective,
     AlterarClienteComponent,
+    CarrinhoComponent,
+    CheckoutComponent,
+    SelecionarEnderecoComponent,
+    SelecionarFormaPagamentoComponent,
+    ConcluirCompraComponent,
+    ConfirmacaoCompraComponent,
   ],
   imports: [
     BrowserModule,

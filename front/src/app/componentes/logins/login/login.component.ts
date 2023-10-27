@@ -1,11 +1,8 @@
-import { ClienteLogado } from './../../../core/types/type';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LoginService } from '../login.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../usuario/user.services';
-import { Logado } from 'src/app/core/types/type';
-import { ClienteService } from '../../cliente/cliente.service';
+import { Cliente, Logado } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-login',
@@ -13,101 +10,95 @@ import { ClienteService } from '../../cliente/cliente.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  formularioCliente!: FormGroup;
-  formularioColaborador!: FormGroup;
-  logado!: Logado;
-  exibirCabecalho: boolean = true;
-  usuarioLogado: boolean = true;
+
+  formulario!: FormGroup;
   usuarioSenhaInvalido: boolean = false;
   selectedType: string = 'cliente';
-  clienteLogado!: ClienteLogado;
-  idCliente!: number;
+  clienteLogado!: Cliente;
+  usuarioLogado!: Logado;
 
   constructor(
-    private service : LoginService,
+    private loginService : LoginService,
     private router : Router,
     private formBuilder : FormBuilder,
-    private userService : UserService,
-    private serviceiD : ClienteService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.userService.setUsuarioLogado(!this.usuarioLogado);
-    this.formularioColaborador = this.formBuilder.group({
-      usuario: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
-        ],
-      ],
-      senha: [
-        '',
-        [Validators.required, Validators.minLength(3)],
-      ],
+    this.formulario = this.formBuilder.group({
+      usuario: ['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      senha: ['', [Validators.required, Validators.minLength(3)]]
     });
-    this.formularioCliente = this.formBuilder.group({
-      emailCliente: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
-        ],
-      ],
-      senhaCliente: [
-        '',
-        [Validators.required, Validators.minLength(3)],
-      ],
+    this.route.queryParams.subscribe((params) => {
+      if (params['fromCart'] === 'true') {
+      }
     });
   }
 
+  fazerLogin(){
+    if (this.selectedType === 'usuario'){
+      this.LoginColaborador();
+    } else if (this.selectedType === 'cliente'){
+      this.LoginCliente();
+    } else {
+      alert('Erro na escolha')
+    }
+  }
+
   LoginColaborador() {
-    if (this.formularioColaborador.valid) {
-      this.service.loginColaborador(this.formularioColaborador.value).subscribe((logado) => {
+    if (this.formulario.valid) {
+      this.loginService.loginColaborador(this.formulario.value).subscribe((logado: Logado) => {
         if (logado) {
-          this.logado = logado;
-          this.userService.setUserType(logado.tipoUsuario);
-          this.userService.setUsuarioLogado(this.usuarioLogado);
-          this.validarUsuario();
-          this.usuarioSenhaInvalido = false;
+          this.usuarioLogado = logado;
+          this.loginService.saveData('usuarioData', this.usuarioLogado);
+          this.loginService.setLoggedIn(true);
+          this.router.navigate(['/backoffice']);
         } else {
-          this.usuarioSenhaInvalido = true;
+          this.falhaLogin();
         }
+      }, (error) => {
+        console.error('Falha ao fazer login:', error);
+        this.falhaLogin();
       });
     }
   }
 
   LoginCliente() {
-    if (this.formularioCliente.valid) {
-      this.service.loginCliente(this.formularioCliente.value).subscribe((clienteLogado) => {
-        if (clienteLogado) {
-          const id = parseInt(clienteLogado.id);
-          this.serviceiD.setIdCliente(id);
-          this.usuarioSenhaInvalido = false;
-          this.router.navigate(['/'])
+    if (this.formulario.valid) {
+      this.loginService.loginCliente(this.formulario.value).subscribe((logado: Cliente) => {
+        if (logado) {
+          this.clienteLogado = logado;
+          this.loginService.saveData('clienteData', this.clienteLogado);
+          this.loginService.setLoggedIn(true);
+          this.route.queryParams.subscribe((params) => {
+            if (params['fromCart'] === 'true') {
+              this.router.navigate(['/checkout']);
+            } else {
+              this.router.navigate(['/telaPrincipal']);
+            }
+          });
         } else {
-          this.usuarioSenhaInvalido = true;
+          this.falhaLogin();
         }
+      }, (error) => {
+        console.error('Falha ao fazer login:', error);
+        this.falhaLogin();
       });
     }
   }
 
-
-  validarUsuario() {
-    if (this.logado.tipoUsuario === '1') {
-      this.router.navigate(['/backoffice']);
-    } else if (this.logado.tipoUsuario === '2') {
-      this.router.navigate(['/backoffice']);
-    }
+  falhaLogin() {
+    this.usuarioSenhaInvalido = true;
   }
 
   habilitarBotao(): string {
-    if (this.formularioColaborador.valid || this.formularioCliente.valid) {
+    if (this.formulario.valid) {
       return 'botao';
     } else {
       return 'botao__desabilitado';
     }
   }
+
   cadastrarCliente() {
     this.router.navigate(['/cadastrarCliente'])
   }

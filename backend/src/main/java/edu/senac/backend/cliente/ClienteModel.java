@@ -1,5 +1,6 @@
 package edu.senac.backend.cliente;
 
+import edu.senac.backend.login.LoginRecord;
 import edu.senac.backend.service.Criptografia;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
@@ -56,8 +57,13 @@ public class ClienteModel {
         }
     }
 
-        public ClienteModel(ClienteRecord loginCliente) {
-            this.emailCliente = loginCliente.emailCliente();
-            this.senhaCliente = new Criptografia().encriptar(loginCliente.senhaCliente());
-        }
+    public ClienteModel(ClienteRecord loginCliente) {
+        this.emailCliente = loginCliente.emailCliente();
+        this.senhaCliente = new Criptografia().encriptar(loginCliente.senhaCliente());
     }
+
+
+}
+
+
+

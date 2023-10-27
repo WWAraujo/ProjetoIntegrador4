@@ -1,0 +1,19 @@
+<div *ngIf="idCliente">
+  <div *ngIf="enderecos">
+    <div class="container-endereco" *ngFor="let endereco of enderecoData; let i = index">
+      <input type="radio" id="option" name="option" [value]="endereco.cep">
+      <div class="card-endereco">
+        <span id="enderecoPrincipal" *ngIf="endereco.enderecoPrincipal"> Endereço Principal</span>
+        <span>{{ endereco.logradouro }}, {{ endereco.numero }} -
+          {{ endereco.bairro }}, {{ endereco.cidade }} - {{ endereco.uf }}, {{
+          endereco.cep
+          }}</span>
+
+      </div>
+    </div>
+  </div>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <button type="button" class="btn btn-outline-primary" (click)="addEndereco()">ALTERAR DADOS</button>
+    <button type="button" class="btn btn-primary" (click)="formaPagamento()">FORMA DE PAGAMENTO</button>
+  </div>
+</div>

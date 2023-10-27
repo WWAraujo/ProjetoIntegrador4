@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { Validacoes } from '../../usuario/cadastro-usuario/validacoes';
 import { Cliente, Endereco, Genero } from 'src/app/core/types/type';
 import { ClienteService } from '../cliente.service';
 import { ModalenderecoService } from '../modalendereco.service';
-import { nomeClienteValidator } from '../validadorCliente';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -14,7 +12,7 @@ import { nomeClienteValidator } from '../validadorCliente';
   styleUrls: ['./cadastro-cliente.component.css'],
 })
 export class CadastroClienteComponent implements OnInit {
-  exibirCabecalho: boolean = true;
+
   formulario!: FormGroup;
   emailEncontrado: boolean = false;
   cpfEncontrado: boolean = false;
@@ -64,11 +62,17 @@ export class CadastroClienteComponent implements OnInit {
     }
 
     this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required, nomeClienteValidator()]],
-      cpf: ['', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
+      nome: ['', [Validators.required,
+        // nomeClienteValidator()
+      ]],
+      cpf: ['', [Validators.required,
+        // Validators.maxLength(11), Validators.minLength(11)
+      ]],
       dataNascimento: ['', [Validators.required]],
       genero: ['', [Validators.required]],
-      telefone: ['', [Validators.required, Validators.pattern(/^[0-9]{0,11}$/)]],
+      telefone: ['', [Validators.required,
+        // Validators.pattern(/^[0-9]{0,11}$/)
+      ]],
       email: [
         '',
         [
@@ -95,8 +99,6 @@ export class CadastroClienteComponent implements OnInit {
     ) {
       return true;
     }
-    console.log('cliente', this.cliente);
-    console.log('cliente Data', this.dadosCliente);
     return false;
   }
 
@@ -108,14 +110,14 @@ export class CadastroClienteComponent implements OnInit {
 
   procurarEmail() {
     this.service
-      .procurarEmail(this.cliente.emailCliente)
+      .procurarEmail(this.formulario.get('email')?.value)
       .subscribe((response) => {
         this.emailEncontrado = response;
       });
   }
 
   procurarCpf() {
-    this.service.procurarCPF(this.cliente.cpfCliente).subscribe((response) => {
+    this.service.procurarCPF(this.formulario.get('cpf')?.value).subscribe((response) => {
       this.cpfEncontrado = response;
     });
   }
@@ -138,7 +140,6 @@ export class CadastroClienteComponent implements OnInit {
       cliente: this.cliente,
       enderecos: this.enderecoData,
     };
-    console.log('Dados enviados', dadosParaEnviar);
 
     if (!this.emailEncontrado.valueOf() && !this.idCliente) {
       if (dadosParaEnviar.enderecos.length > 0) {
@@ -147,6 +148,7 @@ export class CadastroClienteComponent implements OnInit {
           .subscribe((clienteCadastrado) => {
             if (clienteCadastrado) {
               this.router.navigate(['/solicitarLogin']);
+              this.service.setIdCliente(this.idCliente);
             } else {
               alert('Algo deu errado no cadastro');
             }
@@ -168,7 +170,6 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   addEnderecos() {
-    console.log(this.enderecoData);
     const estadoFormularioCliente = this.formulario.getRawValue();
     this.service.setDadosCliente(estadoFormularioCliente);
     this.serviceEndereco.setListaEndereco(this.enderecoData);
@@ -201,6 +202,10 @@ export class CadastroClienteComponent implements OnInit {
     if (telefoneControl) {
       telefoneControl.setValue(telefoneControl.value.replace(/[^0-9]/g, ''));
     }
+  }
+
+  login(){
+    this.router.navigate(['solicitarLogin']);
   }
 
 }

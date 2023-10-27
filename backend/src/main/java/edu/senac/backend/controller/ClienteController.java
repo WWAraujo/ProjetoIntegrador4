@@ -1,7 +1,6 @@
 package edu.senac.backend.controller;
 
 import edu.senac.backend.cliente.*;
-import edu.senac.backend.cliente.LoginClienteResponse;
 import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteModel;
 import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteRecord;
 import edu.senac.backend.enderecos.entrega.EnderecosEntregasClienteRepository;
@@ -9,7 +8,6 @@ import edu.senac.backend.enderecos.faturamento.EnderecoFaturamentoClienteModel;
 import edu.senac.backend.enderecos.faturamento.EnderecoFaturamentoClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -104,7 +102,10 @@ public class ClienteController {
 
     @GetMapping("/buscaremail/{email}")
     public Boolean listarCliente(@PathVariable String email) {
-        return repository.findByEmailCliente(email).isPresent();
+        System.out.println("Entrou no busca");
+        boolean teste = repository.findByEmailCliente(email).isPresent();
+        System.out.println(teste);
+        return teste;
     }
 
     @GetMapping("/buscarcpf/{cpf}")
@@ -112,14 +113,6 @@ public class ClienteController {
         return repository.findByCpfCliente(cpf).isPresent();
     }
 
-    @PostMapping("/login-cliente")
-    @Transactional
-    public ResponseEntity<LoginClienteResponse> salvarCliente(@RequestBody ClienteRecord loginCliente) {
-
-        ClienteModel lg = new ClienteModel(loginCliente);
-        LoginClienteResponse loginResponse = repository.findIdAndTypeByEmailAndSenha(lg.getEmailCliente(), lg.getSenhaCliente());
-        return ResponseEntity.ok(loginResponse);
-    }
 
     @PutMapping("/alterar")
     public ResponseEntity<Long> alterarCliente(@RequestBody ClienteRecordConstructor cliente) {

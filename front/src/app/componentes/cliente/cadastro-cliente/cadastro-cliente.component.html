@@ -1,4 +1,3 @@
-<app-cabecalho></app-cabecalho>
 <section class="container">
   <div class="title">
     <label>Criar Conta</label>
@@ -159,8 +158,9 @@
       </div>
     </div>
 
-    <div class="endereco">
-      <button class="enderecos" (click)="addEnderecos()">Endereços<img src="../../../../assets/image/endereco.png"></button>
+    <div class="endereco-login">
+      <button class="enderecos" (click)="addEnderecos()">Endereços<img src="../../../../assets/image/endereco.png"/></button>
+      <label>Já Possui Cadastro? <a  (click)="login()">ENTRAR</a> </label>
     </div>
 
     <button class="newUser" (click)="cadastrarCliente()" [disabled]="!formulario.valid" [ngClass]="habilitarBotao()">

@@ -11,15 +11,15 @@ const API = environment.apiURL;
   styleUrls: ['./tela-principal.component.css']
 })
 export class TelaPrincipalComponent implements OnInit {
+
   imagemPrincipal!: string;
   idProduto: number = 3;
   productData: ProdutoFotos[] = [];
-  exibirCabecalho: boolean = true;
 
   get productDataGroups(): any[][] {
     const groups: any[][] = [];
-    for (let i = 0; i < this.productData.length; i += 4) {
-      groups.push(this.productData.slice(i, i + 4));
+    for (let i = 0; i < this.productData.length; i += 5) {
+      groups.push(this.productData.slice(i, i + 5));
     }
     return groups;
   }
@@ -31,7 +31,7 @@ export class TelaPrincipalComponent implements OnInit {
         this.productData = data;
       }
     );
-  }
+  } 
 
   getFullPath(imageName: string): string {
     return `${API}/api/upload/${imageName}`;
@@ -44,7 +44,6 @@ export class TelaPrincipalComponent implements OnInit {
   pegarId(idProduto: number) {
     this.service.setIdProduto(idProduto);
     this.router.navigate(['/produtoDetalhado']);
-    console.log(idProduto);
   }
 
   formatarMoeda(valor: number): string {

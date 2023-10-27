@@ -13,6 +13,8 @@ import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente
 import { ProdutoDetalhadoComponent } from './componentes/produtos/produto-detalhado/produto-detalhado.component';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
+import { CarrinhoComponent } from './componentes/compra/carrinho/carrinho.component';
+import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -72,6 +74,14 @@ const routes: Routes = [
     path: 'endereco',
     component: EnderecosComponent
   },
+  {
+    path: 'carrinho',
+    component: CarrinhoComponent
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
+  }
 ];
 
 @NgModule({

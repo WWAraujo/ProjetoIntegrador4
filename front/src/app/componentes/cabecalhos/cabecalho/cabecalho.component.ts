@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginService } from '../../logins/login.service';
+import { Cliente, Logado } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-cabecalho',
@@ -7,19 +10,133 @@ import { Router } from '@angular/router';
   styleUrls: ['./cabecalho.component.css'],
 })
 export class CabecalhoComponent implements OnInit {
-  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  closeResult: string = '';
+  dadosCliente: Cliente | null = null;
+  dadosUsuario: Logado | null = null;
+  logado: boolean = false;
+  nomeLogado: string = '';
 
-  Login(){
-    this.router.navigate(['/solicitarLogin'])
+  constructor(
+    private router: Router,
+    private modalService: NgbModal,
+    private loginService: LoginService
+  ) {}
+
+  ngOnInit(): void {
+    this.loginService.getLoggedIn().subscribe((loggedIn) => {
+      if (loggedIn) {
+        // O usuário está logado, atualize a interface de acordo
+        this.verificarLogado();
+      } 
+    });
+    this.verificarLogado();
   }
 
-  Register(){
+  verificarNovoLogin() {
+    this.verificarLogado();
+  }
+
+  deslogar() {
+    this.logado = false;
+    if (this.dadosCliente){
+      this.deslogarCliente();
+    }
+    if (this.dadosUsuario){
+      this.deslogarUsuario();
+    }
+    this.router.navigate(['/telaPrincipal']);
+  }
+
+  Login() {
+    this.router.navigate(['/solicitarLogin']);
+  }
+
+  registrar() {
     this.router.navigate(['/cadastrarCliente']);
   }
 
-  telaPrincipal(){
+  telaPrincipal() {
     this.router.navigate(['/cadastroCliente']);
+  }
+
+  alterarDados() {
+    if (this.dadosCliente) {
+      this.router.navigate(['/alterarCliente']);
+    } else if (this.dadosUsuario) {
+      this.router.navigate(['/listarUsuario']);
+    }
+  }
+
+  verificarLogado() {
+    if (!this.logado){
+      this.logado = this.verificarClienteLogado();
+    }
+    if (!this.logado){
+      this.logado = this.verificarUsuarioLogado();
+    }
+  }
+
+  verificarClienteLogado() {
+    this.dadosCliente = this.loginService.getData('clienteData');
+    if(this.dadosCliente){
+      this.nomeLogado = this.dadosCliente.nomeCliente;
+      return true;
+    }
+    return false;
+  }
+
+  verificarUsuarioLogado() {
+    this.dadosUsuario = this.loginService.getData('usuarioData');
+    if(this.dadosUsuario){
+      this.nomeLogado = this.dadosUsuario.nomeUsuario;
+      return true;
+    }
+    return false;
+  }
+
+  carrinho(){
+    this.router.navigate(['/checkout']);
+  }
+
+  deslogarCliente(){
+    this.loginService.removeData('clienteData');
+    this.dadosCliente = null;
+  }
+
+  deslogarUsuario(){
+    this.loginService.removeData('usuarioData');
+    this.dadosUsuario = null;
+  }
+
+  open(content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  getPrimeiroNome() {
+    const nomeCompletoArray = this.nomeLogado.split(' ');
+    if (nomeCompletoArray.length > 0) {
+      return nomeCompletoArray[0];
+    }
+    return 'Nome não encontrado';
   }
 }

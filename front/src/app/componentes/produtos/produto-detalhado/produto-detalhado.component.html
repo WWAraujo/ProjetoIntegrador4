@@ -1,4 +1,3 @@
-<app-cabecalho *ngIf="exibirCabecalho"></app-cabecalho>
 <section class="container">
   <div class="container-produtos">
     <div class="title">
@@ -27,7 +26,7 @@
       <div class="buttons">
         <button class="btn-comprar"
         [disabled]="botaoDesabilitado" [ngClass]="habilitarBotao()">COMPRAR</button>
-        <button type="button" name="cadastrar" class="btn-add-carrinho"><img src="../../../../assets/image/adicionar-ao-carrinho.png"></button>
+        <button type="button" name="cadastrar" class="btn-add-carrinho" (click)="pegarId(productData.produto.id)"><img src="../../../../assets/image/adicionar-ao-carrinho.png"></button>
       </div>
     </div>
     <div class="containerImage">

@@ -6,6 +6,7 @@ import { ClienteService } from '../cliente.service';
 import { ModalenderecoService } from '../modalendereco.service';
 import { Observable, Subject } from 'rxjs';
 import { nomeClienteValidator } from '../validadorCliente';
+import { LoginService } from '../../logins/login.service';
 
 @Component({
   selector: 'app-alterar-cliente',
@@ -15,7 +16,6 @@ import { nomeClienteValidator } from '../validadorCliente';
 export class AlterarClienteComponent implements OnInit {
 
   formulario!: FormGroup;
-  exibirCabecalho: boolean = true;
   emailEncontrado: boolean = false;
   cpfEncontrado: boolean = false;
   senhaCorrespondente: boolean = false;
@@ -39,20 +39,22 @@ export class AlterarClienteComponent implements OnInit {
     private router: Router,
     private serviceCliente: ClienteService,
     private serviceEndereco: ModalenderecoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
 
+    this.dadosCliente = this.loginService.getData('clienteData');
+
+    this.idCliente = this.dadosCliente.id;
     const listaEnderecoAtual = this.serviceEndereco.getListaEndereco();
-    this.idCliente = this.serviceCliente.getIdCliente();
     const clienteAtual = this.serviceCliente.getDadosCliente();
 
     if (listaEnderecoAtual) {
       this.enderecoData = listaEnderecoAtual;
     }
 
-    this.idCliente = 3; //chumbado um id
     if (this.idCliente) {
       this.serviceCliente.exibirPerfil(this.idCliente).subscribe((data) => {
         this.dadosCliente = data.cliente;
@@ -80,8 +82,6 @@ export class AlterarClienteComponent implements OnInit {
   }
 
   verificaDadosInseridos() {
-    console.log('cliente', this.cliente);
-    console.log('Dados CLiente', this.dadosCliente);
     if (
       this.cliente.nomeCliente != this.dadosCliente.nomeCliente ||
       this.cliente.generoCliente != this.dadosCliente.generoCliente ||

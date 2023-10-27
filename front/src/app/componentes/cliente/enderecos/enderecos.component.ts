@@ -2,7 +2,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { AtivoInativo, Endereco } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { ModalenderecoService } from '../modalendereco.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from '../cliente.service';
 @Component({
   selector: 'app-enderecos',
@@ -10,10 +10,12 @@ import { ClienteService } from '../cliente.service';
   styleUrls: ['./enderecos.component.css']
 })
 export class EnderecosComponent implements OnInit {
-  exibirCabecalho: boolean = true;
-  idCliente!: number ;
+
+  idCliente!: number;
   enderecos: Endereco[] = [];
   abrirform: boolean = false;
+  enderecoPrincipal!: string;
+  btnAlterarEndereco: boolean = false;
 
   endereco: Endereco = {
     id: 0,
@@ -36,18 +38,22 @@ export class EnderecosComponent implements OnInit {
   constructor(
     private enderecoService: ModalenderecoService,
     private router: Router,
-    private clienteService: ClienteService
-    ) {}
+    private clienteService: ClienteService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.enderecos = this.enderecoService.getListaEndereco();
     this.idCliente = this.clienteService.getIdCliente();
+    if (this.endereco.enderecoPrincipal) {
+
+    }
   }
 
-  finalizarEnderecos(){
+  finalizarEnderecos() {
     try {
       this.enderecos.forEach((endereco) => {
-        if (endereco.enderecoPrincipal === 'p'){
+        if (endereco.enderecoPrincipal === 'p') {
           throw new Error('Parar o loop');
         }
       });
@@ -65,10 +71,10 @@ export class EnderecosComponent implements OnInit {
     }
   }
 
-  excluirEndereco(end: Endereco){
-    this.enderecos.forEach((endereco ) => {
+  excluirEndereco(end: Endereco) {
+    this.enderecos.forEach((endereco) => {
       if (endereco === end) {
-        if (endereco.ativoInativo === AtivoInativo['ATIVO']){
+        if (endereco.ativoInativo === AtivoInativo['ATIVO']) {
           endereco.ativoInativo = AtivoInativo['INATIVO'];
         } else {
           endereco.ativoInativo = AtivoInativo['ATIVO']
@@ -77,24 +83,29 @@ export class EnderecosComponent implements OnInit {
     })
   }
 
-  abrirMenu(){
+  abrirMenu() {
     this.abrirform = true;
   }
 
-  fecharMenu(){
+  fecharMenu() {
     this.abrirform = false;
   }
 
-  voltarParaTela(){
-    if (this.idCliente){
-      this.router.navigate(['/alterarCliente'])
-    } else{
+  voltarParaTela() {
+    if (this.idCliente) {
+      this.route.queryParams.subscribe((params) => {
+        if (params['fromCart'] === 'true') {
+          this.router.navigate(['/checkout']);
+        } else {
+          this.router.navigate(['/alterarCliente']);
+        }
+      });
+    } else {
       this.router.navigate(['/cadastrarCliente'])
-      console.log('pulou o alterar cliente')
     }
   }
 
-  alterarEndereco(end: Endereco){
+  alterarEndereco(end: Endereco) {
     const index = this.enderecos.findIndex(item => item === end);
     if (index !== 1) {
       // this.enderecoAtual = end;
@@ -106,7 +117,7 @@ export class EnderecosComponent implements OnInit {
     this.endereco.cidade = end.cidade;
     this.endereco.uf = end.uf;
     this.endereco.numero = end.numero;
-    this.endereco.complemento= end.complemento;
+    this.endereco.complemento = end.complemento;
     this.endereco.cep = end.cep;
   }
 
@@ -121,14 +132,14 @@ export class EnderecosComponent implements OnInit {
   }
 
   addendereco() {
-    this.enderecos.push({...this.endereco});
+    this.enderecos.push({ ...this.endereco });
     // Limpar os campos em caso de erro ou CEP não encontrado
     this.endereco.logradouro = '';
     this.endereco.bairro = '';
     this.endereco.cidade = '';
     this.endereco.uf = '';
     this.endereco.numero = '';
-    this.endereco.complemento= '';
+    this.endereco.complemento = '';
     this.endereco.cep = '';
     this.fecharMenu();
   }
@@ -142,7 +153,7 @@ export class EnderecosComponent implements OnInit {
           this.endereco.cidade = data.localidade;
           this.endereco.uf = data.uf;
           this.endereco.numero = '';
-          this.endereco.complemento= '';
+          this.endereco.complemento = '';
         } else {
           // Limpar os campos em caso de erro ou CEP não encontrado
           this.endereco.logradouro = '';
@@ -150,7 +161,7 @@ export class EnderecosComponent implements OnInit {
           this.endereco.cidade = '';
           this.endereco.uf = '';
           this.endereco.numero = '';
-          this.endereco.complemento= '';
+          this.endereco.complemento = '';
         }
       });
     }

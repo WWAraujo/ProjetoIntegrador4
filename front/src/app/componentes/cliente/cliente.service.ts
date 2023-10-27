@@ -13,7 +13,6 @@ const API = environment.apiURL;
 
 export class ClienteService{
   private readonly url = `${API}/cliente`;
-  private FormularioCliente: any;
   private idCliente! : number;
   private dadosAtualCliente! : Cliente;
 
@@ -35,7 +34,7 @@ export class ClienteService{
 
   procurarEmail(email: string): Observable<boolean> {
     const caminho = 'buscaremail';
-    const urlBuscarEmail = `${this.url}/${caminho}/${email}`;
+    const urlBuscarEmail = `${API}/cliente/buscaremail/${email}`;
     return this.http.get<boolean>(urlBuscarEmail);
   }
 
