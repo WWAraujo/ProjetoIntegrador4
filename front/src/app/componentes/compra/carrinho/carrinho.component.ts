@@ -3,7 +3,7 @@ import { ProdutosService } from '../../produtos/produtos.service';
 import { Router } from '@angular/router';
 import { Cliente, ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
-import { CarrinhoService } from './carrinho.services';
+import { CarrinhoService } from '../carrinho.services';
 import { LoginService } from '../../logins/login.service';
 
 const API = environment.apiURL;

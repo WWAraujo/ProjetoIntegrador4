@@ -1,17 +1,15 @@
 package edu.senac.backend.controller;
 
 import edu.senac.backend.cliente.ClienteModel;
-import edu.senac.backend.cliente.ClienteRecord;
 import edu.senac.backend.cliente.ClienteRepository;
-import edu.senac.backend.login.*;
+import edu.senac.backend.login.LoginModel;
+import edu.senac.backend.login.LoginRecord;
+import edu.senac.backend.login.LoginUsuarioRepository;
 import edu.senac.backend.service.Criptografia;
-import edu.senac.backend.usuario.UsuarioModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Optional;
 
@@ -29,11 +27,6 @@ public class LoginController {
     @PostMapping("/usuario")
     @Transactional
     public ResponseEntity<LoginModel> salvarUsuario(@RequestBody LoginRecord login) {
-
-//        LoginModel lg = new LoginModel(login);
-//        LoginUsuarioResponse loginUsuarioResponse = UsuarioRepository.findIdAndTypeByEmailAndSenha(lg.getEmailUsuario(), lg.getSenhaUsuario());
-//        Optional<UsuarioModel> usuarioModel = UsuarioRepository.findByEmailCliente(login.usuario());
-//        return ResponseEntity.ok(loginUsuarioResponse);
 
         String senha = new Criptografia().encriptar(login.senha());
 

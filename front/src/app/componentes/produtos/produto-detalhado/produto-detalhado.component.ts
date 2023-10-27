@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../produtos.service';
 import { ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
-import { CarrinhoComponent } from '../../compra/carrinho/carrinho.component';
-import { CarrinhoService } from '../../compra/carrinho/carrinho.services';
+import { CarrinhoService } from '../../compra/carrinho.services';
 
 const API = environment.apiURL;
 
@@ -23,7 +22,6 @@ export class ProdutoDetalhadoComponent implements OnInit {
   produtoIndisponivel: boolean = false;
   imagensSecundarias: string[] = [];
   botaoDesabilitado: boolean = false;
-  exibirCabecalho: boolean = true;
 
   constructor(private service: ProdutosService, private router: Router, private serviceCarrinho: CarrinhoService) { }
 

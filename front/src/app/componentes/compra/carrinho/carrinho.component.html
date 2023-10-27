@@ -1,4 +1,3 @@
-<app-cabecalho></app-cabecalho>
 <section class="container">
   <div class="row">
     <div class="container-card" *ngFor="let produto of productData">
@@ -48,8 +47,8 @@
     <div class="subtotal">
       <h2 id="titleSubtotal">Subtotal</h2>
       <p id="totalSubtotal">{{ formatarMoeda(subtotal) }}</p>
-      <button class="btn-comprarMais" type="button" (click)="paginaPrincipal()">Continuar Comprando</button>
-      <button class="btn-finalizarCompra" type="button" (click)="verificarLogado()">Finalizar Compra</button>
+      <button type="button"  class="btn btn-outline-primary" (click)="paginaPrincipal()">CONTINUAR COMPRANDO</button>
+      <button type="button"  class="btn btn-primary" (click)="verificarLogado()">IR PARA O PAGAMENTO</button>
     </div>
 
   </div>

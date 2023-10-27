@@ -12,7 +12,7 @@ import { ModalenderecoService } from '../modalendereco.service';
   styleUrls: ['./cadastro-cliente.component.css'],
 })
 export class CadastroClienteComponent implements OnInit {
-  exibirCabecalho: boolean = true;
+
   formulario!: FormGroup;
   emailEncontrado: boolean = false;
   cpfEncontrado: boolean = false;
@@ -99,8 +99,6 @@ export class CadastroClienteComponent implements OnInit {
     ) {
       return true;
     }
-    console.log('cliente', this.cliente);
-    console.log('cliente Data', this.dadosCliente);
     return false;
   }
 
@@ -142,7 +140,6 @@ export class CadastroClienteComponent implements OnInit {
       cliente: this.cliente,
       enderecos: this.enderecoData,
     };
-    console.log('Dados enviados', dadosParaEnviar);
 
     if (!this.emailEncontrado.valueOf() && !this.idCliente) {
       if (dadosParaEnviar.enderecos.length > 0) {
@@ -173,7 +170,6 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   addEnderecos() {
-    console.log(this.enderecoData);
     const estadoFormularioCliente = this.formulario.getRawValue();
     this.service.setDadosCliente(estadoFormularioCliente);
     this.serviceEndereco.setListaEndereco(this.enderecoData);

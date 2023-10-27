@@ -12,14 +12,12 @@ import { LoginService } from '../../logins/login.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  exibirCabecalho: boolean = true;
   emailEncontrado: boolean = false;
   cpfEncontrado: boolean = false;
   senhaCorrespondente: boolean = false;
   idCliente!: number;
   dadosCliente!: Cliente;
-  enderecoData: Endereco[] = [];
-  enderecos: Endereco[] = [];
+  telaParaExibir: string = 'carrinho';
 
   constructor(
     private serviceCliente: ClienteService,
@@ -28,30 +26,26 @@ export class CheckoutComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-
-    this.dadosCliente = this.loginService.getData('clienteData');
-    this.idCliente = this.dadosCliente.id;
-    const listaEnderecoAtual = this.serviceEndereco.getListaEndereco();
-
-    if (listaEnderecoAtual) {
-      this.enderecoData = listaEnderecoAtual;
-    }
-
-    if (this.idCliente) {
-      this.serviceCliente.exibirPerfil(this.idCliente).subscribe((data) => {
-        this.dadosCliente = data.cliente;
-
-        if (listaEnderecoAtual.length < 1) {
-          this.enderecoData = data.enderecos;
-        }
-      });
-    }
   }
 
-  addEndereco(){
-    this.serviceCliente.setIdCliente(this.idCliente);
-    this.serviceEndereco.setListaEndereco(this.enderecoData);
-    this.router.navigate(['endereco'],{ queryParams: { fromCart: 'true' } })
-
+  trocarTelaCarrinho(){
+    this.telaParaExibir = 'carrinho';
   }
+
+  trocarTelaEndereco(){
+    this.telaParaExibir = 'endereco';
+  }
+
+  trocarTelaFormaPagamento(){
+    this.telaParaExibir = 'pagamento';
+  }
+
+  trocarTelaConfirmacao(){
+    this.telaParaExibir = 'confirmacao';
+  }
+
+  trocarTelaConcluir(){
+    this.telaParaExibir = 'concluir';
+  }
+
 }

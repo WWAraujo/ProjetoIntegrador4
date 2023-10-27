@@ -16,7 +16,6 @@ import { LoginService } from '../../logins/login.service';
 export class AlterarClienteComponent implements OnInit {
 
   formulario!: FormGroup;
-  exibirCabecalho: boolean = true;
   emailEncontrado: boolean = false;
   cpfEncontrado: boolean = false;
   senhaCorrespondente: boolean = false;
@@ -47,10 +46,8 @@ export class AlterarClienteComponent implements OnInit {
   ngOnInit(): void {
 
     this.dadosCliente = this.loginService.getData('clienteData');
-    console.log('Dados no banco', this.dadosCliente);
 
     this.idCliente = this.dadosCliente.id;
-    console.log('ID salvo', this.idCliente);
     const listaEnderecoAtual = this.serviceEndereco.getListaEndereco();
     const clienteAtual = this.serviceCliente.getDadosCliente();
 
@@ -85,8 +82,6 @@ export class AlterarClienteComponent implements OnInit {
   }
 
   verificaDadosInseridos() {
-    console.log('cliente', this.cliente);
-    console.log('Dados CLiente', this.dadosCliente);
     if (
       this.cliente.nomeCliente != this.dadosCliente.nomeCliente ||
       this.cliente.generoCliente != this.dadosCliente.generoCliente ||

@@ -11,10 +11,10 @@ const API = environment.apiURL;
   styleUrls: ['./tela-principal.component.css']
 })
 export class TelaPrincipalComponent implements OnInit {
+
   imagemPrincipal!: string;
   idProduto: number = 3;
   productData: ProdutoFotos[] = [];
-  exibirCabecalho: boolean = true;
 
   get productDataGroups(): any[][] {
     const groups: any[][] = [];
@@ -31,7 +31,7 @@ export class TelaPrincipalComponent implements OnInit {
         this.productData = data;
       }
     );
-  }
+  } 
 
   getFullPath(imageName: string): string {
     return `${API}/api/upload/${imageName}`;

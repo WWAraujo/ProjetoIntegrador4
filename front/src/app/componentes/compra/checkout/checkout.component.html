@@ -1,23 +1,31 @@
-<app-cabecalho></app-cabecalho>
 <div class="container">
-  <div class="title">
-    <h4>Escolha o endereço de entrega:</h4>
-  </div>
-  <div *ngIf="enderecos">
-    <div class="container-endereco" *ngFor="let endereco of enderecoData; let i = index">
-      <input type="radio" id="option" name="option" [value]="endereco.cep">
-      <div class="card-endereco">
-        <span id="enderecoPrincipal" *ngIf="endereco.enderecoPrincipal"> Endereço Principal</span>
-        <span>{{ endereco.logradouro }}, {{ endereco.numero }} -
-          {{ endereco.bairro }}, {{ endereco.cidade }} - {{ endereco.uf }}, {{
-          endereco.cep
-          }}</span>
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" *ngIf="telaParaExibir === 'carrinho'" aria-current="page">CARINHO</a>
+      <a class="nav-link" *ngIf="telaParaExibir !== 'carrinho'" (click)="trocarTelaCarrinho()">CARINHO</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" *ngIf="telaParaExibir === 'endereco'" aria-current="page">ENDEREÇO</a>
+      <a class="nav-link" *ngIf="telaParaExibir !== 'endereco'" (click)="trocarTelaEndereco()">ENDEREÇO</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" *ngIf="telaParaExibir === 'pagamento'" aria-current="page">FORMA DE PAGAMENTO</a>
+      <a class="nav-link" *ngIf="telaParaExibir !== 'pagamento'" (click)="trocarTelaFormaPagamento()">FORMA DE PAGAMENTO</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" *ngIf="telaParaExibir === 'confirmacao'" aria-current="page">CONFIRMAÇÃO</a>
+      <a class="nav-link" *ngIf="telaParaExibir !== 'confirmacao'" (click)="trocarTelaConfirmacao()">CONFIRMAÇÃO</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" *ngIf="telaParaExibir === 'concluir'" aria-disabled="true">CONCLUIR</a>
+      <a class="nav-link" *ngIf="telaParaExibir !== 'concluir'" aria-disabled="true" (click)="trocarTelaConcluir()">CONCLUIR</a>
+    </li>
+  </ul>
 
-      </div>
-    </div>
-  </div>
-  <div class="btnAddEndereco">
-    <button type="button" id="btnAddEnd" (click)="addEndereco()">Adicionar Endereço</button>
-  </div>
+  <app-carrinho                   *ngIf="telaParaExibir === 'carrinho'    "></app-carrinho>
+  <app-selecionar-endereco        *ngIf="telaParaExibir === 'endereco'    "></app-selecionar-endereco>
+  <app-selecionar-forma-pagamento *ngIf="telaParaExibir === 'pagamento'   "></app-selecionar-forma-pagamento>
+  <app-confirmacao-compra         *ngIf="telaParaExibir === 'confirmacao' "></app-confirmacao-compra>
+  <app-concluir-compra            *ngIf="telaParaExibir === 'concluir'    "></app-concluir-compra>
 
 </div>

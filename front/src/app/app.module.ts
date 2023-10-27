@@ -30,6 +30,10 @@ import { FormatDirective } from './componentes/cliente/enderecos/cep/format.dire
 import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
 import { CarrinhoComponent } from './componentes/compra/carrinho/carrinho.component';
 import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
+import { SelecionarEnderecoComponent } from './componentes/compra/selecionar-endereco/selecionar-endereco.component';
+import { SelecionarFormaPagamentoComponent } from './componentes/compra/selecionar-forma-pagamento/selecionar-forma-pagamento.component';
+import { ConcluirCompraComponent } from './componentes/compra/concluir-compra/concluir-compra.component';
+import { ConfirmacaoCompraComponent } from './componentes/compra/confirmacao-compra/confirmacao-compra.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +60,10 @@ import { CheckoutComponent } from './componentes/compra/checkout/checkout.compon
     AlterarClienteComponent,
     CarrinhoComponent,
     CheckoutComponent,
+    SelecionarEnderecoComponent,
+    SelecionarFormaPagamentoComponent,
+    ConcluirCompraComponent,
+    ConfirmacaoCompraComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from '../../logins/login.service';
-import { Cliente } from 'src/app/core/types/type';
+import { Cliente, Logado } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-cabecalho',
@@ -10,9 +10,11 @@ import { Cliente } from 'src/app/core/types/type';
   styleUrls: ['./cabecalho.component.css'],
 })
 export class CabecalhoComponent implements OnInit {
+
   closeResult: string = '';
-  logado: boolean = false;
   dadosCliente: Cliente | null = null;
+  dadosUsuario: Logado | null = null;
+  logado: boolean = false;
   nomeLogado: string = '';
 
   constructor(
@@ -22,13 +24,28 @@ export class CabecalhoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loginService.getLoggedIn().subscribe((loggedIn) => {
+      if (loggedIn) {
+        // O usuário está logado, atualize a interface de acordo
+        this.verificarLogado();
+      } 
+    });
+    this.verificarLogado();
+  }
+
+  verificarNovoLogin() {
     this.verificarLogado();
   }
 
   deslogar() {
     this.logado = false;
-    this.deslogarCliente();
-    this.router.navigate(['telaPrincipal']);
+    if (this.dadosCliente){
+      this.deslogarCliente();
+    }
+    if (this.dadosUsuario){
+      this.deslogarUsuario();
+    }
+    this.router.navigate(['/telaPrincipal']);
   }
 
   Login() {
@@ -44,12 +61,19 @@ export class CabecalhoComponent implements OnInit {
   }
 
   alterarDados() {
-    this.router.navigate(['/alterarCliente']);
+    if (this.dadosCliente) {
+      this.router.navigate(['/alterarCliente']);
+    } else if (this.dadosUsuario) {
+      this.router.navigate(['/listarUsuario']);
+    }
   }
 
   verificarLogado() {
     if (!this.logado){
       this.logado = this.verificarClienteLogado();
+    }
+    if (!this.logado){
+      this.logado = this.verificarUsuarioLogado();
     }
   }
 
@@ -62,13 +86,27 @@ export class CabecalhoComponent implements OnInit {
     return false;
   }
 
+  verificarUsuarioLogado() {
+    this.dadosUsuario = this.loginService.getData('usuarioData');
+    if(this.dadosUsuario){
+      this.nomeLogado = this.dadosUsuario.nomeUsuario;
+      return true;
+    }
+    return false;
+  }
+
   carrinho(){
-    this.router.navigate(['/carrinho']);
+    this.router.navigate(['/checkout']);
   }
 
   deslogarCliente(){
     this.loginService.removeData('clienteData');
     this.dadosCliente = null;
+  }
+
+  deslogarUsuario(){
+    this.loginService.removeData('usuarioData');
+    this.dadosUsuario = null;
   }
 
   open(content: any) {

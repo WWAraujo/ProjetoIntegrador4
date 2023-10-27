@@ -72,7 +72,6 @@ export class CadastrarProdutosComponent implements OnInit {
     if (index !== -1) {
       this.fotosProduto.splice(index, 1);
     }
-    console.log('lista depois ', this.fotosProduto)
   }
 
   submitForm() {

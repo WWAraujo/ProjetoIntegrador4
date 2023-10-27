@@ -10,7 +10,7 @@ import { ClienteService } from '../cliente.service';
   styleUrls: ['./enderecos.component.css']
 })
 export class EnderecosComponent implements OnInit {
-  exibirCabecalho: boolean = true;
+
   idCliente!: number;
   enderecos: Endereco[] = [];
   abrirform: boolean = false;

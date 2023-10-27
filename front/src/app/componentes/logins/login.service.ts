@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Login, Logado, Cliente } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
 
@@ -10,6 +10,8 @@ const API = environment.apiURL;
   providedIn: 'root',
 })
 export class LoginService {
+
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -32,5 +34,13 @@ export class LoginService {
 
   removeData(key: string) {
     localStorage.removeItem(key);
+  }
+
+  setLoggedIn(value: boolean) {
+    this.loggedIn.next(value);
+  }
+
+  getLoggedIn() {
+    return this.loggedIn.asObservable();
   }
 }
