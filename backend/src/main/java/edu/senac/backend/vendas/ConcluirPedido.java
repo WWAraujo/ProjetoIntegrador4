@@ -12,10 +12,12 @@ public class ConcluirPedido {
             DadosPedidoRepository dadosPedidoRepository,
             ListaProdutosPedidoRepository listaProdutosPedidoRepository) {
 
-        String response = "Erro inesperado";
+        String response;
 
         boolean produtoPresente = venda.produtos().isEmpty();
         if (!produtoPresente){
+
+            //Verificar se tem produtos suficiente no estoque
             for (ListaProdutosPedidoModel lista : venda.produtos()) {
                 Integer id = Integer.parseInt(lista.getIdProduto().toString());
                 Optional<ProdutoModel> buscarproduto = produtoRepository.findById(id);
@@ -31,19 +33,21 @@ public class ConcluirPedido {
                     return response;
                 }
             }
+
+            //Salvar os dados da venda no banco
+            DadosPedidoModel dadosPedidoModel = dadosPedidoRepository.save(venda.dadosVenda());
+
+            //Salvar toda lista de produtos no banco de dados
+            for (ListaProdutosPedidoModel pdt : venda.produtos()){
+                pdt.setIdPedido(dadosPedidoModel.getId());
+                listaProdutosPedidoRepository.save(pdt);
+            }
+
+            response = "Produto cadastrado com sucesso!";
+            return response;
         } else {
             response = "Produto(s) não encontrado(s) na O.S";
             return response;
         }
-
-        DadosPedidoModel dadosPedidoModel = dadosPedidoRepository.save(venda.dadosVenda());
-
-        for (ListaProdutosPedidoModel pdt : venda.produtos()){
-            pdt.setIdPedido(dadosPedidoModel.getId());
-            listaProdutosPedidoRepository.save(pdt);
-        }
-
-        response = "Produto cadastrado com sucesso!";
-        return response;
     }
 }
