@@ -53,7 +53,7 @@ export class SelecionarEnderecoComponent implements OnInit {
   addEndereco(){
     this.serviceCliente.setIdCliente(this.idCliente);
     this.serviceEndereco.setListaEndereco(this.enderecoData);
-    this.router.navigate(['alterarCliente'],{ queryParams: { fromCart: 'true' } })
+    this.router.navigate(['endereco'],{ queryParams: { fromCart: 'true' } })
   }
 
   formaPagamento(){

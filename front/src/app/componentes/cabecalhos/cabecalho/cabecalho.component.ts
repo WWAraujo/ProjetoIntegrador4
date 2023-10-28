@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from '../../logins/login.service';
 import { Cliente, Logado } from 'src/app/core/types/type';
+import { ModalenderecoService } from '../../cliente/modalendereco.service';
 
 @Component({
   selector: 'app-cabecalho',
@@ -16,11 +17,13 @@ export class CabecalhoComponent implements OnInit {
   dadosUsuario: Logado | null = null;
   logado: boolean = false;
   nomeLogado: string = '';
+  enderecos = null;
 
   constructor(
     private router: Router,
     private modalService: NgbModal,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private enderecoService: ModalenderecoService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +31,7 @@ export class CabecalhoComponent implements OnInit {
       if (loggedIn) {
         // O usuário está logado, atualize a interface de acordo
         this.verificarLogado();
-      } 
+      }
     });
     this.verificarLogado();
   }
@@ -101,6 +104,7 @@ export class CabecalhoComponent implements OnInit {
 
   deslogarCliente(){
     this.loginService.removeData('clienteData');
+
     this.dadosCliente = null;
   }
 

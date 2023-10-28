@@ -15,6 +15,7 @@ import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.co
 import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
 import { CarrinhoComponent } from './componentes/compra/carrinho/carrinho.component';
 import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
+import { SelecionarEnderecoComponent } from './componentes/compra/selecionar-endereco/selecionar-endereco.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,10 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
+  },
+  {
+    path: 'selecionarEndereco',
+    component: SelecionarEnderecoComponent
   }
 ];
 

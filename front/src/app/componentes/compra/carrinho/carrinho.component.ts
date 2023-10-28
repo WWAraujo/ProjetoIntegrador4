@@ -24,7 +24,6 @@ export class CarrinhoComponent implements OnInit {
   logado: boolean = false;
   dadosCliente: Cliente | null = null;
   nomeLogado: string = '';
-  veioDoCarrinho: boolean = false;
 
   constructor(
     private service: CarrinhoService,
@@ -36,9 +35,10 @@ export class CarrinhoComponent implements OnInit {
     this.itensNoCarrinho = this.service.getIdsSelecionados();
     this.itenNoCarrinho();
     this.alterarValorfrete;
+
   }
 
-  alterarValorfrete(vl: number){
+  alterarValorfrete(vl: number) {
     this.valorFrete = vl;
     this.subtotalCarrinho();
   }
@@ -82,10 +82,10 @@ export class CarrinhoComponent implements OnInit {
     this.subtotalCarrinho();
   }
 
-excluirDoCarrinho(id: number){
-  this.service.excluirDoCarrinho(id);
-  window.location.reload();
-}
+  excluirDoCarrinho(id: number) {
+    this.service.excluirDoCarrinho(id);
+    window.location.reload();
+  }
 
   subtotalCarrinho() {
     this.subtotal = 0;
@@ -94,7 +94,7 @@ excluirDoCarrinho(id: number){
       const quantidade = this.idsCount[produto.produto.id];
       const valorFrete = this.valorFrete;
       if (quantidade) {
-        this.subtotal +=(precoProduto * quantidade) + valorFrete;
+        this.subtotal += (precoProduto * quantidade) + valorFrete;
       }
     }
   }
@@ -113,19 +113,35 @@ excluirDoCarrinho(id: number){
 
 
   verificarLogado() {
-    if (!this.logado){
+    if (!this.logado) {
       this.logado = this.verificarClienteLogado();
     }
   }
 
   verificarClienteLogado() {
-    this.dadosCliente = this.loginService.getData('clienteData');
-    if(this.dadosCliente){
-      this.nomeLogado = this.dadosCliente.nomeCliente;
-      this.router.navigate(['/checkout'])
-      return true;
+    const radioInputs = document.querySelectorAll('.frete .form-check-input');
+    let peloMenosUmSelecionado = false;
+
+    for (let i = 0; i < radioInputs.length; i++) {
+      const radioInput = radioInputs[i] as HTMLInputElement;
+      if (radioInput.checked) {
+        peloMenosUmSelecionado = true;
+        break;
+      }
     }
-    this.router.navigate(['/solicitarLogin'],{ queryParams: { fromCart: 'true' } })
+    this.dadosCliente = this.loginService.getData('clienteData');
+    if (this.dadosCliente) {
+      if (peloMenosUmSelecionado && this.itensNoCarrinho) {
+        this.nomeLogado = this.dadosCliente.nomeCliente;
+        this.router.navigate(['/selecionarEndereco'])
+        return true;
+      }else{
+        alert('Selecione o frete')
+      }
+    }else{
+      this.router.navigate(['/solicitarLogin'], { queryParams: { fromCart: 'true' } })}
     return false;
   }
+
+
 }
