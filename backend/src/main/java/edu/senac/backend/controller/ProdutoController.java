@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +20,7 @@ import java.util.Optional;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoRepository repository;
+    private ProdutoRepository produtoRepository;
 
     @Autowired
     private AvaliacaoProdutoRepository avaliacaoProdutoRepository;
@@ -31,24 +30,24 @@ public class ProdutoController {
 
     @GetMapping("/listar")
     public Page<ProdutoModel> listarProdutos(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pagina) {
-        return repository.findAll(pagina);
+        return produtoRepository.findAll(pagina);
     }
 
     @GetMapping("/buscarid/{id}")
-    public Optional<ProdutoModel> buscarUsuario(@PathVariable Integer id) {
-        return repository.findById(id);
+    public Optional<ProdutoModel> buscarProduto(@PathVariable Integer id) {
+        return produtoRepository.findById(id);
     }
 
     @GetMapping("/buscarproduto/{pesquisa}")
     public List<ProdutoModel> buscarProduto(@PathVariable String pesquisa) {
-        return repository.pesquisarPorNome(pesquisa);
+        return produtoRepository.pesquisarPorNome(pesquisa);
     }
 
     @DeleteMapping("/{id}/{status}")
     public ResponseEntity deleteProduto(@PathVariable Long id, @PathVariable String status) {
         System.out.println("Chegou id :" + id + " Status : " + status);
 
-        new DeletProdutc(status, id, repository);
+        new DeletProdutc(status, id, produtoRepository);
         return ResponseEntity.noContent().build();
     }
 
@@ -57,7 +56,7 @@ public class ProdutoController {
     public ResponseEntity<Long> alterarProduto(@RequestBody ProdutoRecordConstructor produto) {
 
         ProdutoModel produtoModel = new ProdutoModel(produto);
-        ProdutoModel produtoSalvo = repository.save(produtoModel);
+        ProdutoModel produtoSalvo = produtoRepository.save(produtoModel);
 
         fotosProdutoRepository.deleteByProdutoId(produtoSalvo.getId());
 
@@ -74,7 +73,7 @@ public class ProdutoController {
     @PostMapping("/cadastrar-produto")
     public ResponseEntity<Long> cadastrarProduto(@RequestBody ProdutoRecordConstructor produto) {
 
-        ProdutoModel produtoSalvo = repository.save(new ProdutoModel(produto));
+        ProdutoModel produtoSalvo = produtoRepository.save(new ProdutoModel(produto));
 
 
         for (FotosProdutoRecord fotoRecord : produto.fotosProdutoRecord()) {
@@ -88,7 +87,7 @@ public class ProdutoController {
 
     @GetMapping("/mostrar-produto-completo/{id}")
     public ResponseEntity<ProdutoRecordConstructor> mostrarProdutoCompleto(@PathVariable Long id) {
-        Optional<ProdutoModel> produtoModel = repository.findById(Integer.parseInt(id.toString()));
+        Optional<ProdutoModel> produtoModel = produtoRepository.findById(Integer.parseInt(id.toString()));
         ProdutoRecord produtoRecord =
                 new ProdutoRecord(
                         produtoModel.get().getId(),
@@ -124,7 +123,7 @@ public class ProdutoController {
     public ResponseEntity<List<ProdutoRecordConstructor>> listarTodosProdutos() {
         
         List<ProdutoRecordConstructor> produtosRecordList = new ArrayList<>();
-        List<ProdutoModel> produtosModel = repository.findAll();
+        List<ProdutoModel> produtosModel = produtoRepository.findAll();
 
         for (ProdutoModel produtoModel : produtosModel) {
             ProdutoRecord produtoRecord =
