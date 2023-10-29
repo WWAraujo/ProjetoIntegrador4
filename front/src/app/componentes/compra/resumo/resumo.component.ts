@@ -33,7 +33,8 @@ export class ResumoComponent implements OnInit {
   constructor(
     private service: CarrinhoService,
     private serviceProduto: ProdutosService,
-    private router: Router
+    private router: Router,
+    private carrinhoService: CarrinhoService
   ) { }
 
   ngOnInit(): void {
@@ -119,11 +120,13 @@ export class ResumoComponent implements OnInit {
     }
   }
 
-  voltar(){
-    this.router.navigate(['pagamento'])
+  voltarFormaPagamento(){
+    this.carrinhoService.setTrocarTelaFormaPagamento();
+    this.carrinhoService.setLoggedIn(true);
   }
 
   finalizarCompra(){
-
+    this.carrinhoService.setTrocarTelaConcluir();
+    this.carrinhoService.setLoggedIn(true);
   }
 }

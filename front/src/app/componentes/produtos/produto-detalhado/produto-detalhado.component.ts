@@ -72,10 +72,14 @@ export class ProdutoDetalhadoComponent implements OnInit {
     }
   }
 
-  pegarId(idProduto: number) {
+  addCarrinho(idProduto: number) {
     this.serviceCarrinho.adicionarAoCarrinho(idProduto);
-    this.router.navigate(['/carrinho']);
+    alert('Produto adicionado ao carrinho')
   }
 
+  irCheckout(idProduto: number) {
+    this.serviceCarrinho.adicionarAoCarrinho(idProduto);
+    this.router.navigate(['/checkout']);
+  }
 
 }

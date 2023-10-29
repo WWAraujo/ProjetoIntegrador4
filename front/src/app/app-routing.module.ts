@@ -83,26 +83,6 @@ const routes: Routes = [
     path: 'checkout',
     component: CheckoutComponent
   },
-  {
-    path: 'carrinho',
-    component: CarrinhoComponent
-  },
-  {
-    path: 'selecionarEndereco',
-    component: SelecionarEnderecoComponent
-  },
-  {
-    path: 'pagamento',
-    component: PagamentoComponent
-  },
-  {
-    path: 'resumo',
-    component: ResumoComponent
-  },
-  {
-    path: 'finalizarCompra',
-    component: FinalizarComponent
-  },
 
 ];
 

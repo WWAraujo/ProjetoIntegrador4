@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Endereco } from 'src/app/core/types/type';
 
 @Injectable({
@@ -7,12 +7,14 @@ import { Endereco } from 'src/app/core/types/type';
 })
 export class CarrinhoService {
 
+  private telaParaExibir: string = 'carrinho';
   private chaveArmazenamento = 'carrinho';
   private subtotal: number = 0;
   private numeroParcelas: number = 0;
   private frete: number = 0;
   private formaPagamento: string = '';
   private enderecoSelecionado: Endereco | null = null;
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   getIdsSelecionados() {
     const carrinho = localStorage.getItem(this.chaveArmazenamento);
@@ -92,4 +94,35 @@ export class CarrinhoService {
     this.enderecoSelecionado = endereco;
   }
 
+  setLoggedIn(value: boolean) {
+    this.loggedIn.next(value);
+  }
+
+  getLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
+
+  setTrocarTelaCarrinho() {
+    this.telaParaExibir = 'carrinho';
+  }
+
+  setTrocarTelaEndereco() {
+    this.telaParaExibir = 'endereco';
+  }
+
+  setTrocarTelaFormaPagamento() {
+    this.telaParaExibir = 'pagamento';
+  }
+
+  setTrocarTelaConfirmacao() {
+    this.telaParaExibir = 'confirmacao';
+  }
+
+  setTrocarTelaConcluir() {
+    this.telaParaExibir = 'concluir';
+  }
+
+  getTelaCarrinho(){
+    return this.telaParaExibir;
+  }
 }

@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente, Endereco } from 'src/app/core/types/type';
-import { ModalenderecoService } from '../../cliente/modalendereco.service';
-import { Router } from '@angular/router';
-import { ClienteService } from '../../cliente/cliente.service';
-import { LoginService } from '../../logins/login.service';
-
+import { CarrinhoService } from '../carrinho.services';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -14,29 +9,44 @@ export class CheckoutComponent implements OnInit {
 
   telaParaExibir: string = 'carrinho';
 
-  constructor() { }
+  constructor(private carrinhoService: CarrinhoService) { }
 
   ngOnInit(): void {
+    this.carrinhoService.getLoggedIn().subscribe((loggedIn) => {
+      if (loggedIn) {
+        // Verificar tela
+        this.verificarTela();
+      }
+    });
+  }
+
+  verificarTela(){
+    this.telaParaExibir = this.carrinhoService.getTelaCarrinho();
   }
 
   trocarTelaCarrinho() {
-    this.telaParaExibir = 'carrinho';
+    this.carrinhoService.setTrocarTelaCarrinho();
+    this.carrinhoService.setLoggedIn(true);
   }
 
   trocarTelaEndereco() {
-    this.telaParaExibir = 'endereco';
+    this.carrinhoService.setTrocarTelaEndereco();
+    this.carrinhoService.setLoggedIn(true);
   }
 
   trocarTelaFormaPagamento() {
-    this.telaParaExibir = 'pagamento';
+    this.carrinhoService.setTrocarTelaFormaPagamento();
+    this.carrinhoService.setLoggedIn(true);
   }
 
   trocarTelaConfirmacao() {
-    this.telaParaExibir = 'confirmacao';
+    this.carrinhoService.setTrocarTelaConfirmacao();
+    this.carrinhoService.setLoggedIn(true);
   }
 
   trocarTelaConcluir() {
-    this.telaParaExibir = 'concluir';
+    this.carrinhoService.setTrocarTelaConcluir();
+    this.carrinhoService.setLoggedIn(true);
   }
 
 }

@@ -15,7 +15,8 @@ export class PagamentoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private service: CarrinhoService
+    private service: CarrinhoService,
+    private carrinhoService: CarrinhoService
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +38,7 @@ export class PagamentoComponent implements OnInit {
     }
   }
 
-  selecionado() {
+  finalizarCompra() {
     const radioInputs = document.querySelectorAll('.form-check .form-check-input');
     let peloMenosUmSelecionado = false;
 
@@ -49,14 +50,16 @@ export class PagamentoComponent implements OnInit {
       }
     }
     if (peloMenosUmSelecionado) {
-      this.router.navigate(['resumo'])
+      this.carrinhoService.setTrocarTelaConfirmacao();
+      this.carrinhoService.setLoggedIn(true);
     } else {
       alert('Selecione uma forma de Pagamento: ');
     }
   }
 
   voltarEndereco() {
-    this.router.navigate(['/selecionarEndereco']);
+    this.carrinhoService.setTrocarTelaEndereco();
+    this.carrinhoService.setLoggedIn(true);
   }
 
   formatarMoeda(valor: number): string {

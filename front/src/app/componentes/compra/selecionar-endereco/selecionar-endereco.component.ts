@@ -24,8 +24,9 @@ export class SelecionarEnderecoComponent implements OnInit {
     private serviceEndereco: ModalenderecoService,
     private serviceCarrinho: CarrinhoService,
     private loginService: LoginService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private carrinhoService: CarrinhoService
+    ) { }
 
   ngOnInit(): void {
 
@@ -72,15 +73,15 @@ export class SelecionarEnderecoComponent implements OnInit {
       const radioInput = radioInputs[i] as HTMLInputElement;
       if (radioInput.checked) {
         peloMenosUmSelecionado = true;
-
         break;
       }
     }
 
     if(peloMenosUmSelecionado){
-      this.router.navigate(['pagamento'])
+      this.carrinhoService.setTrocarTelaFormaPagamento();
+      this.carrinhoService.setLoggedIn(true);
     }else{
-      alert('Selecione o Endereço da Entrega:')
+      alert('Selecione o Endereço da Entrega:');
     }
   }
 }

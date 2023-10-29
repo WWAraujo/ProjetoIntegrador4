@@ -29,7 +29,8 @@ export class CarrinhoComponent implements OnInit {
     private service: CarrinhoService,
     private router: Router,
     private serviceProduto: ProdutosService,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private carrinhoService: CarrinhoService) { }
 
   ngOnInit(): void {
     this.itensNoCarrinho = this.service.getIdsSelecionados();
@@ -133,8 +134,9 @@ export class CarrinhoComponent implements OnInit {
     if (this.dadosCliente) {
       if (peloMenosUmSelecionado && this.itensNoCarrinho) {
         this.nomeLogado = this.dadosCliente.nomeCliente;
-        this.router.navigate(['/selecionarEndereco']);
         this.service.setSubtotal(this.subtotal);
+        this.carrinhoService.setTrocarTelaEndereco();
+        this.carrinhoService.setLoggedIn(true);
         return true;
       }else{
         alert('Selecione o frete')
