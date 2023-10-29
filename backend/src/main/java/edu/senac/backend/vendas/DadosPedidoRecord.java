@@ -10,6 +10,7 @@ public record DadosPedidoRecord(
         String prazoEntrega,
         Double valorEntrega,
         Double valorTotal,
+        String statusEntrega,
         String formaPagamento,
         int qtdParcelas,
         String cep,

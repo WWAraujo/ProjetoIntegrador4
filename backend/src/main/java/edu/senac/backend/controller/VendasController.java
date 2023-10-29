@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/vendas")
@@ -27,4 +29,9 @@ public class VendasController {
 
         return ResponseEntity.ok(response);
     }
+
+//    @GetMapping
+//    public ResponseEntity<List<PedidosRecord>>(){
+//        return ResponseEntity.ok().build();
+//    }
 }

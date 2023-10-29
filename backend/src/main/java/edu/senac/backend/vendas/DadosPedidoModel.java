@@ -23,6 +23,7 @@ public class DadosPedidoModel {
     private String prazoEntrega;
     private Double valorEntrega;
     private Double valorTotal;
+    private String statusEntrega;
     private String formaPagamento;
     private int qtdParcelas;
     private String cep;
@@ -41,6 +42,7 @@ public class DadosPedidoModel {
         this.prazoEntrega = dadosPedidoRecord.prazoEntrega();
         this.valorEntrega = dadosPedidoRecord.valorEntrega();
         this.valorTotal = dadosPedidoRecord.valorTotal();
+        this.statusEntrega = dadosPedidoRecord.statusEntrega();
         this.formaPagamento = dadosPedidoRecord.formaPagamento();
         this.cep = dadosPedidoRecord.cep();
         this.logradouro = dadosPedidoRecord.logradouro();
