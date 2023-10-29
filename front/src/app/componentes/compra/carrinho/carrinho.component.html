@@ -4,7 +4,7 @@
       <div class="card">
         <div *ngFor="let foto of produto.fotosProdutoRecord">
           <ng-container *ngIf="foto.flagImg === 'p'">
-            <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="100" [height]="100" />
+            <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="80" [height]="80" />
           </ng-container>
         </div>
         <div class="infoProduto">
@@ -29,27 +29,40 @@
     </div>
   </div>
   <div class="container-subtotal">
-    <div class="frete">
-      <p>Escolha o frete: </p>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="5" id="5" value="5" (change)="alterarValorfrete(15.00)">
-        <label class="form-check-label" for="5">R$ 15,00<br><p>1 a 3 Dias Úteis</p></label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="5" id="10" value="10" (change)="alterarValorfrete(10.00)">
-        <label class="form-check-label" for="10">R$ 10,00<br> <p>3 a 5 Dias Úteis</p></label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="5" id="10" value="10" (change)="alterarValorfrete(5.00)">
-        <label class="form-check-label" for="10">R$ 5,00<br> <p>5 a 10 Dias Úteis</p></label>
-      </div>
-    </div>
     <div class="subtotal">
-      <h2 id="titleSubtotal">Subtotal</h2>
-      <p id="totalSubtotal">{{ formatarMoeda(subtotal) }}</p>
-      <button type="button"  class="btn btn-outline-primary" (click)="paginaPrincipal()">CONTINUAR COMPRANDO</button>
-      <button type="button"  class="btn btn-primary" (click)="verificarLogado()">IR PARA O PAGAMENTO</button>
+      <div class="frete">
+        <p>Selecione o frete: </p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="option" id="15" value="15"
+            (change)="alterarValorfrete(15.00)">
+          <label class="form-check-label" for="5">R$ 15,00 Transportadora<br>
+            <p>1 a 3 Dias Úteis</p>
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="option" id="10" value="10"
+            (change)="alterarValorfrete(10.00)">
+          <label class="form-check-label" for="10">R$ 10,00 Sedex<br>
+            <p>3 a 5 Dias Úteis</p>
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="option" id="5" value="5"
+            (change)="alterarValorfrete(5.00)">
+          <label class="form-check-label" for="10">R$ 5,00 PAC<br>
+            <p>5 a 10 Dias Úteis</p>
+          </label>
+        </div>
+      </div>
+      <div class="valor-subtotal">
+        <h2 id="titleSubtotal">Subtotal</h2>
+        <p id="totalSubtotal">{{ formatarMoeda(subtotal) }}</p>
+      </div>
     </div>
-
+    <div class="buttons">
+      <button type="button" class="btn btn-outline-primary" (click)="paginaPrincipal()">CONTINUAR COMPRANDO</button>
+      <button type="button" class="btn btn-primary" (click)="verificarLogado()">FINALIZAR COMPRA</button>
+    </div>
   </div>
+
 </section>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConcluirCompraComponent } from './concluir-compra.component';
+import { ResumoComponent } from './resumo.component';
 
-describe('ConcluirCompraComponent', () => {
-  let component: ConcluirCompraComponent;
-  let fixture: ComponentFixture<ConcluirCompraComponent>;
+describe('ResumoComponent', () => {
+  let component: ResumoComponent;
+  let fixture: ComponentFixture<ResumoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConcluirCompraComponent ]
+      declarations: [ ResumoComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ConcluirCompraComponent);
+    fixture = TestBed.createComponent(ResumoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -12,39 +12,30 @@ import { LoginService } from '../../logins/login.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  emailEncontrado: boolean = false;
-  cpfEncontrado: boolean = false;
-  senhaCorrespondente: boolean = false;
-  idCliente!: number;
-  dadosCliente!: Cliente;
   telaParaExibir: string = 'carrinho';
 
-  constructor(
-    private serviceCliente: ClienteService,
-    private serviceEndereco: ModalenderecoService,
-    private loginService: LoginService,
-    private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  trocarTelaCarrinho(){
+  trocarTelaCarrinho() {
     this.telaParaExibir = 'carrinho';
   }
 
-  trocarTelaEndereco(){
+  trocarTelaEndereco() {
     this.telaParaExibir = 'endereco';
   }
 
-  trocarTelaFormaPagamento(){
+  trocarTelaFormaPagamento() {
     this.telaParaExibir = 'pagamento';
   }
 
-  trocarTelaConfirmacao(){
+  trocarTelaConfirmacao() {
     this.telaParaExibir = 'confirmacao';
   }
 
-  trocarTelaConcluir(){
+  trocarTelaConcluir() {
     this.telaParaExibir = 'concluir';
   }
 
