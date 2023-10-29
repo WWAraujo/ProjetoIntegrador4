@@ -31,9 +31,9 @@ import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/a
 import { CarrinhoComponent } from './componentes/compra/carrinho/carrinho.component';
 import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
 import { SelecionarEnderecoComponent } from './componentes/compra/selecionar-endereco/selecionar-endereco.component';
-import { SelecionarFormaPagamentoComponent } from './componentes/compra/selecionar-forma-pagamento/selecionar-forma-pagamento.component';
-import { ConcluirCompraComponent } from './componentes/compra/concluir-compra/concluir-compra.component';
-import { ConfirmacaoCompraComponent } from './componentes/compra/confirmacao-compra/confirmacao-compra.component';
+import { PagamentoComponent } from './componentes/compra/pagamento/pagamento.component';
+import { ResumoComponent } from './componentes/compra/resumo/resumo.component';
+import { FinalizarComponent } from './componentes/compra/finalizar/finalizar.component';
 
 @NgModule({
   declarations: [
@@ -61,9 +61,9 @@ import { ConfirmacaoCompraComponent } from './componentes/compra/confirmacao-com
     CarrinhoComponent,
     CheckoutComponent,
     SelecionarEnderecoComponent,
-    SelecionarFormaPagamentoComponent,
-    ConcluirCompraComponent,
-    ConfirmacaoCompraComponent,
+    PagamentoComponent,
+    ResumoComponent,
+    FinalizarComponent,
   ],
   imports: [
     BrowserModule,

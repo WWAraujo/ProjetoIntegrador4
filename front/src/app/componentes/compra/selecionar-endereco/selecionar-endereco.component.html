@@ -1,8 +1,9 @@
 
 <div class="container" *ngIf="idCliente">
-  <div *ngIf="enderecos">
+  <div class='enderecos' *ngIf="enderecos">
+    <p>Endereço de Entrega:</p>
     <div class="container-endereco" *ngFor="let endereco of enderecoData; let i = index">
-      <input type="radio" id="option" name="option" [value]="endereco.cep">
+      <input class='form-check-input' type="radio" [id]="'option' + i" name="option" [value]="endereco.cep" (click)="selecionarEndereco(endereco)">
       <div class="card-endereco">
         <span id="enderecoPrincipal" *ngIf="endereco.enderecoPrincipal"> Endereço Principal</span>
         <span>{{ endereco.logradouro }}, {{ endereco.numero }} -

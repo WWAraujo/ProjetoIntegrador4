@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="containerPagamento">
+    <div class="formaPagamento">
+      <h2>Pagamento</h2>
+      <p>Escolha uma forma de pagamento</p>
+      <div class="form-check">
+        <div class="form-check-cartao">
+          <div class="cardCartao">
+            <input class="form-check-input" type="radio" name="option" id="cartao" value="cartao"
+              (change)="exibirDiv($event)">
+            <label for="cartao">Cartão de Crédito</label>
+          </div>
+          <div class="cardimages">
+            <img id="mastercard" src="../../../../assets/image/iconMastercard.png">
+            <img id="visa" src="../../../../assets/image/iconVisa.png">
+            <img id="diners" src="../../../../assets/image/iconDinersClub.png">
+            <img id="hipercard" src="../../../../assets/image/iconHipercard.png">
+            <img id="discover" src="../../../../assets/image/iconDiscover.png">
+          </div>
+        </div>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="option" id="boleto" value="boleto"
+          (change)="exibirDiv($event)">
+        <img id="imageBoleto" src="../../../../assets/image/iconCódigoDeBarras.png">
+        <label for="boleto">Boleto Bancário</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="option" id="pix" value="pix" (change)="exibirDiv($event)">
+        <img id="imagePix" src="../../../../assets/image/iconPix.png">
+        <label for="pix">Pix</label>
+      </div>
+    </div>
+    <div class="dadosPagamento">
+      <div class="cartao">
+        <p>Dados do Cartão</p>
+        <div class="nome-numero">
+          <input type="text" id="nomeCompleto" placeholder="Nome Completo">
+          <input type="text" id="numero" placeholder="Numero do Cartão">
+        </div>
+        <div class="codigo-vencimento">
+          <input type="text" id="código" placeholder="ccv">
+          <input type="month" id="vencimento" placeholder="Data de Vencimento">
+        </div>
+        <div class="parcelamento">
+          <label>Parcelas</label>
+          <select class="parcelas" [(ngModel)]="numeroParcelas" (change)="onNumeroParcelasChange()">
+            <option *ngFor="let opcao of getOpcoesParcelas()" [value]="opcao.value">{{ opcao.label }}</option>
+          </select>
+        </div>
+        <p>Valor da Parcela: {{ formatarMoeda(calcularValorDaParcela()) }}</p>
+      </div>
+      <div class="boleto">
+        <p>campo Boleto</p>
+      </div>
+      <div class="pix">
+        <p>campo pix</p>
+      </div>
+    </div>
+  </div>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <button type="button" class="btn btn-outline-primary" (click)="voltarEndereco()">Voltar</button>
+    <button type="button" class="btn btn-primary" (click)="selecionado()">FINALIZAR COMPRA</button>
+  </div>
+</div>

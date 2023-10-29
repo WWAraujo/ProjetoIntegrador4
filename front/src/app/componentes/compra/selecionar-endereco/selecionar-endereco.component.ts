@@ -4,6 +4,7 @@ import { ClienteService } from '../../cliente/cliente.service';
 import { ModalenderecoService } from '../../cliente/modalendereco.service';
 import { LoginService } from '../../logins/login.service';
 import { Router } from '@angular/router';
+import { CarrinhoService } from '../carrinho.services';
 
 @Component({
   selector: 'app-selecionar-endereco',
@@ -16,20 +17,22 @@ export class SelecionarEnderecoComponent implements OnInit {
   dadosCliente!: Cliente;
   enderecoData: Endereco[] = [];
   enderecos: Endereco[] = [];
+  enderecoSelecionado: Endereco [] = [];
 
   constructor(
     private serviceCliente: ClienteService,
     private serviceEndereco: ModalenderecoService,
+    private serviceCarrinho: CarrinhoService,
     private loginService: LoginService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
     this.dadosCliente = this.loginService.getData('clienteData');
 
-    if (!this.dadosCliente){
-      this.router.navigate(['solicitarLogin'],{ queryParams: { fromCart: 'true' } })
+    if (!this.dadosCliente) {
+      this.router.navigate(['solicitarLogin'], { queryParams: { fromCart: 'true' } })
     }
 
     this.idCliente = this.dadosCliente.id;
@@ -48,15 +51,36 @@ export class SelecionarEnderecoComponent implements OnInit {
         }
       });
     }
+
   }
 
-  addEndereco(){
+  selecionarEndereco(endereco: Endereco) {
+    this.serviceCarrinho.setEndereco(endereco);
+  }
+
+  addEndereco() {
     this.serviceCliente.setIdCliente(this.idCliente);
     this.serviceEndereco.setListaEndereco(this.enderecoData);
-    this.router.navigate(['endereco'],{ queryParams: { fromCart: 'true' } })
+    this.router.navigate(['endereco'], { queryParams: { fromCart: 'true' } })
   }
 
-  formaPagamento(){
+  formaPagamento() {
+    const radioInputs = document.querySelectorAll('.container-endereco .form-check-input');
+    let peloMenosUmSelecionado = false;
 
+    for (let i = 0; i < radioInputs.length; i++) {
+      const radioInput = radioInputs[i] as HTMLInputElement;
+      if (radioInput.checked) {
+        peloMenosUmSelecionado = true;
+
+        break;
+      }
+    }
+
+    if(peloMenosUmSelecionado){
+      this.router.navigate(['pagamento'])
+    }else{
+      alert('Selecione o Endereço da Entrega:')
+    }
   }
 }

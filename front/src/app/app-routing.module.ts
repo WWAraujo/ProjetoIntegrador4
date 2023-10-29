@@ -16,6 +16,10 @@ import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/a
 import { CarrinhoComponent } from './componentes/compra/carrinho/carrinho.component';
 import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
 import { SelecionarEnderecoComponent } from './componentes/compra/selecionar-endereco/selecionar-endereco.component';
+import { PagamentoComponent } from './componentes/compra/pagamento/pagamento.component';
+import { ResumoComponent } from './componentes/compra/resumo/resumo.component';
+import { FinalizarComponent } from './componentes/compra/finalizar/finalizar.component';
+
 
 const routes: Routes = [
   {
@@ -69,24 +73,37 @@ const routes: Routes = [
   },
   {
     path: 'produtoDetalhado',
-    component: ProdutoDetalhadoComponent,data: { mostrarCabecalho: true }
+    component: ProdutoDetalhadoComponent, data: { mostrarCabecalho: true }
   },
   {
     path: 'endereco',
     component: EnderecosComponent
   },
   {
-    path: 'carrinho',
-    component: CarrinhoComponent
-  },
-  {
     path: 'checkout',
     component: CheckoutComponent
   },
   {
+    path: 'carrinho',
+    component: CarrinhoComponent
+  },
+  {
     path: 'selecionarEndereco',
     component: SelecionarEnderecoComponent
-  }
+  },
+  {
+    path: 'pagamento',
+    component: PagamentoComponent
+  },
+  {
+    path: 'resumo',
+    component: ResumoComponent
+  },
+  {
+    path: 'finalizarCompra',
+    component: FinalizarComponent
+  },
+
 ];
 
 @NgModule({

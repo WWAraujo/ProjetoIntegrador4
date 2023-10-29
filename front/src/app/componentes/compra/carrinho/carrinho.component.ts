@@ -35,11 +35,11 @@ export class CarrinhoComponent implements OnInit {
     this.itensNoCarrinho = this.service.getIdsSelecionados();
     this.itenNoCarrinho();
     this.alterarValorfrete;
-
   }
 
   alterarValorfrete(vl: number) {
     this.valorFrete = vl;
+    this.service.setValorFrete(vl);
     this.subtotalCarrinho();
   }
 
@@ -133,7 +133,8 @@ export class CarrinhoComponent implements OnInit {
     if (this.dadosCliente) {
       if (peloMenosUmSelecionado && this.itensNoCarrinho) {
         this.nomeLogado = this.dadosCliente.nomeCliente;
-        this.router.navigate(['/selecionarEndereco'])
+        this.router.navigate(['/selecionarEndereco']);
+        this.service.setSubtotal(this.subtotal);
         return true;
       }else{
         alert('Selecione o frete')
