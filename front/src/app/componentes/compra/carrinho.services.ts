@@ -13,7 +13,7 @@ export class CarrinhoService {
   private numeroParcelas: number = 0;
   private frete: number = 0;
   private formaPagamento: string = '';
-  private enderecoSelecionado: Endereco | null = null;
+  private enderecoSelecionado!: Endereco;
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   getIdsSelecionados() {
@@ -86,11 +86,11 @@ export class CarrinhoService {
     this.formaPagamento = formaPagamento;
   }
 
-  getEndereco(): Endereco | null{
+  getEndereco(){
     return this.enderecoSelecionado;
   }
 
-  setEndereco(endereco: Endereco | null){
+  setEndereco(endereco: Endereco){
     this.enderecoSelecionado = endereco;
   }
 

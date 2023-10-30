@@ -24,6 +24,7 @@ export class CarrinhoComponent implements OnInit {
   logado: boolean = false;
   dadosCliente: Cliente | null = null;
   nomeLogado: string = '';
+  freteInserido: boolean = false;
 
   constructor(
     private service: CarrinhoService,
@@ -36,12 +37,20 @@ export class CarrinhoComponent implements OnInit {
     this.itensNoCarrinho = this.service.getIdsSelecionados();
     this.itenNoCarrinho();
     this.alterarValorfrete;
+    this.valorFrete = this.carrinhoService.getValorFrete();
+  }
+
+  valorDoFreteinserido() {
+    if (this.valorFrete > 0 ){
+      this.freteInserido = true;
+    }
   }
 
   alterarValorfrete(vl: number) {
     this.valorFrete = vl;
     this.service.setValorFrete(vl);
     this.subtotalCarrinho();
+    this.valorDoFreteinserido();
   }
 
   itenNoCarrinho() {

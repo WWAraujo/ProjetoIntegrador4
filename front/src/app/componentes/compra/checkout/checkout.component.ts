@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarrinhoService } from '../carrinho.services';
+import { Subscription } from 'rxjs';
+import { LoginService } from '../../logins/login.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -8,16 +10,29 @@ import { CarrinhoService } from '../carrinho.services';
 export class CheckoutComponent implements OnInit {
 
   telaParaExibir: string = 'carrinho';
+  valorFrete: number = 0;
+  clienteLogado: boolean = true;
 
-  constructor(private carrinhoService: CarrinhoService) { }
+  constructor(
+    private carrinhoService: CarrinhoService,
+    private loginService: LoginService
+    ) {
+   }
 
   ngOnInit(): void {
     this.carrinhoService.getLoggedIn().subscribe((loggedIn) => {
       if (loggedIn) {
-        // Verificar tela
         this.verificarTela();
       }
     });
+    this.verificarClenteLogado();
+  }
+
+  verificarClenteLogado(){
+    const cliente = this.loginService.getData('clienteData');
+    if (cliente){
+      this.clienteLogado = false;
+    }
   }
 
   verificarTela(){

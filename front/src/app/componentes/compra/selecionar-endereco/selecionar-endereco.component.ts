@@ -18,6 +18,7 @@ export class SelecionarEnderecoComponent implements OnInit {
   enderecoData: Endereco[] = [];
   enderecos: Endereco[] = [];
   enderecoSelecionado: Endereco [] = [];
+  enderecoInserido: boolean = false;
 
   constructor(
     private serviceCliente: ClienteService,
@@ -57,6 +58,7 @@ export class SelecionarEnderecoComponent implements OnInit {
 
   selecionarEndereco(endereco: Endereco) {
     this.serviceCarrinho.setEndereco(endereco);
+    this.enderecoInserido = true;
   }
 
   addEndereco() {
