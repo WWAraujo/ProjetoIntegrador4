@@ -2,6 +2,9 @@ package edu.senac.backend.vendas;
 
 import edu.senac.backend.produto.ProdutoModel;
 import edu.senac.backend.produto.ProdutoRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ConcluirPedido {
@@ -10,7 +13,8 @@ public class ConcluirPedido {
             PedidosRecord venda,
             ProdutoRepository produtoRepository,
             DadosPedidoRepository dadosPedidoRepository,
-            ListaProdutosPedidoRepository listaProdutosPedidoRepository) {
+            ListaProdutosPedidoRepository listaProdutosPedidoRepository,
+            FormaPagamentoRepository formaPagamentoRepository) {
 
         String response;
 
@@ -36,15 +40,38 @@ public class ConcluirPedido {
 
             //Salvar os dados da venda no banco
             DadosPedidoModel dadosPedidoModel = dadosPedidoRepository.save(venda.dadosVenda());
+            Long idVenda = dadosPedidoModel.getId();
+
+            //Salvar a forma de pagamento
+            venda.formaPagamento().setIdPedido(idVenda);
+            FormaPagamentoModel formaPagamentoModel = formaPagamentoRepository.save(venda.formaPagamento());
+
 
             //Salvar toda lista de produtos no banco de dados
+            List<ListaProdutosPedidoModel> listaProdutosPedidoModels = new ArrayList<>();
             for (ListaProdutosPedidoModel pdt : venda.produtos()){
-                pdt.setIdPedido(dadosPedidoModel.getId());
-                listaProdutosPedidoRepository.save(pdt);
+                pdt.setIdPedido(idVenda);
+                listaProdutosPedidoModels.add(listaProdutosPedidoRepository.save(pdt));
             }
 
-            response = "Produto cadastrado com sucesso!";
+            if (idVenda > 0 &&
+                    !listaProdutosPedidoModels.isEmpty() &&
+                    formaPagamentoModel.getId() > 0){
+                response = "Produto cadastrado com sucesso! ID: " + idVenda;
+                return response;
+            }
+
+            //Retorne essa mensagem caso a persistencia no banco de algum erro.
+            String idProdutosCadastrados = new String();
+            for (ListaProdutosPedidoModel pdt : listaProdutosPedidoModels){
+                idProdutosCadastrados = idProdutosCadastrados + pdt.getId().toString() + ", ";
+            }
+            response = "Algo deu erro na persistencia do banco de dados:" +
+                    "ID venda : " + idVenda +
+                    "ID forma de pagamento: "+ formaPagamentoModel.getId() +" " +
+                    "ID dos produtos: " + idProdutosCadastrados;
             return response;
+
         } else {
             response = "Produto(s) não encontrado(s) na O.S";
             return response;

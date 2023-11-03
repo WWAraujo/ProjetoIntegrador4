@@ -22,10 +22,13 @@ public class VendasController {
     @Autowired
     private ListaProdutosPedidoRepository listaProdutosPedidoRepository;
 
+    @Autowired
+    private FormaPagamentoRepository formaPagamentoRepository;
+
     @PostMapping
     public ResponseEntity<String> salvarVenda(@RequestBody PedidosRecord venda) {
 
-        String response = new ConcluirPedido().ConcluirPedido(venda, produtoRepository, dadosPedidoRepository, listaProdutosPedidoRepository);
+        String response = new ConcluirPedido().ConcluirPedido(venda, produtoRepository, dadosPedidoRepository, listaProdutosPedidoRepository, formaPagamentoRepository);
 
         return ResponseEntity.ok(response);
     }
