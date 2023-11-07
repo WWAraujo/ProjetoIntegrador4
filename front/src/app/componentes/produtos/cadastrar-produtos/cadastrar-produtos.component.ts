@@ -52,7 +52,6 @@ export class CadastrarProdutosComponent implements OnInit {
       this.isCliente = true;
     }
 
-
     this.modalservice.fecharModalEvent.subscribe(() => {
       this.fecharModal();
     });

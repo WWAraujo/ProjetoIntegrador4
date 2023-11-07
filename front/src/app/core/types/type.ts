@@ -3,9 +3,9 @@ export interface Login {
   senha: string;
 }
 
-export interface ClienteLogado{
+export interface ClienteLogado {
   id: number;
-  }
+}
 
 export interface Logado {
   id: string;
@@ -42,10 +42,10 @@ export enum AtivoInativo {
   INATIVO = 'INATIVO',
 }
 
-export enum Genero{
+export enum Genero {
   MASCULINO = 'MASCULINO',
   FEMININO = 'FEMININO',
-  OUTROS = 'OUTROS'
+  OUTROS = 'OUTROS',
 }
 
 export interface DeletarUsuario {
@@ -76,13 +76,13 @@ export interface CarregarFotos {
 
 export interface ProdutoFotos {
   produto: Produto;
-  fotosProdutoRecord: CarregarFotos[] ;
+  fotosProdutoRecord: CarregarFotos[];
 }
 
 export interface ProdutoCompleto {
   produto: Produto;
   avaliacaoProdutoRecord: AvaliacaoProduto;
-  fotosProdutoRecord: CarregarFotos[] ;
+  fotosProdutoRecord: CarregarFotos[];
 }
 
 export interface PaginaProdutos {
@@ -99,7 +99,7 @@ export interface PaginaProdutos {
   empty: boolean;
 }
 
-export interface Cliente{
+export interface Cliente {
   id: number;
   nomeCliente: string;
   cpfCliente: string;
@@ -124,7 +124,44 @@ export interface Endereco {
   enderecoPrincipal: string;
 }
 
-export interface ClienteCompleto{
+export interface ClienteCompleto {
   cliente: Cliente;
   enderecos: Endereco[];
+}
+
+export interface DadosVenda {
+  idCliente: number;
+  nomeCliente: string;
+  dataCompra: string;
+  prazoEntrega: string;
+  valorEntrega: number;
+  valorTotal: number;
+  statusEntrega: string;
+  formaPagamento: string;
+  qtdParcelas: number;
+  cep: string;
+  logradouro: string;
+  numero: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+}
+
+export interface FormaPagamento {
+  formaPagamento: string;
+  valorTotal: number;
+  nomeCartao: string;
+  numeroCartao: string;
+  ccvCartao: string;
+  validadeCartao: string;
+  quantidadeCartao: number;
+  valorDaParcela: number;
+}
+
+export interface ProdutosVenda {
+  idPedido: number;
+  idProduto: number;
+  quantidade: number;
+  valorUnidade: number;
 }

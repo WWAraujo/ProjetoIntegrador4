@@ -40,14 +40,14 @@
         *ngIf="telaParaExibir === 'confirmacao'"
         aria-current="page"
         >
-        CONFIRMAÇÃO
+        RESUMO
       </button>
       <button
         class="nav-link"
         *ngIf="telaParaExibir !== 'confirmacao'"
         (click)="trocarTelaConfirmacao()"
         [disabled]="clienteLogado">
-        CONFIRMAÇÃO
+        RESUMO
       </button>
     </li>
     <li class="nav-item">

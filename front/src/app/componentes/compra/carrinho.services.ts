@@ -17,14 +17,14 @@ export class CarrinhoService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   getIdsSelecionados() {
-    const carrinho = localStorage.getItem(this.chaveArmazenamento);
+    const carrinho = sessionStorage.getItem(this.chaveArmazenamento);
     return carrinho ? JSON.parse(carrinho) : [];
   }
 
   adicionarAoCarrinho(id: number) {
     const carrinho = this.getIdsSelecionados();
     carrinho.push(id);
-    localStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
+    sessionStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
   }
 
   removerDoCarrinho(id: number) {
@@ -34,7 +34,7 @@ export class CarrinhoService {
     if (index !== -1) {
       carrinho.splice(index, 1);
     }
-    localStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
+    sessionStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
   }
 
   excluirDoCarrinho(id: number) {
@@ -50,7 +50,7 @@ export class CarrinhoService {
     for (let i = indices.length - 1; i >= 0; i--) {
       carrinho.splice(indices[i], 1);
     }
-    localStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
+    sessionStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
   }
 
   getSubtotal(): number {
@@ -79,7 +79,6 @@ export class CarrinhoService {
 
   getFormaDePagamento(){
     return this.formaPagamento;
-
   }
 
   setFormaDePagamento(formaPagamento: string){

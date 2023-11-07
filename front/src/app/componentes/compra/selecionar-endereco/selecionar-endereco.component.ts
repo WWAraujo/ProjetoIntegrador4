@@ -16,7 +16,7 @@ export class SelecionarEnderecoComponent implements OnInit {
   idCliente!: number;
   dadosCliente!: Cliente;
   enderecoData: Endereco[] = [];
-  enderecos: Endereco[] = [];
+  enderecosFiltrados: Endereco[] = [];
   enderecoSelecionado: Endereco [] = [];
   enderecoInserido: boolean = false;
 
@@ -42,18 +42,26 @@ export class SelecionarEnderecoComponent implements OnInit {
 
     if (listaEnderecoAtual) {
       this.enderecoData = listaEnderecoAtual;
+      listaEnderecoAtual.forEach((elemento) => {
+        if(elemento.ativoInativo === 'ATIVO'){
+          this.enderecosFiltrados.push(elemento);
+        }
+      });
     }
 
     if (this.idCliente) {
       this.serviceCliente.exibirPerfil(this.idCliente).subscribe((data) => {
         this.dadosCliente = data.cliente;
-
         if (listaEnderecoAtual.length < 1) {
           this.enderecoData = data.enderecos;
+          data.enderecos.forEach((elemento) => {
+            if(elemento.ativoInativo === 'ATIVO'){
+              this.enderecosFiltrados.push(elemento);
+            }
+          });
         }
       });
     }
-
   }
 
   selecionarEndereco(endereco: Endereco) {

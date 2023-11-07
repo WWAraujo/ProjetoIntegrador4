@@ -1,3 +1,4 @@
+import { DadosVenda, FormaPagamento, ProdutosVenda } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { CarrinhoService } from '../carrinho.services';
 import { ProdutosService } from '../../produtos/produtos.service';
@@ -30,6 +31,10 @@ export class ResumoComponent implements OnInit {
   enderecoSelecionado: Endereco | null = null;
   enderecoData: Endereco | null = null;
 
+  dadosVenda!: DadosVenda;
+  formaPagamento!: FormaPagamento;
+  listaProdutosVenda!: ProdutosVenda[];
+
   constructor(
     private service: CarrinhoService,
     private serviceProduto: ProdutosService,
@@ -47,6 +52,56 @@ export class ResumoComponent implements OnInit {
     this.verificaFormaDePagamento();
     this.itenNoCarrinho();
     this.subtotalResumo();
+
+    if (this.enderecoSelecionado == null){
+      this.carrinhoService.setTrocarTelaEndereco();
+      this.carrinhoService.setLoggedIn(true);
+    }
+  }
+
+
+  finalizarCompra(){
+    const mandarVendaProBackend = this.prepararDadosParaEnviar(); //falta preencher os dados para mandar pro back
+    // this.carrinhoService.setTrocarTelaConcluir();
+    // this.carrinhoService.setLoggedIn(true);
+  }
+
+  prepararDadosParaEnviar(){
+
+    this.dadosVenda.idCliente = 0;
+    this.dadosVenda.nomeCliente = '';
+    this.dadosVenda.dataCompra = '';
+    this.dadosVenda.prazoEntrega = '';
+    this.dadosVenda.valorEntrega = 0;
+    this.dadosVenda.valorTotal = 0;
+    this.dadosVenda.statusEntrega = '';
+    this.dadosVenda.formaPagamento = '';
+    this.dadosVenda.qtdParcelas = 0;
+    this.dadosVenda.cep = '';
+    this.dadosVenda.logradouro = '';
+    this.dadosVenda.numero = '';
+    this.dadosVenda.complemento = '';
+    this.dadosVenda.bairro = '';
+    this.dadosVenda.cidade = '';
+    this.dadosVenda.uf = '';
+
+    this.formaPagamento.formaPagamento
+    this.formaPagamento.valorTotal
+    this.formaPagamento.nomeCartao
+    this.formaPagamento.numeroCartao
+    this.formaPagamento.ccvCartao
+    this.formaPagamento.validadeCartao
+    this.formaPagamento.quantidadeCartao
+    this.formaPagamento.valorDaParcela
+
+    this.listaProdutosVenda
+
+    const dadosParaEnviar = {
+      dadosVenda: this.dadosVenda,
+      formaPagamento: this.formaPagamento,
+      produtos: this.listaProdutosVenda
+    };
+    return dadosParaEnviar;
   }
 
   calcularTotalProduto(produto: any): number {
@@ -102,8 +157,11 @@ export class ResumoComponent implements OnInit {
       this.exibirParcelas = true;
     }else if(this.formaDePagamento === 'boleto'){
       this.exibirFormaDePagamento = 'Boleto á Vista'
-    }else{
+    }else if (this.formaDePagamento === 'pix') {
       this.exibirFormaDePagamento = 'Pix á Vista'
+    } else{
+      this.carrinhoService.setTrocarTelaFormaPagamento();
+      this.carrinhoService.setLoggedIn(true);
     }
   }
 
@@ -125,8 +183,4 @@ export class ResumoComponent implements OnInit {
     this.carrinhoService.setLoggedIn(true);
   }
 
-  finalizarCompra(){
-    this.carrinhoService.setTrocarTelaConcluir();
-    this.carrinhoService.setLoggedIn(true);
-  }
 }
