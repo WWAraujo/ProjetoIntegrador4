@@ -2,15 +2,32 @@ package edu.senac.backend.vendas;
 
 import edu.senac.backend.produto.ProdutoModel;
 import edu.senac.backend.produto.ProdutoRepository;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
-public class ConcluirPedido {
+@Service
+public class ConcluirPedidoImpl implements IConcluirPedido {
 
+    @Autowired @Setter
+    private ProdutoRepository produtoRepository;
+
+    @Autowired @Setter
+    private DadosPedidoRepository dadosPedidoRepository;
+
+    @Autowired @Setter
+    private ListaProdutosPedidoRepository listaProdutosPedidoRepository;
+
+
+    @Override
     public String ConcluirPedido(
-            PedidosRecord venda,
-            ProdutoRepository produtoRepository,
-            DadosPedidoRepository dadosPedidoRepository,
-            ListaProdutosPedidoRepository listaProdutosPedidoRepository) {
+            PedidosRecord venda
+//            ,ProdutoRepository produtoRepository,
+//            DadosPedidoRepository dadosPedidoRepository,
+//            ListaProdutosPedidoRepository listaProdutosPedidoRepository
+    ) {
 
         String response;
 

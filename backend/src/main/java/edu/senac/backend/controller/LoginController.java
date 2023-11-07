@@ -7,6 +7,7 @@ import edu.senac.backend.login.LoginRecord;
 import edu.senac.backend.login.LoginUsuarioRepository;
 import edu.senac.backend.service.Criptografia;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/login")
+@ResponseStatus(HttpStatus.UNAUTHORIZED)
 public class LoginController {
 
     @Autowired
