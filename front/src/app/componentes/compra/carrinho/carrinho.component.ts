@@ -35,9 +35,8 @@ export class CarrinhoComponent implements OnInit {
 
   ngOnInit(): void {
     this.itensNoCarrinho = this.service.getIdsSelecionados();
-    this.itenNoCarrinho();
-    this.alterarValorfrete;
     this.valorFrete = this.carrinhoService.getValorFrete();
+    this.itenNoCarrinho();
   }
 
   valorDoFreteinserido() {
@@ -46,11 +45,11 @@ export class CarrinhoComponent implements OnInit {
     }
   }
 
-  alterarValorfrete(vl: number) {
-    this.valorFrete = vl;
-    this.service.setValorFrete(vl);
-    this.subtotalCarrinho();
+  alterarValorfrete(valor: number) {
+    this.valorFrete = valor;
+    this.service.setValorFrete(valor);
     this.valorDoFreteinserido();
+    this.subtotalCarrinho();
   }
 
   itenNoCarrinho() {
@@ -100,13 +99,15 @@ export class CarrinhoComponent implements OnInit {
   subtotalCarrinho() {
     this.subtotal = 0;
     for (let produto of this.productData) {
-      const precoProduto = produto.produto.precoProduto;
-      const quantidade = this.idsCount[produto.produto.id];
-      const valorFrete = this.valorFrete;
-      if (quantidade) {
-        this.subtotal += (precoProduto * quantidade) + valorFrete;
-      }
+      console.log('Valor fretenovo', this.valorFrete);
+      console.log('Valor subtotal', this.subtotal);
+      this.subtotal += (produto.produto.precoProduto * this.idsCount[produto.produto.id]) + this.valorFrete;
     }
+
+    console.log('Valor subtotal', this.subtotal);
+    console.log('productData', this.productData);
+    console.log('itensNoCarrinho', this.itensNoCarrinho);
+    console.log('idsCount', this.idsCount);
   }
 
   getFullPath(imageName: string): string {
@@ -154,6 +155,4 @@ export class CarrinhoComponent implements OnInit {
       this.router.navigate(['/solicitarLogin'], { queryParams: { fromCart: 'true' } })}
     return false;
   }
-
-
 }

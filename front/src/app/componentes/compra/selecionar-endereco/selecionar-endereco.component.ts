@@ -62,6 +62,8 @@ export class SelecionarEnderecoComponent implements OnInit {
         }
       });
     }
+
+    this.carrinhoService.setMostrarEndereco(true);
   }
 
   selecionarEndereco(endereco: Endereco) {

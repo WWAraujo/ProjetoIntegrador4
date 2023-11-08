@@ -12,12 +12,16 @@ export class CheckoutComponent implements OnInit {
   telaParaExibir: string = 'carrinho';
   valorFrete: number = 0;
   clienteLogado: boolean = true;
+  mostrarEndereco: boolean = false;
+  mostrarFormaPagamento: boolean = false;
+  mostrarResumo: boolean = false;
+  mostrarConcluir: boolean = false;
 
   constructor(
     private carrinhoService: CarrinhoService,
     private loginService: LoginService
-    ) {
-   }
+  ) {
+  }
 
   ngOnInit(): void {
     this.carrinhoService.getLoggedIn().subscribe((loggedIn) => {
@@ -37,6 +41,10 @@ export class CheckoutComponent implements OnInit {
 
   verificarTela(){
     this.telaParaExibir = this.carrinhoService.getTelaCarrinho();
+    this.mostrarEndereco = this.carrinhoService.getMostrarEndereco();
+    this.mostrarFormaPagamento = this.carrinhoService.getMostrarFormaPagamento();
+    this.mostrarResumo = this.carrinhoService.getMostrarResumo();
+    this.mostrarConcluir = this.carrinhoService.getMostrarConcluir();
   }
 
   trocarTelaCarrinho() {

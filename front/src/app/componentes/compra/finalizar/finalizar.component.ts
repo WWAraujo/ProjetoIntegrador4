@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CarrinhoService } from '../carrinho.services';
 
 @Component({
   selector: 'app-finalizar',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinalizarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private carrinhoService: CarrinhoService) { }
 
   ngOnInit(): void {
+    this.carrinhoService.setMostrarConcluir(true);
   }
 
 }

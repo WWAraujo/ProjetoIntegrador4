@@ -8,7 +8,7 @@ CREATE TABLE dados_pedidos (
     prazo_entrega VARCHAR (10) NOT NULL,
     valor_entrega DECIMAL (18, 2) NOT NULL,
     valor_total DECIMAL (18, 2) NOT NULL,
-    status_entrega ENUM ('PEDIDO RECEBIDO', 'PAGAMENTO APROVADO', 'SEPARAÇÃO DO PEDIDO', 'AGUARDANDO ENTREGA', 'ENTREGUE') NOT NULL,
+    status_entrega ENUM ('PEDIDO RECEBIDO', 'AGUARDANDO PAGAMENTO', 'SEPARAÇÃO DO PEDIDO', 'AGUARDANDO ENTREGA', 'ENTREGUE') NOT NULL,
     forma_pagamento ENUM ('BOLETO', 'CARTÃO CREDITO', 'CARTÃO DÉBITO', 'PIX') NOT NULL,
     qtd_parcelas INTEGER ,
     cep VARCHAR (9) NOT NULL,

@@ -17,6 +17,7 @@ public class VendasController {
 
     @PostMapping
     public ResponseEntity<String> salvarVenda(@RequestBody PedidosRecord venda) {
+        System.out.println(venda);
         return ResponseEntity.ok(concluirPedido.ConcluirPedido(venda));
     }
 

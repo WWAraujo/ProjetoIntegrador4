@@ -1,6 +1,8 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarrinhoService } from '../carrinho.services';
+import { FormaPagamento } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-pagamento',
@@ -12,15 +14,25 @@ export class PagamentoComponent implements OnInit {
   exibir: boolean = false;
   subtotal: number = 0;
   numeroParcelas: number = 1;
+  formPagamento: FormaPagamento = {
+    formaPagamento: '',
+    valorTotal: 0,
+    nomeCartao: '',
+    numeroCartao: '',
+    ccvCartao: '',
+    validadeCartao: '',
+    quantidadeCartao: 0,
+    valorDaParcela: 0
+  };
 
   constructor(
     private router: Router,
-    private service: CarrinhoService,
     private carrinhoService: CarrinhoService
   ) { }
 
   ngOnInit(): void {
     this.exibirDiv;
+    this.carrinhoService.setMostrarFormaPagamento(true);
   }
 
   exibirDiv(event: Event) {
@@ -28,7 +40,7 @@ export class PagamentoComponent implements OnInit {
     const divs = document.querySelectorAll('.boleto, .cartao, .pix');
 
     divs.forEach(div => (div as HTMLElement).style.display = 'none');
-    this.service.setFormaDePagamento(target.value);
+    this.carrinhoService.setFormaDePagamento(target.value);
 
     if (target.checked) {
       const divToShow = document.querySelector(`.${target.value}`);
@@ -39,6 +51,10 @@ export class PagamentoComponent implements OnInit {
   }
 
   finalizarCompra() {
+
+    //passando a forma de pagamento para service do carrinho
+    this.carrinhoService.setFormaPagamentoCompleto(this.formPagamento);
+
     const radioInputs = document.querySelectorAll('.form-check .form-check-input');
     let peloMenosUmSelecionado = false;
 
@@ -67,7 +83,7 @@ export class PagamentoComponent implements OnInit {
   }
 
   calcularValorDaParcela(): number {
-    const subtotal = this.service.getSubtotal();
+    const subtotal = this.carrinhoService.getSubtotal();
     if (this.numeroParcelas > 0) {
       return subtotal / this.numeroParcelas;
 
@@ -77,11 +93,11 @@ export class PagamentoComponent implements OnInit {
 
   onNumeroParcelasChange(): void {
     this.subtotal = this.calcularValorDaParcela();
-    this.service.setNumeroParcelas(this.numeroParcelas);
+    this.carrinhoService.setNumeroParcelas(this.numeroParcelas);
   }
 
   getOpcoesParcelas(): { value: number, label: string }[] {
-    const subtotal = this.service.getSubtotal();
+    const subtotal = this.carrinhoService.getSubtotal();
     const opcoes: { value: number, label: string }[] = [];
 
     for (let i = 1; i <= 12; i++) {

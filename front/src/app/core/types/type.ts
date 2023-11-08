@@ -129,6 +129,12 @@ export interface ClienteCompleto {
   enderecos: Endereco[];
 }
 
+export interface Venda {
+  dadosVenda: DadosVenda;
+  formaPagamento: FormaPagamento;
+  produtos: ProdutosVenda[];
+}
+
 export interface DadosVenda {
   idCliente: number;
   nomeCliente: string;

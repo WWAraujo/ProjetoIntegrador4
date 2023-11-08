@@ -137,9 +137,4 @@ export class CadastrarProdutosComponent implements OnInit {
   irParaListaProdutos() {
     this.router.navigate(['listarProduto']);
   }
-
-//  novaAvaliacao() {
-//    this.avaliacaoProdutoRecord.idProduto = 0;
-//    this.avaliacaoProdutoRecord.avaliacao = 0;
-//  }
 }

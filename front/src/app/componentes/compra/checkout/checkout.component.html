@@ -5,66 +5,20 @@
       <a class="nav-link" *ngIf="telaParaExibir !== 'carrinho'" (click)="trocarTelaCarrinho()">CARINHO</a>
     </li>
     <li class="nav-item">
-      <button
-        type="button"
-        class="nav-link active"
-        *ngIf="telaParaExibir === 'endereco'"
-        aria-current="page"
-        >ENDEREÇO</button>
-      <button
-        type="button"
-        class="nav-link"
-        *ngIf="telaParaExibir !== 'endereco'"
-        (click)="trocarTelaEndereco()"
-        [disabled]="clienteLogado"
-        >ENDEREÇO</button>
+      <button type="button" class="nav-link active" *ngIf="telaParaExibir === 'endereco'" aria-current="page">ENDEREÇO</button>
+      <button type="button" class="nav-link" *ngIf="telaParaExibir !== 'endereco'" (click)="trocarTelaEndereco()" [disabled]="clienteLogado" [disabled]="!mostrarEndereco" >ENDEREÇO</button>
     </li>
     <li class="nav-item">
-      <button
-        class="nav-link active"
-        *ngIf="telaParaExibir === 'pagamento'"
-        aria-current="page"
-        >FORMA DE PAGAMENTO
-      </button>
-      <button
-        class="nav-link"
-        *ngIf="telaParaExibir !== 'pagamento'"
-        (click)="trocarTelaFormaPagamento()"
-        [disabled]="clienteLogado"
-        >FORMA DE PAGAMENTO
-      </button>
+      <button class="nav-link active" *ngIf="telaParaExibir === 'pagamento'" aria-current="page" >FORMA DE PAGAMENTO</button>
+      <button class="nav-link" *ngIf="telaParaExibir !== 'pagamento'" (click)="trocarTelaFormaPagamento()" [disabled]="clienteLogado" [disabled]="!mostrarFormaPagamento" >FORMA DE PAGAMENTO</button>
     </li>
     <li class="nav-item">
-      <button
-        class="nav-link active"
-        *ngIf="telaParaExibir === 'confirmacao'"
-        aria-current="page"
-        >
-        RESUMO
-      </button>
-      <button
-        class="nav-link"
-        *ngIf="telaParaExibir !== 'confirmacao'"
-        (click)="trocarTelaConfirmacao()"
-        [disabled]="clienteLogado">
-        RESUMO
-      </button>
+      <button class="nav-link active" *ngIf="telaParaExibir === 'confirmacao'" aria-current="page" >RESUMO</button>
+      <button class="nav-link" *ngIf="telaParaExibir !== 'confirmacao'" (click)="trocarTelaConfirmacao()" [disabled]="clienteLogado" [disabled]="!mostrarResumo"> RESUMO </button>
     </li>
     <li class="nav-item">
-      <button
-        class="nav-link active"
-        *ngIf="telaParaExibir === 'concluir'"
-        aria-disabled="true">
-        CONCLUIR
-      </button>
-      <button
-        class="nav-link"
-        *ngIf="telaParaExibir !== 'concluir'"
-        aria-disabled="true"
-        (click)="trocarTelaConcluir()"
-        [disabled]="clienteLogado">
-        CONCLUIR
-      </button>
+      <button class="nav-link active" *ngIf="telaParaExibir === 'concluir'" aria-disabled="true"> CONCLUIR </button>
+      <button class="nav-link" *ngIf="telaParaExibir !== 'concluir'" aria-disabled="true" (click)="trocarTelaConcluir()" [disabled]="clienteLogado" [disabled]="!mostrarConcluir"> CONCLUIR </button>
     </li>
   </ul>
 

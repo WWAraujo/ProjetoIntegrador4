@@ -1,6 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Endereco } from 'src/app/core/types/type';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Endereco, FormaPagamento, Venda } from 'src/app/core/types/type';
+import { environment } from 'src/environments/environment';
+
+const API = environment.apiURL;
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +16,66 @@ export class CarrinhoService {
   private subtotal: number = 0;
   private numeroParcelas: number = 0;
   private frete: number = 0;
+  private prazoEntrega: string = '';
   private formaPagamento: string = '';
   private enderecoSelecionado!: Endereco;
   private loggedIn = new BehaviorSubject<boolean>(false);
+  private mostrarResumo: boolean = false;
+  private mostrarEndereco: boolean = false;
+  private mostrarConcluir: boolean = false;
+  private mostrarFormaPagamento: boolean = false;
+  private formaPagamentoCompleto!: FormaPagamento;
+
+  constructor(private http: HttpClient) {}
+
+  salvarVendaBackend(venda: any): Observable<any> {
+    console.log('URL',`${API}/vendas`);
+    console.log('dados',venda);
+    return this.http.post<any>(`${API}/vendas`, venda);
+  }
+
+  getFormaPagamentoCompleto(){
+    return this.formaPagamentoCompleto;
+  }
+  setFormaPagamentoCompleto(form: FormaPagamento){
+    this.formaPagamentoCompleto = form;
+  }
+
+  getMostrarEndereco() {
+    return this.mostrarEndereco;
+  }
+  setMostrarEndereco(status: boolean) {
+    this.mostrarEndereco = status;
+  }
+
+  getMostrarFormaPagamento() {
+    return this.mostrarFormaPagamento;
+  }
+  setMostrarFormaPagamento(status: boolean) {
+    this.mostrarFormaPagamento = status;
+  }
+
+  getMostrarResumo() {
+    return this.mostrarResumo;
+  }
+  setMostrarResumo(status: boolean) {
+    this.mostrarResumo = status;
+  }
+
+  getMostrarConcluir() {
+    return this.mostrarConcluir;
+  }
+  setMostrarConcluir(status: boolean) {
+    this.mostrarConcluir = status;
+  }
+
+  getPrazoEntrega() {
+    return this.prazoEntrega;
+  }
+
+  setPrazoEntrega(prazo: string) {
+    this.prazoEntrega = prazo;
+  }
 
   getIdsSelecionados() {
     const carrinho = sessionStorage.getItem(this.chaveArmazenamento);
