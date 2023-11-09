@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CarrinhoService } from '../carrinho.services';
+import { CarrinhoServices } from '../carrinho.services';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../../logins/login.service';
 @Component({
@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
   mostrarConcluir: boolean = false;
 
   constructor(
-    private carrinhoService: CarrinhoService,
+    private carrinhoService: CarrinhoServices,
     private loginService: LoginService
   ) {
   }
