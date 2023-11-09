@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CarrinhoService } from '../carrinho.services';
+import { CarrinhoServices } from '../carrinho.services';
 import { FormaPagamento } from 'src/app/core/types/type';
 
 @Component({
@@ -27,7 +27,7 @@ export class PagamentoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private carrinhoService: CarrinhoService
+    private carrinhoService: CarrinhoServices
   ) { }
 
   ngOnInit(): void {

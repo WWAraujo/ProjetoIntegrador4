@@ -3,7 +3,7 @@ import { ProdutosService } from '../../produtos/produtos.service';
 import { Router } from '@angular/router';
 import { Cliente, ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
-import { CarrinhoService } from '../carrinho.services';
+import { CarrinhoServices } from '../carrinho.services';
 import { LoginService } from '../../logins/login.service';
 
 const API = environment.apiURL;
@@ -26,13 +26,14 @@ export class CarrinhoComponent implements OnInit {
   dadosCliente: Cliente | null = null;
   nomeLogado: string = '';
   freteInserido: boolean = false;
+  subtotalComFrete: number = 0;
 
   constructor(
-    private service: CarrinhoService,
+    private service: CarrinhoServices,
     private router: Router,
     private serviceProduto: ProdutosService,
     private loginService: LoginService,
-    private carrinhoService: CarrinhoService) { }
+    private carrinhoService: CarrinhoServices) { }
 
   ngOnInit(): void {
     this.itensNoCarrinho = this.service.getIdsSelecionados();
