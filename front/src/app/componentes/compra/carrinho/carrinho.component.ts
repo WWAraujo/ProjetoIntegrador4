@@ -20,6 +20,7 @@ export class CarrinhoComponent implements OnInit {
   itensNoCarrinho!: number[];
   idsCount: { [id: number]: number } = {};
   subtotal: number = 0;
+  subtotalComFrete: number = 0;
   valorFrete: number = 0;
   logado: boolean = false;
   dadosCliente: Cliente | null = null;
@@ -99,15 +100,9 @@ export class CarrinhoComponent implements OnInit {
   subtotalCarrinho() {
     this.subtotal = 0;
     for (let produto of this.productData) {
-      console.log('Valor fretenovo', this.valorFrete);
-      console.log('Valor subtotal', this.subtotal);
-      this.subtotal += (produto.produto.precoProduto * this.idsCount[produto.produto.id]) + this.valorFrete;
+      this.subtotal += (produto.produto.precoProduto * this.idsCount[produto.produto.id]);
+      this.subtotalComFrete = this.subtotal + this.valorFrete;
     }
-
-    console.log('Valor subtotal', this.subtotal);
-    console.log('productData', this.productData);
-    console.log('itensNoCarrinho', this.itensNoCarrinho);
-    console.log('idsCount', this.idsCount);
   }
 
   getFullPath(imageName: string): string {
