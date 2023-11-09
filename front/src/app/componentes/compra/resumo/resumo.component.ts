@@ -6,7 +6,6 @@ import { Endereco, ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { LoginService } from '../../logins/login.service';
-import { CarrinhoService } from '../carrinho.service';
 
 const API = environment.apiURL;
 
@@ -66,8 +65,7 @@ export class ResumoComponent implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private serviceProduto: ProdutosService,
-    private carrinhoService: CarrinhoServices,
-    private service: CarrinhoService
+    private carrinhoService: CarrinhoServices
   ) { }
 
   ngOnInit(): void {
@@ -98,7 +96,7 @@ export class ResumoComponent implements OnInit {
 
   finalizarCompra(){
     const mandarVendaProBackend = this.prepararDadosParaEnviarBanckend();
-    this.service.salvarVendaBackend(mandarVendaProBackend);
+    this.carrinhoService.salvarVendaBackend(mandarVendaProBackend);
 
     // this.carrinhoService.setTrocarTelaConcluir();
     // this.carrinhoService.setLoggedIn(true);

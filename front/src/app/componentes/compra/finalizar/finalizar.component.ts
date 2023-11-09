@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CarrinhoService } from '../carrinho.service';
 import { CarrinhoServices } from '../carrinho.services';
 
 
@@ -10,12 +9,20 @@ import { CarrinhoServices } from '../carrinho.services';
 })
 export class FinalizarComponent implements OnInit {
 
-  constructor(
-    private service: CarrinhoService,
-    private carrinhoService: CarrinhoServices) { }
+  id: number = 0;
+  teste: string = 'Retorno teste';
+
+  constructor(private carrinhoService: CarrinhoServices) { }
 
   ngOnInit(): void {
-    this.carrinhoService.setMostrarConcluir(true);
+    this.carrinhoService.getVendas(1).subscribe((response) => {
+      console.log('Retorno get', response);
+      this.id = response;
+    });
+    this.carrinhoService.teste(1).subscribe((response) => {
+      console.log('Retorno teste', response);
+      this.teste = 'Retorno teste',response;
+    });
   }
 
 }

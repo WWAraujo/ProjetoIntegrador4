@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError } from 'rxjs';
 import { Endereco, FormaPagamento, Venda } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
 
@@ -27,6 +27,26 @@ export class CarrinhoServices {
   private formaPagamentoCompleto!: FormaPagamento;
 
   constructor(private http: HttpClient) {}
+
+  salvarVendaBackend(venda: any): Observable<string> {
+    console.log('URL :',`${API}/vendas/cadastrar-vendas`);
+    console.log('DADOS :',venda);
+    return this.http.post<string>(`${API}/vendas/cadastrar-vendas`, venda)
+    .pipe(
+      catchError((error: any) => {
+        console.error('Erro na solicitação POST:', error);
+        throw error; // Rejeita o erro para que o componente que chamou o serviço possa lidar com ele.
+      })
+    );
+  }
+
+  teste(id: number): Observable<number> {
+    return this.http.get<number>(`${API}/vendas/cadastrar-vendas/${id}`)
+  }
+
+  getVendas(id: number): Observable<number> {
+    return this.http.get<number>(`${API}/vendas/${id}`)
+  }
 
   getFormaPagamentoCompleto(){
     return this.formaPagamentoCompleto;
