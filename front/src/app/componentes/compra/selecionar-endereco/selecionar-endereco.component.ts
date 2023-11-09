@@ -4,7 +4,7 @@ import { ClienteService } from '../../cliente/cliente.service';
 import { ModalenderecoService } from '../../cliente/modalendereco.service';
 import { LoginService } from '../../logins/login.service';
 import { Router } from '@angular/router';
-import { CarrinhoService } from '../carrinho.services';
+import { CarrinhoServices } from '../carrinho.services';
 
 @Component({
   selector: 'app-selecionar-endereco',
@@ -23,10 +23,10 @@ export class SelecionarEnderecoComponent implements OnInit {
   constructor(
     private serviceCliente: ClienteService,
     private serviceEndereco: ModalenderecoService,
-    private serviceCarrinho: CarrinhoService,
+    private serviceCarrinho: CarrinhoServices,
     private loginService: LoginService,
     private router: Router,
-    private carrinhoService: CarrinhoService
+    private carrinhoService: CarrinhoServices
     ) { }
 
   ngOnInit(): void {

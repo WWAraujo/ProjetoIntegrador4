@@ -9,7 +9,7 @@ const API = environment.apiURL;
 @Injectable({
   providedIn: 'root',
 })
-export class CarrinhoService {
+export class CarrinhoServices {
 
   private telaParaExibir: string = 'carrinho';
   private chaveArmazenamento = 'carrinho';
@@ -27,12 +27,6 @@ export class CarrinhoService {
   private formaPagamentoCompleto!: FormaPagamento;
 
   constructor(private http: HttpClient) {}
-
-  salvarVendaBackend(venda: any): Observable<any> {
-    console.log('URL',`${API}/vendas`);
-    console.log('dados',venda);
-    return this.http.post<any>(`${API}/vendas`, venda);
-  }
 
   getFormaPagamentoCompleto(){
     return this.formaPagamentoCompleto;

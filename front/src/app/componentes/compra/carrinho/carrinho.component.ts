@@ -3,7 +3,7 @@ import { ProdutosService } from '../../produtos/produtos.service';
 import { Router } from '@angular/router';
 import { Cliente, ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
-import { CarrinhoService } from '../carrinho.services';
+import { CarrinhoServices } from '../carrinho.services';
 import { LoginService } from '../../logins/login.service';
 
 const API = environment.apiURL;
@@ -25,13 +25,14 @@ export class CarrinhoComponent implements OnInit {
   dadosCliente: Cliente | null = null;
   nomeLogado: string = '';
   freteInserido: boolean = false;
+  subtotalComFrete: number = 0;
 
   constructor(
-    private service: CarrinhoService,
+    private service: CarrinhoServices,
     private router: Router,
     private serviceProduto: ProdutosService,
     private loginService: LoginService,
-    private carrinhoService: CarrinhoService) { }
+    private carrinhoService: CarrinhoServices) { }
 
   ngOnInit(): void {
     this.itensNoCarrinho = this.service.getIdsSelecionados();
@@ -99,15 +100,9 @@ export class CarrinhoComponent implements OnInit {
   subtotalCarrinho() {
     this.subtotal = 0;
     for (let produto of this.productData) {
-      console.log('Valor fretenovo', this.valorFrete);
-      console.log('Valor subtotal', this.subtotal);
-      this.subtotal += (produto.produto.precoProduto * this.idsCount[produto.produto.id]) + this.valorFrete;
+      this.subtotal += (produto.produto.precoProduto * this.idsCount[produto.produto.id]);
+      this.subtotalComFrete = this.subtotal + this.valorFrete;
     }
-
-    console.log('Valor subtotal', this.subtotal);
-    console.log('productData', this.productData);
-    console.log('itensNoCarrinho', this.itensNoCarrinho);
-    console.log('idsCount', this.idsCount);
   }
 
   getFullPath(imageName: string): string {
