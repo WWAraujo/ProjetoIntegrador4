@@ -24,14 +24,22 @@ public class VendasController {
     @Autowired
     private FormaPagamentoRepository formaPagamentoRepository;
 
-    @PostMapping
-    public ResponseEntity<String> salvarVenda(@RequestBody PedidosRecord venda) {
-        return ResponseEntity.ok(concluirPedido.ConcluirPedido(venda));
+//    @PostMapping("/cadastrar-vendas")
+//    public ResponseEntity<String> salvarVenda(@RequestBody PedidosRecord venda) {
+//        System.out.println("Entrou no POST");
+//        return ResponseEntity.ok(concluirPedido.ConcluirPedido(venda));
+//    }
+
+    @PostMapping("/cadastrar-vendas/{id}")
+    public ResponseEntity<Long> salvarVenda(@PathVariable Long id) {
+        System.out.println("Entrou no POST");
+        return ResponseEntity.ok(id);
     }
 
     @GetMapping("/{cliente}")
-    public ResponseEntity<List<PedidosRecord>> getVendas(@PathVariable Long cliente){
-        return ResponseEntity.ok().body(new ListarPedidos().listarPedido(
-                cliente, dadosPedidoRepository, listaProdutosPedidoRepository, formaPagamentoRepository));
+    public ResponseEntity<Long> getVendas(@PathVariable Long cliente){
+//        return ResponseEntity.ok().body(new ListarPedidos().listarPedido(cliente, dadosPedidoRepository, listaProdutosPedidoRepository, formaPagamentoRepository)); List<PedidosRecord>
+        System.out.println("Entrou no GET");
+        return ResponseEntity.ok().body(cliente);
     }
 }

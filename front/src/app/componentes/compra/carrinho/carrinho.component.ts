@@ -26,7 +26,6 @@ export class CarrinhoComponent implements OnInit {
   dadosCliente: Cliente | null = null;
   nomeLogado: string = '';
   freteInserido: boolean = false;
-  subtotalComFrete: number = 0;
 
   constructor(
     private service: CarrinhoServices,
