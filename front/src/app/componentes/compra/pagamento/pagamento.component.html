@@ -66,7 +66,7 @@
         </div>
         <div class="parcelamento">
           <label>Parcelas</label>
-          <select class="parcelas" [(ngModel)]="numeroParcelas" [(ngModel)]="formPagamento.quantidadeCartao" (change)="onNumeroParcelasChange()">
+          <select class="parcelas" [(ngModel)]="numeroParcelas" [(ngModel)]="formPagamento.quantidadeParcelas" (change)="onNumeroParcelasChange()">
             <option *ngFor="let opcao of getOpcoesParcelas()" [value]="opcao.value">{{ opcao.label }}</option>
           </select>
         </div>

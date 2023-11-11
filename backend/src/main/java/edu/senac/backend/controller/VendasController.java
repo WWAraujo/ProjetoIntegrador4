@@ -24,17 +24,16 @@ public class VendasController {
     @Autowired
     private FormaPagamentoRepository formaPagamentoRepository;
 
-//    @PostMapping("/cadastrar-vendas")
-//    public ResponseEntity<String> salvarVenda(@RequestBody PedidosRecord venda) {
-//        System.out.println("Entrou no POST");
-//        return ResponseEntity.ok(concluirPedido.ConcluirPedido(venda));
-//    }
-
-    @PostMapping("/cadastrar-vendas/{id}")
-    public ResponseEntity<Long> salvarVenda(@PathVariable Long id) {
-        System.out.println("Entrou no POST");
-        return ResponseEntity.ok(id);
+    @PostMapping("/cadastrar")
+    public ResponseEntity<String> salvarVenda(@RequestBody PedidosRecord venda) {
+        return ResponseEntity.ok(concluirPedido.ConcluirPedido(venda));
     }
+
+//    @PostMapping("/cadastrar-vendas/{id}")
+//    public ResponseEntity<Long> salvarVenda(@PathVariable Long id) {
+//        System.out.println("Entrou no POST");
+//        return ResponseEntity.ok(id);
+//    }
 
     @GetMapping("/{cliente}")
     public ResponseEntity<Long> getVendas(@PathVariable Long cliente){

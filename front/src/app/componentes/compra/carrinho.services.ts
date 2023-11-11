@@ -26,27 +26,7 @@ export class CarrinhoServices {
   private mostrarFormaPagamento: boolean = false;
   private formaPagamentoCompleto!: FormaPagamento;
 
-  constructor(private http: HttpClient) {}
-
-  salvarVendaBackend(venda: any): Observable<string> {
-    console.log('URL :',`${API}/vendas/cadastrar-vendas`);
-    console.log('DADOS :',venda);
-    return this.http.post<string>(`${API}/vendas/cadastrar-vendas`, venda)
-    .pipe(
-      catchError((error: any) => {
-        console.error('Erro na solicitação POST:', error);
-        throw error; // Rejeita o erro para que o componente que chamou o serviço possa lidar com ele.
-      })
-    );
-  }
-
-  teste(id: number): Observable<number> {
-    return this.http.get<number>(`${API}/vendas/cadastrar-vendas/${id}`)
-  }
-
-  getVendas(id: number): Observable<number> {
-    return this.http.get<number>(`${API}/vendas/${id}`)
-  }
+  constructor() {}
 
   getFormaPagamentoCompleto(){
     return this.formaPagamentoCompleto;

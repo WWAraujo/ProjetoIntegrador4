@@ -76,7 +76,6 @@ export class CadastrarProdutosComponent implements OnInit {
   submitForm() {
     const dadosParaEnviar = {
       produto: this.produto,
-      //avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
       fotosProdutoRecord: this.fotosProduto,
     };
 
