@@ -36,6 +36,7 @@ export class ResumoComponent implements OnInit {
   dataCompraString!: string;
 
   dadosVenda: DadosVenda = {
+    id: 0,
     idCliente: 0,
     nomeCliente: '',
     dataCompra: '',
@@ -154,7 +155,7 @@ export class ResumoComponent implements OnInit {
 
     this.dadosVenda.dataCompra = this.dataCompraString;
 
-    this.formaPagamento.formaPagamento = this.exibirFormaDePagamento;
+    this.formaPagamento.formaPagamento = this.formaDePagamentoString;
     this.formaPagamento.valorTotal = this.subtotalComFrete;
     this.formaPagamento.nomeCartao = this.formaPagamento.nomeCartao;
     this.formaPagamento.numeroCartao = this.formaPagamento.numeroCartao;

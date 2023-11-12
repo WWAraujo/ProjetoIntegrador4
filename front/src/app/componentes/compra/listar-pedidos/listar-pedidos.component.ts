@@ -18,6 +18,8 @@ export class FinalizarComponent implements OnInit {
   ngOnInit(): void {
     this.carrinhoservice.getVendas(this.cliente).subscribe((response) => {
       this.dados = response;
+      console.log(response);
+      console.log(this.dados);
     });
 
 }
