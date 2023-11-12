@@ -28,8 +28,8 @@ public class BuscarPedidos {
             if (dadosPedidoModelList.isPresent()){
                 for (DadosPedidoModel dadosPedidoModel : dadosPedidoModelList.get()){
 
-                    FormaPagamentoModel formaPagamentoModel = formaPagamentoRepository.pesquisarPorId(id);
-                    List<ListaProdutosPedidoModel> listaProdutos = listaProdutosPedidoRepository.pesquisarPorId(id);
+                    FormaPagamentoModel formaPagamentoModel = formaPagamentoRepository.pesquisarPorId(dadosPedidoModel.getId());
+                    List<ListaProdutosPedidoModel> listaProdutos = listaProdutosPedidoRepository.pesquisarPorId(dadosPedidoModel.getId());
 
                     PedidosRecord pedidosRecord = new PedidosRecord(dadosPedidoModel,formaPagamentoModel,listaProdutos);
 

@@ -136,6 +136,7 @@ export interface Venda {
 }
 
 export interface DadosVenda {
+  id: number;
   idCliente: number;
   nomeCliente: string;
   dataCompra: string;
