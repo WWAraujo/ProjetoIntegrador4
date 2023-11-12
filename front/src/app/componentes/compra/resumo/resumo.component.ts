@@ -127,7 +127,6 @@ export class ResumoComponent implements OnInit {
           this.carrinhoService.setLoggedIn(true);
         },
         (error)=> {
-          console.error('Erro ao finalizar a venda', error);
           this.carrinhoService.setTrocarTelaListarPedidos();
           this.carrinhoService.setLoggedIn(true);
         }
