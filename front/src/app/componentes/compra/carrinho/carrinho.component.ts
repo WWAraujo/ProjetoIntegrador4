@@ -3,7 +3,7 @@ import { ProdutosService } from '../../produtos/produtos.service';
 import { Router } from '@angular/router';
 import { Cliente, ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
-import { CarrinhoService } from '../carrinho.services';
+import { CarrinhoServices } from '../carrinho.services';
 import { LoginService } from '../../logins/login.service';
 
 const API = environment.apiURL;
@@ -20,26 +20,36 @@ export class CarrinhoComponent implements OnInit {
   itensNoCarrinho!: number[];
   idsCount: { [id: number]: number } = {};
   subtotal: number = 0;
+  subtotalComFrete: number = 0;
   valorFrete: number = 0;
   logado: boolean = false;
   dadosCliente: Cliente | null = null;
   nomeLogado: string = '';
-  veioDoCarrinho: boolean = false;
+  freteInserido: boolean = false;
 
   constructor(
-    private service: CarrinhoService,
+    private service: CarrinhoServices,
     private router: Router,
     private serviceProduto: ProdutosService,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private carrinhoService: CarrinhoServices) { }
 
   ngOnInit(): void {
     this.itensNoCarrinho = this.service.getIdsSelecionados();
+    this.valorFrete = this.carrinhoService.getValorFrete();
     this.itenNoCarrinho();
-    this.alterarValorfrete;
   }
 
-  alterarValorfrete(vl: number){
-    this.valorFrete = vl;
+  valorDoFreteinserido() {
+    if (this.valorFrete > 0 ){
+      this.freteInserido = true;
+    }
+  }
+
+  alterarValorfrete(valor: number) {
+    this.valorFrete = valor;
+    this.service.setValorFrete(valor);
+    this.valorDoFreteinserido();
     this.subtotalCarrinho();
   }
 
@@ -82,20 +92,16 @@ export class CarrinhoComponent implements OnInit {
     this.subtotalCarrinho();
   }
 
-excluirDoCarrinho(id: number){
-  this.service.excluirDoCarrinho(id);
-  window.location.reload();
-}
+  excluirDoCarrinho(id: number) {
+    this.service.excluirDoCarrinho(id);
+    window.location.reload();
+  }
 
   subtotalCarrinho() {
     this.subtotal = 0;
     for (let produto of this.productData) {
-      const precoProduto = produto.produto.precoProduto;
-      const quantidade = this.idsCount[produto.produto.id];
-      const valorFrete = this.valorFrete;
-      if (quantidade) {
-        this.subtotal +=(precoProduto * quantidade) + valorFrete;
-      }
+      this.subtotal += (produto.produto.precoProduto * this.idsCount[produto.produto.id]);
+      this.subtotalComFrete = this.subtotal + this.valorFrete;
     }
   }
 
@@ -113,19 +119,35 @@ excluirDoCarrinho(id: number){
 
 
   verificarLogado() {
-    if (!this.logado){
+    if (!this.logado) {
       this.logado = this.verificarClienteLogado();
     }
   }
 
   verificarClienteLogado() {
-    this.dadosCliente = this.loginService.getData('clienteData');
-    if(this.dadosCliente){
-      this.nomeLogado = this.dadosCliente.nomeCliente;
-      this.router.navigate(['/checkout'])
-      return true;
+    const radioInputs = document.querySelectorAll('.frete .form-check-input');
+    let peloMenosUmSelecionado = false;
+
+    for (let i = 0; i < radioInputs.length; i++) {
+      const radioInput = radioInputs[i] as HTMLInputElement;
+      if (radioInput.checked) {
+        peloMenosUmSelecionado = true;
+        break;
+      }
     }
-    this.router.navigate(['/solicitarLogin'],{ queryParams: { fromCart: 'true' } })
+    this.dadosCliente = this.loginService.getData('clienteData');
+    if (this.dadosCliente) {
+      if (peloMenosUmSelecionado && this.itensNoCarrinho) {
+        this.nomeLogado = this.dadosCliente.nomeCliente;
+        this.service.setSubtotal(this.subtotal);
+        this.carrinhoService.setTrocarTelaEndereco();
+        this.carrinhoService.setLoggedIn(true);
+        return true;
+      }else{
+        alert('Selecione o frete')
+      }
+    }else{
+      this.router.navigate(['/solicitarLogin'], { queryParams: { fromCart: 'true' } })}
     return false;
   }
 }

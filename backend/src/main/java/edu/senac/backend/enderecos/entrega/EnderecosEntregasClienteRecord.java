@@ -1,7 +1,5 @@
 package edu.senac.backend.enderecos.entrega;
 
-import edu.senac.backend.service.AtivoInativo;
-
 public record EnderecosEntregasClienteRecord(
         Long id,
         Long idCliente,

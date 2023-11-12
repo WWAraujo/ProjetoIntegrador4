@@ -52,7 +52,6 @@ export class CadastrarProdutosComponent implements OnInit {
       this.isCliente = true;
     }
 
-
     this.modalservice.fecharModalEvent.subscribe(() => {
       this.fecharModal();
     });
@@ -77,7 +76,6 @@ export class CadastrarProdutosComponent implements OnInit {
   submitForm() {
     const dadosParaEnviar = {
       produto: this.produto,
-      //avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
       fotosProdutoRecord: this.fotosProduto,
     };
 
@@ -138,9 +136,4 @@ export class CadastrarProdutosComponent implements OnInit {
   irParaListaProdutos() {
     this.router.navigate(['listarProduto']);
   }
-
-//  novaAvaliacao() {
-//    this.avaliacaoProdutoRecord.idProduto = 0;
-//    this.avaliacaoProdutoRecord.avaliacao = 0;
-//  }
 }

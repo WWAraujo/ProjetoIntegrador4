@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../produtos.service';
 import { ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
-import { CarrinhoService } from '../../compra/carrinho.services';
+import { CarrinhoServices } from '../../compra/carrinho.services';
 
 const API = environment.apiURL;
 
@@ -23,7 +23,7 @@ export class ProdutoDetalhadoComponent implements OnInit {
   imagensSecundarias: string[] = [];
   botaoDesabilitado: boolean = false;
 
-  constructor(private service: ProdutosService, private router: Router, private serviceCarrinho: CarrinhoService) { }
+  constructor(private service: ProdutosService, private router: Router, private serviceCarrinho: CarrinhoServices) { }
 
   ngOnInit(): void {
     this.idProduto = this.service.getIdProduto();
@@ -72,10 +72,14 @@ export class ProdutoDetalhadoComponent implements OnInit {
     }
   }
 
-  pegarId(idProduto: number) {
+  addCarrinho(idProduto: number) {
     this.serviceCarrinho.adicionarAoCarrinho(idProduto);
-    this.router.navigate(['/carrinho']);
+    alert('Produto adicionado ao carrinho')
   }
 
+  irCheckout(idProduto: number) {
+    this.serviceCarrinho.adicionarAoCarrinho(idProduto);
+    this.router.navigate(['/checkout']);
+  }
 
 }
