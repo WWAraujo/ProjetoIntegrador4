@@ -1,10 +1,12 @@
 package edu.senac.backend.controller;
 
+import edu.senac.backend.produto.ProdutoRepository;
 import edu.senac.backend.vendas.*;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -12,8 +14,11 @@ import java.util.List;
 @RequestMapping("/vendas")
 public class VendasController {
 
-    @Autowired @Setter
-    private IConcluirPedido concluirPedido;
+    @Autowired
+    private ConcluirPedido concluirPedido;
+
+    @Autowired
+    ProdutoRepository produtoRepository;
 
     @Autowired
     private DadosPedidoRepository dadosPedidoRepository;
@@ -25,20 +30,27 @@ public class VendasController {
     private FormaPagamentoRepository formaPagamentoRepository;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> salvarVenda(@RequestBody PedidosRecord venda) {
-        return ResponseEntity.ok(concluirPedido.ConcluirPedido(venda));
+    public String salvarVenda(@RequestBody PedidosRecord venda) {
+        return
+                new ConcluirPedido()
+                        .ConcluirPedido(
+                                venda,
+                                produtoRepository,
+                                dadosPedidoRepository,
+                                listaProdutosPedidoRepository,
+                                formaPagamentoRepository
+                );
     }
 
-//    @PostMapping("/cadastrar-vendas/{id}")
-//    public ResponseEntity<Long> salvarVenda(@PathVariable Long id) {
-//        System.out.println("Entrou no POST");
-//        return ResponseEntity.ok(id);
-//    }
-
     @GetMapping("/{cliente}")
-    public ResponseEntity<Long> getVendas(@PathVariable Long cliente){
-//        return ResponseEntity.ok().body(new ListarPedidos().listarPedido(cliente, dadosPedidoRepository, listaProdutosPedidoRepository, formaPagamentoRepository)); List<PedidosRecord>
-        System.out.println("Entrou no GET");
-        return ResponseEntity.ok().body(cliente);
+    public ResponseEntity<List<PedidosRecord>> getVendas(@PathVariable Long cliente) {
+        return ResponseEntity.ok().body(
+                new BuscarPedidos().listarPedidos(
+                        cliente,
+                        dadosPedidoRepository,
+                        formaPagamentoRepository,
+                        listaProdutosPedidoRepository
+                )
+        );
     }
 }

@@ -9,7 +9,7 @@ import { LoginService } from '../../logins/login.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  telaParaExibir: string = 'carrinho';
+  telaParaExibir: string = 'listar-pedidos';
   valorFrete: number = 0;
   clienteLogado: boolean = true;
   mostrarEndereco: boolean = false;
@@ -67,8 +67,8 @@ export class CheckoutComponent implements OnInit {
     this.carrinhoService.setLoggedIn(true);
   }
 
-  trocarTelaConcluir() {
-    this.carrinhoService.setTrocarTelaConcluir();
+  trocarTelaListarPedidos() {
+    this.carrinhoService.setTrocarTelaListarPedidos();
     this.carrinhoService.setLoggedIn(true);
   }
 

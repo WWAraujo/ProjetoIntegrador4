@@ -122,12 +122,14 @@ export class ResumoComponent implements OnInit {
     if(!this.idVenda){
       this.service.cadastrarVenda(dadosParaEnviar).subscribe(
         (response)=>{
-          alert('Venda Realizada com Sucesso');
-          console.log(dadosParaEnviar)
+          alert(response);
+          this.carrinhoService.setTrocarTelaListarPedidos();
+          this.carrinhoService.setLoggedIn(true);
         },
         (error)=> {
           console.error('Erro ao finalizar a venda', error);
-          console.log(dadosParaEnviar)
+          this.carrinhoService.setTrocarTelaListarPedidos();
+          this.carrinhoService.setLoggedIn(true);
         }
       );
     }

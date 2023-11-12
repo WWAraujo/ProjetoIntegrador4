@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FinalizarComponent } from './finalizar.component';
+import { FinalizarComponent } from './listar-pedidos.component';
 
 describe('FinalizarComponent', () => {
   let component: FinalizarComponent;

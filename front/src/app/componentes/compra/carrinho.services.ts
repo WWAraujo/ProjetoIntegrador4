@@ -172,8 +172,8 @@ export class CarrinhoServices {
     this.telaParaExibir = 'confirmacao';
   }
 
-  setTrocarTelaConcluir() {
-    this.telaParaExibir = 'concluir';
+  setTrocarTelaListarPedidos() {
+    this.telaParaExibir = 'listar-pedidos';
   }
 
   getTelaCarrinho(){

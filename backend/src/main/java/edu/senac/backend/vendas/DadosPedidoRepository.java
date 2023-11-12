@@ -5,10 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DadosPedidoRepository extends JpaRepository<DadosPedidoModel, Long> {
 
-//    @Query("SELECT d FROM DadosPedidoModel d WHERE d.idCliente = :id")
-//    List<DadosPedidoModel> pesquisarPorId(@Param("id") Long id);
+    @Query("SELECT d FROM Pedidos d WHERE d.idCliente = :id")
+    Optional<DadosPedidoModel[]> pesquisarPorId(@Param("id") Long id);
 
 }

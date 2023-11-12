@@ -18,7 +18,7 @@ import { CheckoutComponent } from './componentes/compra/checkout/checkout.compon
 import { SelecionarEnderecoComponent } from './componentes/compra/selecionar-endereco/selecionar-endereco.component';
 import { PagamentoComponent } from './componentes/compra/pagamento/pagamento.component';
 import { ResumoComponent } from './componentes/compra/resumo/resumo.component';
-import { FinalizarComponent } from './componentes/compra/finalizar/finalizar.component';
+import { FinalizarComponent } from './componentes/compra/listar-pedidos/listar-pedidos.component';
 
 
 const routes: Routes = [

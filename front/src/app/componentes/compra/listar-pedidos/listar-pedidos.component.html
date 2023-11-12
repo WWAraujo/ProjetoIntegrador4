@@ -1,0 +1,12 @@
+<div class="card">
+  <table>
+    <tr>
+      <th>Data Compra</th>
+      <th>Forma depagamento</th>
+    </tr>
+    <tr *ngFor="let venda of dados">
+      <td>{{ venda.dadosVenda.dataCompra }}</td>
+      <td>{{ venda.formaPagamento.formaPagamento }}</td>
+    </tr>
+  </table>
+</div>
