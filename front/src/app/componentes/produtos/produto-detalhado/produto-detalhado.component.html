@@ -25,8 +25,14 @@
       </div>
       <div class="buttons">
         <button class="btn-comprar"
-        [disabled]="botaoDesabilitado" [ngClass]="habilitarBotao()">COMPRAR</button>
-        <button type="button" name="cadastrar" class="btn-add-carrinho" (click)="pegarId(productData.produto.id)"><img src="../../../../assets/image/adicionar-ao-carrinho.png"></button>
+        [disabled]="botaoDesabilitado" (click)="irCheckout(productData.produto.id)">COMPRAR</button>
+        <button
+          type="button"
+          name="cadastrar"
+          class="btn-add-carrinho"
+          (click)="addCarrinho(productData.produto.id)">
+          <img src="../../../../assets/image/adicionar-ao-carrinho.png">
+        </button>
       </div>
     </div>
     <div class="containerImage">

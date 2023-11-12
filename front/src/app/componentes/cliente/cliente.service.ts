@@ -32,6 +32,10 @@ export class ClienteService{
 
   }
 
+  adicionarEndereco(cliente: any) {
+    return this.http.put(`${API}/cliente/alterar`,cliente);
+  }
+
   procurarEmail(email: string): Observable<boolean> {
     const caminho = 'buscaremail';
     const urlBuscarEmail = `${API}/cliente/buscaremail/${email}`;

@@ -1,7 +1,6 @@
 package edu.senac.backend.enderecos.entrega;
 
 import edu.senac.backend.cliente.ClienteModel;
-import edu.senac.backend.service.AtivoInativo;
 import jakarta.persistence.*;
 import lombok.*;
 

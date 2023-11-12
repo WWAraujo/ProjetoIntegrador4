@@ -24,16 +24,16 @@ export class LoginService {
   }
 
   saveData(key: string, data: any) {
-    localStorage.setItem(key, JSON.stringify(data));
+    sessionStorage.setItem(key, JSON.stringify(data));
   }
 
   getData(key: string) {
-    const data = localStorage.getItem(key);
+    const data = sessionStorage.getItem(key);
     return data ? JSON.parse(data) : null;
   }
 
   removeData(key: string) {
-    localStorage.removeItem(key);
+    sessionStorage.removeItem(key);
   }
 
   setLoggedIn(value: boolean) {

@@ -4,6 +4,7 @@ import { ClienteService } from '../../cliente/cliente.service';
 import { ModalenderecoService } from '../../cliente/modalendereco.service';
 import { LoginService } from '../../logins/login.service';
 import { Router } from '@angular/router';
+import { CarrinhoServices } from '../carrinho.services';
 
 @Component({
   selector: 'app-selecionar-endereco',
@@ -15,21 +16,25 @@ export class SelecionarEnderecoComponent implements OnInit {
   idCliente!: number;
   dadosCliente!: Cliente;
   enderecoData: Endereco[] = [];
-  enderecos: Endereco[] = [];
+  enderecosFiltrados: Endereco[] = [];
+  enderecoSelecionado: Endereco [] = [];
+  enderecoInserido: boolean = false;
 
   constructor(
     private serviceCliente: ClienteService,
     private serviceEndereco: ModalenderecoService,
+    private serviceCarrinho: CarrinhoServices,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private carrinhoService: CarrinhoServices
     ) { }
 
   ngOnInit(): void {
 
     this.dadosCliente = this.loginService.getData('clienteData');
 
-    if (!this.dadosCliente){
-      this.router.navigate(['solicitarLogin'],{ queryParams: { fromCart: 'true' } })
+    if (!this.dadosCliente) {
+      this.router.navigate(['solicitarLogin'], { queryParams: { fromCart: 'true' } })
     }
 
     this.idCliente = this.dadosCliente.id;
@@ -37,26 +42,58 @@ export class SelecionarEnderecoComponent implements OnInit {
 
     if (listaEnderecoAtual) {
       this.enderecoData = listaEnderecoAtual;
+      listaEnderecoAtual.forEach((elemento) => {
+        if(elemento.ativoInativo === 'ATIVO'){
+          this.enderecosFiltrados.push(elemento);
+        }
+      });
     }
 
     if (this.idCliente) {
       this.serviceCliente.exibirPerfil(this.idCliente).subscribe((data) => {
         this.dadosCliente = data.cliente;
-
         if (listaEnderecoAtual.length < 1) {
           this.enderecoData = data.enderecos;
+          data.enderecos.forEach((elemento) => {
+            if(elemento.ativoInativo === 'ATIVO'){
+              this.enderecosFiltrados.push(elemento);
+            }
+          });
         }
       });
     }
+
+    this.carrinhoService.setMostrarEndereco(true);
   }
 
-  addEndereco(){
+  selecionarEndereco(endereco: Endereco) {
+    this.serviceCarrinho.setEndereco(endereco);
+    this.enderecoInserido = true;
+  }
+
+  addEndereco() {
     this.serviceCliente.setIdCliente(this.idCliente);
     this.serviceEndereco.setListaEndereco(this.enderecoData);
-    this.router.navigate(['alterarCliente'],{ queryParams: { fromCart: 'true' } })
+    this.router.navigate(['endereco'], { queryParams: { fromCart: 'true' } })
   }
 
-  formaPagamento(){
+  formaPagamento() {
+    const radioInputs = document.querySelectorAll('.container-endereco .form-check-input');
+    let peloMenosUmSelecionado = false;
 
+    for (let i = 0; i < radioInputs.length; i++) {
+      const radioInput = radioInputs[i] as HTMLInputElement;
+      if (radioInput.checked) {
+        peloMenosUmSelecionado = true;
+        break;
+      }
+    }
+
+    if(peloMenosUmSelecionado){
+      this.carrinhoService.setTrocarTelaFormaPagamento();
+      this.carrinhoService.setLoggedIn(true);
+    }else{
+      alert('Selecione o Endereço da Entrega:');
+    }
   }
 }

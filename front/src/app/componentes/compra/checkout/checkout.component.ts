@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente, Endereco } from 'src/app/core/types/type';
-import { ModalenderecoService } from '../../cliente/modalendereco.service';
-import { Router } from '@angular/router';
-import { ClienteService } from '../../cliente/cliente.service';
+import { CarrinhoServices } from '../carrinho.services';
+import { Subscription } from 'rxjs';
 import { LoginService } from '../../logins/login.service';
-
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -12,40 +9,67 @@ import { LoginService } from '../../logins/login.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  emailEncontrado: boolean = false;
-  cpfEncontrado: boolean = false;
-  senhaCorrespondente: boolean = false;
-  idCliente!: number;
-  dadosCliente!: Cliente;
-  telaParaExibir: string = 'carrinho';
+  telaParaExibir: string = 'listar-pedidos';
+  valorFrete: number = 0;
+  clienteLogado: boolean = true;
+  mostrarEndereco: boolean = false;
+  mostrarFormaPagamento: boolean = false;
+  mostrarResumo: boolean = false;
+  mostrarConcluir: boolean = false;
 
   constructor(
-    private serviceCliente: ClienteService,
-    private serviceEndereco: ModalenderecoService,
-    private loginService: LoginService,
-    private router: Router) { }
+    private carrinhoService: CarrinhoServices,
+    private loginService: LoginService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.carrinhoService.getLoggedIn().subscribe((loggedIn) => {
+      if (loggedIn) {
+        this.verificarTela();
+      }
+    });
+    this.verificarClenteLogado();
   }
 
-  trocarTelaCarrinho(){
-    this.telaParaExibir = 'carrinho';
+  verificarClenteLogado(){
+    const cliente = this.loginService.getData('clienteData');
+    if (cliente){
+      this.clienteLogado = false;
+    }
   }
 
-  trocarTelaEndereco(){
-    this.telaParaExibir = 'endereco';
+  verificarTela(){
+    this.telaParaExibir = this.carrinhoService.getTelaCarrinho();
+    this.mostrarEndereco = this.carrinhoService.getMostrarEndereco();
+    this.mostrarFormaPagamento = this.carrinhoService.getMostrarFormaPagamento();
+    this.mostrarResumo = this.carrinhoService.getMostrarResumo();
+    this.mostrarConcluir = this.carrinhoService.getMostrarConcluir();
   }
 
-  trocarTelaFormaPagamento(){
-    this.telaParaExibir = 'pagamento';
+  trocarTelaCarrinho() {
+    this.carrinhoService.setTrocarTelaCarrinho();
+    this.carrinhoService.setLoggedIn(true);
   }
 
-  trocarTelaConfirmacao(){
-    this.telaParaExibir = 'confirmacao';
+  trocarTelaEndereco() {
+    this.carrinhoService.setTrocarTelaEndereco();
+    this.carrinhoService.setLoggedIn(true);
   }
 
-  trocarTelaConcluir(){
-    this.telaParaExibir = 'concluir';
+  trocarTelaFormaPagamento() {
+    this.carrinhoService.setTrocarTelaFormaPagamento();
+    this.carrinhoService.setLoggedIn(true);
+  }
+
+  trocarTelaConfirmacao() {
+    this.carrinhoService.setTrocarTelaConfirmacao();
+    this.carrinhoService.setLoggedIn(true);
+  }
+
+  trocarTelaListarPedidos() {
+    this.carrinhoService.setTrocarTelaListarPedidos();
+    this.carrinhoService.setLoggedIn(true);
   }
 
 }
