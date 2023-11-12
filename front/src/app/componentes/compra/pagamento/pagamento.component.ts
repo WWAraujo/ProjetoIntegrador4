@@ -21,7 +21,7 @@ export class PagamentoComponent implements OnInit {
     numeroCartao: '',
     ccvCartao: '',
     validadeCartao: '',
-    quantidadeCartao: 0,
+    quantidadeParcelas: 0,
     valorDaParcela: 0
   };
 

@@ -161,7 +161,7 @@ export interface FormaPagamento {
   numeroCartao: string;
   ccvCartao: string;
   validadeCartao: string;
-  quantidadeCartao: number;
+  quantidadeParcelas: number;
   valorDaParcela: number;
 }
 
