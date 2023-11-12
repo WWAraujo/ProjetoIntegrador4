@@ -12,4 +12,5 @@ public interface DadosPedidoRepository extends JpaRepository<DadosPedidoModel, L
     @Query("SELECT d FROM Pedidos d WHERE d.idCliente = :id")
     Optional<DadosPedidoModel[]> pesquisarPorId(@Param("id") Long id);
 
+
 }

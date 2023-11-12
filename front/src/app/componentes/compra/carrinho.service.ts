@@ -13,12 +13,16 @@ export class CarrinhoService {
 
   constructor(private http: HttpClient) { }
 
-  cadastrarVenda(venda: any): Observable<any>{
-    return this.http.post(`${API}/vendas/cadastrar`,venda);
+  cadastrarVenda(venda: any): Observable<number>{
+    return this.http.post<number>(`${API}/vendas/cadastrar`,venda);
   }
 
   getVendas(id: number): Observable<Venda[]> {
     return this.http.get<Venda[]>(`${API}/vendas/${id}`)
+  }
+
+  getVenda(id: number): Observable<Venda> {
+    return this.http.get<Venda>(`${API}/vendas/ultima/${id}`)
   }
 
 }
