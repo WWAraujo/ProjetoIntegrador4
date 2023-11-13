@@ -2,7 +2,6 @@ package edu.senac.backend.controller;
 
 import edu.senac.backend.produto.ProdutoRepository;
 import edu.senac.backend.vendas.*;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ public class VendasController {
     private FormaPagamentoRepository formaPagamentoRepository;
 
     @PostMapping("/cadastrar")
-    public String salvarVenda(@RequestBody PedidosRecord venda) {
+    public Long salvarVenda(@RequestBody PedidosRecord venda) {
         return
                 new ConcluirPedido()
                         .ConcluirPedido(
@@ -42,6 +41,17 @@ public class VendasController {
                 );
     }
 
+    @GetMapping("/ultima/{cliente}")
+    public ResponseEntity<PedidosRecord> getVenda(@PathVariable Long cliente) {
+        return ResponseEntity.ok().body(
+                new BuscarUltimoPedido().ultimoPedido(
+                        cliente,
+                        dadosPedidoRepository,
+                        formaPagamentoRepository,
+                        listaProdutosPedidoRepository
+                )
+        );
+    }
     @GetMapping("/{cliente}")
     public ResponseEntity<List<PedidosRecord>> getVendas(@PathVariable Long cliente) {
         return ResponseEntity.ok().body(

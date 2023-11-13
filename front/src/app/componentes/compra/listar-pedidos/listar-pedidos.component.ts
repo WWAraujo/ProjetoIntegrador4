@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarrinhoService } from '../carrinho.service';
-import { DadosVenda, FormaPagamento, ProdutosVenda, Venda } from 'src/app/core/types/type';
+import { Venda } from 'src/app/core/types/type';
+import { CarrinhoServices } from '../carrinho.services';
 
 
 @Component({
@@ -10,15 +11,17 @@ import { DadosVenda, FormaPagamento, ProdutosVenda, Venda } from 'src/app/core/t
 })
 export class FinalizarComponent implements OnInit {
 
-  cliente: number = 1;
-  dados: Venda[] = [];
+  idedido: number = 0;
+  dados!: Venda ;
 
-  constructor(private carrinhoservice: CarrinhoService) { }
+  constructor(private carrinhoservice: CarrinhoService,
+    private carrinhoservices: CarrinhoServices) { }
 
   ngOnInit(): void {
-    this.carrinhoservice.getVendas(this.cliente).subscribe((response) => {
+    this.idedido = this.carrinhoservices.getIdVendaSalvaBanco();
+    this.carrinhoservice.getVenda(this.idedido).subscribe((response) => {
+      console.log('response',response);
       this.dados = response;
-      console.log(this.dados)
     });
 
 }

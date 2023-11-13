@@ -12,7 +12,7 @@ import java.util.Optional;
 @Component
 public class ConcluirPedido {
 
-    public String ConcluirPedido(
+    public Long ConcluirPedido(
             PedidosRecord venda,
             ProdutoRepository produtoRepository,
             DadosPedidoRepository dadosPedidoRepository,
@@ -28,13 +28,13 @@ public class ConcluirPedido {
             if (buscarproduto.isPresent()) {
                 if (lista.getQuantidade() > buscarproduto.get().getQtdEstoque()) {
                     Long qtdFaltante = lista.getQuantidade() - buscarproduto.get().getQtdEstoque();
-                    response = "O Produto " + buscarproduto.get().getNomeProduto() + " com ID: "
-                            + buscarproduto.get().getId() + " não tem estoque suficiente. Falta " + qtdFaltante + " unidades.";
-                    return response;
+
+                    throw new RuntimeException("O Produto " + buscarproduto.get().getNomeProduto() + " com ID: "
+                            + buscarproduto.get().getId() + " não tem estoque suficiente. Falta " + qtdFaltante + " unidades.");
+
                 }
             } else {
-                response = "Produto não encontrado id: " + lista.getIdProduto();
-                return response;
+                throw new RuntimeException("Produto não encontrado id: " + lista.getIdProduto());
             }
         }
 
@@ -57,8 +57,7 @@ public class ConcluirPedido {
         if (idVenda > 0 &&
                 !listaProdutosPedidoModels.isEmpty() &&
                 formaPagamentoModel.getId() > 0) {
-            response = "Produto cadastrado com sucesso! ID: " + idVenda;
-            return response;
+            return idVenda;
         }
 
         //Retorne essa mensagem caso a persistência de erro.
@@ -66,10 +65,10 @@ public class ConcluirPedido {
         for (ListaProdutosPedidoModel pdt : listaProdutosPedidoModels) {
             idProdutosCadastrados = idProdutosCadastrados + pdt.getId().toString() + ", ";
         }
-        response = "Algo deu erro na persistencia do banco de dados:" +
+
+        throw new RuntimeException("Algo deu erro na persistencia do banco de dados:" +
                 "ID venda : " + idVenda +
                 "ID forma de pagamento: " + formaPagamentoModel.getId() + " " +
-                "ID dos produtos: " + idProdutosCadastrados;
-        return response;
+                "ID dos produtos: " + idProdutosCadastrados);
     }
 }

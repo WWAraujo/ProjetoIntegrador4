@@ -2,11 +2,15 @@
   <table>
     <tr>
       <th>Data Compra</th>
-      <th>Forma depagamento</th>
+      <th>Status Entrega</th>
+      <th>Forma Depagamento</th>
+      <th>Valor da Compra</th>
     </tr>
-    <tr *ngFor="let venda of dados">
-      <td>{{ venda.dadosVenda.dataCompra }}</td>
-      <td>{{ venda.formaPagamento.formaPagamento }}</td>
+    <tr>
+      <td>{{ dados.dadosVenda.dataCompra }}</td>
+      <td>{{ dados.dadosVenda.statusEntrega }}</td>
+      <td>{{ dados.formaPagamento.formaPagamento }}</td>
+      <td>{{ dados.formaPagamento.valorTotal }}</td>
     </tr>
   </table>
 </div>

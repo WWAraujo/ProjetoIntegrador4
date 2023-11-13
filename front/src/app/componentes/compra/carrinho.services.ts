@@ -25,8 +25,16 @@ export class CarrinhoServices {
   private mostrarConcluir: boolean = false;
   private mostrarFormaPagamento: boolean = false;
   private formaPagamentoCompleto!: FormaPagamento;
+  private idVendaSalvaBanco: number = 0;
 
   constructor() {}
+
+  getIdVendaSalvaBanco(){
+    return this.idVendaSalvaBanco;
+  }
+  setIdVendaSalvaBanco(id: number){
+    this.idVendaSalvaBanco = id;
+  }
 
   getFormaPagamentoCompleto(){
     return this.formaPagamentoCompleto;

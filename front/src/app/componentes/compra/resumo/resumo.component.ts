@@ -36,6 +36,7 @@ export class ResumoComponent implements OnInit {
   dataCompraString!: string;
 
   dadosVenda: DadosVenda = {
+    id: 0,
     idCliente: 0,
     nomeCliente: '',
     dataCompra: '',
@@ -122,14 +123,13 @@ export class ResumoComponent implements OnInit {
     if(!this.idVenda){
       this.service.cadastrarVenda(dadosParaEnviar).subscribe(
         (response)=>{
-          alert(response);
+          this.carrinhoService.setIdVendaSalvaBanco(response);
+          alert('Produto salvo com sucesso!');
           this.carrinhoService.setTrocarTelaListarPedidos();
           this.carrinhoService.setLoggedIn(true);
         },
         (error)=> {
-          console.error('Erro ao finalizar a venda', error);
-          this.carrinhoService.setTrocarTelaListarPedidos();
-          this.carrinhoService.setLoggedIn(true);
+          alert('Algo deu errado!')
         }
       );
     }
@@ -155,7 +155,7 @@ export class ResumoComponent implements OnInit {
 
     this.dadosVenda.dataCompra = this.dataCompraString;
 
-    this.formaPagamento.formaPagamento = this.exibirFormaDePagamento;
+    this.formaPagamento.formaPagamento = this.formaDePagamentoString;
     this.formaPagamento.valorTotal = this.subtotalComFrete;
     this.formaPagamento.nomeCartao = this.formaPagamento.nomeCartao;
     this.formaPagamento.numeroCartao = this.formaPagamento.numeroCartao;
