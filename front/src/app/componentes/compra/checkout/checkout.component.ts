@@ -9,7 +9,7 @@ import { LoginService } from '../../logins/login.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  telaParaExibir: string = 'concluir';
+  telaParaExibir: string = 'carrinho';
   valorFrete: number = 0;
   clienteLogado: boolean = true;
   mostrarEndereco: boolean = false;

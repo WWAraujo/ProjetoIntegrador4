@@ -26,6 +26,7 @@ export class CarrinhoServices {
   private mostrarFormaPagamento: boolean = false;
   private formaPagamentoCompleto!: FormaPagamento;
   private idVendaSalvaBanco: number = 0;
+  private idCliente: number = 0;
 
   constructor() {}
 
@@ -195,6 +196,4 @@ export class CarrinhoServices {
   setIdCliente(id: number){
     this.idCliente = id;
   }
-
-
 }

@@ -273,13 +273,4 @@ export class ResumoComponent implements OnInit {
     }
     return this.tempoDeEntrega;
   }
-
-  pegarId(idPedido: number) {
-    if (idPedido) {
-      this.carrinhoService.setIdCliente(idPedido);
-      this.finalizarCompra();
-      this.carrinhoService.setTrocarTelaConcluir();
-      this.carrinhoService.setLoggedIn(true);
-    }
-  }
 }
