@@ -123,13 +123,13 @@ export class ResumoComponent implements OnInit {
     if(!this.idVenda){
       this.service.cadastrarVenda(dadosParaEnviar).subscribe(
         (response)=>{
-          alert(response);
+          this.carrinhoService.setIdVendaSalvaBanco(response);
+          alert('Produto salvo com sucesso!');
           this.carrinhoService.setTrocarTelaListarPedidos();
           this.carrinhoService.setLoggedIn(true);
         },
         (error)=> {
-          this.carrinhoService.setTrocarTelaListarPedidos();
-          this.carrinhoService.setLoggedIn(true);
+          alert('Algo deu errado!')
         }
       );
     }
