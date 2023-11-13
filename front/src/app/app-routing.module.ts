@@ -13,12 +13,7 @@ import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente
 import { ProdutoDetalhadoComponent } from './componentes/produtos/produto-detalhado/produto-detalhado.component';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
-import { CarrinhoComponent } from './componentes/compra/carrinho/carrinho.component';
 import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
-import { SelecionarEnderecoComponent } from './componentes/compra/selecionar-endereco/selecionar-endereco.component';
-import { PagamentoComponent } from './componentes/compra/pagamento/pagamento.component';
-import { ResumoComponent } from './componentes/compra/resumo/resumo.component';
-import { FinalizarComponent } from './componentes/compra/listar-pedidos/listar-pedidos.component';
 
 
 const routes: Routes = [

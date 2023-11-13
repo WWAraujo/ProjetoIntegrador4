@@ -11,21 +11,22 @@ import { CarrinhoServices } from '../carrinho.services';
 })
 export class FinalizarComponent implements OnInit {
 
-  idCliente: number = 0;
+  idPedido: number = 0;
   pedido!: Venda;
 
 
   constructor(
-    private carrinhoService: CarrinhoServices,
+    private carrinhoServices: CarrinhoServices,
     private service: CarrinhoService
     ) { }
 
   ngOnInit(): void {
-    this.idCliente = this.carrinhoService.getIdCliente();
-    console.log('Recebeu do resumo',this.idCliente);
-    this.service.getVendas(this.idCliente).subscribe(data => {
-      console.log('RECEBEU O PEDIDO',this.pedido);
-      this.pedido = data});
+    this.idPedido = this.carrinhoServices.getIdVendaSalvaBanco();
+    this.service.getVenda(this.idPedido).subscribe((response) => {
+      console.log('response',response);
+      this.pedido = response;
+    });
+
   }
 
 

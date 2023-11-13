@@ -123,13 +123,13 @@ export class ResumoComponent implements OnInit {
 
     if (!this.idVenda) {
       this.service.cadastrarVenda(dadosParaEnviar).subscribe(
-        (response)=>{
+        (response) => {
           this.carrinhoService.setIdVendaSalvaBanco(response);
           alert('Produto salvo com sucesso!');
-          this.carrinhoService.setTrocarTelaListarPedidos();
+          this.carrinhoService.setTrocarTelaConcluir();
           this.carrinhoService.setLoggedIn(true);
         },
-        (error)=> {
+        (error) => {
           alert('Algo deu errado!')
         }
       );
@@ -274,12 +274,4 @@ export class ResumoComponent implements OnInit {
     return this.tempoDeEntrega;
   }
 
-  pegarId(idPedido: number) {
-    if (idPedido) {
-      this.carrinhoService.setIdCliente(idPedido);
-      this.finalizarCompra();
-      this.carrinhoService.setTrocarTelaConcluir();
-      this.carrinhoService.setLoggedIn(true);
-    }
-  }
 }

@@ -93,10 +93,6 @@
           <a (click)="open(mymodal)"> SAIR </a>
         </span>
       </div>
-      <div class="deslogar">
-        <a *ngIf="logado" (click)="open(mymodal)">Logoff</a>
-        <img (click)="open(mymodal)" class="icone-deslogar" src="../../../../assets/image/deslogar.png" alt="deslogar" *ngIf="logado">
-      </div>
     </div>
 
     <ng-template #mymodal let-modal>
