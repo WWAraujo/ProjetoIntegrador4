@@ -43,6 +43,7 @@
         <p>Pagamento: </p><span>{{ exibirFormaDePagamento }}</span>
       </div>
       <div class="parcelas" *ngIf="exibirParcelas">
+        <p>Parcelamento:</p>
         <p>{{ numeroParcelas }}x Sem Juros - {{
           formatarMoeda(subtotalParcelado) }}</p>
       </div>
@@ -62,7 +63,7 @@
     </div>
     <div class="buttons">
       <button class="btn btn-outline-primary" type="button" (click)="voltarFormaPagamento()">VOLTAR</button>
-      <button class="btn btn-primary" type="button" (click)="finalizarCompra()">FINALIZAR COMPRA</button>
+      <button class="btn btn-primary" type="button" (click)="pegarId(dadosCliente.id)">FINALIZAR COMPRA</button>
     </div>
   </div>
 </div>

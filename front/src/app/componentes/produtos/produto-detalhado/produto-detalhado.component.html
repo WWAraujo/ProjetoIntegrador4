@@ -8,8 +8,7 @@
         <p>{{ productData.produto.descricaoDetalhadaProduto }}</p>
       </div>
       <div class="preco">
-        <label>R$</label>
-        <p>{{ productData.produto.precoProduto }}</p>
+        <p>{{ formatarMoeda(productData.produto.precoProduto) }}</p>
       </div>
       <div class="indisponivel" *ngIf="produtoIndisponivel">
         <span>Produto indisponível no momento.</span>
@@ -36,7 +35,7 @@
       </div>
     </div>
     <div class="containerImage">
-      <div id="carousel-container" class="container">
+      <div id="carousel-container">
         <div id="carousel-image" class="carousel carousel-dark slide">
           <div class="carousel-inner">
             <div class="carousel-item active">

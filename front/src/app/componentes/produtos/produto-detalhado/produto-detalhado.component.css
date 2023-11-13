@@ -3,23 +3,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: auto;
-  padding: 0;
   background-color: #fff;
   height: 100%;
   width: 100%;
+  margin-top: 3%;
 }
 
 .container-produtos {
-  position: relative;
   display: grid;
-  grid-template-columns: 2;
+  grid-template-columns: 50% 50%;
   grid-template-rows: 2;
-  box-shadow: 0px 0px 2px 2px gray;
-  width: 100%;
+  justify-content: space-around;
+  align-content: space-around;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.22), 0 1px 2px rgba(0,0,0,0.24);
+  width: 80%;
   height: 100%;
-  padding: 0;
-  align-items: center;
+  padding: 5%;
+  margin-top: 10%;
+  margin: auto;
 }
 
 .title {
@@ -28,7 +29,7 @@
   align-items: center;
   grid-column: 1 / span 2;
   grid-row: 1;
-  height: 100px;
+  padding: 2%;
 }
 
 .title p {
@@ -41,7 +42,7 @@
 
 .infoProdutos {
   width: 100%;
-  height: 75%;
+  height: 100%;
   grid-column: 2;
   grid-row: 2;
   display: grid;
@@ -149,38 +150,54 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin: 2%;
 }
 
 .btn-add-carrinho{
-  background-color: #fff;
-  border: 2px solid #1e90ff;
+  width: 70px;
+  height: 60px;
+  padding: 0.5em;
   border-top-left-radius: 0px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 10px
+  border-bottom-right-radius: 10px;
+  background-color: #fff;
+  border: 2px solid #1e90ff;
+}
+
+.btn-add-carrinho img{
+  width: 42px;
 }
 
 .btn-comprar{
-  margin: 0;
-  padding: 1.32em;
+  width: 100px;
+  height: 60px;
+  padding: 0.5em;
   border-top-left-radius: 10px;
   border-top-right-radius: 0px;
   border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 0
+  border-bottom-right-radius: 0;
+  background-color: #fff;
+  border: 2px solid #1e90ff;
+}
+
+.btn-comprar:hover{
+  color: #fff;
+  background-color: #1e90ff;
 }
 
 
 #carousel-image{
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
-  width: 600px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
 }
 
 .img-carousel {
-  width: 400px;
-  height: 400px;
+  width: 70%;
+  height: 70%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
