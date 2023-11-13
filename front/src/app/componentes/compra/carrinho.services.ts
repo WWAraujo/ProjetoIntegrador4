@@ -187,4 +187,14 @@ export class CarrinhoServices {
   getTelaCarrinho(){
     return this.telaParaExibir;
   }
+
+  getIdCliente():number{
+    return this.idCliente;
+  }
+
+  setIdCliente(id: number){
+    this.idCliente = id;
+  }
+
+
 }

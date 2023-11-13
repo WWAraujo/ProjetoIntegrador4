@@ -1,0 +1,11 @@
+<section class="container">
+  <div class="idVenda">
+    <p id="idDaVenda" *ngIf="pedido">Pedido #{{ pedido.dadosVenda.id }}</p>
+  </div>
+  <div class="confirmacao-venda">
+    <p id="confirmacao">Pedido Realizado Com Sucesso <img src="../../../../assets/image/confirmado.png"></p>
+  </div>
+  <div class="valorVenda">
+    <p id="valorDaVenda"> Total: {{ formatarMoeda(pedido.dadosVenda.valorTotal) }}</p>
+  </div>
+</section>

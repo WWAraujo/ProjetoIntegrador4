@@ -82,4 +82,8 @@ export class ProdutoDetalhadoComponent implements OnInit {
     this.router.navigate(['/checkout']);
   }
 
+  formatarMoeda(valor: number): string {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
 }
