@@ -11,7 +11,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/vendas")
-public class VendasController {
+public class VendasController{
 
     @Autowired
     private ConcluirPedido concluirPedido;
