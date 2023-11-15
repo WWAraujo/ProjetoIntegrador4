@@ -17,8 +17,8 @@
       <button class="nav-link" *ngIf="telaParaExibir !== 'confirmacao'" (click)="trocarTelaConfirmacao()" [disabled]="clienteLogado" [disabled]="!mostrarResumo"> RESUMO </button>
     </li>
     <li class="nav-item">
-      <button class="nav-link active" *ngIf="telaParaExibir === 'listar-pedidos'" aria-disabled="true"> PEDIDOS </button>
-      <button class="nav-link" *ngIf="telaParaExibir !== 'listar-pedidos'" aria-disabled="true" (click)="trocarTelaListarPedidos()" [disabled]="clienteLogado" [disabled]="!mostrarConcluir"> CONCLUIR </button>
+      <button class="nav-link active" *ngIf="telaParaExibir === 'concluir'" aria-disabled="true"> CONCLUIR </button>
+      <button class="nav-link" *ngIf="telaParaExibir !== 'concluir'" aria-disabled="true" (click)="trocarTelaListarPedidos()" [disabled]="clienteLogado" [disabled]="!mostrarConcluir"> CONCLUIR </button>
     </li>
   </ul>
 
@@ -26,6 +26,7 @@
   <app-selecionar-endereco  *ngIf="telaParaExibir === 'endereco'    "></app-selecionar-endereco>
   <app-pagamento            *ngIf="telaParaExibir === 'pagamento'   "></app-pagamento>
   <app-resumo               *ngIf="telaParaExibir === 'confirmacao' "></app-resumo>
+  <app-finalizar           *ngIf="telaParaExibir === 'concluir'   "></app-finalizar>
   <app-listar-pedidos       *ngIf="telaParaExibir === 'listar-pedidos'"></app-listar-pedidos>
 
 </div>

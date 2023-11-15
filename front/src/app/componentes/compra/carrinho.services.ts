@@ -26,6 +26,7 @@ export class CarrinhoServices {
   private mostrarFormaPagamento: boolean = false;
   private formaPagamentoCompleto!: FormaPagamento;
   private idVendaSalvaBanco: number = 0;
+  private idCliente: number = 0;
 
   constructor() {}
 
@@ -67,6 +68,7 @@ export class CarrinhoServices {
   getMostrarConcluir() {
     return this.mostrarConcluir;
   }
+
   setMostrarConcluir(status: boolean) {
     this.mostrarConcluir = status;
   }
@@ -180,11 +182,23 @@ export class CarrinhoServices {
     this.telaParaExibir = 'confirmacao';
   }
 
+  setTrocarTelaConcluir(){
+    this.telaParaExibir = 'concluir';
+  }
+
   setTrocarTelaListarPedidos() {
     this.telaParaExibir = 'listar-pedidos';
   }
 
   getTelaCarrinho(){
     return this.telaParaExibir;
+  }
+
+  getIdCliente():number{
+    return this.idVendaSalvaBanco;
+  }
+
+  setIdCliente(id: number){
+    this.idVendaSalvaBanco = id;
   }
 }

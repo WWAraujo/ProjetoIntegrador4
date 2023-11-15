@@ -100,8 +100,8 @@
 .parcelas{
   display: flex;
   flex-direction: row;
-  align-items: end;
-  justify-content: end;
+  align-items: flex-end;
+  justify-content: space-between;
   width: 100%;
   padding: 1%;
   border-bottom: 1px solid gray;

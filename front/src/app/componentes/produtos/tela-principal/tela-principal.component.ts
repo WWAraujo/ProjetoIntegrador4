@@ -1,3 +1,4 @@
+import { AtivoInativo } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { ProdutosService } from '../produtos.service';
 import { Router } from '@angular/router';
@@ -27,11 +28,12 @@ export class TelaPrincipalComponent implements OnInit {
   constructor(private service: ProdutosService, private router: Router) { }
 
   ngOnInit(): void {
+
     this.service.getListarProdutosCompletos().subscribe(data  => {
         this.productData = data;
       }
     );
-  } 
+  }
 
   getFullPath(imageName: string): string {
     return `${API}/api/upload/${imageName}`;
