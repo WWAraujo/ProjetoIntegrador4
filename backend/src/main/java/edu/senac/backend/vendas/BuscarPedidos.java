@@ -14,21 +14,21 @@ public class BuscarPedidos {
             DadosPedidoRepository dadosPedidoRepository,
             FormaPagamentoRepository formaPagamentoRepository,
             ListaProdutosPedidoRepository listaProdutosPedidoRepository
-    ){
+    ) {
 
-        if (id > 0){
+        if (id > 0) {
             List<PedidosRecord> response = new ArrayList<>();
 
             Optional<DadosPedidoModel[]> dadosPedidoModelList = dadosPedidoRepository.pesquisarPorId(id);
 
-            if (dadosPedidoModelList.isPresent()){
+            if (dadosPedidoModelList.isPresent()) {
 
-                for (DadosPedidoModel dadosPedidoModel : dadosPedidoModelList.get()){
+                for (DadosPedidoModel dadosPedidoModel : dadosPedidoModelList.get()) {
 
                     FormaPagamentoModel formaPagamentoModel = formaPagamentoRepository.pesquisarPorId(dadosPedidoModel.getId());
                     List<ListaProdutosPedidoModel> listaProdutos = listaProdutosPedidoRepository.pesquisarPorId(dadosPedidoModel.getId());
 
-                    PedidosRecord pedidosRecord = new PedidosRecord(dadosPedidoModel,formaPagamentoModel,listaProdutos);
+                    PedidosRecord pedidosRecord = new PedidosRecord(dadosPedidoModel, formaPagamentoModel, listaProdutos);
 
                     response.add(pedidosRecord);
                 }
@@ -39,6 +39,34 @@ public class BuscarPedidos {
             }
         } else {
             throw new RuntimeException("Falta informar o ID do cliente!");
+        }
+    }
+
+    public List<PedidosRecord> listarPedidosTodosPedidos(
+            DadosPedidoRepository dadosPedidoRepository,
+            FormaPagamentoRepository formaPagamentoRepository,
+            ListaProdutosPedidoRepository listaProdutosPedidoRepository
+    ) {
+
+        List<PedidosRecord> response = new ArrayList<>();
+
+        List<DadosPedidoModel> dadosPedidoModelList = dadosPedidoRepository.findAll();
+
+        if (!dadosPedidoModelList.isEmpty()) {
+
+            for (DadosPedidoModel dadosPedidoModel : dadosPedidoModelList) {
+
+                FormaPagamentoModel formaPagamentoModel = formaPagamentoRepository.pesquisarPorId(dadosPedidoModel.getId());
+                List<ListaProdutosPedidoModel> listaProdutos = listaProdutosPedidoRepository.pesquisarPorId(dadosPedidoModel.getId());
+
+                PedidosRecord pedidosRecord = new PedidosRecord(dadosPedidoModel, formaPagamentoModel, listaProdutos);
+
+                response.add(pedidosRecord);
+            }
+            return response;
+
+        } else {
+            throw new RuntimeException("Não tem vendas salvas para esse cliente!");
         }
     }
 }

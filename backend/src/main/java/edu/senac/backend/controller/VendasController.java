@@ -41,6 +41,11 @@ public class VendasController {
                 );
     }
 
+    @PostMapping("/alterar-entrega")
+    public String alterarEntrega(@RequestBody PedidosRecord venda) {
+        return new ConcluirPedido().AlterarPedido(venda, dadosPedidoRepository);
+    }
+
     @GetMapping("/ultima/{cliente}")
     public ResponseEntity<PedidosRecord> getVenda(@PathVariable Long cliente) {
         return ResponseEntity.ok().body(
@@ -57,6 +62,18 @@ public class VendasController {
         return ResponseEntity.ok().body(
                 new BuscarPedidos().listarPedidos(
                         cliente,
+                        dadosPedidoRepository,
+                        formaPagamentoRepository,
+                        listaProdutosPedidoRepository
+                )
+        );
+    }
+
+    @GetMapping("/todas-vendas")
+    public ResponseEntity<List<PedidosRecord>> getVendasTotal() {
+        return ResponseEntity.ok().body(
+                new BuscarPedidos().listarPedidosTodosPedidos(
+
                         dadosPedidoRepository,
                         formaPagamentoRepository,
                         listaProdutosPedidoRepository
