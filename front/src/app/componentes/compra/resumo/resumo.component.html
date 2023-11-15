@@ -43,6 +43,7 @@
         <p>Pagamento: </p><span>{{ exibirFormaDePagamento }}</span>
       </div>
       <div class="parcelas" *ngIf="exibirParcelas">
+        <p>Parcelamento:</p>
         <p>{{ numeroParcelas }}x Sem Juros - {{
           formatarMoeda(subtotalParcelado) }}</p>
       </div>
