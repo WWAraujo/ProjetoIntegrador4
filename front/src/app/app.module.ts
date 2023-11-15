@@ -23,7 +23,6 @@ import { CommonModule } from '@angular/common';
 import { TelaPrincipalComponent } from './componentes/produtos/tela-principal/tela-principal.component';
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
 import { ProdutoDetalhadoComponent } from './componentes/produtos/produto-detalhado/produto-detalhado.component';
-import { CabecalhoSecundarioComponent } from './componentes/cabecalhos/cabecalho-secundario/cabecalho-secundario.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { FormatDirective } from './componentes/cliente/enderecos/cep/format.directive';
@@ -33,13 +32,13 @@ import { CheckoutComponent } from './componentes/compra/checkout/checkout.compon
 import { SelecionarEnderecoComponent } from './componentes/compra/selecionar-endereco/selecionar-endereco.component';
 import { PagamentoComponent } from './componentes/compra/pagamento/pagamento.component';
 import { ResumoComponent } from './componentes/compra/resumo/resumo.component';
-import { FinalizarComponent } from './componentes/compra/listar-pedidos/listar-pedidos.component';
+import { ListarPedidosComponent } from './componentes/compra/listar-pedidos/listar-pedidos.component';
+import { FinalizarComponent } from './componentes/compra/finalizar/finalizar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CabecalhoComponent,
-    CabecalhoSecundarioComponent,
     RodapeComponent,
     LoginComponent,
     BackofficeComponent,
@@ -63,7 +62,8 @@ import { FinalizarComponent } from './componentes/compra/listar-pedidos/listar-p
     SelecionarEnderecoComponent,
     PagamentoComponent,
     ResumoComponent,
-    FinalizarComponent,
+    ListarPedidosComponent,
+    FinalizarComponent
   ],
   imports: [
     BrowserModule,

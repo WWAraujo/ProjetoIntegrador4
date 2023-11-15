@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CarrinhoServices } from '../carrinho.services';
-import { Subscription } from 'rxjs';
 import { LoginService } from '../../logins/login.service';
 @Component({
   selector: 'app-checkout',
@@ -64,6 +63,11 @@ export class CheckoutComponent implements OnInit {
 
   trocarTelaConfirmacao() {
     this.carrinhoService.setTrocarTelaConfirmacao();
+    this.carrinhoService.setLoggedIn(true);
+  }
+
+  trocarTelaConcluir(){
+    this.carrinhoService.setTrocarTelaConcluir();
     this.carrinhoService.setLoggedIn(true);
   }
 

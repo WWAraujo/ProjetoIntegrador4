@@ -68,6 +68,7 @@ export class CarrinhoServices {
   getMostrarConcluir() {
     return this.mostrarConcluir;
   }
+
   setMostrarConcluir(status: boolean) {
     this.mostrarConcluir = status;
   }
@@ -181,6 +182,10 @@ export class CarrinhoServices {
     this.telaParaExibir = 'confirmacao';
   }
 
+  setTrocarTelaConcluir(){
+    this.telaParaExibir = 'concluir';
+  }
+
   setTrocarTelaListarPedidos() {
     this.telaParaExibir = 'listar-pedidos';
   }
@@ -190,10 +195,10 @@ export class CarrinhoServices {
   }
 
   getIdCliente():number{
-    return this.idCliente;
+    return this.idVendaSalvaBanco;
   }
 
   setIdCliente(id: number){
-    this.idCliente = id;
+    this.idVendaSalvaBanco = id;
   }
 }
