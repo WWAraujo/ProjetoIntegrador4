@@ -11,7 +11,6 @@ import { ModalenderecoService } from '../../cliente/modalendereco.service';
   styleUrls: ['./cabecalho.component.css'],
 })
 export class CabecalhoComponent implements OnInit {
-
   closeResult: string = '';
   dadosCliente: Cliente | null = null;
   dadosUsuario: Logado | null = null;
@@ -42,10 +41,10 @@ export class CabecalhoComponent implements OnInit {
 
   deslogar() {
     this.logado = false;
-    if (this.dadosCliente){
+    if (this.dadosCliente) {
       this.deslogarCliente();
     }
-    if (this.dadosUsuario){
+    if (this.dadosUsuario) {
       this.deslogarUsuario();
     }
     this.router.navigate(['/telaPrincipal']);
@@ -63,6 +62,14 @@ export class CabecalhoComponent implements OnInit {
     this.router.navigate(['/cadastroCliente']);
   }
 
+  listarPedidoEstoquista() {
+    this.router.navigate(['/listarProdutosEstoquista']);
+  }
+
+  listarPedidoCliente() {
+    this.router.navigate(['/listarProdutosCliente']);
+  }
+
   alterarDados() {
     if (this.dadosCliente) {
       this.router.navigate(['/alterarCliente']);
@@ -72,17 +79,17 @@ export class CabecalhoComponent implements OnInit {
   }
 
   verificarLogado() {
-    if (!this.logado){
+    if (!this.logado) {
       this.logado = this.verificarClienteLogado();
     }
-    if (!this.logado){
+    if (!this.logado) {
       this.logado = this.verificarUsuarioLogado();
     }
   }
 
   verificarClienteLogado() {
     this.dadosCliente = this.loginService.getData('clienteData');
-    if(this.dadosCliente){
+    if (this.dadosCliente) {
       this.nomeLogado = this.dadosCliente.nomeCliente;
       return true;
     }
@@ -91,24 +98,24 @@ export class CabecalhoComponent implements OnInit {
 
   verificarUsuarioLogado() {
     this.dadosUsuario = this.loginService.getData('usuarioData');
-    if(this.dadosUsuario){
+    if (this.dadosUsuario) {
       this.nomeLogado = this.dadosUsuario.nomeUsuario;
       return true;
     }
     return false;
   }
 
-  carrinho(){
+  carrinho() {
     this.router.navigate(['/checkout']);
   }
 
-  deslogarCliente(){
+  deslogarCliente() {
     this.loginService.removeData('clienteData');
 
     this.dadosCliente = null;
   }
 
-  deslogarUsuario(){
+  deslogarUsuario() {
     this.loginService.removeData('usuarioData');
     this.dadosUsuario = null;
   }

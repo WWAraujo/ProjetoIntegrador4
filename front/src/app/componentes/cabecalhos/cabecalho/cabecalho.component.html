@@ -49,6 +49,9 @@
             alt="carrinho"
           />
         </a>
+        <div>
+          <button type="button" class="btn btn-primary" (click)="listarPedidoCliente()">Meus Pedidos</button>
+        </div>
       </div>
     </div>
     <ng-template #mymodal let-modal>
@@ -92,6 +95,9 @@
           <a (click)="alterarDados()"> MINHA CONTA</a> |
           <a (click)="open(mymodal)"> SAIR </a>
         </span>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary btn-lg" (click)="listarPedidoEstoquista()">PEDIDOS</button>
       </div>
     </div>
 

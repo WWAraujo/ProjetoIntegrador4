@@ -1,0 +1,1 @@
+ALTER TABLE dados_pedidos MODIFY COLUMN status_entrega varchar(20) not null;

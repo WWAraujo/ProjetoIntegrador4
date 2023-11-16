@@ -71,4 +71,19 @@ public class ConcluirPedido {
                 "ID forma de pagamento: " + formaPagamentoModel.getId() + " " +
                 "ID dos produtos: " + idProdutosCadastrados);
     }
+
+    public String AlterarPedido(
+            PedidosRecord venda,
+            DadosPedidoRepository dadosPedidoRepository) {
+
+        String response="Não foi possivel fazer a alteração no banco!";
+
+        //Alterar os dados de status entrega
+        int resposta = dadosPedidoRepository.alterarStatus(venda.dadosVenda().getId(), venda.dadosVenda().getStatusEntrega());
+
+        if (resposta == 1){
+            return response="Deu certo!";
+        }
+        return response;
+    }
 }

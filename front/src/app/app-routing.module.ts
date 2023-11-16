@@ -14,6 +14,8 @@ import { ProdutoDetalhadoComponent } from './componentes/produtos/produto-detalh
 import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
 import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
 import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
+import { AlterarProdutoEstoquistaComponent } from './componentes/produtos/alterar-produto-estoquista/alterar-produto-estoquista.component';
+import { ListarComprasClienteComponent } from './componentes/cliente/listar-compras-cliente/listar-compras-cliente.component';
 
 
 const routes: Routes = [
@@ -78,7 +80,18 @@ const routes: Routes = [
     path: 'checkout',
     component: CheckoutComponent
   },
-
+  {
+    path: 'estoquista',
+    component: AlterarProdutoEstoquistaComponent
+  },
+  {
+    path: 'listarProdutosEstoquista',
+    component: AlterarProdutoEstoquistaComponent
+  },
+  {
+    path: 'listarProdutosCliente',
+    component: ListarComprasClienteComponent
+  }
 ];
 
 @NgModule({

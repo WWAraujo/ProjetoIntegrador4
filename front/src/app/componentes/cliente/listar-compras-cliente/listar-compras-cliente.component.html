@@ -1,0 +1,23 @@
+<div class="card">
+  <table>
+    <tr>
+      <th>Data Compra</th>
+      <th>Status Entrega</th>
+      <th>Forma Depagamento</th>
+      <th>Valor da Compra</th>
+      <th>Mais Detalhes</th>
+    </tr>
+    <tr *ngFor="let item of listaProdutos">
+      <td>{{ item.dadosVenda.dataCompra }}</td>
+      <td>{{ item.dadosVenda.statusEntrega }}</td>
+      <td>{{ item.formaPagamento.formaPagamento }}</td>
+      <td>{{ item.formaPagamento.valorTotal }}</td>
+      <button (click)="abrirTemplate(item.dadosVenda.id)" type="button" class="btn btn-info" >+ Detalhes</button>
+    </tr>
+  </table>
+
+  <ng-template #mymodal let-modal>
+    <p>TESTE</p>
+  </ng-template>
+
+</div>
