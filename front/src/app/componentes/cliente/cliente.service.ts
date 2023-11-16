@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { Cliente, ClienteCompleto } from 'src/app/core/types/type';
+import { Cliente, ClienteCompleto, Venda } from 'src/app/core/types/type';
 import { environment } from "src/environments/environment";
 
 
@@ -18,6 +18,10 @@ export class ClienteService{
 
   constructor(private http: HttpClient){}
 
+  listarCompras(id: number) {
+    return this.http.get<Venda[]>(`${API}/vendas/${id}`);
+  }
+
   cadastrarCliente(cliente: any): Observable<any>{
     return this.http.post(`${API}/cliente/cadastrar-cliente`, cliente);
   }
@@ -29,7 +33,6 @@ export class ClienteService{
   exibirPerfil(id: number) : Observable <ClienteCompleto>{
     return this.http.get<ClienteCompleto>(
       `${API}/cliente/buscarid/${id}`);
-
   }
 
   adicionarEndereco(cliente: any) {

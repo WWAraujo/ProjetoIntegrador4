@@ -1,5 +1,7 @@
 package edu.senac.backend.vendas;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class BuscarPedidos {
     }
 
     public List<PedidosRecord> listarPedidosTodosPedidos(
+            Pageable pagina,
             DadosPedidoRepository dadosPedidoRepository,
             FormaPagamentoRepository formaPagamentoRepository,
             ListaProdutosPedidoRepository listaProdutosPedidoRepository
@@ -50,7 +53,7 @@ public class BuscarPedidos {
 
         List<PedidosRecord> response = new ArrayList<>();
 
-        List<DadosPedidoModel> dadosPedidoModelList = dadosPedidoRepository.findAll();
+        Page<DadosPedidoModel> dadosPedidoModelList = dadosPedidoRepository.findAll(pagina);
 
         if (!dadosPedidoModelList.isEmpty()) {
 

@@ -1,0 +1,26 @@
+<div class="card">
+  <table>
+    <tr>
+      <th>Data Compra</th>
+      <th>Status Entrega</th>
+      <th>Forma Depagamento</th>
+      <th>Valor da Compra</th>
+    </tr>
+    <tr *ngFor="let item of listaProdutos" class="table">
+      <td>{{ item.dadosVenda.dataCompra }}</td>
+      <td>
+        <select id="statusEntrega" class="form-control" (change)="alterarStatus(item.dadosVenda.id, '' )">
+          <option [value]="item.dadosVenda.statusEntrega">{{ item.dadosVenda.statusEntrega }}</option>
+          <option value="AGUARDANDO PAGAMENTO">AGUARDANDO PAGAMENTO</option>
+          <option value="PAGAMENTO REJEITADO">PAGAMENTO REJEITADO</option>
+          <option value="PAGAMENTO COM SUCESSO">PAGAMENTO COM SUCESSO</option>
+          <option value="AGUARDANDO RETIRADA">AGUARDANDO RETIRADA</option>
+          <option value="EM TRANSITO">EM TRANSITO</option>
+          <option value="ESTOQUE">ESTOQUE</option>
+        </select>
+      </td>
+      <td>{{ item.formaPagamento.formaPagamento }}</td>
+      <td>{{ item.formaPagamento.valorTotal }}</td>
+    </tr>
+  </table>
+</div>

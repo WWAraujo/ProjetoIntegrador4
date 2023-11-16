@@ -1,4 +1,10 @@
-import { Cliente, DadosVenda, FormaPagamento, ProdutosVenda, Venda } from './../../../core/types/type';
+import {
+  Cliente,
+  DadosVenda,
+  FormaPagamento,
+  ProdutosVenda,
+  Venda,
+} from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { CarrinhoServices } from '../carrinho.services';
 import { ProdutosService } from '../../produtos/produtos.service';
@@ -13,10 +19,9 @@ const API = environment.apiURL;
 @Component({
   selector: 'app-resumo',
   templateUrl: './resumo.component.html',
-  styleUrls: ['./resumo.component.css']
+  styleUrls: ['./resumo.component.css'],
 })
 export class ResumoComponent implements OnInit {
-
   subtotal: number = 0;
   valorFrete!: number;
   subtotalComFrete: number = 0;
@@ -52,7 +57,7 @@ export class ResumoComponent implements OnInit {
     complemento: '',
     bairro: '',
     cidade: '',
-    uf: ''
+    uf: '',
   };
 
   formaPagamento: FormaPagamento = {
@@ -63,7 +68,7 @@ export class ResumoComponent implements OnInit {
     ccvCartao: '',
     validadeCartao: '',
     quantidadeParcelas: 0,
-    valorDaParcela: 0
+    valorDaParcela: 0,
   };
 
   listaProdutosVenda: ProdutosVenda[] = [];
@@ -74,10 +79,9 @@ export class ResumoComponent implements OnInit {
     private serviceProduto: ProdutosService,
     private carrinhoService: CarrinhoServices,
     private service: CarrinhoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     this.carrinhoService.setMostrarResumo(true);
     this.valorFrete = this.carrinhoService.getValorFrete();
     this.enderecoSelecionado = this.carrinhoService.getEndereco();
@@ -99,7 +103,9 @@ export class ResumoComponent implements OnInit {
     }
 
     if (!this.dadosCliente) {
-      this.router.navigate(['solicitarLogin'], { queryParams: { fromCart: 'true' } })
+      this.router.navigate(['solicitarLogin'], {
+        queryParams: { fromCart: 'true' },
+      });
     }
 
     const dataHoraLocal = new Date();
@@ -111,16 +117,14 @@ export class ResumoComponent implements OnInit {
       hour: '2-digit',
       minute: '2-digit',
     };
-
-    this.dataCompraString = dataHoraLocal.toLocaleString('pt-BR', formatoDataHora);
+    this.dataCompraString = dataHoraLocal.toLocaleString(
+      'pt-BR',
+      formatoDataHora
+    );
   }
 
-
   finalizarCompra() {
-
     const dadosParaEnviar = this.DadosParaEnviar();
-
-
     if (!this.idVenda) {
       this.service.cadastrarVenda(dadosParaEnviar).subscribe(
         (response) => {
@@ -130,7 +134,7 @@ export class ResumoComponent implements OnInit {
           this.carrinhoService.setLoggedIn(true);
         },
         (error) => {
-          alert('Algo deu errado!')
+          alert('Algo deu errado!');
         }
       );
     }
@@ -152,7 +156,6 @@ export class ResumoComponent implements OnInit {
     this.dadosVenda.bairro = this.enderecoSelecionado?.bairro;
     this.dadosVenda.cidade = this.enderecoSelecionado?.cidade;
     this.dadosVenda.uf = this.enderecoSelecionado?.uf;
-
 
     this.dadosVenda.dataCompra = this.dataCompraString;
 
@@ -213,17 +216,19 @@ export class ResumoComponent implements OnInit {
         this.idsCount[id]++;
       } else {
         this.idsCount[id] = 1;
-        this.serviceProduto.getProdutoCompleto(id)
-          .subscribe((data) => {
-            this.productData.push(data);
-            this.subtotalResumo();
-          });
+        this.serviceProduto.getProdutoCompleto(id).subscribe((data) => {
+          this.productData.push(data);
+          this.subtotalResumo();
+        });
       }
     }
   }
 
   formatarMoeda(valor: number): string {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    return valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
   }
 
   getFullPath(imageName: string): string {
@@ -232,12 +237,12 @@ export class ResumoComponent implements OnInit {
 
   verificaFormaDePagamento() {
     if (this.formaDePagamentoString === 'cartao') {
-      this.exibirFormaDePagamento = 'Cartão de Crédito'
+      this.exibirFormaDePagamento = 'Cartão de Crédito';
       this.exibirParcelas = true;
     } else if (this.formaDePagamentoString === 'boleto') {
-      this.exibirFormaDePagamento = 'Boleto Á Vista'
+      this.exibirFormaDePagamento = 'Boleto Á Vista';
     } else if (this.formaDePagamentoString === 'pix') {
-      this.exibirFormaDePagamento = 'Pix Á Vista'
+      this.exibirFormaDePagamento = 'Pix Á Vista';
     } else {
       this.carrinhoService.setTrocarTelaFormaPagamento();
       this.carrinhoService.setLoggedIn(true);
@@ -263,15 +268,13 @@ export class ResumoComponent implements OnInit {
   }
 
   informarTempoDeEntrega() {
-
     if (this.valorFrete === 15) {
-      this.tempoDeEntrega = "1 a 3 Dias Úteis"
+      this.tempoDeEntrega = '1 a 3 Dias Úteis';
     } else if (this.valorFrete === 10) {
-      this.tempoDeEntrega = "3 a 5 Dias Úteis"
+      this.tempoDeEntrega = '3 a 5 Dias Úteis';
     } else if (this.valorFrete === 5) {
-      this.tempoDeEntrega = "5 a 10 Dias Úteis"
+      this.tempoDeEntrega = '5 a 10 Dias Úteis';
     }
     return this.tempoDeEntrega;
   }
-
 }

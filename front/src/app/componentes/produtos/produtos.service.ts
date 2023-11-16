@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CarregarFotos, PaginaProdutos, Produto, ProdutoFotos } from 'src/app/core/types/type';
+import { CarregarFotos, PaginaProdutos, Produto, ProdutoFotos, Venda } from 'src/app/core/types/type';
 
 const API = environment.apiURL;
 
@@ -80,4 +80,11 @@ export class ProdutosService {
     return this.idProduto;
   }
 
+  listarProdutosEstoquista(){
+    return this.http.get<Venda[]>(`${API}/vendas/todas-vendas`);
+  }
+
+  alterarStatusEstoquista(produto: Venda){
+    return this.http.post<string>(`${API}/vendas/alterar-entrega`, produto);
+  }
 }
