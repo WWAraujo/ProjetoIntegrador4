@@ -9,7 +9,7 @@ import { CarrinhoServices } from '../carrinho.services';
   templateUrl: './listar-pedidos.component.html',
   styleUrls: ['./listar-pedidos.component.css']
 })
-export class FinalizarComponent implements OnInit {
+export class ListarPedidosComponent implements OnInit {
 
   idedido: number = 0;
   dados!: Venda ;

@@ -120,15 +120,16 @@ export class ResumoComponent implements OnInit {
 
     const dadosParaEnviar = this.DadosParaEnviar();
 
-    if(!this.idVenda){
+
+    if (!this.idVenda) {
       this.service.cadastrarVenda(dadosParaEnviar).subscribe(
-        (response)=>{
+        (response) => {
           this.carrinhoService.setIdVendaSalvaBanco(response);
           alert('Produto salvo com sucesso!');
-          this.carrinhoService.setTrocarTelaListarPedidos();
+          this.carrinhoService.setTrocarTelaConcluir();
           this.carrinhoService.setLoggedIn(true);
         },
-        (error)=> {
+        (error) => {
           alert('Algo deu errado!')
         }
       );
@@ -168,7 +169,7 @@ export class ResumoComponent implements OnInit {
       const produto = this.productData.find((p) => p.produto.id === id);
       const quantidade = this.idsCount[id];
       return {
-        idPedido: 0, //
+        idPedido: 0,
         valorUnidade: produto?.produto.precoProduto || 0,
         idProduto: id,
         quantidade: quantidade,
@@ -261,15 +262,16 @@ export class ResumoComponent implements OnInit {
     this.carrinhoService.setLoggedIn(true);
   }
 
-  informarTempoDeEntrega(){
+  informarTempoDeEntrega() {
 
-    if(this.valorFrete === 15){
+    if (this.valorFrete === 15) {
       this.tempoDeEntrega = "1 a 3 Dias Úteis"
-    }else if(this.valorFrete === 10){
+    } else if (this.valorFrete === 10) {
       this.tempoDeEntrega = "3 a 5 Dias Úteis"
-    }else if(this.valorFrete === 5){
+    } else if (this.valorFrete === 5) {
       this.tempoDeEntrega = "5 a 10 Dias Úteis"
     }
     return this.tempoDeEntrega;
   }
+
 }

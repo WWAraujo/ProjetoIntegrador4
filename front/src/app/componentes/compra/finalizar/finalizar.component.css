@@ -1,0 +1,51 @@
+.container{
+  display: grid;
+  width: 100%;
+  height: 100%;
+  border: 1px solid;
+  grid-template-columns: 1;
+  grid-template-rows: 30% 30% 40%;
+}
+
+.idVenda{
+  grid-row: 1;
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10%;
+}
+
+.confirmacao-venda{
+  grid-row: 2;
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.valorVenda{
+  grid-row: 3;
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#idDaVenda{
+  font: 1.5em 'Inter', sans-serif;
+}
+
+#confirmacao{
+  font: 2.5em 'Inter', sans-serif;
+  font-weight: bolder;
+}
+
+#valorDaVenda{
+  font: 1.5em 'Inter', sans-serif;
+}

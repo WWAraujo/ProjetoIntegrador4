@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -10,6 +10,14 @@ const API = environment.apiURL;
   providedIn: 'root'
 })
 export class CarrinhoService {
+
+  private vendaAdicionadaSubject: Subject<void> = new Subject<void>();
+
+  vendaAdicionada: Observable<void> = this.vendaAdicionadaSubject.asObservable();
+
+  adicionarVenda() {
+    this.vendaAdicionadaSubject.next();
+  }
 
   constructor(private http: HttpClient) { }
 
