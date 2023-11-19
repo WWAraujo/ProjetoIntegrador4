@@ -85,7 +85,7 @@ const routes: Routes = [
     component: AlterarProdutoEstoquistaComponent
   },
   {
-    path: 'listarProdutosEstoquista',
+    path: 'alterar-produtos-estoquista',
     component: AlterarProdutoEstoquistaComponent
   },
   {

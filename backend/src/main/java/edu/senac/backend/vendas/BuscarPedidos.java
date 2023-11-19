@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class BuscarPedidos {
 
-    public List<PedidosRecord> listarPedidos(
+    public List<PedidosRecord> listarPedidosDoCliente(
             Long id,
             DadosPedidoRepository dadosPedidoRepository,
             FormaPagamentoRepository formaPagamentoRepository,
@@ -44,7 +44,7 @@ public class BuscarPedidos {
         }
     }
 
-    public List<PedidosRecord> listarPedidosTodosPedidos(
+    public List<PedidosRecord> listarTodosPedidos(
             Pageable pagina,
             DadosPedidoRepository dadosPedidoRepository,
             FormaPagamentoRepository formaPagamentoRepository,

@@ -63,7 +63,7 @@ export class CabecalhoComponent implements OnInit {
   }
 
   listarPedidoEstoquista() {
-    this.router.navigate(['/listarProdutosEstoquista']);
+    this.router.navigate(['/alterar-produtos-estoquista']);
   }
 
   listarPedidoCliente() {

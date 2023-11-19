@@ -82,7 +82,7 @@ public class ConcluirPedido {
         int resposta = dadosPedidoRepository.alterarStatus(venda.dadosVenda().getId(), venda.dadosVenda().getStatusEntrega());
 
         if (resposta == 1){
-            return response="Deu certo!";
+            return response="Status Alterado com sucesso!";
         }
         return response;
     }

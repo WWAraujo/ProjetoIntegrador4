@@ -45,8 +45,8 @@ public class VendasController {
     }
 
     @PostMapping("/alterar-entrega")
-    public String alterarEntrega(@RequestBody PedidosRecord venda) {
-        return new ConcluirPedido().AlterarPedido(venda, dadosPedidoRepository);
+    public ResponseEntity<String> alterarEntrega(@RequestBody PedidosRecord venda) {
+        return ResponseEntity.ok(new ConcluirPedido().AlterarPedido(venda, dadosPedidoRepository));
     }
 
     @GetMapping("/ultima/{cliente}")
@@ -65,7 +65,7 @@ public class VendasController {
             @PathVariable Long cliente,
             @PageableDefault(size = 50, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pagina) {
         return ResponseEntity.ok().body(
-                new BuscarPedidos().listarPedidos(
+                new BuscarPedidos().listarPedidosDoCliente(
                         cliente,
                         dadosPedidoRepository,
                         formaPagamentoRepository,
@@ -78,7 +78,7 @@ public class VendasController {
     public ResponseEntity<List<PedidosRecord>> getVendasTotal(
             @PageableDefault(size = 100, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pagina) {
         return ResponseEntity.ok().body(
-                new BuscarPedidos().listarPedidosTodosPedidos(
+                new BuscarPedidos().listarTodosPedidos(
                         pagina,
                         dadosPedidoRepository,
                         formaPagamentoRepository,
