@@ -1,26 +1,36 @@
 <div class="card">
-  <table>
-    <tr>
-      <th>Data Compra</th>
-      <th>Status Entrega</th>
-      <th>Forma Depagamento</th>
-      <th>Valor da Compra</th>
-    </tr>
-    <tr *ngFor="let item of listaProdutos" class="table">
-      <td>{{ item.dadosVenda.dataCompra }}</td>
-      <td>
-        <select id="statusEntrega" class="form-control" (change)="alterarStatus(item.dadosVenda.id, '' )">
-          <option [value]="item.dadosVenda.statusEntrega">{{ item.dadosVenda.statusEntrega }}</option>
-          <option value="AGUARDANDO PAGAMENTO">AGUARDANDO PAGAMENTO</option>
-          <option value="PAGAMENTO REJEITADO">PAGAMENTO REJEITADO</option>
-          <option value="PAGAMENTO COM SUCESSO">PAGAMENTO COM SUCESSO</option>
-          <option value="AGUARDANDO RETIRADA">AGUARDANDO RETIRADA</option>
-          <option value="EM TRANSITO">EM TRANSITO</option>
-          <option value="ESTOQUE">ESTOQUE</option>
-        </select>
-      </td>
-      <td>{{ item.formaPagamento.formaPagamento }}</td>
-      <td>{{ item.formaPagamento.valorTotal }}</td>
-    </tr>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Data Compra</th>
+        <th scope="col">Status Entrega</th>
+        <th scope="col">Forma Depagamento</th>
+        <th scope="col">Valor da Compra</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let item of listaProdutos" class="table">
+        <td scope="row">{{ item.dadosVenda.dataCompra }}</td>
+        <td scope="row">
+          <select
+            id="statusEntrega"
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="item.dadosVenda.statusEntrega"
+            (change)="alterarStatus(item.dadosVenda.id)"
+          >
+            <option [value]="item.dadosVenda.statusEntrega">{{ item.dadosVenda.statusEntrega }}</option>
+            <option value="AGUARDANDO PAGAMENTO">AGUARDANDO PAGAMENTO</option>
+            <option value="PAGAMENTO REJEITADO">PAGAMENTO REJEITADO</option>
+            <option value="PAGAMENTO COM SUCESSO">PAGAMENTO COM SUCESSO</option>
+            <option value="AGUARDANDO RETIRADA">AGUARDANDO RETIRADA</option>
+            <option value="EM TRANSITO">EM TRANSITO</option>
+            <option value="ESTOQUE">ESTOQUE</option>
+          </select>
+        </td>
+        <td scope="row">{{ item.formaPagamento.formaPagamento }}</td>
+        <td scope="row">{{ item.formaPagamento.valorTotal }}</td>
+      </tr>
+    </tbody>
   </table>
 </div>

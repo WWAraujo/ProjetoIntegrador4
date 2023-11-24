@@ -5,14 +5,12 @@ import { Venda } from 'src/app/core/types/type';
 @Component({
   selector: 'app-alterar-produto-estoquista',
   templateUrl: './alterar-produto-estoquista.component.html',
-  styleUrls: ['./alterar-produto-estoquista.component.css']
+  styleUrls: ['./alterar-produto-estoquista.component.css'],
 })
 export class AlterarProdutoEstoquistaComponent implements OnInit {
-
-  listaProdutos: Venda[]=[];
+  listaProdutos: Venda[] = [];
   status: string = '';
   produto!: Venda;
-  response: string = '';
 
   constructor(private produtosService: ProdutosService) {}
 
@@ -22,12 +20,22 @@ export class AlterarProdutoEstoquistaComponent implements OnInit {
     });
   }
 
-  alterarStatus(id: number, status: string){
-    console.log(`Alterando status para ${status} do item com id ${id}`);
-    this.produtosService.alterarStatusEstoquista(this.produto).subscribe((resp)=>{
-      this.response = resp;
-      console.log(resp);
-    })
+  alterarStatus(id: number) {
+    for (const elemento of this.listaProdutos) {
+      if (elemento.dadosVenda.id === id) {
+        this.produto = elemento;
+        this.produtosService.alterarStatusEstoquista(this.produto).subscribe(
+          (resp) => {
+            // Verifica se a resposta é uma string
+            if (typeof resp === 'string') {
+              alert(`${resp}`);
+            }
+          },
+          (error) => {
+            console.error('Erro na requisição:', error);
+          }
+        );
+      }
+    }
   }
-
 }

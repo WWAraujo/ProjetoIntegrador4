@@ -1,10 +1,7 @@
 package edu.senac.backend.vendas;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "dados_pedidos")
 @Entity(name = "Pedidos")

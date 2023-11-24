@@ -85,6 +85,6 @@ export class ProdutosService {
   }
 
   alterarStatusEstoquista(produto: Venda){
-    return this.http.post<string>(`${API}/vendas/alterar-entrega`, produto);
+    return this.http.post(`${API}/vendas/alterar-entrega`, produto, { responseType: 'text' });
   }
 }
