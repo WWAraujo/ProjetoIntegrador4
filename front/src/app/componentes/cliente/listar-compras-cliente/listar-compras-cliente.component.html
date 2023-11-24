@@ -11,13 +11,31 @@
       <td>{{ item.dadosVenda.dataCompra }}</td>
       <td>{{ item.dadosVenda.statusEntrega }}</td>
       <td>{{ item.formaPagamento.formaPagamento }}</td>
-      <td>{{ item.formaPagamento.valorTotal }}</td>
-      <button (click)="abrirTemplate(item.dadosVenda.id)" type="button" class="btn btn-info" >+ Detalhes</button>
+      <td>{{ formatarMoeda(item.formaPagamento.valorTotal) }}</td>
+      <button (click)="open(mymodal)" (click)="pegarId(item.dadosVenda.id)" type="button" class="btn btn-info">+
+        Detalhes</button>
     </tr>
   </table>
 
   <ng-template #mymodal let-modal>
-    <p>TESTE</p>
+    <h3>ID Venda: {{ venda.dadosVenda.id }}</h3>
+    <p>Valor Do Pedido: {{formatarMoeda(venda.dadosVenda.valorTotal)}}</p>
+    <p>Valor Do Frete: {{formatarMoeda(venda.dadosVenda.valorEntrega)}}</p>
+    <p>Forma de pagamento: {{venda.dadosVenda.formaPagamento}}</p>
+    <span>Endereço: {{ venda.dadosVenda.logradouro }}
+      Nº{{ venda.dadosVenda.numero}},
+      {{ venda.dadosVenda.bairro}},
+      {{ venda.dadosVenda.cidade}},
+      {{ venda.dadosVenda.cep }}</span>
+    <div class="card card-custom">
+      <h3>Produtos</h3>
+      <div *ngFor="let item of productData">
+        Produto: {{item.produto.nomeProduto}}<br>
+        Valor Produto: {{formatarMoeda(item.produto.precoProduto)}}
+        Quantidade: {{formatarMoeda(item.produto.qtdEstoque)}}
+      </div>
+    </div>
+
   </ng-template>
 
 </div>

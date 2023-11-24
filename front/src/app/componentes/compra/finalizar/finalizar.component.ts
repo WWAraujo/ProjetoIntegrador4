@@ -29,8 +29,6 @@ export class FinalizarComponent implements OnInit {
 
   }
 
-
-
   formatarMoeda(valor: number): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }

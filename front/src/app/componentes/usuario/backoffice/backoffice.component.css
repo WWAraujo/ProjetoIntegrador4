@@ -55,6 +55,7 @@ h2 {
   width: 330px;
   box-shadow: 0px 0px 10px 1px #fff, 0 0 0 4px #fff;
   color: #fff;
+  background-color: #1e90ff;
 }
 
 .opcoes button:disabled {
