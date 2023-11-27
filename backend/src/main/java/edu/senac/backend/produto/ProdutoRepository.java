@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public interface ProdutoRepository extends JpaRepository<ProdutoModel, Integer> {
 
     @Query("SELECT p FROM Produto p WHERE p.nomeProduto LIKE %:pesquisa%")
-    List<ProdutoModel> pesquisarPorNome(@Param("pesquisa") String pesquisa);
+    LinkedList<ProdutoModel> pesquisarPorNome(@Param("pesquisa") String pesquisa);
 
     @Modifying
     @Transactional

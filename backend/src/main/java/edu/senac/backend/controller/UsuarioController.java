@@ -4,6 +4,7 @@ import edu.senac.backend.usuario.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<ConverterListaUsuarios> listarUsuarios() {
+    public LinkedList<ConverterListaUsuarios> listarUsuarios() {
         return new ConverterListaUsuarios().converterUsuario(repository.findAll());
     }
 

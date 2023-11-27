@@ -9,7 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.LinkedList;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -61,7 +61,7 @@ public class VendasController{
         );
     }
     @GetMapping("/{cliente}")
-    public ResponseEntity<List<PedidosRecord>> getVendasPorCliente(
+    public ResponseEntity<LinkedList<PedidosRecord>> getVendasPorCliente(
             @PathVariable Long cliente,
             @PageableDefault(size = 50, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pagina) {
         return ResponseEntity.ok().body(
@@ -75,7 +75,7 @@ public class VendasController{
     }
 
     @GetMapping("/todas-vendas")
-    public ResponseEntity<List<PedidosRecord>> getVendasTotal(
+    public ResponseEntity<LinkedList<PedidosRecord>> getVendasTotal(
             @PageableDefault(size = 100, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pagina) {
         return ResponseEntity.ok().body(
                 new BuscarPedidos().listarTodosPedidos(

@@ -1,15 +1,15 @@
 package edu.senac.backend.produto;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 public class ListarTodosProdutos {
-    public List<ProdutoRecordConstructor> ListarTodosProdutos(
+    public LinkedList<ProdutoRecordConstructor> ListarTodosProdutos(
             ProdutoRepository produtoRepository,
             FotosProdutoRepository fotosProdutoRepository
     ) {
-        List<ProdutoRecordConstructor> produtosRecordList = new ArrayList<>();
+        LinkedList<ProdutoRecordConstructor> produtosRecordList = new LinkedList<>();
         List<ProdutoModel> produtosModel = produtoRepository.findAll();
 
         for (ProdutoModel produtoModel : produtosModel) {
@@ -25,7 +25,7 @@ public class ListarTodosProdutos {
                     );
 
 
-            List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
+            LinkedList<FotosProdutoRecord> fotosresponse = new LinkedList<>();
             Optional<FotosProdutoModel[]> fotosProdutoModelOptional = fotosProdutoRepository.buscarFotosPorIdProduto(produtoModel.getId());
             if (fotosProdutoModelOptional.isPresent()) {
                 FotosProdutoModel[] fotosProdutoModel = fotosProdutoModelOptional.get();

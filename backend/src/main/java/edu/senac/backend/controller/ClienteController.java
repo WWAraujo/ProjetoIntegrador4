@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -54,14 +55,14 @@ public class ClienteController {
 
         ClienteModel clienteModel = new ClienteModel(repository.findById(id));
 
-        List<EnderecosEntregasClienteModel> endereco = (enderecosEntregasClienteRepository.findIdByIdCliente(clienteModel.getId()));
+        LinkedList<EnderecosEntregasClienteModel> endereco = (enderecosEntregasClienteRepository.findIdByIdCliente(clienteModel.getId()));
 
         ClienteRecordConstructor cliente = getClienteRecordConstructor(clienteModel, endereco);
 
         return ResponseEntity.ok(cliente);
     }
 
-    private static ClienteRecordConstructor getClienteRecordConstructor(ClienteModel clienteModel, List<EnderecosEntregasClienteModel> endereco ) {
+    private static ClienteRecordConstructor getClienteRecordConstructor(ClienteModel clienteModel, LinkedList<EnderecosEntregasClienteModel> endereco ) {
 
         ClienteRecord clienteRecord = new ClienteRecord(
                 clienteModel.getId(),
@@ -73,14 +74,14 @@ public class ClienteController {
                 clienteModel.getEmailCliente(),
                 clienteModel.getSenhaCliente());
 
-        List<EnderecosEntregasClienteRecord> enderecos = getEnderecosEntregasClienteRecords(endereco);
+        LinkedList<EnderecosEntregasClienteRecord> enderecos = getEnderecosEntregasClienteRecords(endereco);
 
         ClienteRecordConstructor cliente = new ClienteRecordConstructor(clienteRecord,enderecos);
         return cliente;
     }
 
-    private static List<EnderecosEntregasClienteRecord> getEnderecosEntregasClienteRecords(List<EnderecosEntregasClienteModel> endereco) {
-        List<EnderecosEntregasClienteRecord> enderecos = new ArrayList<>();
+    private static LinkedList<EnderecosEntregasClienteRecord> getEnderecosEntregasClienteRecords(List<EnderecosEntregasClienteModel> endereco) {
+        LinkedList<EnderecosEntregasClienteRecord> enderecos = new LinkedList<>();
 
         for (EnderecosEntregasClienteModel end : endereco){
             EnderecosEntregasClienteRecord enderecoAtual = new EnderecosEntregasClienteRecord(

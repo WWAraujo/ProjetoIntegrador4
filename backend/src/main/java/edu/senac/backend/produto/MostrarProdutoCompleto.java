@@ -1,8 +1,7 @@
 package edu.senac.backend.produto;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Optional;
 
 public class MostrarProdutoCompleto {
@@ -26,7 +25,7 @@ public class MostrarProdutoCompleto {
                 );
 
 
-        List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
+        LinkedList<FotosProdutoRecord> fotosresponse = new LinkedList<>();
         Optional<FotosProdutoModel[]> fotosProdutoModel = fotosProdutoRepository.buscarFotosPorIdProduto(id);
         for (FotosProdutoModel fotos : fotosProdutoModel.get()) {
             FotosProdutoRecord foto =

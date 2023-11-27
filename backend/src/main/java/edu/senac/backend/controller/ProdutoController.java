@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/buscarproduto/{pesquisa}")
-    public List<ProdutoModel> buscarProduto(@PathVariable String pesquisa) {
+    public LinkedList<ProdutoModel> buscarProduto(@PathVariable String pesquisa) {
         return produtoRepository.pesquisarPorNome(pesquisa);
     }
 
@@ -75,7 +76,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/listar-todos-produtos")
-    public ResponseEntity<List<ProdutoRecordConstructor>> listarTodosProdutos() {
+    public ResponseEntity<LinkedList<ProdutoRecordConstructor>> listarTodosProdutos() {
         return new ResponseEntity<>(
                 new ListarTodosProdutos()
                         .ListarTodosProdutos(produtoRepository, fotosProdutoRepository), HttpStatus.OK);
