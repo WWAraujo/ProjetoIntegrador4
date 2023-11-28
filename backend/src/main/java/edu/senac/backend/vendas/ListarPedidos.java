@@ -1,19 +1,20 @@
 package edu.senac.backend.vendas;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListarPedidos {
 
-    public List<PedidosRecord> listarPedido(
+    public LinkedList<PedidosRecord> listarPedido(
             Long cliente,
             DadosPedidoRepository dadosPedidoRepository,
             ListaProdutosPedidoRepository listaProdutosPedidoRepository,
             FormaPagamentoRepository formaPagamentoRepository){
 
-        List<PedidosRecord> list = new ArrayList<>();
+        LinkedList<PedidosRecord> list = new LinkedList<>();
 
-//        List<DadosPedidoModel> dadosPedidoModelList = dadosPedidoRepository.pesquisarPorId(cliente);
+//        LinkedList<DadosPedidoModel> dadosPedidoModelList = dadosPedidoRepository.pesquisarPorId(cliente);
 
 
         return list;
