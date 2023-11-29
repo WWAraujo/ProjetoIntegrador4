@@ -28,7 +28,7 @@ public class LoginController {
 
     @PostMapping("/usuario")
     @Transactional
-    public ResponseEntity<LoginModel> salvarUsuario(@RequestBody LoginRecord login) {
+    public ResponseEntity<LoginModel> buscarUsuario(@RequestBody LoginRecord login) {
 
         String senha = new Criptografia().encriptar(login.senha());
 
@@ -44,7 +44,7 @@ public class LoginController {
 
     @PostMapping("/cliente")
     @Transactional
-    public ResponseEntity<ClienteModel> salvarCliente(@RequestBody LoginRecord loginCliente) {
+    public ResponseEntity<ClienteModel> buscarCliente(@RequestBody LoginRecord loginCliente) {
 
         String senha = new Criptografia().encriptar(loginCliente.senha());
         Optional<ClienteModel> clienteModel = ClienteRepository.findByEmailCliente(loginCliente.usuario());

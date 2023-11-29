@@ -2,7 +2,6 @@ package edu.senac.backend.vendas;
 
 import edu.senac.backend.produto.ProdutoModel;
 import edu.senac.backend.produto.ProdutoRepository;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -77,14 +76,12 @@ public class ConcluirPedido {
             PedidosRecord venda,
             DadosPedidoRepository dadosPedidoRepository) {
 
-        String response="Não foi possivel fazer a alteração no banco!";
-
         //Alterar os dados de status entrega
-        int resposta = dadosPedidoRepository.alterarStatus(venda.dadosVenda().getId(), venda.dadosVenda().getStatusEntrega());
+        int response = dadosPedidoRepository.alterarStatus(venda.dadosVenda().getId(), venda.dadosVenda().getStatusEntrega());
 
-        if (resposta == 1){
-            return response="Status Alterado com sucesso!";
+        if (response == 1){
+            return "Status Alterado com sucesso!";
         }
-        return response;
+        return "Não foi possivel fazer a alteração no banco!";
     }
 }
