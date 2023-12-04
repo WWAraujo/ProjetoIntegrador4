@@ -37,6 +37,7 @@
         <span>
           Olá, {{ getPrimeiroNome() }} <br />
           <a (click)="alterarDados()"> MINHA CONTA</a> |
+          <a (click)="listarPedidoCliente()">MEUS PEDIDOS</a> |
           <a (click)="open(mymodal)"> SAIR </a>
         </span>
       </div>
@@ -49,9 +50,6 @@
             alt="carrinho"
           />
         </a>
-        <div>
-          <button type="button" class="btn btn-primary" (click)="listarPedidoCliente()">Meus Pedidos</button>
-        </div>
       </div>
     </div>
     <ng-template #mymodal let-modal>
@@ -93,14 +91,12 @@
         <span>
           Olá, {{ getPrimeiroNome() }} <br />
           <a (click)="alterarDados()"> MINHA CONTA</a> |
+          <a (click)="backoffice()"> BACK OFFICE</a> |
+          <a type="button" (click)="listarPedidoEstoquista()">PEDIDOS</a> |
           <a (click)="open(mymodal)"> SAIR </a>
         </span>
       </div>
-      <div>
-        <button type="button" class="btn btn-primary btn-lg" (click)="listarPedidoEstoquista()">PEDIDOS</button>
-      </div>
     </div>
-
     <ng-template #mymodal let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">LOGOFF</h4>

@@ -1,0 +1,91 @@
+.cabecalho-tabela{
+  font: 1.1em 'Inter',sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  border-bottom: 0.2em solid #000
+}
+
+.pedidos-cliente{
+  font: 1.1em 'Inter',sans-serif;
+  text-transform: uppercase;
+}
+
+.button-detalhes{
+  background-color: #fff;
+  color: #1e90ff;
+  border: none;
+  margin: 10px 0px;
+  text-transform: uppercase;
+}
+
+.button-detalhes:hover{
+  background-color: #1e90ff;
+  color: #fff;
+}
+
+.detalhes-pedido{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 1em 2em ;
+
+}
+
+.detalhes-pedido p{
+  font: 1.2em 'Inter',sans-serif;
+  font-weight: bold;
+}
+
+.detalhes-pedido span{
+  font: 1em 'Inter',sans-serif;
+
+}
+.card-custom{
+  width: 100%;
+  border-bottom: 1.5px solid #1e90ff;
+  border-top: 1.5px solid #1e90ff ;
+}
+
+.card-itens{
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  border: 1px solid #1e90ff;
+  margin: 1.5% 1% ;
+  border-radius: 5px ;
+}
+
+.info{
+  font: 0.8em 'Inter',sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.button-modal{
+  text-align: center;
+  background-color: #fff;
+  color: red;
+  border: none;
+  text-transform: uppercase;
+  margin: 2% auto;
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 5px 20px ;
+}
+
+.button-modal:hover{
+  background-color: red;
+  color: #fff;
+}
+
+img{
+  margin: 0 1em ;
+}
+
+h2{
+  text-align: center;
+  font: 1em 'Inter', sans-serif;
+
+}

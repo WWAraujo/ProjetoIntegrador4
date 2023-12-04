@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AlterarProdutoEstoquistaComponent } from './alterar-produto-estoquista.component';
+import { AlterarProdutoEstoquistaComponent } from './alterar-pedidos-estoquista.component';
 
 describe('AlterarProdutoEstoquistaComponent', () => {
   let component: AlterarProdutoEstoquistaComponent;
