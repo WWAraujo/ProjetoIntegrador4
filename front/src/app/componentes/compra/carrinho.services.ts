@@ -117,6 +117,10 @@ export class CarrinhoServices {
     sessionStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
   }
 
+  limparCarrinho(){
+    sessionStorage.removeItem(this.chaveArmazenamento);
+  }
+
   getSubtotal(): number {
     return this.subtotal;
   }

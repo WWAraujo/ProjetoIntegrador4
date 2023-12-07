@@ -42,7 +42,6 @@ export class ProdutoDetalhadoComponent implements OnInit {
       this.semEstoque = this.productData.produto.qtdEstoque;
       if (this.ativoInativo === 'INATIVO' || this.semEstoque == 0) {
         this.produtoIndisponivel = true;
-
       } else {
         this.produtoIndisponivel = false;
 
@@ -73,13 +72,21 @@ export class ProdutoDetalhadoComponent implements OnInit {
   }
 
   addCarrinho(idProduto: number) {
-    this.serviceCarrinho.adicionarAoCarrinho(idProduto);
-    alert('Produto adicionado ao carrinho')
+    if (this.produtoIndisponivel) {
+      alert('produto indiponivel');
+    } else {
+      this.serviceCarrinho.adicionarAoCarrinho(idProduto);
+      alert('Produto adicionado ao carrinho')
+    }
   }
 
   irCheckout(idProduto: number) {
-    this.serviceCarrinho.adicionarAoCarrinho(idProduto);
-    this.router.navigate(['/checkout']);
+    if (this.produtoIndisponivel) {
+      alert('produto indiponivel');
+    } else {
+      this.serviceCarrinho.adicionarAoCarrinho(idProduto);
+      this.router.navigate(['/checkout']);
+    }
   }
 
   formatarMoeda(valor: number): string {

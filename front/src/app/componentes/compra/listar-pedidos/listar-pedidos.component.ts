@@ -4,6 +4,7 @@ import { Venda } from 'src/app/core/types/type';
 import { CarrinhoServices } from '../carrinho.services';
 
 
+
 @Component({
   selector: 'app-listar-pedidos',
   templateUrl: './listar-pedidos.component.html',

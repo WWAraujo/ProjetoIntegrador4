@@ -29,6 +29,7 @@
           type="button"
           name="cadastrar"
           class="btn-add-carrinho"
+          [disabled]="botaoDesabilitado"
           (click)="addCarrinho(productData.produto.id)">
           <img src="../../../../assets/image/adicionar-ao-carrinho.png">
         </button>

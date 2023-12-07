@@ -76,8 +76,10 @@ export class EnderecosComponent implements OnInit {
         }
       });
       this.enderecos.forEach((endr) => {
+
         this.selecionarEnderecoPrincipal(endr.cep, endr.numero);
         throw new Error('Parar o loop');
+
       })
     } catch (e: any) {
       if (e.message === 'Parar o loop') {
@@ -132,7 +134,6 @@ export class EnderecosComponent implements OnInit {
           this.router.navigate(['/selecionarEndereco']);
         } else {
           this.router.navigate(['/alterarCliente']);
-
         }
       });
     } else {
@@ -143,7 +144,6 @@ export class EnderecosComponent implements OnInit {
   alterarEndereco(end: Endereco) {
     const index = this.enderecos.findIndex(item => item === end);
     if (index !== 1) {
-      // this.enderecoAtual = end;
       this.enderecos.splice(index, 1)
     }
     this.endereco.id = end.id
@@ -168,7 +168,6 @@ export class EnderecosComponent implements OnInit {
 
   addendereco() {
     this.enderecos.push({ ...this.endereco });
-    // Limpar os campos em caso de erro ou CEP não encontrado
     this.endereco.logradouro = '';
     this.endereco.bairro = '';
     this.endereco.cidade = '';
@@ -190,7 +189,6 @@ export class EnderecosComponent implements OnInit {
           this.endereco.numero = '';
           this.endereco.complemento = '';
         } else {
-          // Limpar os campos em caso de erro ou CEP não encontrado
           this.endereco.logradouro = '';
           this.endereco.bairro = '';
           this.endereco.cidade = '';

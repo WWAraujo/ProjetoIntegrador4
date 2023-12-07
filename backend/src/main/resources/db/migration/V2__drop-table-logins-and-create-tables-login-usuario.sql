@@ -22,4 +22,4 @@ create table login(
     foreign key (tipo_usuario) references tipo_usuarios(id)
 );
 INSERT INTO login (nome_usuario, cpf_usuario, email_usuario, senha_usuario, tipo_usuario)
-			VALUES ('admin', '12345678910', 'admin@admin', 'YWRtaW5TRU5BQzIwMjM=', 1);
+			VALUES ('admin', '12345678910', 'admin@admin.com', 'YWRtaW5TRU5BQzIwMjM=', 1);
