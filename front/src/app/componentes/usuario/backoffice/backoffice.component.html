@@ -1,0 +1,20 @@
+<section class="container">
+  <header class="header d-class"></header>
+  <h2>BackOffice</h2>
+  <div class="opcoes">
+    <button
+      [disabled]="isCliente"
+      alt="listarProdutos"
+      (click)="irParaListaProdutos()"
+    >
+      Produtos
+    </button>
+    <button
+      [disabled]="isEstoquista || isCliente"
+      alt="listarUsuario"
+      (click)="irParaUsuarios()"
+    >
+      Usuários
+    </button>
+  </div>
+</section>

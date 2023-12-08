@@ -1,0 +1,176 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.containerPagamento {
+  width: 100%;
+  height: 100%;
+  margin: 5% 0;
+  border: 1px solid;
+  display: grid;
+  grid-template-columns: 35% 60%;
+  grid-template-rows: 1;
+  justify-content: space-between;
+}
+
+.formaPagamento {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2%;
+  width: 100%;
+}
+
+.formaPagamento p {
+  color: gray;
+  font: 0.9em 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.form-check-cartao {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.cardCartao input {
+  margin-right: 5%;
+}
+
+.cardCartao label {
+  font: 1em 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.form-check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid gray;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5%;
+  margin-bottom: 2%;
+}
+
+.form-check input {
+  margin-left: 2%;
+}
+
+.form-check label {
+  font: 1em 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.boleto,
+.cartao,
+.pix {
+  display: none;
+}
+
+#imagePix,
+#imageBoleto {
+  width: 20px;
+  margin: 0 2% 0 5%;
+}
+
+.cardimages {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#mastercard,
+#visa,
+#diners {
+  margin: 0 1%;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0px 10px;
+  width: 60px;
+  height: 40px;
+}
+
+#hipercard {
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 0 1%;
+  width: 60px;
+  height: 40px;
+}
+
+#discover {
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 0 1%;
+  width: 60px;
+  height: 40px;
+}
+
+.dadosPagamento {
+  grid-column: 2;
+  width: 100%;
+  padding: 5%;
+}
+
+.cartao {
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 2%;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.cartao p {
+  font: 1.3em 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.nome-numero {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.nome-numero input {
+  width: 100%;
+  margin: 1% 5%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 1% 1% 1%;
+}
+
+.codigo-vencimento {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.codigo-vencimento input {
+  width: 100%;
+  margin: 1% 5%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 1% 1% 1%;
+}
+
+.parcelamento {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 5%;
+}
+
+.parcelamento label {
+  font: 1.1em 'Inter', sans-serif;
+  font-weight: 600;
+  margin: 0 0 1% 0;
+}

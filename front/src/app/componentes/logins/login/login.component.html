@@ -1,67 +1,97 @@
-<app-cabecalho-secundario></app-cabecalho-secundario>
 <section class="container">
+
   <div class="title">
     <label>FAZER LOGIN</label>
   </div>
-    <form class="form-login" [formGroup]="formulario">
-      <label for="usuario">E-mail</label>
+
+  <div class="tipodelogin">
+    <label class="custom-radio">
       <input
-        type="text"
-        class="input"
-        id="usuario"
-        formControlName="usuario"
-        placeholder="Digite o e-mail"
+        type="radio"
+        name="tipo"
+        [(ngModel)]="selectedType"
+        value="cliente"
       />
-      <div
-        class="mensagem__erro"
-        *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched"
-      >
-        E-mail é obrigatório!
-      </div>
-      <div
-        class="mensagem__erro"
-        *ngIf="formulario.get('usuario')?.errors?.['email'] && formulario.get('usuario')?.touched"
-      >
-        Digite um e-mail válido!
-      </div>
-      <div
+      <div class="radio-content">SOU CLIENTE</div>
+    </label>
+
+    <label class="custom-radio">
+      <input
+        type="radio"
+        name="tipo"
+        [(ngModel)]="selectedType"
+        value="usuario"
+      />
+      <div class="radio-content">SOU COLABORADOR</div>
+    </label>
+  </div>
+
+  <form class="form-login esconder-div" [formGroup]="formulario">
+
+    <input
+      type="text"
+      class="input"
+      id="usuario"
+      formControlName="usuario"
+      placeholder="E-mail"
+    />
+
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched"
+    >
+      E-mail é obrigatório!
+    </div>
+
+    <div
+      class="mensagem__erro"
+      *ngIf="formulario.get('usuario')?.errors?.['email'] && formulario.get('usuario')?.touched"
+    >
+      Digite um e-mail válido!
+    </div>
+
+    <div
       class="mensagem__erro"
       *ngIf="formulario.get('usuario')?.hasError('pattern') && formulario.get('usuario')?.touched"
-      >
+    >
       E-mail inválido! Deve ser no formato correto.
-      </div>
-    <label for="senha">Senha</label>
+    </div>
+
     <input
       type="password"
       class="input"
       id="senha"
       formControlName="senha"
-      placeholder="Digite a senha"
+      placeholder="Senha"
     />
+
     <div
       class="mensagem__erro"
       *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched"
     >
       Senha é obrigatoria!
     </div>
+
     <div
       class="mensagem__erro"
       *ngIf="formulario.get('senha')?.errors?.['minlength'] && formulario.get('senha')?.touched"
     >
       Senha tem mínimo de 3 caracteres!
     </div>
-    <div
-      class="mensagem__erro"
-      *ngIf="usuarioSenhaInvalido"
-    >
+
+    <div class="mensagem__erro" *ngIf="usuarioSenhaInvalido">
       Usuario ou senha Invalido!
     </div>
-    <label for="sign-up" id="sign-up-text">Novidades tech na NexusTech. <a (click)="cadastrarCliente()" id="sign-up">Inscreva-se já!</a></label>
+
+    <label for="sign-up" id="sign-up-text"
+      >Novidades tech na NexusTech.
+      <a (click)="cadastrarCliente()" id="sign-up">Inscreva-se já!</a></label
+    >
     <div class="login">
       <button
         [disabled]="!formulario.valid"
-        (click)="solicitarLogin()"
-        ((keypress))="solicitarLogin()"
+        (click)="fazerLogin()"
+        (keypress)="fazerLogin()"
         [ngClass]="habilitarBotao()"
       >
         Entrar

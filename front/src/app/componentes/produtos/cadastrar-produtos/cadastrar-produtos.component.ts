@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup} from '@angular/forms';
 import { ProdutosService } from '../produtos.service';
 import { ModalService } from './modal.service';
 import { Router } from '@angular/router';
@@ -36,7 +36,6 @@ export class CadastrarProdutosComponent implements OnInit {
   fotosProduto: CarregarFotos[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
     private produtosService: ProdutosService,
     public modalservice: ModalService,
     private router: Router,
@@ -52,7 +51,6 @@ export class CadastrarProdutosComponent implements OnInit {
     } else if (userType === '3') {
       this.isCliente = true;
     }
-
 
     this.modalservice.fecharModalEvent.subscribe(() => {
       this.fecharModal();
@@ -73,13 +71,11 @@ export class CadastrarProdutosComponent implements OnInit {
     if (index !== -1) {
       this.fotosProduto.splice(index, 1);
     }
-    console.log('lista depois ', this.fotosProduto)
   }
 
   submitForm() {
     const dadosParaEnviar = {
       produto: this.produto,
-      //avaliacaoProdutoRecord: this.avaliacaoProdutoRecord,
       fotosProdutoRecord: this.fotosProduto,
     };
 
@@ -140,9 +136,4 @@ export class CadastrarProdutosComponent implements OnInit {
   irParaListaProdutos() {
     this.router.navigate(['listarProduto']);
   }
-
-//  novaAvaliacao() {
-//    this.avaliacaoProdutoRecord.idProduto = 0;
-//    this.avaliacaoProdutoRecord.avaliacao = 0;
-//  }
 }

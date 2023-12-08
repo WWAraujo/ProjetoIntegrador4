@@ -1,0 +1,60 @@
+<div class="card">
+
+  <table>
+    <tr class="cabecalho-tabela">
+      <th>DATA DA COMPRA</th>
+      <th>STATUS DE ENTREGA</th>
+      <th>FORMA DE PAGAMENTO</th>
+      <th>VALOR TOTAL DA COMPRA</th>
+      <th>DETALHES DA COMPRA</th>
+    </tr>
+    <tr class="pedidos-cliente" *ngFor="let item of listaProdutos">
+      <td>{{ item.dadosVenda.dataCompra }}</td>
+      <td>{{ item.dadosVenda.statusEntrega }}</td>
+      <td>{{ item.formaPagamento.formaPagamento }}</td>
+      <td>{{ formatarMoeda(item.formaPagamento.valorTotal) }}</td>
+      <button (click)="open(mymodal)" (click)="pegarId(item)" type="button" class="button-detalhes">+
+        Detalhes</button>
+    </tr>
+  </table>
+
+  <ng-template #mymodal let-modal>
+
+    <div class="detalhes-pedido">
+      <p>Pedido #{{ venda.dadosVenda.id }}</p>
+      <span>Valor: {{formatarMoeda(venda.dadosVenda.valorTotal)}}</span>
+      <span>Valor Do Frete: {{formatarMoeda(venda.dadosVenda.valorEntrega)}}</span>
+      <span>Forma de pagamento: {{venda.dadosVenda.formaPagamento}}</span>
+      <span>Endereço: {{ venda.dadosVenda.logradouro }}
+        Nº{{ venda.dadosVenda.numero}},
+        {{ venda.dadosVenda.bairro}},
+        {{ venda.dadosVenda.cidade}},
+        {{ venda.dadosVenda.cep }}</span>
+    </div>
+    <div >
+      <h2>ITENS DO PEDIDO</h2>
+      <div *ngIf="productData && productData.length > 0" class="card card-custom">
+
+        <div class="card-itens" *ngFor="let produto of productData">
+
+          <div *ngFor="let foto of produto.fotosProdutoRecord">
+            <ng-container *ngIf="foto.flagImg === 'p'">
+              <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="100" [height]="100" />
+            </ng-container>
+          </div>
+
+          <div class="info" *ngFor="let itemPedido of lista">
+            <ng-container *ngIf="produto.produto.id === itemPedido.idProduto">
+              <p> #{{ itemPedido.idProduto }}</p>
+              <p>{{ produto.produto.nomeProduto }}</p>
+              <p>Valor: {{ formatarMoeda(produto.produto.precoProduto) }}</p>
+              <p>Quantidade: {{ itemPedido.quantidade }}</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="button-modal" type="button" (click)="modal.close()">Fechar</button>
+  </ng-template>
+
+</div>

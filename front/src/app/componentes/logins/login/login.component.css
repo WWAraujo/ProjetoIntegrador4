@@ -28,21 +28,16 @@
   height: 60%;
 }
 
-.form-login label {
-  width: 40%;
-  font: 1.2em "Inter", sans-serif;
-  margin: 15px 0px;
-  color: #1e90ff;
-}
 
 .form-login input {
   width: 40%;
   height: 40px;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #1e90ff;
+  border: 1px solid #000;
   font: 18px "Inter", sans-serif;
   color: #1e90ff;
+  margin: 20px;
 }
 
 .login {
@@ -65,3 +60,50 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.tipodelogin{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 40%;
+}
+
+
+.custom-radio {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+  font: 1em 'Inter', sans-serif;
+  font-weight: bold;
+}
+
+.custom-radio input[type="radio"] {
+  display: none;
+}
+
+.custom-radio .radio-content {
+  position: relative;
+  padding-left: 25px;
+}
+
+.custom-radio .radio-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  text-align: center
+}
+
+.custom-radio input[type="radio"]:checked + .radio-content {
+  background-color: #1e90ff;
+  color: #fff;
+}
+
+.mensagem__erro{ color: red}
+

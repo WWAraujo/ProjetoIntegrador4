@@ -1,0 +1,30 @@
+<div class="card">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">DATA DA COMPRA</th>
+        <th scope="col">Nº PEDIDO</th>
+        <th scope="col">CLIENTE</th>
+        <th scope="col">STATUS DO PEDIDO</th>
+        <th scope="col">FORMA DE PAGAMENTO</th>
+        <th scope="col">VALOR DA COMPRA</th>
+
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let item of listaProdutos" class="table">
+        <td scope="row">{{ item.dadosVenda.dataCompra }}</td>
+        <td scope="row">#{{ item.dadosVenda.id }}</td>
+        <td scope="row">{{ item.dadosVenda.nomeCliente }}</td>
+        <td scope="row">
+          <select id="statusEntrega" class="form-select" aria-label="Default select example"
+            [(ngModel)]="item.dadosVenda.statusEntrega" (change)="alterarStatus(item.dadosVenda.id)">
+            <option *ngFor="let status of statusEntrega" [value]="status">{{ status }}</option>
+          </select>
+        </td>
+        <td scope="row">{{ item.formaPagamento.formaPagamento }}</td>
+        <td scope="row">{{ formatarMoeda(item.formaPagamento.valorTotal) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

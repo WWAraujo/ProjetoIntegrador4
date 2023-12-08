@@ -1,0 +1,37 @@
+<section class="container">
+  <div class="banner">
+    <img src="../../../../assets/image/Bannerimage.png">
+    <p id="desconto">Até 35% off</p>
+    <p id="textoplaca">Em todas as Placas de Video</p>
+    <div id="container-semjuros">
+      <p>Aproveite e compre em</p>
+    </div>
+      <div id="container-cartao">
+        <p id="semjuros">Até </p>
+        <p id="dozex">12x</p>
+        <p id=semjuros> Sem Juros</p>
+        <p id="semjuros">no Cartão</p>
+      </div>
+
+    <div class="logos">
+      <img id="nvidia" src="../../../../assets/image/nvidia.png">
+      <img id="amd" src="../../../../assets/image/AMD_Radeon_logo.svg.png">
+      <img id="intel" src="../../../../assets/image/intel-arc-logo-16x9.png">
+    </div>
+  </div>
+  <div class="row">
+    <div class="container-card col-md-4" *ngFor="let produto of productData; let i = index">
+      <div class="card card-custom">
+        <div *ngFor="let foto of produto.fotosProdutoRecord">
+          <ng-container *ngIf="foto.flagImg === 'p'">
+            <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="80" [height]="80" />
+          </ng-container>
+        </div>
+        <h2>{{ produto.produto.nomeProduto }}</h2>
+        <p>{{ formatarMoeda(produto.produto.precoProduto) }}</p>
+        <button class="detail" (click)="pegarId(produto.produto.id)">+Detalhes</button>
+      </div>
+    </div>
+  </div>
+
+</section>

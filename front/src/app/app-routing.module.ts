@@ -1,4 +1,4 @@
-import { BackofficeComponent } from './componentes/backoffice/backoffice.component';
+import { BackofficeComponent } from './componentes/usuario/backoffice/backoffice.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './componentes/logins/login/login.component';
@@ -8,9 +8,15 @@ import { AlterarUsuarioComponent } from './componentes/usuario/alterar-usuario/a
 import { ListarProdutosComponent } from './componentes/produtos/listar-produtos/listar-produtos.component';
 import { CadastrarProdutosComponent } from './componentes/produtos/cadastrar-produtos/cadastrar-produtos.component';
 import { VisualizarProdutosCadastradosComponent } from './componentes/produtos/visualizar-produtos-cadastrados/visualizar-produtos-cadastrados.component';
-import { TelaPrincipalComponent } from './componentes/tela-principal/tela-principal.component';
+import { TelaPrincipalComponent } from './componentes/produtos/tela-principal/tela-principal.component';
 import { CadastroClienteComponent } from './componentes/cliente/cadastro-cliente/cadastro-cliente.component';
-import { ProdutoDetalhadoComponent } from './componentes/processoDeCompra/produto-detalhado/produto-detalhado.component';
+import { ProdutoDetalhadoComponent } from './componentes/produtos/produto-detalhado/produto-detalhado.component';
+import { EnderecosComponent } from './componentes/cliente/enderecos/enderecos.component';
+import { AlterarClienteComponent } from './componentes/cliente/alterar-cliente/alterar-cliente.component';
+import { CheckoutComponent } from './componentes/compra/checkout/checkout.component';
+import { AlterarProdutoEstoquistaComponent } from './componentes/usuario/alterar-pedidos-estoquista/alterar-pedidos-estoquista.component';
+import { ListarComprasClienteComponent } from './componentes/cliente/listar-compras-cliente/listar-compras-cliente.component';
+
 
 const routes: Routes = [
   {
@@ -59,9 +65,33 @@ const routes: Routes = [
     component: CadastroClienteComponent,
   },
   {
-    path: 'produtoDetalhado',
-    component: ProdutoDetalhadoComponent,data: { mostrarCabecalho: true }
+    path: 'alterarCliente',
+    component: AlterarClienteComponent,
   },
+  {
+    path: 'produtoDetalhado',
+    component: ProdutoDetalhadoComponent, data: { mostrarCabecalho: true }
+  },
+  {
+    path: 'endereco',
+    component: EnderecosComponent
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
+  },
+  {
+    path: 'estoquista',
+    component: AlterarProdutoEstoquistaComponent
+  },
+  {
+    path: 'alterar-produtos-estoquista',
+    component: AlterarProdutoEstoquistaComponent
+  },
+  {
+    path: 'listarProdutosCliente',
+    component: ListarComprasClienteComponent
+  }
 ];
 
 @NgModule({

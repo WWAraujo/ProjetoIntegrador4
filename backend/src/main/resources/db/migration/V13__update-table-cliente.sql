@@ -1,0 +1,1 @@
+ALTER TABLE cliente MODIFY COLUMN datanasc_cliente varchar (11) not null;

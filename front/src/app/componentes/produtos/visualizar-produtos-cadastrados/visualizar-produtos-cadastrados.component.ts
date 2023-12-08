@@ -20,12 +20,9 @@ export class VisualizarProdutosCadastradosComponent implements OnInit {
 
   ngOnInit(): void {
     this.idProduto = this.service.getIdProduto()
-    console.log('chegou no visualizar')
 
     this.service.getProduto(this.idProduto).subscribe(data => {
-      console.log('pegou o arquivo')
       this.productData = data;
-      console.log('transformou o arquivo')
 
       const primeiraImagemPrincipal = this.productData.fotosProdutoRecord.find(
         (foto: { flagImg: string; }) => foto.flagImg === 'p'

@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="title">
+    <p>RESUMO</p>
+  </div>
+  <div class="container-resumo">
+    <div class="resumo-pedido">
+      <div class="title-box">
+        <ul>
+          <li></li>
+          <li> Produto </li>
+          <li> Valor Unitário</li>
+          <li> Unidades </li>
+          <li> Valor Calculado </li>
+        </ul>
+      </div>
+      <div class="container-card" *ngFor="let produto of productData">
+        <div class="card">
+          <div *ngFor="let foto of produto.fotosProdutoRecord">
+            <ng-container *ngIf="foto.flagImg === 'p'">
+              <img [src]="getFullPath(foto.nomeImg)" [alt]="foto.nomeImg" [width]="60" [height]="60" />
+            </ng-container>
+          </div>
+          <div class="infoProduto">
+            <p id="nomeProduto">{{ produto.produto.nomeProduto }}</p>
+            <p id="valorProduto">{{ formatarMoeda(produto.produto.precoProduto) }}</p>
+            <p id="quantidadeProduto">{{ idsCount[produto.produto.id] }}</p>
+            <p id="totalProduto" [innerText]="formatarMoeda(calcularTotalProduto(produto))"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resumo-compra">
+      <div class="subtotalItens">
+        <p id="subtotalItens">Subtotal dos Itens:</p><span>{{ formatarMoeda(subtotal) }}</span>
+      </div>
+      <div class="frete">
+        <p>Valor do Frete: </p><span>{{ formatarMoeda(valorFrete) }}</span>
+      </div>
+      <div class="totalSubtotal">
+        <p id="totalSubtotal">Subtotal: </p><span>{{ formatarMoeda(subtotalComFrete) }}</span>
+      </div>
+      <div class="pagamento">
+        <p>Pagamento: </p><span>{{ exibirFormaDePagamento }}</span>
+      </div>
+      <div class="parcelas" *ngIf="exibirParcelas">
+        <p>Parcelamento:</p>
+        <p>{{ numeroParcelas }}x Sem Juros - {{
+          formatarMoeda(subtotalParcelado) }}</p>
+      </div>
+      <div class="totalAPagar">
+        <p>Total: </p><span> {{ formatarMoeda(subtotalComFrete) }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="endereco-buttons">
+    <span>Endereço de Entrega:</span>
+    <div class="card-endereco">
+      <span>{{ enderecoSelecionado.logradouro }}
+        Nº{{ enderecoSelecionado.numero}},
+        {{ enderecoSelecionado.bairro}},
+        {{ enderecoSelecionado.cidade}},
+        {{ enderecoSelecionado.cep }}</span>
+    </div>
+    <div class="buttons">
+      <button class="btn btn-outline-primary" type="button" (click)="voltarFormaPagamento()">VOLTAR</button>
+      <button class="btn btn-primary" type="button" (click)="finalizarCompra()">FINALIZAR COMPRA</button>
+    </div>
+  </div>
+</div>

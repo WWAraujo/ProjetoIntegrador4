@@ -4,6 +4,7 @@ import edu.senac.backend.usuario.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,20 +16,18 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository repository;
 
-
-
     @PostMapping
     public UsuarioModel criarUsuario(@RequestBody UsuarioRecordCREATE usuario) {
         return repository.save(new UsuarioModel(usuario));
     }
 
     @PutMapping
-    public void buscarUsuario(@RequestBody UsuarioRecordUPDATE usuario) {
+    public void alterarUsuario(@RequestBody UsuarioRecordUPDATE usuario) {
         repository.save(new UsuarioModel(usuario));
     }
 
     @GetMapping
-    public List<ConverterListaUsuarios> listarUsuarios() {
+    public LinkedList<ConverterListaUsuarios> listarUsuarios() {
         return new ConverterListaUsuarios().converterUsuario(repository.findAll());
     }
 
