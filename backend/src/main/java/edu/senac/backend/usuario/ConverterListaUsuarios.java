@@ -4,6 +4,7 @@ import edu.senac.backend.service.AlterarTipoUsuario;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -16,9 +17,9 @@ public class ConverterListaUsuarios {
     private String tipoUsuario;
 
 
-    public List<ConverterListaUsuarios> converterUsuario(List<UsuarioModel> usuarioModelList) {
+    public LinkedList<ConverterListaUsuarios> converterUsuario(List<UsuarioModel> usuarioModelList) {
 
-        List<ConverterListaUsuarios> responses = new ArrayList<>();
+        LinkedList<ConverterListaUsuarios> responses = new LinkedList<>();
 
         for (UsuarioModel converter: usuarioModelList){
 

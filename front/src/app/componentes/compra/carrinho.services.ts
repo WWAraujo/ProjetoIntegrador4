@@ -26,7 +26,6 @@ export class CarrinhoServices {
   private mostrarFormaPagamento: boolean = false;
   private formaPagamentoCompleto!: FormaPagamento;
   private idVendaSalvaBanco: number = 0;
-  private idCliente: number = 0;
 
   constructor() {}
 
@@ -116,6 +115,10 @@ export class CarrinhoServices {
       carrinho.splice(indices[i], 1);
     }
     sessionStorage.setItem(this.chaveArmazenamento, JSON.stringify(carrinho));
+  }
+
+  limparCarrinho(){
+    sessionStorage.removeItem(this.chaveArmazenamento);
   }
 
   getSubtotal(): number {

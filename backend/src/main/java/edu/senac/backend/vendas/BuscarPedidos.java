@@ -5,13 +5,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BuscarPedidos {
 
-    public List<PedidosRecord> listarPedidosDoCliente(
+    public LinkedList<PedidosRecord> listarPedidosDoCliente(
             Long id,
             DadosPedidoRepository dadosPedidoRepository,
             FormaPagamentoRepository formaPagamentoRepository,
@@ -19,7 +20,7 @@ public class BuscarPedidos {
     ) {
 
         if (id > 0) {
-            List<PedidosRecord> response = new ArrayList<>();
+            LinkedList<PedidosRecord> response = new LinkedList<>();
 
             Optional<DadosPedidoModel[]> dadosPedidoModelList = dadosPedidoRepository.pesquisarPorId(id);
 
@@ -28,7 +29,7 @@ public class BuscarPedidos {
                 for (DadosPedidoModel dadosPedidoModel : dadosPedidoModelList.get()) {
 
                     FormaPagamentoModel formaPagamentoModel = formaPagamentoRepository.pesquisarPorId(dadosPedidoModel.getId());
-                    List<ListaProdutosPedidoModel> listaProdutos = listaProdutosPedidoRepository.pesquisarPorId(dadosPedidoModel.getId());
+                    LinkedList<ListaProdutosPedidoModel> listaProdutos = listaProdutosPedidoRepository.pesquisarPorId(dadosPedidoModel.getId());
 
                     PedidosRecord pedidosRecord = new PedidosRecord(dadosPedidoModel, formaPagamentoModel, listaProdutos);
 
@@ -44,14 +45,14 @@ public class BuscarPedidos {
         }
     }
 
-    public List<PedidosRecord> listarTodosPedidos(
+    public LinkedList<PedidosRecord> listarTodosPedidos(
             Pageable pagina,
             DadosPedidoRepository dadosPedidoRepository,
             FormaPagamentoRepository formaPagamentoRepository,
             ListaProdutosPedidoRepository listaProdutosPedidoRepository
     ) {
 
-        List<PedidosRecord> response = new ArrayList<>();
+        LinkedList<PedidosRecord> response = new LinkedList<>();
 
         Page<DadosPedidoModel> dadosPedidoModelList = dadosPedidoRepository.findAll(pagina);
 
@@ -60,7 +61,7 @@ public class BuscarPedidos {
             for (DadosPedidoModel dadosPedidoModel : dadosPedidoModelList) {
 
                 FormaPagamentoModel formaPagamentoModel = formaPagamentoRepository.pesquisarPorId(dadosPedidoModel.getId());
-                List<ListaProdutosPedidoModel> listaProdutos = listaProdutosPedidoRepository.pesquisarPorId(dadosPedidoModel.getId());
+                LinkedList<ListaProdutosPedidoModel> listaProdutos = listaProdutosPedidoRepository.pesquisarPorId(dadosPedidoModel.getId());
 
                 PedidosRecord pedidosRecord = new PedidosRecord(dadosPedidoModel, formaPagamentoModel, listaProdutos);
 

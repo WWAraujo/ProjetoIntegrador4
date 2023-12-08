@@ -1,4 +1,4 @@
-import { Venda, Produto } from './../../../core/types/type';
+import { Venda, Produto, DadosVenda } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../cliente.service';
 import { Cliente, ProdutoFotos, ProdutosVenda } from 'src/app/core/types/type';
@@ -7,6 +7,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CarrinhoService } from '../../compra/carrinho.service';
 import { ProdutosService } from '../../produtos/produtos.service';
 import { environment } from 'src/environments/environment';
+import { forkJoin } from 'rxjs';
 
 const API = environment.apiURL;
 @Component({
@@ -23,13 +24,14 @@ export class ListarComprasClienteComponent implements OnInit {
   closeResult: string = '';
   venda!: Venda;
   lista: ProdutosVenda[] = [];
-  productData: ProdutoFotos[]=[];
+  productData: ProdutoFotos[] = [];
   ativoInativo!: string;
   semEstoque: number = 0;
   imagemPrincipal!: string;
   produtoIndisponivel: boolean = false;
   imagensSecundarias: string[] = [];
   content: any;
+  detalhesProduto: string[] = [];
 
   constructor(
     private clienteService: ClienteService,
@@ -61,17 +63,24 @@ export class ListarComprasClienteComponent implements OnInit {
       );
   }
 
-  pegarId(id: number){
-    this.idProduto=id;
-    this.service.getVenda(this.idProduto).subscribe((response) => {
+  pegarId(item: any){
+
+    const idVenda = item.dadosVenda.id;
+    this.service.getVenda(idVenda).subscribe((response) => {
       console.log('response',response);
       this.venda = response;
       this.lista = this.venda.produtos;
-      for(let produto of this.lista){
-        this.pegarProduto(produto.idProduto);
-      }
+
+      const requests = this.lista.map(product => this.produtoService.getProdutoCompleto(product.idProduto));
+
+      forkJoin(requests).subscribe((data: any[]) => {
+        this.productData = data;
+        console.log(this.productData);
+      });
     });
-  }
+
+    }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -84,22 +93,6 @@ export class ListarComprasClienteComponent implements OnInit {
     }
   }
 
-  pegarProduto(id: number){
-    this.produtoService.getProdutoCompleto(id).subscribe(data => {
-      this.productData.push(data);
-      for(let produto of this.productData){
-        const number = produto.produto.id;
-
-        for(let venda of this.venda.produtos){
-          if (number === venda.idProduto){
-            console.log('Quantidade salva', venda.quantidade);
-
-          }
-        }
-      }
-    })
-
-  }
 
 
   getFullPath(imageName: string): string {
@@ -109,4 +102,13 @@ export class ListarComprasClienteComponent implements OnInit {
   formatarMoeda(valor: number): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
+
+  exibirProduto(id:number){
+    this.produtoService.getProdutoCompleto(id).subscribe((data) => {
+      this.productData.push(data);
+    });
+  }
+
+
+
 }

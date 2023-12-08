@@ -1,11 +1,11 @@
 package edu.senac.backend.vendas;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public record PedidosRecord(
 
         DadosPedidoModel dadosVenda,
         FormaPagamentoModel formaPagamento,
-        List<ListaProdutosPedidoModel> produtos
+        LinkedList<ListaProdutosPedidoModel> produtos
 ) {
 }

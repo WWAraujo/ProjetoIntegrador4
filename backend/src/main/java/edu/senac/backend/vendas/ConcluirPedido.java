@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,7 @@ public class ConcluirPedido {
 
 
         //Salvar toda lista de produtos no banco de dados
-        List<ListaProdutosPedidoModel> listaProdutosPedidoModels = new ArrayList<>();
+        LinkedList<ListaProdutosPedidoModel> listaProdutosPedidoModels = new LinkedList<>();
         for (ListaProdutosPedidoModel pdt : venda.produtos()) {
             pdt.setIdPedido(idVenda);
             listaProdutosPedidoModels.add(listaProdutosPedidoRepository.save(pdt));

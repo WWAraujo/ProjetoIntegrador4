@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/buscarproduto/{pesquisa}")
-    public List<ProdutoModel> buscarProduto(@PathVariable String pesquisa) {
+    public LinkedList<ProdutoModel> buscarProduto(@PathVariable String pesquisa) {
         return produtoRepository.pesquisarPorNome(pesquisa);
     }
 
@@ -69,12 +70,22 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoSalvo.getId());
     }
 
+    @GetMapping("/mostrar-produto-completo/{id}")
+    public ResponseEntity<ProdutoRecordConstructor> mostrarProdutoCompleto(@PathVariable Long id) {
+        return ResponseEntity.ok(new MostrarProdutoCompleto().response(produtoRepository, fotosProdutoRepository, id));
+    }
+
+    @GetMapping("/listar-todos-produtos")
+    public ResponseEntity<LinkedList<ProdutoRecordConstructor>> listarTodosProdutos() {
+        return new ResponseEntity<>(
+                new ListarTodosProdutos()
+                        .ListarTodosProdutos(produtoRepository, fotosProdutoRepository), HttpStatus.OK);
+    }
 
     @PostMapping("/cadastrar-produto")
     public ResponseEntity<Long> cadastrarProduto(@RequestBody ProdutoRecordConstructor produto) {
 
         ProdutoModel produtoSalvo = produtoRepository.save(new ProdutoModel(produto));
-
 
         for (FotosProdutoRecord fotoRecord : produto.fotosProdutoRecord()) {
             FotosProdutoModel fotosProdutoModel =
@@ -83,79 +94,5 @@ public class ProdutoController {
         }
         Long idProdutoSalvo = Long.parseLong(String.valueOf(produtoSalvo.getId()));
         return ResponseEntity.ok(idProdutoSalvo);
-    }
-
-    @GetMapping("/mostrar-produto-completo/{id}")
-    public ResponseEntity<ProdutoRecordConstructor> mostrarProdutoCompleto(@PathVariable Long id) {
-        Optional<ProdutoModel> produtoModel = produtoRepository.findById(Integer.parseInt(id.toString()));
-        ProdutoRecord produtoRecord =
-                new ProdutoRecord(
-                        produtoModel.get().getId(),
-                        produtoModel.get().getNomeProduto(),
-                        produtoModel.get().getDescricaoDetalhadaProduto(),
-                        produtoModel.get().getPrecoProduto(),
-                        produtoModel.get().getQtdEstoque(),
-                        produtoModel.get().getAtivoInativo(),
-                        produtoModel.get().getAvaliacao()
-                );
-
-
-        List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
-        Optional<FotosProdutoModel[]> fotosProdutoModel = fotosProdutoRepository.buscarFotosPorIdProduto(id);
-        for (FotosProdutoModel fotos : fotosProdutoModel.get()) {
-            FotosProdutoRecord foto =
-                    new FotosProdutoRecord(
-                            Integer.parseInt(fotos.getIdProduto().toString()),
-                            fotos.getNomeImg(),
-                            fotos.getCaminhoImg(),
-                            fotos.getFlagImg()
-                    );
-            fotosresponse.add(foto);
-        }
-
-
-        ProdutoRecordConstructor response = new ProdutoRecordConstructor(produtoRecord, fotosresponse);
-
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/listar-todos-produtos")
-    public ResponseEntity<List<ProdutoRecordConstructor>> listarTodosProdutos() {
-        
-        List<ProdutoRecordConstructor> produtosRecordList = new ArrayList<>();
-        List<ProdutoModel> produtosModel = produtoRepository.findAll();
-
-        for (ProdutoModel produtoModel : produtosModel) {
-            ProdutoRecord produtoRecord =
-                    new ProdutoRecord(
-                            produtoModel.getId(),
-                            produtoModel.getNomeProduto(),
-                            produtoModel.getDescricaoDetalhadaProduto(),
-                            produtoModel.getPrecoProduto(),
-                            produtoModel.getQtdEstoque(),
-                            produtoModel.getAtivoInativo(),
-                            produtoModel.getAvaliacao()
-                    );
-
-
-            List<FotosProdutoRecord> fotosresponse = new ArrayList<>();
-            Optional<FotosProdutoModel[]> fotosProdutoModelOptional = fotosProdutoRepository.buscarFotosPorIdProduto(produtoModel.getId());
-                if (fotosProdutoModelOptional.isPresent()) {
-                    FotosProdutoModel[] fotosProdutoModel = fotosProdutoModelOptional.get();
-
-                    for (FotosProdutoModel fotos : fotosProdutoModel) {
-                        FotosProdutoRecord foto = new FotosProdutoRecord(
-                                Integer.parseInt(fotos.getIdProduto().toString()),
-                                fotos.getNomeImg(),
-                                fotos.getCaminhoImg(),
-                                fotos.getFlagImg()
-                        );
-                        fotosresponse.add(foto);
-                    }
-                }
-            produtosRecordList.add(new ProdutoRecordConstructor(produtoRecord,fotosresponse));
-        }
-
-        return new ResponseEntity<>(produtosRecordList, HttpStatus.OK);
     }
 }

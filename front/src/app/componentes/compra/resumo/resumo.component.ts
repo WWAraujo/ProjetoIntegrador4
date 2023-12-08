@@ -3,16 +3,15 @@ import {
   DadosVenda,
   FormaPagamento,
   ProdutosVenda,
-  Venda,
 } from './../../../core/types/type';
 import { Component, OnInit } from '@angular/core';
-import { CarrinhoServices } from '../carrinho.services';
 import { ProdutosService } from '../../produtos/produtos.service';
 import { Endereco, ProdutoFotos } from 'src/app/core/types/type';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { LoginService } from '../../logins/login.service';
 import { CarrinhoService } from '../carrinho.service';
+import { CarrinhoServices } from '../carrinho.services';
 
 const API = environment.apiURL;
 
@@ -132,6 +131,7 @@ export class ResumoComponent implements OnInit {
           alert('Produto salvo com sucesso!');
           this.carrinhoService.setTrocarTelaConcluir();
           this.carrinhoService.setLoggedIn(true);
+          this.carrinhoService.limparCarrinho();
         },
         (error) => {
           alert('Algo deu errado!');

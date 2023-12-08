@@ -34,7 +34,7 @@ import { PagamentoComponent } from './componentes/compra/pagamento/pagamento.com
 import { ResumoComponent } from './componentes/compra/resumo/resumo.component';
 import { ListarPedidosComponent } from './componentes/compra/listar-pedidos/listar-pedidos.component';
 import { FinalizarComponent } from './componentes/compra/finalizar/finalizar.component';
-import { AlterarProdutoEstoquistaComponent } from './componentes/produtos/alterar-produto-estoquista/alterar-produto-estoquista.component';
+import { AlterarProdutoEstoquistaComponent } from './componentes/usuario/alterar-pedidos-estoquista/alterar-pedidos-estoquista.component';
 import { ListarComprasClienteComponent } from './componentes/cliente/listar-compras-cliente/listar-compras-cliente.component';
 
 @NgModule({

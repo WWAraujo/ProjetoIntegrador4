@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProdutosService } from '../produtos.service';
-import { Venda } from 'src/app/core/types/type';
+import { ProdutosService } from '../../produtos/produtos.service';
+import { StatusPedidos, Venda } from 'src/app/core/types/type';
 
 @Component({
   selector: 'app-alterar-produto-estoquista',
@@ -11,8 +11,9 @@ export class AlterarProdutoEstoquistaComponent implements OnInit {
   listaProdutos: Venda[] = [];
   status: string = '';
   produto!: Venda;
+  statusEntrega = Object.values(StatusPedidos)
 
-  constructor(private produtosService: ProdutosService) {}
+  constructor(private produtosService: ProdutosService) { }
 
   ngOnInit() {
     this.produtosService.listarProdutosEstoquista().subscribe((dados) => {
@@ -37,5 +38,8 @@ export class AlterarProdutoEstoquistaComponent implements OnInit {
         );
       }
     }
+  }
+  formatarMoeda(valor: number): string {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 }

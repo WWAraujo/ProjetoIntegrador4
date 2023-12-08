@@ -26,7 +26,6 @@ export class PagamentoComponent implements OnInit {
   };
 
   constructor(
-    private router: Router,
     private carrinhoService: CarrinhoServices
   ) { }
 
